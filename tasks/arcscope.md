@@ -18,7 +18,7 @@ Outcome: A single adapter contract (DataSource/SourceAdapter/Connection) exists 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.00 (shared adapter contract; ConnectionProfile storage/reuse; EffectiveConfigurationSnapshot immutability on profile edit; lease/busy exclusivity model (BR-01..BR-06, BR-09)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.00
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: published store abstraction with the single write path (for ArcScope's own profile/session store)
 - [contract] CON.91: published Contracts records for capture/session identifiers referenced by ConnectionProfile
@@ -46,7 +46,7 @@ Outcome: A precise time model spanning signal samples and discrete events with e
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.03
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: published numeric/time wire types (rate, timestamp, duration) Channel/Signal/EventRecord must serialise as
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -72,7 +72,7 @@ Outcome: TCP, UDP and file-stream-replay adapters work over real transports (pur
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.00 (TCP/UDP/file-replay concrete adapters over the shared contract; real-transport connect/disconnect/reconnect tests): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.00
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.01: DataSource/SourceAdapter contract and connection profile model
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -100,7 +100,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-33.90 (generic-USB-V1 body text (enumeration, explicit interface/endpoint open, control/bulk/interrupt transfers, partial writes, cancellation, driver/permission/busy refusal per Tier 1 RID; no automatic kernel-driver detach; hot unplug records an explicit capture gap) — this text sits orphaned between WP-33 §6 and §7 in the source doc with no substep id of its own; folded here since it is entirely about the serial/USB adapter, not §33.90's own verify-and-integration content): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.90
 - WP-33:orphaned-generic-usb-is-v1-body-text-enu orphaned 'Generic USB is V1' body text (enumeration/open/transfer/cancel/refusal per Tier-1 RID, no auto kernel-driver detach, hot-unplug=explicit gap) sitting between §6 Impacts and §7 Tests with no substep id (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.01: DataSource/SourceAdapter contract and connection profile model
 - [artifact] NAT.13: published ArcInstrumentsNative package (arc_instruments_* ABI) — at minimum its fixture/simulated-hardware tier build
@@ -128,7 +128,7 @@ Outcome: A bounded, timestamped acquisition loop with explicit backpressure sust
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.01
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.01: source adapter contract
 - [artifact] SCOPE.02: time/channel model
@@ -156,7 +156,7 @@ Outcome: The session/capture lifecycle (armed, running, paused, stopped, finalis
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.02
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.05: acquisition pipeline and rolling buffer
 - [artifact] SCOPE.02: time/channel model
@@ -183,7 +183,7 @@ Outcome: Raw capture is written to the chunked verifiable store with per-chunk c
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.04
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.06: session/capture lifecycle types
 - [artifact] PLT.06: published chunked/large-append verifiable store primitive
@@ -210,7 +210,7 @@ Outcome: Replay of a recorded, finalised capture feeds the same pipeline as a la
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.05
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.07: durable, finalised captures to replay
 - [artifact] SCOPE.01: source adapter contract
@@ -237,7 +237,7 @@ Outcome: Recording state is permanently visible; closing a window during capture
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.06
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.06: capture lifecycle (running/interrupted states) to bind the shell prompt to
 - [artifact] PLT.32: published generic shell lifecycle/shutdown-prompt mechanism
@@ -264,7 +264,7 @@ Outcome: A drift report exists comparing the reference against the bound commit,
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-33.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.07
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -292,7 +292,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-33.90 (full (excluding the generic-USB-V1 body text folded into SCOPE.04)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, anchor rule-wp-33.90
 - WP-33:p2-010-required-behavior-and-closure-sec P2-010 required-behavior-and-closure section (acquisition.source/framing/trigger profiles, gap/loss/durable-capture manifests, all accepted serial/network/file/USB sources) (P2-010 required-behavior-and-closure section: acquisition.source/framing/trigger profiles, gap/loss/durable-capture manifests, all accepted serial/network/file/USB sources, independent positive/negative vectors, actual owner integration): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\33-arcscope-acquisition-and-session.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.01: all WP33 tasks complete to assemble
 - [artifact] SCOPE.02: as above
@@ -327,7 +327,7 @@ Outcome: Time-series and event visualisation meets the responsiveness budget at 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-34.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.00
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.02: time/channel model
 - [artifact] SCOPE.06: session/capture to visualise
@@ -354,7 +354,7 @@ Outcome: Triggers control capture and mark significant time events with exact pr
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-34.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.01
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.05: rolling buffer
 - [artifact] SCOPE.06: capture lifecycle
@@ -382,7 +382,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-34:orphaned-6-7-body-text-pearson-independe orphaned §6/§7 body text: 'Pearson independent vectors: x=[1,2,3], y=[2,4,6] gives r=1; y=[3,2,1] gives r=-1. Constant input is unavailable; preserve the declared lag and overlap rules' — a concrete correlation-family acceptance vector with no substep id of its own (orphaned §6/§7 body text: 'Pearson independent vectors: x=[1,2,3], y=[2,4,6] gives r=1; y=[3,2,1] gives r=-1. Constant input is unavailable; preserve the declared lag and overlap rules' — a concrete correlation-family acceptance vector with no substep id of its own; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, package-level obligation
 - WP-34:8-additional-completion-requirement-ever §8 additional completion requirement: every basic family has its formula/status oracle; reproduction uses the defined tolerance rather than an undefined byte-equality claim (§8 additional completion requirement: every basic family has its formula/status oracle; reproduction uses the defined tolerance rather than an undefined byte-equality claim; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: the published scope.measurement.v1 profile (families, formulas, units, coverage/status rules) in Contracts
 - [artifact] SCOPE.02: time/channel model
@@ -409,7 +409,7 @@ Outcome: A versioned decoder framework produces structured events (never raw cha
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-34.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.03
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.06: capture/channel data to decode
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -435,7 +435,7 @@ Outcome: Versioned analysis definitions compose into recipes; results are derive
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-34.04 (full, including the required-design-implementation text: same profile through native ProductJobs over a frozen committed source; persist request/config hashes, resolved levels, per-family quality; delete-and-rebuild must match the profile oracle within tolerance): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.04
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.14: measurements
 - [artifact] SCOPE.15: decoders
@@ -462,7 +462,7 @@ Outcome: Annotations and findings exist as authored content with identity and hi
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-34.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.05
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.06: session/capture to annotate/compare
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -489,7 +489,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-34.06 (full, including both required-design-implementation paragraphs: report/UI/offline-recomputation comparison with rendering/rounding never changing the stored numeric result; report-section origin plus enclosing union; deterministic measurement beside AI narrative never relabelled): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.06
 - WP-34:8-additional-completion-requirement-ever §8 additional completion requirement: every basic family has its formula/status oracle; reproduction uses the defined tolerance rather than an undefined byte-equality claim (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.14: measurements
 - [artifact] SCOPE.15: decoders
@@ -519,7 +519,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-34.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, anchor rule-wp-34.90
 - WP-34:p2-010-required-behavior-and-closure-sec P2-010 required-behavior-and-closure section (every remaining spectrum/correlation/threshold/event-pattern/decoder analysis profile in architecture 26) (P2-010 required-behavior-and-closure section: every remaining spectrum/correlation/threshold/event-pattern/decoder analysis profile in architecture 26, independent numeric and gap/error vectors): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\34-arcscope-analysis-and-reporting.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.12: all WP34 tasks complete to assemble
 - [artifact] SCOPE.13: as above
@@ -551,7 +551,7 @@ Outcome: Query, analysis, authoring and operational capabilities are declared, e
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-35.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.00
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.06: session/capture/channel/signal/event domain objects the query capabilities expose
 - [contract] CON.02: the generic capability descriptor shape (risk level, permission requirement, approval posture) established by the Hub/minimal-provider-slice pattern
@@ -579,7 +579,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-35.01 (full, including required-design-implementation text: project measurement values with profile, immutable source/configuration binding, counts, coverage and status into bounded context/report references; unknown-profile and insufficient results are never silently rendered as numeric zero): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.01
 - WP-35:4-content-origin-content-unit-binding-ob §4 content-origin/content-unit binding obligation applying broadly to WP35's changed files (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.14: measurements
 - [artifact] SCOPE.16: analysis results
@@ -606,7 +606,7 @@ Outcome: The ArcScope sync scope excludes raw capture by default and includes me
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-35.02 (all work except the parts mapped to SCOPE.27): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.02
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.06: session metadata
 - [artifact] SCOPE.18: reports
@@ -634,7 +634,7 @@ Outcome: Raw upload is an explicit per-session act with size/destination/consequ
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-35.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.03
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.07: durable capture to upload
 - [artifact] CLOUD.42: published blob lifecycle mechanism (chunked upload, resumption, verification)
@@ -662,7 +662,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-35:4-content-origin-content-unit-binding-ob §4 content-origin/content-unit binding obligation applying broadly to WP35's changed files (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, package-level obligation
 - WP-35:8-additional-completion-requirements-mea §8 additional completion requirements (measurement meaning/numerical profile survives portability; content-origin carrier vectors) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, package-level obligation
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.07: durable capture format to bundle/export
 - [artifact] SCOPE.14: measurement profile/configuration to carry in the bundle
@@ -690,7 +690,7 @@ Outcome: No extension-reachable path can write raw capture; extension access to 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-35.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.05
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.20: capability surface
 - [artifact] SCOPE.07: raw capture write path to assert exclusion against
@@ -717,7 +717,7 @@ Outcome: The WP-35 candidate closes: metadata sync and explicit-upload behavior 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-35.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.90
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.20: all WP35 tasks complete to assemble
 - [artifact] SCOPE.21: as above
@@ -747,7 +747,7 @@ Outcome: ArcScope session and capture metadata sync scopes converge across devic
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-35.02 (real-integration evidence: metadata sync scope converges against deployed Cloud authority): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\35-arcscope-integration-and-sync.md, anchor rule-wp-35.02
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.arcscope is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SCOPE.22: ArcScope Cloud sync scope declaration and client
 - [artifact] CLOUD.39: deployed guarded publication and convergent bootstrap

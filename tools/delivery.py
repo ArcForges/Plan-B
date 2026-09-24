@@ -12,8 +12,9 @@ Commands (standard library only; documentation tooling, not a scheduler):
   python tools/delivery.py analyze   [--design PATH] [--workers 1,4,8,16,32]
   python tools/delivery.py ready     [--design PATH] [--plan PATH] [--lane LANE]
 
-`ready` lists tasks whose start prerequisites are complete according to Plan `ledger/tasks/*.md`;
-it reads files only and never assigns, claims or starts work.
+`ready` lists tasks and adoption slices whose start rule (DLV-22/DLV-24) is satisfied according to
+Plan `ledger/tasks/*.md`; it reads files (and, with --claims, fetches claim refs) and never assigns,
+claims or starts work.
 """
 from __future__ import annotations
 
@@ -30,6 +31,8 @@ GRAPH_REL = 'docs/planning/delivery/delivery-graph.json'
 DELIVERY_REL = 'docs/planning/delivery'
 WP_REL = 'docs/planning/work-packages'
 TASK_ID = re.compile(r'^[A-Z]{2,6}\.\d{2}$')
+SLICE_ID = re.compile(r'^ADOPT\.\d{2}\.[a-z][a-z0-9-]*$')
+ROOT_ADOPTION = 'ADOPT.01'
 SUB_ID = re.compile(r'^SUB-[a-z0-9]+(?:-[a-z0-9]+)*$')
 RES_ID = re.compile(r'^RES-[a-z0-9]+(?:-[a-z0-9]+)*$')
 POB_ID = re.compile(r'^WP-(\d{2}):[a-z0-9]+(?:-[a-z0-9]+)*$')
@@ -40,7 +43,8 @@ COMPLETE_TYPES = {'integration'}
 KINDS = {'governance', 'contract', 'producer', 'feature', 'service', 'proof', 'integration',
          'acceptance', 'release', 'adoption'}
 SIZES = {'S': 1, 'M': 2, 'L': 4, 'XL': 8}
-BASELINE = {'accepted', 'reported-unverified', 'not-started'}
+BASELINE = {'accepted', 'not-started'}
+SUB_CLASSES = {'value', 'behavior'}
 MODES = {'append', 'exclusive', 'read', 'regenerate'}
 # Corpus identifier grammar used by DesktopPlatform eng/design_corpus.py; every occurrence in a
 # generated Design view must be a link to its defining anchor.
@@ -187,6 +191,27 @@ class Graph:
         self.pobs = {p['id']: p for p in self.data.get('packageObligations', [])}
         self.gates = {g['gate']: g for g in self.data.get('gates', [])}
         self.catalogue = substeps(design)
+        # Adoption slices (DLV-22): one independently claimable unit per repository and lane. They are
+        # scheduling nodes like tasks; the repository adoption task completes after all of its slices.
+        self.slices = {s['id']: s for s in self.data.get('adoptionSlices', [])}
+        self.slice_of = {(s['repo'], s['lane']): s['id'] for s in self.slices.values()}
+        for s in self.slices.values():
+            self.tasks[s['id']] = {
+                'id': s['id'], 'title': s['title'], 'lane': 'adoption', 'repo': s['repo'], 'kind': 'adoption',
+                'size': 'S', 'slice': True, 'lanesOpened': s['lane'], 'baseline': {'state': 'not-started'},
+                'obligations': [{'ref': 'P2-018', 'part': f'adoption slice for {s["repo"]} lane {s["lane"]}'}],
+                'start': [{'type': 'artifact', 'task': ROOT_ADOPTION, 'need': 'frozen baseline record',
+                           'why': 'every slice classifies against the same frozen heads and receipts'}],
+                'complete': []}
+            parent = self.tasks.get(s['adoptionTask'])
+            if parent is not None and not any(e['task'] == s['id'] for e in parent['complete']):
+                parent['complete'].append({'type': 'integration', 'task': s['id'], 'need': 'slice recorded',
+                                           'why': 'the repository adoption record closes after every slice of the repository'})
+
+    def slice_tasks(self, sid):
+        s = self.slices[sid]
+        return sorted(tid for tid, t in self.tasks.items()
+                      if not t.get('slice') and t['repo'] == s['repo'] and t['lane'] == s['lane'])
 
     def start_edges(self, t):
         return [e for e in t.get('start', [])]
@@ -195,12 +220,15 @@ class Graph:
         return [e for e in t.get('complete', [])]
 
     def entry(self, tid):
-        """Adoption entry task of the owning repository (DLV-22), if any."""
+        """Adoption entry of a task (DLV-22): the slice of its repository and lane, if any."""
         t = self.tasks[tid]
-        a = self.repos.get(t['repo'], {}).get('adoptionTask')
-        if not a or a == tid or t.get('kind') == 'adoption' or t['baseline']['state'] == 'accepted':
+        if t.get('kind') == 'adoption' or t['baseline']['state'] == 'accepted':
             return None
-        return a
+        sid = self.slice_of.get((t['repo'], t['lane']))
+        if sid:
+            return sid
+        a = self.repos.get(t['repo'], {}).get('adoptionTask')
+        return None if not a or a == tid else a
 
     def starts(self, tid):
         t = self.tasks[tid]
@@ -383,6 +411,38 @@ def validate(g: Graph) -> tuple[list[str], list[str]]:
     for l in g.lanes.values():
         if l['repo'] not in g.repos and l['repo'] != 'multiple':
             errors.append(f'lane {l["id"]}: unknown repository {l["repo"]}')
+    # Adoption slices: exactly one per (repository, lane) pair that has non-adoption tasks (DLV-22).
+    pairs = {(t['repo'], t['lane']) for t in g.data['tasks'] if t.get('kind') != 'adoption'}
+    seen_pairs = Counter((s['repo'], s['lane']) for s in g.slices.values())
+    for sid, s in g.slices.items():
+        if not SLICE_ID.match(sid):
+            errors.append(f'{sid}: invalid adoption slice id')
+        parent = g.repos.get(s.get('repo'), {}).get('adoptionTask')
+        if s.get('adoptionTask') != parent or not sid.startswith(f'{parent}.') or sid != f'{parent}.{s.get("lane")}':
+            errors.append(f'{sid}: slice does not belong to the adoption task of {s.get("repo")}')
+        if s.get('lane') not in g.lanes:
+            errors.append(f'{sid}: unknown lane {s.get("lane")}')
+        if not s.get('title'):
+            errors.append(f'{sid}: missing title')
+    for pair in pairs:
+        if g.repos.get(pair[0], {}).get('adoptionTask') and seen_pairs.get(pair, 0) != 1:
+            errors.append(f'repository {pair[0]} lane {pair[1]}: expected exactly one adoption slice, found {seen_pairs.get(pair, 0)}')
+    for pair in seen_pairs:
+        if pair not in pairs:
+            errors.append(f'adoption slice for {pair[0]}/{pair[1]} has no tasks')
+    # Package acceptance is a roll-up, never a start barrier for work outside the package (DLV-35).
+    accept = {t['id']: t['packageAcceptance'] for t in g.data['tasks'] if t.get('packageAcceptance')}
+    for tid, wp in accept.items():
+        if not re.match(r'^WP-\d{2}$', wp):
+            errors.append(f'{tid}: invalid packageAcceptance {wp}')
+    for t in g.data['tasks']:
+        if t.get('kind') == 'release' or t.get('packageAcceptance'):
+            continue
+        for e in t.get('start', []):
+            wp = accept.get(e.get('task'))
+            if wp and not any(o['ref'].startswith((wp + '.', wp + ':')) for o in t.get('obligations', [])):
+                errors.append(f'{t["id"]}: start prerequisite on package acceptance task {e["task"]} ({wp}); depend on the '
+                              f'producing tasks or use a completion prerequisite (DLV-35)')
     _, stuck = g.event_order()
     if stuck:
         errors.append(f'unsatisfiable prerequisites (deadlock) among {len(stuck)} tasks: {stuck[:12]}')
@@ -410,6 +470,8 @@ def validate(g: Graph) -> tuple[list[str], list[str]]:
         for f in ('standsInFor', 'contract', 'proves', 'realProducer', 'replacedBy', 'realEvidence'):
             if not s.get(f):
                 errors.append(f'{sid}: missing {f}')
+        if s.get('class') not in SUB_CLASSES:
+            errors.append(f'{sid}: class must be value or behavior (DLV-18)')
         rp = s.get('realProducer', [])
         rp = rp if isinstance(rp, list) else [rp]
         rb = s.get('replacedBy')
@@ -594,11 +656,33 @@ def analysis(g: Graph, worker_counts=(1, 2, 4, 8, 16, 32, 64, 0)):
     adopted = done | {tid for tid, t in g.tasks.items() if t.get('kind') == 'adoption'}
     ready = [tid for tid, t in g.tasks.items() if tid not in done and t.get('kind') != 'adoption'
              and all(p in adopted for p in g.starts(tid))]
-    ready_width = len(ready)
+    # Concurrency inside each repository: tasks on the same delivery level have no prerequisite path
+    # between them, so they can be in progress at the same time (subject to declared shared resources).
+    per_repo = []
+    for repo in sorted({t['repo'] for t in g.data['tasks'] if t.get('kind') != 'adoption'}):
+        open_tasks = sorted(tid for tid, t in g.tasks.items()
+                            if t['repo'] == repo and t.get('kind') != 'adoption' and tid not in done)
+        if not open_tasks:
+            continue
+        by_level = Counter(lvl[tid] for tid in open_tasks)
+        widest_level, widest = sorted(by_level.items(), key=lambda kv: (-kv[1], kv[0]))[0]
+        at_level = [tid for tid in open_tasks if lvl[tid] == widest_level]
+        examples, lanes_seen = [], set()
+        for tid in at_level:
+            if g.tasks[tid]['lane'] not in lanes_seen:
+                examples.append(tid)
+                lanes_seen.add(g.tasks[tid]['lane'])
+        examples += [tid for tid in at_level if tid not in examples]
+        per_repo.append({'repository': repo, 'openTasks': len(open_tasks),
+                         'lanes': len({g.tasks[tid]['lane'] for tid in open_tasks}),
+                         'widestLevel': widest_level, 'widestLevelTasks': widest,
+                         'readyAfterAdoption': sorted(tid for tid in ready if g.tasks[tid]['repo'] == repo),
+                         'examples': examples[:4]})
     return {
-        'tasks': len(g.tasks), 'acceptedBaseline': len(done), 'remainingWork': total,
+        'tasks': len(g.data['tasks']), 'adoptionSlices': len(g.slices), 'acceptedBaseline': len(done),
+        'remainingWork': total, 'concurrencyByRepository': per_repo,
         'criticalPath': path, 'criticalPathLength': length,
-        'maxLevel': max((v for tid, v in lvl.items() if tid not in done), default=0) + 1,
+        'maxLevel': max((v for tid, v in lvl.items() if tid not in done), default=0),
         'levelWidths': dict(sorted(width.items())),
         'maxLevelWidth': max(width.values()) if width else 0,
         'simulatedMakespan': sims, 'edgeTypes': dict(edge_types),
@@ -667,6 +751,9 @@ def render_lane(g: Graph, lane: dict) -> str:
         out.append(f'| Owning repository | {t["repo"]} (`{repo["root"]}`); integration owner: {repo["integrationOwner"]}'
                    + (f'; also touches {touches}' if touches else '') + ' |')
         out.append(f'| Kind / size | {t["kind"]} / {t["size"]}' + (' · early risk proof' if t.get('earlyRiskProof') else '') + ' |')
+        if t.get('packageAcceptance'):
+            out.append(f'| Package acceptance | Records the {L.link(t["packageAcceptance"])} acceptance receipt after every task mapped to the '
+                       f'package; tasks outside the package never start from it ([DLV-35](../README.md#rule-dlv-35)) |')
         obl = '<br>'.join(f'{obligation_link(g, L, o["ref"])} — {L.text(o["part"])}' for o in t['obligations'])
         out.append(f'| Obligations | {obl} |')
         if t.get('provides'):
@@ -676,7 +763,7 @@ def render_lane(g: Graph, lane: dict) -> str:
         out.append(f'| Start prerequisites | {st} |')
         ent = g.entry(t['id'])
         if ent:
-            out.append(f'| Entry condition | {task_link(g, ent, rel)} — adoption of the owning repository is complete ([DLV-22](../README.md#rule-dlv-22)) |')
+            out.append(f'| Entry condition | {task_link(g, ent, rel)} — the adoption slice for this repository and lane is complete ([DLV-22](../README.md#rule-dlv-22)) |')
         cp = '<br>'.join(f'**{e["type"]}** {task_link(g, e["task"], rel)} — {L.text(e["need"])}. *Why:* {L.text(e["why"])}'
                          for e in t['complete']) or 'none'
         out.append(f'| Completion prerequisites | {cp} |')
@@ -701,6 +788,25 @@ def render_lane(g: Graph, lane: dict) -> str:
         out.append(f'| Baseline (unreviewed unless accepted) | {btxt} |')
         if t.get('notes'):
             out.append(f'| Notes | {L.text(t["notes"])} |')
+        out.append('')
+    if lane['id'] == 'adoption' and g.slices:
+        out.append('## Adoption slices')
+        out.append('')
+        out.append('Each slice classifies the tasks of one repository and lane against the frozen baseline and opens '
+                   'exactly those tasks when it is recorded ([DLV-22](../README.md#rule-dlv-22)). Slices are claimed and '
+                   'recorded separately; one reviewed pull request may carry several. The repository adoption task '
+                   'records the repository-wide facts and closes after all of its slices.')
+        out.append('')
+        out.append('| Slice | Repository | Lane | Tasks it opens | Accepted baseline in scope | Repository record |')
+        out.append('|---|---|---|---|---|---|')
+        for sid in sorted(g.slices, key=lambda s: (g.slices[s]['adoptionTask'], s)):
+            s = g.slices[sid]
+            scope = g.slice_tasks(sid)
+            accepted = [x for x in scope if g.tasks[x]['baseline']['state'] == 'accepted']
+            opens = len(scope) - len(accepted)
+            out.append(f'| <a id="{slug(sid)}"></a>{sid} | {s["repo"]} | [{md_escape(g.lanes[s["lane"]]["title"])}]({s["lane"]}.md) | '
+                       f'{opens} | {", ".join(task_link(g, x, rel) for x in accepted) or "none"} | '
+                       f'{task_link(g, s["adoptionTask"], rel)} |')
         out.append('')
     if L.unknown:
         raise Fail(f'{rel}: unresolved identifiers {sorted(L.unknown)}')
@@ -768,11 +874,15 @@ def render_substitutes(g: Graph) -> str:
            'producer exists. Its checks prove only what is stated here. The replacing task removes runtime '
            'registration of the substitute and records the real evidence; retained regression fixtures stay '
            'test-only.', '',
-           '| Substitute | Stands in for | Real producer | Replaced by | Used by |', '|---|---|---|---|---|']
+           'A **value** substitute supplies contract-shaped data (vectors, documents, recorded responses) that only '
+           "the consumer's own logic interprets; a **behavior** substitute emulates a producer's decisions or effects. "
+           'Neither kind closes a service, authorization, transaction, hardware, provider, AI or commercial gate '
+           '([DLV-18](README.md#rule-dlv-18)).', '',
+           '| Substitute | Class | Stands in for | Real producer | Replaced by | Used by |', '|---|---|---|---|---|---|']
     for sid in sorted(g.subs):
         s = g.subs[sid]
         rp = s['realProducer'] if isinstance(s['realProducer'], list) else [s['realProducer']]
-        out.append(f'| [{sid}](#{sid.lower()}) | {L.text(s["standsInFor"])} | '
+        out.append(f'| [{sid}](#{sid.lower()}) | {s["class"]} | {L.text(s["standsInFor"])} | '
                    f'{", ".join(task_link(g, p, rel) for p in rp)} | {task_link(g, s["replacedBy"], rel)} | '
                    f'{", ".join(task_link(g, u, rel) for u in users.get(sid, []))} |')
     out.append('')
@@ -782,6 +892,7 @@ def render_substitutes(g: Graph) -> str:
         out.append('')
         out.append('| Field | Value |')
         out.append('|---|---|')
+        out.append(f'| Class | {s["class"]} |')
         out.append(f'| Stands in for | {L.text(s["standsInFor"])} |')
         out.append(f'| Authoritative contract | {L.text(s["contract"])} |')
         out.append(f'| What its checks prove | {L.text(s["proves"])} |')
@@ -842,7 +953,7 @@ def render_analysis(g: Graph) -> str:
     out.append('')
     out.append('| Measure | Value |')
     out.append('|---|---|')
-    out.append(f'| Delivery tasks | {a["tasks"]} ({a["acceptedBaseline"]} carried as accepted baseline) |')
+    out.append(f'| Delivery tasks | {a["tasks"]} ({a["acceptedBaseline"]} carried as accepted baseline), plus {a["adoptionSlices"]} adoption slices |')
     et = ', '.join(f'{k} {v}' for k, v in sorted(a['edgeTypes'].items()))
     out.append(f'| Dependency edges by type | {et} |')
     out.append(f'| Remaining work (size units: S=1, M=2, L=4, XL=8) | {a["remainingWork"]} |')
@@ -860,6 +971,19 @@ def render_analysis(g: Graph) -> str:
         if lt:
             out.append(f'| [{md_escape(lane["title"])}](lanes/{lane["id"]}.md) | {len(lt)} | {sum(SIZES[t["size"]] for t in lt)} | '
                        f'{", ".join(sorted({t["repo"] for t in lt}))} |')
+    out.append('')
+    out.append('## Concurrency inside each repository')
+    out.append('')
+    out.append('Tasks on the same delivery level have no prerequisite path between them, so they can be in progress '
+               'at the same time in one repository, each in its own worktree and write scope, subject only to their '
+               'declared shared resources. The counts are structural properties of the graph, not measured throughput.')
+    out.append('')
+    out.append('| Repository | Open tasks | Lanes | Widest level (tasks at once) | Ready after its adoption slices | Examples that can run at the same time |')
+    out.append('|---|---|---|---|---|---|')
+    for r in a['concurrencyByRepository']:
+        ex = ', '.join(f'{task_link(g, t, rel)} {md_escape(g.tasks[t]["title"])}' for t in r['examples'])
+        out.append(f'| {r["repository"]} | {r["openTasks"]} | {r["lanes"]} | level {r["widestLevel"]}: {r["widestLevelTasks"]} | '
+                   f'{len(r["readyAfterAdoption"])} | {ex} |')
     out.append('')
     out.append('## Critical path')
     out.append('')
@@ -983,9 +1107,20 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
                     b.append(f'- {o["ref"]} {p["title"]} ({o["part"]}): {design_win}\\docs\\planning\\work-packages\\{f}'
                              + (f', {p["section"]}' if p.get('section') else ', package-level obligation'))
             b.append('')
+            own_slices = sorted(s for s, v in g.slices.items() if v['adoptionTask'] == t['id'])
+            if own_slices:
+                b.append('Adoption slices (claim, review and record each separately as ledger/tasks/<slice>.md; one pull request '
+                         'may carry several; each slice opens only its own repository lane; see the Design adoption stage):')
+                for sid in own_slices:
+                    scope = g.slice_tasks(sid)
+                    acc = sum(1 for x in scope if g.tasks[x]['baseline']['state'] == 'accepted')
+                    opens = len(scope) - acc
+                    b.append(f'- {sid}: {g.slices[sid]["title"]} (opens {opens} task{"" if opens == 1 else "s"}'
+                             + (f'; records {acc} accepted task{"" if acc == 1 else "s"} as inherited' if acc else '') + ')')
+                b.append('')
             ent = g.entry(t['id'])
             if ent:
-                b.append(f'Entry condition: {ent} (adoption of the owning repository) is complete in the Plan ledger.')
+                b.append(f'Entry condition: adoption slice {ent} is complete in the Plan ledger (DLV-22).')
             b.append('Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete'
                      ' and each release prerequisite complete in the Plan ledger; DLV-24):')
             for e in t['start'] or []:
@@ -1027,7 +1162,8 @@ def render_index(g: Graph) -> str:
            'There is no Current task. Any number of workers may execute different ready tasks at the same time.',
            'Find ready tasks with `python tools/delivery.py ready`, claim one as described in `arcforges-implementation.md`,',
            'and paste its self-contained prompt from the lane file linked below. The order here is for reading only.', '',
-           f'Tasks: {len(g.tasks)} in {sum(1 for l in g.lanes if any(t["lane"] == l for t in g.tasks.values()))} lanes.', '']
+           f'Tasks: {len(g.data["tasks"])} in {sum(1 for l in g.lanes if any(t["lane"] == l for t in g.data["tasks"]))} lanes, '
+           f'plus {len(g.slices)} adoption slices listed with their repository adoption task.', '']
     for lane in g.data['lanes']:
         tasks = [t for t in g.data['tasks'] if t['lane'] == lane['id']]
         if not tasks:
@@ -1098,37 +1234,38 @@ def claimed(plan: Path, grace_hours: int = 1) -> set[str]:
     refs = subprocess.run(['git', '-C', str(plan), 'for-each-ref', '--format=%(refname:strip=4)',
                            'refs/remotes/origin/claims/'], capture_output=True, text=True, check=True).stdout.split()
     now = datetime.datetime.now(datetime.timezone.utc)
-    taken = set()
+    taken = set()  # lower-case ids; claim refs are lower case (claims/<task-id>)
     for name in refs:
         shown = subprocess.run(['git', '-C', str(plan), 'show', f'refs/remotes/origin/claims/{name}:claim.json'],
                                capture_output=True, text=True)
         if shown.returncode != 0:
-            taken.add(name.upper())  # unreadable claim: treat as taken and let a human resolve it
+            taken.add(name.lower())  # unreadable claim: treat as taken and let a human resolve it
             continue
         try:
             rec = json.loads(shown.stdout)
             state = rec.get('state', 'claimed')
             lease = datetime.datetime.fromisoformat(rec.get('leaseUntil', '').replace('Z', '+00:00'))
         except (ValueError, AttributeError):
-            taken.add(name.upper())
+            taken.add(name.lower())
             continue
         if state in {'delivered', 'complete'}:
-            taken.add(name.upper())
+            taken.add(name.lower())
         elif state in {'claimed', 'blocked'} and lease + datetime.timedelta(hours=grace_hours) > now:
-            taken.add(name.upper())
+            taken.add(name.lower())
     return taken
 
 
 def ready(g: Graph, plan: Path, lane: str | None, with_claims: bool = False):
     """Readiness under DLV-22/DLV-24: contract, artifact and design prerequisites need the target delivered
-    (or complete/inherited); release prerequisites and the adoption entry need it complete (or inherited)."""
-    status = ledger(plan)
+    (or complete/inherited); release prerequisites and the adoption slice need it complete (or inherited)."""
+    canon = {tid.lower(): tid for tid in g.tasks}
+    status = {canon.get(k.lower(), k): v for k, v in ledger(plan).items()}
     delivered = {t for t, s in status.items() if s in {'delivered', 'complete', 'inherited'}}
     complete = {t for t, s in status.items() if s in {'complete', 'inherited'}}
     taken = claimed(plan) if with_claims else set()
     rows = []
     for tid, t in g.tasks.items():
-        if tid in delivered or status.get(tid) == 'superseded' or tid in taken:
+        if tid in delivered or status.get(tid) == 'superseded' or tid.lower() in taken:
             continue
         if t['baseline']['state'] == 'accepted':
             continue  # recorded as inherited by the adoption stage, never re-executed
@@ -1177,7 +1314,8 @@ def main():
                     print('stale view:', p)
                 if stale:
                     raise Fail(f'{len(stale)} generated views are stale; run generate')
-                print(f'check passed: {len(g.tasks)} tasks, {len(files)} views current, {len(warnings)} warnings')
+                print(f'check passed: {len(g.data["tasks"])} tasks, {len(g.slices)} adoption slices, '
+                      f'{len(files)} views current, {len(warnings)} warnings')
         elif args.command == 'analyze':
             if errors:
                 raise Fail(f'{len(errors)} graph errors; run check')

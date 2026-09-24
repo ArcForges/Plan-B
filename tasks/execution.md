@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-16.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.00
 - WP-16:tool-result-acceptance-paragraph-between Tool-result acceptance paragraph (between §5 and §6): two distinct toolRequestIds in one attempt both persist and each replay returns its own original receipt; a changed result under the same (toolRequestId,attemptId,commandId) refuses with command.reused_identifier; lost acknowledgement never allocates a fresh command or drops the second result. Bound to the wire registry, TK-05 and task.tool_result -- the same key WP-26.03 uses. (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published product/profile identity (ApplicationScope) from Assistant.Abstractions
 - [artifact] FND.02: published execution identity and idempotency records
@@ -49,7 +49,7 @@ Outcome: Every reachable state carries a reason facet (waiting for approval, wai
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-16.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real state machine to attach reason facets to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -74,7 +74,7 @@ Outcome: Failures classify into transient/permanent/refused/cancelled/unknown-ef
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-16.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.02
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real state machine to classify failures against
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -100,7 +100,7 @@ Outcome: A task may spawn children with their own lifecycle/budget/cancellation 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-16.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.03
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real state machine and persistence to attach child relationships to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -127,7 +127,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-16.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.04
 - WP-16:tool-result-acceptance-paragraph-between Tool-result acceptance paragraph (between §5 and §6): two distinct toolRequestIds in one attempt both persist and each replay returns its own original receipt; a changed result under the same (toolRequestId,attemptId,commandId) refuses with command.reused_identifier; lost acknowledgement never allocates a fresh command or drops the second result. Bound to the wire registry, TK-05 and task.tool_result -- the same key WP-26.03 uses. (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real durable state machine to checkpoint
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -154,7 +154,7 @@ Outcome: Approval gates pause a task durably until resolved/expired; steering ad
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-16.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real durable state machine to pause/resume
 - [artifact] PLT.39: published approval/steering/step-up mechanism
@@ -182,7 +182,7 @@ Outcome: Progress is a separate best-effort channel; outcome is durable fact; ex
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-16.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.06
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real durable state machine to record outcome against
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -208,7 +208,7 @@ Outcome: Per-product and per-device/resource concurrency limits; loop detection 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-16.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.07
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: the real state machine and job tree to bound
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -235,7 +235,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-16.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, anchor rule-wp-16.90
 - WP-16:6-impacts-row-compatibility-task-contrac §6 Impacts row 'Compatibility: Task contract versioning for later cloud and mobile surfaces' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.execution is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXE.01: completed WP-16.00
 - [artifact] EXE.02: completed WP-16.01

@@ -18,7 +18,7 @@ Outcome: ArcForges.Foundation exposes the UUID/revision/enum/error primitive typ
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.00 (all work except the parts mapped to FND.07): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.00
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: ArcForges.Contracts.Foundation package: canonical UUID/Decimal/Rational/exact-value wire types and codecs
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -44,7 +44,7 @@ Outcome: Immutable CommandId/InvocationId/AttemptId/RunId, canonical hash, Outco
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: Contracts.Foundation exact-value/identity wire types
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -70,7 +70,7 @@ Outcome: Revision (per-object monotonic, optimistic-concurrency comparable) and 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.02
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: Contracts.Foundation revision/sequence wire primitives
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -95,7 +95,7 @@ Outcome: A clock abstraction provides wall-clock Instant and MonotonicTimestamp 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.03
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -120,7 +120,7 @@ Outcome: A single generated reason-code registry (eng/policy/reason-codes.json, 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.04
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: Contracts error/reason-code wire schema
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -146,7 +146,7 @@ Outcome: Each of the nine version axes (AppVersion, ContractSet, CapabilityVersi
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -174,7 +174,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.00 (first real external consumption of Contracts.Foundation): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.00
 - WP-04:typescript-kotlin-primitive-projection-o TypeScript/Kotlin primitive projection of registry-04 exact-value rules (UUID canonical ordering, TS bigint/Decimal, JSON exceptions) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.foundation is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.01: identity/exact-value types
 - [artifact] FND.02: execution identity/idempotency types

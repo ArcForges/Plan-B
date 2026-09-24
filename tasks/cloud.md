@@ -18,7 +18,7 @@ Outcome: Worker /api routing plus the C# AOT gRPC-Web/auth/current-owner pipelin
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.00 (all work except the parts mapped to CLOUD.37): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: published ArcForges.Contracts.PublicApi generated gRPC-Web service stubs to register the pipeline against
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -45,7 +45,7 @@ Outcome: The 21 module projects exist as boundaries and the D1 named-plan bridge
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: the deployed ingress/host pipeline to carry the private C#<->Worker plan-execution calls
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -73,7 +73,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-21.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.03
 - WP-21:6-impacts-migration-compatibility-manife §6 Impacts -- migration/compatibility manifests include source/schema/plan/ABI/runtime versions (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.02: module boundary projects to attach physical tables to (physical table name = <module>_<snake_case_entity>)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -100,7 +100,7 @@ Outcome: Every atomic guarded write also produces its owner receipt, outbox entr
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.02: the D1 named-plan bridge to add receipt/outbox/inbox writes inside
 - [artifact] CLOUD.03: physical platform.command/outbox/inbox tables (data-model/01 §2 platform infra tables)
@@ -127,7 +127,7 @@ Outcome: Perpetual hosted loops are replaced by Cron/Queue/Workflow-woken C# end
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.01
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: the deployed Worker/Container ingress to attach Cron/Queue/Workflow triggers to
 - [artifact] CLOUD.04: receipt/lease primitives to checkpoint job progress
@@ -155,7 +155,7 @@ Outcome: A reusable D1 guarded-batch executor exists that enforces the fixed SU-
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.05 (generic guarded-batch engine and fixed SU-04 module lock-order enforcement only; each module's own family participant list is a separate obligation carried by that module's own task (see coverage)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.02: the D1 named-plan bridge, since a guarded batch is executed as one named plan
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -182,7 +182,7 @@ Outcome: Model-04 named plans run through guarded-batch fixtures under measured 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.06 (all work except the parts mapped to SIM.10): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.02: module boundary + plan bridge to issue guarded-batch fixture plans against
 - [artifact] CLOUD.03: physical D1 schema to measure real write/read latency against
@@ -212,7 +212,7 @@ Outcome: Ingress/Container/D1/DO/R2/Queue health are exposed separately, and a m
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.07
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: the deployed ingress/Container to expose readiness for
 - [artifact] CLOUD.02: the plan-manifest hash to check for mismatch
@@ -239,7 +239,7 @@ Outcome: An operator-owned Cloudflare deployment/config/realm descriptor exists 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.08 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.08
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: a deployable Worker/Container image to define a second deployment profile for
 - [artifact] CLOUD.03: the D1 physical schema/migration runner to provision a fresh realm's database
@@ -268,7 +268,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-21.90 (full, including the Launch configuration acceptance subsection (launch-capacity.v1, PG-26)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.90
 - WP-21:6-impacts-migration-compatibility-manife §6 Impacts -- migration/compatibility manifests include source/schema/plan/ABI/runtime versions (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.37: package task delivered
 - [artifact] SIM.10: package task delivered
@@ -304,7 +304,7 @@ Outcome: Realm, user, authentication identity and single-owner workspace exist w
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.00 (all work except the parts mapped to CLOUD.20): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.02: module boundary + D1 plan bridge to implement the Identity module against
 - [artifact] CLOUD.03: physical D1 schema/migration runner for identity.* tables
@@ -333,7 +333,7 @@ Outcome: Native authorize/token PKCE ceremony and minimal browser login UI work 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.01
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.11: the core identity/authIdentity model to attach auth methods to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -360,7 +360,7 @@ Outcome: Device, installation, instance and session are four distinct concepts w
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.11: the core identity model a device/session attaches to
 - [artifact] CLOUD.06: the shared atomic family engine, since device revocation is a named shared-transaction family
@@ -387,7 +387,7 @@ Outcome: Trust levels per device exist with remote access defaulting to off; rai
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.13: the device/session model to attach trust levels to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -412,7 +412,7 @@ Outcome: Step-up challenges exist for the enumerated sensitive operations, bound
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.04 (the step-up mechanism itself and coverage for Cloud/Identity-owned sensitive operations (credential change, recovery, deletion, trust elevation); full coverage across every enumerated operation in every module is completed as each owning module wires it in -- see IM.step-up-cross-product-coverage): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.12: real authentication methods to re-assert during a step-up challenge
 - [artifact] CLOUD.13: the session model to scope step-up state to
@@ -439,7 +439,7 @@ Outcome: patEligible/scopes metadata, hash-only token storage, expiry/revocation
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.11: the core identity model a token belongs to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -464,7 +464,7 @@ Outcome: Recovery flows resist modelled abuse; account states (active/restricted
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.12: real auth methods (passkey/email/OIDC) to build recovery flows on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -489,7 +489,7 @@ Outcome: System browser, per-product redirects, secure storage and installation-
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.07
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.12: the real native PKCE ceremony endpoints to integrate against
 - [artifact] PLT.40: the local security foundation's secure storage primitive
@@ -518,7 +518,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-22.08 (full, including the 'Required implementation and closure from the final review' paragraph (complete typed account surface: profile/email, recovery-code set, scoped PAT, credential rename, session listing, four sign-out scopes, per-installation browser authorization, remote capability policy, restricted deletion-cancel reauthentication)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.08
 - WP-22:browser-session-evidence-note-wp-22-08-m Browser-session evidence note (WP-22.08 must pass before WP-23 consumes its contract; a written P2-003 decision alone is insufficient) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: the AOT host pipeline to implement the /session/* routes in
 - [artifact] CLOUD.11: identity core model
@@ -549,7 +549,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-22:p2-010-required-behavior-and-closure-app P2-010 required behavior and closure appendix (initial enrollment/recovery/provider/account/SSO methods wired end-to-end in client journeys) (P2-010 required behavior and closure appendix (initial enrollment/recovery/provider/account/SSO methods wired end-to-end in client journeys)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, package-level obligation
 - WP-22.00 (real identity/session implementation): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CON.07: real, delivered outcome of CON.07 (Identity/session/device operation registry + native-auth and browser HTTP exceptions)
 - [artifact] CLOUD.11: real, delivered outcome of CLOUD.11 (Core identity model (realm, user, authIdentity, single-owner workspace))
@@ -585,7 +585,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-23.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.00
 - WP-22:browser-session-evidence-note-wp-22-08-m Browser-session evidence note (WP-22.08 must pass before WP-23 consumes its contract; a written P2-003 decision alone is insufficient) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: the handwritten-proto-generated service/method definitions to register (D-009 authority)
 - [artifact] CLOUD.13: session model and native session validation
@@ -593,7 +593,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] CLOUD.19: the browser cookie-session adapter and native session validation to authenticate requests before they reach a handler
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.PublicApi/Endpoints/**
-Unblocks: AND.04, CLOUD.22, CLOUD.23, CLOUD.24, CLOUD.25, CLOUD.28, CLOUD.29, COM.13, SIM.05
+Unblocks: AND.04, CLOUD.22, CLOUD.23, CLOUD.24, CLOUD.25, CLOUD.28, CLOUD.29, CLOUD.64, CLOUD.66, COM.13, SIM.05
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline + opt-in tests: each method category through native and TS transport, malformed/unknown request values, denied scope before handler
 Completion evidence for the ledger: every selected operation has a concrete typed endpoint and owner; no ad-hoc REST business API
@@ -611,14 +611,14 @@ Outcome: Generated ArcResult domain errors and gRPC-Web transport statuses/trail
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.01
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.21: the endpoint registration to attach error mapping to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.PublicApi/Errors/**
-Unblocks: CLOUD.26, CLOUD.28
+Unblocks: CLOUD.26, CLOUD.28, CLOUD.64, CLOUD.66
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline + opt-in tests: HTTP200-with-error-trailers, partial frame, 64-bit values, deadline/cancel-after-dispatch, command-receipt reconciliation
 Completion evidence for the ledger: every C#/TS/Kotlin client distinguishes transport uncertainty from a domain refusal
@@ -636,7 +636,7 @@ Outcome: Opaque scope-bound PageRequest cursors, registered typed filters and Re
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.21: endpoint registration to add query/cursor semantics to
 - [contract] CON.91: the frozen notes.scalar.v1 query profile definition
@@ -662,7 +662,7 @@ Outcome: State-changing requests accept a command identity and produce exactly o
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.21: endpoint registration to enforce idempotency/rate limits on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -687,7 +687,7 @@ Outcome: The complete generated upload/status/ticket/verification/owner-promotio
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.04 (full (schema/transport/fixture boundary only; real R2 multipart behavior is WP-25.05)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.21: endpoint registration to add resource-transport endpoints to
 - [artifact] PRF.07: the minimal real R2 transport probe already proved by WP-06
@@ -714,7 +714,7 @@ Outcome: Released C# native, TypeScript gRPC-Web and Kotlin native clients work 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.05 (all work except the parts mapped to AND.07, WEB.30): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.19: the real browser cookie-session adapter to test the TS client's cookie/CSRF/Origin handling against
 - [artifact] CLOUD.22: typed error mapping to test exact-value/error/header client conformance against
@@ -742,7 +742,7 @@ Outcome: The supported client window is declared with golden wire vectors per co
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.26: at least one generated client per language to build the matrix against
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -771,7 +771,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-23:operator-contract-closure-appendix-regis Operator contract closure appendix (registry04 §9 + model01 operator state; eight authorization fields, operator scope, OC-03 role binding) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, package-level obligation
 - WP-23:browser-matrix-acceptance-appendix-brows Browser matrix acceptance appendix (browser-support.v1, supported/degraded/blocked behavior for generated transports) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.07: package task delivered
 - [artifact] WEB.30: package task delivered
@@ -804,7 +804,7 @@ Outcome: Public server-streaming shells for EventService.Watch and ExecutionServ
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.21: the endpoint-mapping pattern to register server-streaming methods alongside unary ones
 - [artifact] CLOUD.19: session authorization to re-check every 15s on the open stream
@@ -831,7 +831,7 @@ Outcome: The feed is bound to owner/product/filter/recovery generation, one even
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.01 (all work except the parts mapped to DEV.14): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.01
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.29: the stream connection/auth shell to bind scope onto
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -856,7 +856,7 @@ Outcome: Sequence/hash/offset cursors and snapshot high-water recovery work per 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.30: scoped subscription to attach cursor semantics to
 - [artifact] CLOUD.04: the committed D1 outbox to project from
@@ -882,7 +882,7 @@ Outcome: Poll/readOutput works with the same owner/cursor profile as the stream,
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.31: cursor/gap handling to read from in the unary fallback
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -908,7 +908,7 @@ Outcome: The committed D1 outbox publishes into the bounded DO feed with wake hi
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.31: the DO projection to publish into
 - [artifact] CLOUD.05: the finite-durable-job/Queue wake mechanism
@@ -935,7 +935,7 @@ Outcome: 5-minute stream, 15s heartbeat, 45s silence and bounded jitter/queue li
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.29: the stream shell to bound the lifecycle of
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -960,7 +960,7 @@ Outcome: Platform Cloud.Client and Contracts TS/Kotlin stream fixtures are publi
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.33: the real publication/wake mechanism to expose through the reusable adapter
 - [artifact] CLOUD.34: bounded lifecycle semantics to expose as typed lifecycle states
@@ -987,7 +987,7 @@ Outcome: Every WP-24 substep is complete and packaged; two distinct toolRequestI
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-24.90 (full, including the Tool-result acceptance subsection (toolRequestId dedup for Task and ChatTurn owners, command.reused_identifier refusal, wire registry + TK-05 + task.tool_result binding)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.90
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.14: package task delivered
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1020,7 +1020,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-25.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.00
 - WP-21.00 (real Sync owner transaction implementation): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.03: D1 physical mapping/migration runner for notes.* tables
 - [artifact] CLOUD.06: the shared atomic family engine, since synced content mutation is a named shared-transaction family
@@ -1053,7 +1053,7 @@ Outcome: The single sync_outbox schema exists client-side: acked shadow plus pen
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: the local store journal/single-writer persistence foundation
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1080,7 +1080,7 @@ Outcome: Model-04's primary lower-bound W bootstrap, immutable-key pages, retent
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.37: the canonical notes schema to publish changes from
 - [artifact] CLOUD.04: the generic receipts/outbox mechanism this publisher reads committed-unpublished rows from
@@ -1109,7 +1109,7 @@ Outcome: Conflicts are detected by revision, never timestamp; five policies are 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.38: the client outbox/conflict lineage to detect conflicts against
 - [artifact] CLOUD.39: the guarded publication mechanism, since conflicts are detected during publication
@@ -1135,7 +1135,7 @@ Outcome: Deletion propagates through tombstones with defined retention; an offli
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.39: the change feed/publication mechanism to propagate tombstones through
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1160,7 +1160,7 @@ Outcome: Upload happens through a server-issued session, chunked and checksummed
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: the deployed Worker's R2 bucket binding and job-authorized object port (contracts/05 §9 job-grant/job-authorize)
 - [artifact] CLOUD.06: the shared atomic family engine, since resource upload lifecycle is a named shared-transaction family
@@ -1189,7 +1189,7 @@ Outcome: Hydration/cache pause is distinguished from explicit Cloud deletion; so
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.42: the real blob lifecycle to verify object availability against
 - [artifact] CLOUD.39: the sync change feed for the realm-transfer workflow's status/commit steps
@@ -1216,7 +1216,7 @@ Outcome: Three devices editing concurrently, one offline for an extended period,
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.07 (all work except the parts mapped to NOTES.35): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.07
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1246,7 +1246,7 @@ Outcome: Bounded leased Cloud export jobs freeze an acknowledged revision manife
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.08 (all work except the parts mapped to AST.21, CLOUD.58, NOTES.33): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.08
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.37: the canonical notes schema to snapshot for export
 - [artifact] CLOUD.42: real R2 staging/verification for the export bundle
@@ -1276,7 +1276,7 @@ Outcome: HistoryService.BeginImport/FinalizeImport/GetImport/CancelImport work p
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.09 (all work except the parts mapped to AST.22): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.09
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.42: real R2 staged-archive verification for imported history bodies
 - [artifact] CLOUD.06: the shared atomic family engine for atomic visibility/receipt
@@ -1304,7 +1304,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-25.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.90
 - WP-25:required-implementation-and-closure-from Required implementation and closure from the final review (01-cloud-data-model verification; real structural move/ack/conflict transactions, full native metadata replicas, job-authorized R2 staging/verification/promotion, quarantined old-generation client commands) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.21: package task delivered
 - [artifact] AST.22: package task delivered
@@ -1342,7 +1342,7 @@ Outcome: Model-04/backup-manifest-v1 works: matching D1 export/bookmark/base seq
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.03: the D1 physical schema/migration runner to export a matching bookmark/base sequence for
 - [artifact] CLOUD.42: real committed R2 objects to inventory and copy independently
@@ -1369,7 +1369,7 @@ Outcome: Base bookmark/sequence and contiguous after-image archive are verified;
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.01
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.48: the backup manifest/archive to restore from
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1394,7 +1394,7 @@ Outcome: Old ingress/keys are fenced, D1/R2 are restored, the independent restri
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.49: point-in-time restore to rebuild from
 - [artifact] CLOUD.17: the recovery/account-states/deletion model, since a deleted/revoked account must not reappear after rebuild
@@ -1420,7 +1420,7 @@ Outcome: An actual Container/Worker/DO/R2/D1 restore runs using separate credent
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.03 (Cloud-side drill: real Container/Worker/DO/R2/D1 restore using separate credentials and immutable archive, RTO<=4h. The combined AI reopen portion is a joint step with the AI lanes/the governance and release lanes -- see IM.dr-drill-combined-ai-reopen): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.50: the fresh environment rebuild mechanism to drill
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1445,7 +1445,7 @@ Outcome: Archive watermark, capacity, canonical refs/hash/pins, derived-rebuild 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.48: the real D1/object backup mechanism producing watermark/lag/inventory numbers to project
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1471,7 +1471,7 @@ Outcome: Explicit realm export/import semantics work using compatible D1 physica
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.48: the backup manifest format to reuse for realm export/import
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1498,7 +1498,7 @@ Outcome: Verified independent backup and safety journal are required before paid
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.48: the independent backup/safety-journal mechanism this gate checks the completeness of
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1523,7 +1523,7 @@ Outcome: Every WP-46 substep is complete, built/packed once, and consumed as exa
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.90
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1554,7 +1554,7 @@ Outcome: Both production clients run with no fixture export producer registered;
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.08 (full, joint with consumer-side structural fixture-registration removal): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.08
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.45: real, delivered outcome of CLOUD.45 (Real Cloud Notes and Chat export producers)
 - [artifact] NOTES.33: real, delivered outcome of NOTES.33 (Real Cloud Notes export join replaces the / fixture endpoint)
@@ -1581,7 +1581,7 @@ Outcome: The 'exact credits' half of WP-21.05's own completion gate ('Two Contai
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-21.05 (Commerce/Entitlement family participant evidence for the shared completion gate): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.06: real, delivered outcome of CLOUD.06 (Shared atomic family guarded-batch engine)
 - [artifact] CLOUD.16: real, delivered outcome of CLOUD.16 (PAT and actor authorization)
@@ -1608,14 +1608,15 @@ Outcome: Every operator operation's eight authorization fields, operator scope a
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23:operator-contract-closure-appendix-full Operator contract closure appendix, full cross-area join (Operator contract closure appendix, full cross-area join): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] CLOUD.28: real, delivered outcome of CLOUD.28 (Owned-artifact closure and real integration)
 - [artifact] COM.13: real, delivered outcome of COM.13 (Operator financial-owner proposal/approval operations)
 - [artifact] POL.05: real, delivered outcome of POL.05 (Kill switches)
 - [artifact] OPS.05: real, delivered outcome of OPS.05 (Operator console and support access)
+- [artifact] CLOUD.21: real public endpoint mapping for the operator operations
+- [artifact] CLOUD.22: real typed protocol and error mapping
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- none
+- [integration] CLOUD.28: the WP-23 operator contract closure accepted
 
 Permitted write scope: 
 
@@ -1635,11 +1636,12 @@ Outcome: Full coverage of WP-22.04's completion gate ('every enumerated operatio
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-22.04 (cross-product operation coverage beyond Identity's own operations): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\22-identity-workspace-and-device.md, anchor rule-wp-22.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.15: real, delivered outcome of CLOUD.15 (Step-up challenges for sensitive operations)
 - [artifact] COM.10: real, delivered outcome of COM.10 (Refunds, disputes and evidence)
-- [artifact] AND.07: real, delivered outcome of AND.07 (Foundation integration evidence: real candidate against deployed 22/23/24/25)
+- [artifact] CLOUD.21: real public endpoint mapping for the sensitive operations
+- [artifact] CLOUD.22: real typed protocol and error mapping that returns step-up challenges
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -1662,10 +1664,13 @@ Outcome: AI services genuinely reopen and function after a real Cloud DR restore
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.03 (combined AI-reopen portion): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.cloud is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.51: real, delivered outcome of CLOUD.51 (Disaster-recovery drill programme)
-- [artifact] HAR.05: real, delivered outcome of HAR.05 (Own-application execution proof and fixture turn-endpoint removal)
+- [artifact] HAR.00: the real Harness turn loop to reopen
+- [artifact] HAR.02: real approval, cancellation and crash recovery
+- [artifact] HAR.03: real generated streaming and durable output
+- [artifact] AIR.00: real Workers AI provider adapters
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

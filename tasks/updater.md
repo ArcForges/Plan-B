@@ -18,7 +18,7 @@ Outcome: update.feed.v1 canonical JSON envelope validation, trust (ECDSA P256/SH
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.00
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.40: secure key-handling/signature-verification patterns from Security
 - [artifact] FND.05: reason-code registry
@@ -46,7 +46,7 @@ Outcome: Background check, range resume, delta reconstruct with verified full fa
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed/target selection
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -71,7 +71,7 @@ Outcome: The real lifecycle shutdown handshake (await all affected instances exi
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.02
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.02: staged verified candidate
 - [artifact] PLT.32: lifecycle/shutdown handshake (WP-10.06)
@@ -99,7 +99,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.03
 - WP-53:versioned-installation-update-journal-pe Versioned installation update journal persisted outside install/data files; the updater never writes product data or implements schema migration (SS6 impacts, BR-05) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.03: safe apply/activation
 - [artifact] PLT.04: migration runner's read/write compatibility-horizon concept (WP-07.03)
@@ -125,7 +125,7 @@ Outcome: Explicit channel selection, stable installation-based rollout assignmen
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.04
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -151,7 +151,7 @@ Outcome: check/download/verify/stage/apply/defer/fail/rollback recorded with sta
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.47: emission/dimension surface (WP-12.00)
 - [artifact] FND.05: reason-code registry
@@ -178,7 +178,7 @@ Outcome: Production catalog/revocation and Android direct-update feeds using WP0
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.07
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed mechanics
 - [contract] CON.16: native auth exceptions, catalog/index/revocation/update/realm schemas and independent signed vectors
@@ -204,7 +204,7 @@ Outcome: ArcForges.Update is packed with its verified closure, restored into cle
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.90
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.updater is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed
 - [artifact] UPD.02: download/staging

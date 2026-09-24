@@ -18,7 +18,7 @@ Outcome: React Router build-time pre-rendering (SSR disabled) generates the full
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.00
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.03: Node/npm workspace and toolchain pins
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -45,7 +45,7 @@ Outcome: Catalogue, release metadata, changelog and legal versions are consumed 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.01
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.01: static generator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -71,7 +71,7 @@ Outcome: Above-the-fold content ships in delivered HTML, assets are content-hash
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.02
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.01: static generator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -97,7 +97,7 @@ Outcome: Locale-scoped URLs with alternate-language annotations, no client-only 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.03
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.01: static generator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -122,7 +122,7 @@ Outcome: Versioned per-product documentation, a no-account-gate download surface
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.04
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.01: static generator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -148,7 +148,7 @@ Outcome: Accessibility semantics and keyboard-only navigation on every page; min
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.05
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.01: static generator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -173,7 +173,7 @@ Outcome: The site remains fully available during a full Cloud outage, deploys at
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.06
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.01: static generator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -199,7 +199,7 @@ Outcome: packages/ui grows from a placeholder Shell/Button into a full design-to
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-47.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.07
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.03: Node/npm workspace
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -227,7 +227,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-47.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, anchor rule-wp-47.90
 - WP-47:browser-matrix-acceptance-paragraph-brow Browser matrix acceptance paragraph (browser-support.v1 for the static site output) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\47-static-public-site.md, package-level obligation
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.02: content/pricing inputs
 - [artifact] WEB.03: performance
@@ -259,7 +259,7 @@ Outcome: The apps/app workspace member is created with the account deployment pr
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.00
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.08: design system tokens/components
 - [contract] CON.07: generated TS SDK (@arcforges/api-client/@arcforges/proto)
@@ -286,7 +286,7 @@ Outcome: Passkey/email verification/recovery, live opaque cookie session, server
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.01
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.19: the P2-003 same-origin cookie-session adapter
 - [artifact] WEB.10: account shell
@@ -312,7 +312,7 @@ Outcome: Profile, authentication methods, passkey management, sessions, device l
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.02
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.11: session/step-up
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -337,7 +337,7 @@ Outcome: Single-owner workspace settings (no membership/invitation/role/seat sur
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.03
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.10: account shell
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -363,7 +363,7 @@ Outcome: Consumer subscription/management views use public server projections an
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.04 (all work except the parts mapped to WEB.29): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.04
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.10: account shell
 - [contract] CON.08: commerce/entitlement wire records
@@ -390,7 +390,7 @@ Outcome: Export requests show progress and download; deletion requests show a gr
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.05
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.10: account shell
 - [contract] CON.22: published data and export operations
@@ -416,7 +416,7 @@ Outcome: A strict CSP with no default inline script, per-origin cookie/CORS/CSRF
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.06
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.10: account shell
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -442,7 +442,7 @@ Outcome: Honest offline behaviour preserving unsent input, a cloud-outage state 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.07
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.12: account/security surfaces
 - [artifact] WEB.13: workspace/storage surfaces
@@ -472,7 +472,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-48:required-implementation-and-closure-from Required implementation and closure from the final review: 08-security-architecture account/provider closure, scoped-token display-once, cancellation restricted route (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, package-level obligation
 - WP-48:browser-matrix-acceptance-paragraph-brow Browser matrix acceptance paragraph (browser-support.v1 for the account output) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, package-level obligation
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.11: session/step-up
 - [artifact] WEB.12: security surfaces
@@ -504,7 +504,7 @@ Outcome: Chat routes are composed in the same ArcForges.Web.App codebase using o
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.00
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.08: design system tokens/components
 - [artifact] WEB.10: account shell and apps/app workspace registration
@@ -531,7 +531,7 @@ Outcome: The full Chat UI uses annex-10 gRPC-Web binary output/event streams wit
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.01 (all work except the parts mapped to WEB.27): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.01
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.19: chat shell + real deployed WP23/24 transport (inherited via WEB.10)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -557,7 +557,7 @@ Outcome: Task/run/step/tool-call surfaces with progress; approve/reject/cancel/p
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.02 (all work except the parts mapped to WEB.27, WEB.28): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.02
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.19: chat shell
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -583,7 +583,7 @@ Outcome: Artifact preview runs inside an isolated sandbox so untrusted content n
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.03
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.19: chat shell
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -609,7 +609,7 @@ Outcome: Device applications are listed, an explicit authorized product/installa
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.04 (all work except the parts mapped to WEB.28): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.04
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.19: chat shell + real device-presence API (inherited)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -634,7 +634,7 @@ Outcome: Honest offline messaging preserving unsent input; realtime loss degrade
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.05
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.20: streaming UI
 - [artifact] WEB.21: tasks UI
@@ -662,7 +662,7 @@ Outcome: Bundle size, first-interactive and interaction-responsiveness budgets a
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-49.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.06
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.19: chat shell
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -689,7 +689,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-49.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.90
 - WP-49:browser-matrix-acceptance-paragraph-brow Browser matrix acceptance paragraph (browser-support.v1 for the chat output) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, package-level obligation
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.20: streaming
 - [artifact] WEB.21: tasks/approval
@@ -720,7 +720,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-49.01 (real-integration closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.01
 - WP-49.02 (real-integration closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.02
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.20: real, delivered outcome of WEB.20 (Conversation and generated output streams)
 - [artifact] WEB.21: real, delivered outcome of WEB.21 (Tasks, approval and steering)
@@ -749,11 +749,15 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-49.02 (device-dispatch closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.02
 - WP-49.04 (real-integration closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\49-arcchat-web-companion.md, anchor rule-wp-49.04
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.21: real, delivered outcome of WEB.21 (Tasks, approval and steering)
 - [artifact] WEB.23: real, delivered outcome of WEB.23 (One-application remote control)
-- [artifact] DEV.09: real, delivered outcome of DEV.09 (Owned-artifact receipt and real integration)
+- [artifact] DEV.02: the real durable target queue
+- [artifact] DEV.03: real owner reauthorization on the desktop
+- [artifact] DEV.06: real remote approval and steering
+- [artifact] DEV.07: real offline expiry and unknown-effect recovery
+- [artifact] DEV.12: the cross-repository (toolRequestId, attemptId, commandId) agreement
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -776,7 +780,7 @@ Outcome: hosted checkout, entitlement reasons and rate-limit/recovery text refle
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-48.04 (real-provider-evidence closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\48-account-portal.md, anchor rule-wp-48.04
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] WEB.14: real, delivered outcome of WEB.14 (Subscription, capacity, credits and hosted checkout)
 - [artifact] COM.14: real, delivered outcome of COM.14 (Technical commerce closure and live-gate staging)
@@ -803,7 +807,7 @@ Outcome: Real TS gRPC-Web client, cookie/CSRF/Origin session behavior and realti
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23.05 (Web real-consumer integration): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.05
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.19: real, delivered outcome of CLOUD.19 (Browser cookie-session adapter and full account-surface closure)
 - [artifact] CLOUD.26: real, delivered outcome of CLOUD.26 (Generated C#/TypeScript/Kotlin clients against Identity/Workspace/Device)
@@ -816,7 +820,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: 
-Unblocks: CLOUD.28
+Unblocks: CLOUD.28, WEB.31
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Local real-integration run of the affected scenario in an existing environment, recorded once; offline and static checks in CI; no hosted runtime, device, browser, live-service or inference CI (P2-017).
 Completion evidence for the ledger: Real TS gRPC-Web client, cookie/CSRF/Origin session behavior and realtime streams against the deployed Cloud, beyond MSW fixtures
@@ -834,15 +838,15 @@ Outcome: Supported/degraded/blocked behavior across every output's flows on real
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-23:browser-matrix-acceptance-appendix-full Browser matrix acceptance appendix, full cross-area join (Browser matrix acceptance appendix, full cross-area join): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, package-level obligation
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.web is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] CLOUD.28: real, delivered outcome of CLOUD.28 (Owned-artifact closure and real integration)
 - [artifact] OPS.05: real, delivered outcome of OPS.05 (Operator console and support access)
 - [artifact] WEB.07: real, delivered outcome of WEB.07 (Independence and atomic deployment)
 - [artifact] WEB.14: real, delivered outcome of WEB.14 (Subscription, capacity, credits and hosted checkout)
 - [artifact] WEB.19: real, delivered outcome of WEB.19 (Chat shell: route composition and design-system integration)
+- [artifact] WEB.30: the real React Web client against the deployed browser session
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- none
+- [integration] CLOUD.28: the WP-23 browser-matrix Cloud part accepted
 
 Permitted write scope: 
 
