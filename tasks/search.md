@@ -33,7 +33,7 @@ Unblocks: HAR.01, SRCH.01
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit + Cloud integration tests against the real D1 schema in an ephemeral test host; no live web fetch in CI (P2-017 forbids live-service CI) -- the web-source path is exercised through the fixture web-search response only.
 Completion evidence for the ledger: Rejection-before-snippet test matrix (other-product/realm/private), consent/origin record contents, source registration receipt.
-Notes: WP-40 has no explicit Sec.4 project/file table unlike WP-41/43/52; the Cloud module path above is this agent's convention-based inference, not sourced WP text -- flagged in report.md.
+Notes: WP-40 has no explicit section 4 project/file table (unlike WP-41, WP-43 and WP-52); the Cloud module path above follows the Cloud module layout convention and is not stated in WP-40 itself.
 ```
 
 ```text

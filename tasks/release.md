@@ -127,7 +127,7 @@ Unblocks: REL.07, REL.11
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Post-release store-channel install/update verification, listing-consistency check; no emulator/device CI per P2-017 (real device evidence is WP06.07/WP30/WP32).
 Completion evidence for the ledger: Store install/update verification results; listing-consistency check.
-Notes: F-023 final closure and VG-13 (store category fit) are WP32's own gates (a11), consumed here rather than produced.
+Notes: F-023 final closure and VG-13 (store category fit) are WP32's own gates, consumed here rather than produced.
 ```
 
 ```text
@@ -258,7 +258,7 @@ Unblocks: REL.07, REL.11
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Full commercial gate evidence set from WP42; configuration assertion on the regional route; a received payout is required, not merely a successful test transaction, per BR-05.
 Completion evidence for the ledger: Commercial gate evidence set including the received payout; regional-route configuration assertion.
-Notes: VG-10/VG-11/VG-12 (supplier onboarding, payout eligibility, regional enablement) are WP42's own gates (a09), consumed here rather than produced.
+Notes: VG-10/VG-11/VG-12 (supplier onboarding, payout eligibility, regional enablement) are WP42's own gates, consumed here rather than produced.
 ```
 
 ```text

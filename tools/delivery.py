@@ -1092,8 +1092,9 @@ def claimed(plan: Path, grace_hours: int = 1) -> set[str]:
     """
     import datetime
     import subprocess
-    subprocess.run(['git', '-C', str(plan), 'fetch', '--quiet', 'origin',
-                    '+refs/heads/claims/*:refs/remotes/origin/claims/*'], check=True)
+    fetch = ['git', '-C', str(plan), 'fetch', '--quiet', 'origin', '+refs/heads/claims/*:refs/remotes/origin/claims/*']
+    if subprocess.run(fetch).returncode != 0:
+        raise Fail('network operation failed: ' + ' '.join(fetch[3:]) + ' (report it and stop; do not retry or change networking)')
     refs = subprocess.run(['git', '-C', str(plan), 'for-each-ref', '--format=%(refname:strip=4)',
                            'refs/remotes/origin/claims/'], capture_output=True, text=True, check=True).stdout.split()
     now = datetime.datetime.now(datetime.timezone.utc)

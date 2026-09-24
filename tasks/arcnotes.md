@@ -232,7 +232,7 @@ Unblocks: NOTES.14
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline unit tests: managed round-trip with integrity, reference-unavailable behaviour, malformed-image corpus asserting placeholder+reason+no crash, egress test
 Completion evidence for the ledger: attachment integrity, no-embedding, malformed-input degradation and preview-egress results (image/file portion only; PDF portion is NOTES.09)
-Notes: Deliberately split from the PDF viewer (NOTES.09) so ordinary attachment handling does not wait on the native PDFium wrapper, which does not exist yet anywhere in DesktopPlatform - this is the aggregate-producer-gate pattern the brief asks to avoid.
+Notes: Deliberately split from the PDF viewer (NOTES.09) so ordinary attachment handling does not wait on the native PDFium wrapper, which does not exist yet anywhere in DesktopPlatform - this is the aggregate-producer-gate pattern the delivery model avoids.
 ```
 
 ```text
@@ -261,7 +261,7 @@ Unblocks: NOTES.14, NOTES.37
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline unit tests against the fixture parser now; real hostile-input containment test deferred to IM.notes-pdf-native-integration; no live GUI E2E in CI
 Completion evidence for the ledger: real native-parser-crash/hang-survival-with-metadata-card result; page-anchor survive-reopen result; PG-12/PG-22 evidence once the real WP-13 artifact lands
-Notes: Flagged as an early risk proof because AT-05 (PDF first-class attachment) cannot be met by a metadata fallback per PD-07, and the native dependency chain (WP-11.09 -> WP-13) is currently the least-built part of the whole Notes surface - worth surfacing to a02/a03 planning early rather than discovering it late.
+Notes: Flagged as an early risk proof because AT-05 (PDF first-class attachment) cannot be met by a metadata fallback per PD-07, and the native dependency chain (WP-11.09 -> WP-13) is currently the least-built part of the whole Notes surface - worth surfacing early rather than discovering it late.
 ```
 
 ```text

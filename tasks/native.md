@@ -436,7 +436,7 @@ Unblocks: NAT.26, NAT.30, SLATE.19, SLATE.22, SLATE.25
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): CPU display/readback, ownership and fence lifetime, device loss and forced software path; each advertised accelerator exercised with its actual driver where locally available
 Completion evidence for the ledger: Portable graphics and optional OS backends: behavioral, failure and package evidence
-Notes: Consumed by both ArcSlate (preview surface) and ArcScope (live-view surface) per the brief's consumer split.
+Notes: Consumed by both ArcSlate (preview surface) and ArcScope (live-view surface).
 ```
 
 ```text

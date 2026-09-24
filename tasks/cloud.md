@@ -502,7 +502,7 @@ Unblocks: AND.07, CLOUD.20, PLT.40
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline + opt-in local tests: separate product sign-in/sign-out, canceled/lost callback, wrong state/realm, expired code, device revoke, local history preservation
 Completion evidence for the ledger: per-client session isolation results
-Notes: Cross-repo: owned by WP-22 (a08) but lives in DesktopPlatform.
+Notes: Cross-repo: owned by WP-22 but lives in DesktopPlatform.
 ```
 
 ```text
@@ -1424,7 +1424,7 @@ Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.50: the fresh environment rebuild mechanism to drill
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- [integration] CLOUD.67: AI (a10) reopen after the Cloud-side restore, per WP-46's own text 'then combined AI reopen at 50/52'
+- [integration] CLOUD.67: AI reopen after the Cloud-side restore, per WP-46's own text 'then combined AI reopen at 50/52'
 
 Permitted write scope: Cloud:tests/DrillTests/**
 Unblocks: CLOUD.55, CLOUD.67, OPS.03, REL.06
@@ -1657,7 +1657,7 @@ Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
 Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
 Kind/size: integration/M. Baseline: not-started.
-Outcome: AI (a10) services genuinely reopen and function after a real Cloud DR restore, per WP-46.03's own 'then combined AI reopen at 50/52'
+Outcome: AI services genuinely reopen and function after a real Cloud DR restore, per WP-46.03's own 'then combined AI reopen at 50/52'
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-46.03 (combined AI-reopen portion): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\46-backup-recovery-and-data-health.md, anchor rule-wp-46.03
@@ -1673,5 +1673,5 @@ Permitted write scope:
 Unblocks: CLOUD.51
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Local real-integration run of the affected scenario in an existing environment, recorded once; offline and static checks in CI; no hosted runtime, device, browser, live-service or inference CI (P2-017).
-Completion evidence for the ledger: AI (a10) services genuinely reopen and function after a real Cloud DR restore, per WP-46.03's own 'then combined AI reopen at 50/52'
+Completion evidence for the ledger: AI services genuinely reopen and function after a real Cloud DR restore, per WP-46.03's own 'then combined AI reopen at 50/52'
 ```

@@ -384,7 +384,7 @@ Unblocks: GOV.15
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline Gradle-time checks, negative fixtures, PR CI; no device/emulator runtime here, per P2-017 (that is WP06.07/WP30/WP32).
 Completion evidence for the ledger: Per-rule pass/fail fixture table for Mobile's Gradle dependency graph.
-Notes: F-023 (mobile provenance) and VG-07 (Android runtime posture) are separately scheduled at WP06.07/WP30/WP32 (a03/a11) and are not this task's concern.
+Notes: F-023 (mobile provenance) and VG-07 (Android runtime posture) are separately scheduled at WP06.07/WP30/WP32 and are not this task's concern.
 ```
 
 ```text
