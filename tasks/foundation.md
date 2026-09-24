@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Foundation values
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Foundation values
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.00 (all work except the parts mapped to FND.07): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.00
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: ArcForges.Contracts.Foundation package: canonical UUID/Decimal/Rational/exact-value wire types and codecs
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -45,7 +45,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: Contracts.Foundation exact-value/identity wire types
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] PLT.01: durable single-effect/receipt proof against real persistence
@@ -71,7 +71,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: Contracts.Foundation revision/sequence wire primitives
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -96,7 +96,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -121,7 +121,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: Contracts error/reason-code wire schema
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -147,7 +147,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-04.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -172,17 +172,17 @@ Outcome: ArcForges.Foundation and ArcForges.Application.Abstractions are packed,
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-04.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.90
 - WP-04.00 (first real external consumption of Contracts.Foundation): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, anchor rule-wp-04.00
-- WP-04:typescript-kotlin-primitive-projection-o TypeScript/Kotlin primitive projection of registry-04 exact-value rules (UUID canonical ordering, TS bigint/Decimal, JSON exceptions) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md — 
+- WP-04:typescript-kotlin-primitive-projection-o TypeScript/Kotlin primitive projection of registry-04 exact-value rules (UUID canonical ordering, TS bigint/Decimal, JSON exceptions) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\04-identity-error-and-versioning-primitives.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.01: identity/exact-value types
 - [artifact] FND.02: execution identity/idempotency types
 - [artifact] FND.03: revision/sequence types
 - [artifact] FND.04: clock abstraction
 - [artifact] FND.05: reason-code registry
 - [artifact] FND.06: version axis types
-- [artifact] CON.91: real CON.91 available
+- [artifact] CON.91: real, delivered outcome of CON.91 (WP03.01 — foundation contract types (accepted, historical))
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

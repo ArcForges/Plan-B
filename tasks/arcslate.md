@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — ArcSlate
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## ArcSlate
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.01
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -45,7 +45,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.00
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.01: RationalRate/TimeRange types for SequenceSettings video/audio output grids
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -71,7 +71,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.02 (domain types (MediaAsset/MediaStream/MediaMetadata/MediaAvailability) and the relink-by-content-hash algorithm; excludes the real native read/probe adapter): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.02
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.01: source-stream time base rational types for MediaMetadata.rate/duration
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -95,10 +95,10 @@ Outcome: Importing a real media file populates MediaMetadata through the owned a
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-36.02 (the real metadata/read adapter using the approved owned ABI and ContentSandbox, and the content-origin carrier/propagation/failure vectors recorded in this substep's evidence row): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.02
-- WP-36:content-origin-carrier-propagation-failu Content-origin carrier/propagation/failure vectors (WP-36.02 required evidence addition; §8 additional completion requirement) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md — 
+- WP-36:content-origin-carrier-propagation-failu Content-origin carrier/propagation/failure vectors (WP-36.02 required evidence addition; §8 additional completion requirement) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.07: published arc_media_probe / arc_media_reader_stream export in the ArcForges.Native.Media package (managed MediaProbe wrapper)
 - [artifact] SLATE.03: MediaAsset/MediaMetadata domain types to populate
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -125,7 +125,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.03
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.02: Project/MediaLibrary container
 - [artifact] SLATE.03: MediaAsset identity
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -151,7 +151,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.04
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.02: Sequence to hold tracks
 - [artifact] SLATE.03: MediaAsset reference type
 - [artifact] SLATE.01: TimeRange for clip in/out and timeline placement
@@ -179,7 +179,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.05 (the shared validate->expand-affected-set->one-transaction command pipeline, plus Insert/Overwrite/Move/Trim(in/out)/Split/Delete/Lift/RippleDelete/Extract/Duplicate exactly per slate.edit.v1 (26-product-behavior-profiles.md §4)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.05
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: Track/TimelineItem/Clip model to operate on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -206,7 +206,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.05 (RippleTrim/Roll/Slip/Slide/Group-Ungroup/Link-Unlink/Enable-Disable/ReorderTracks/Transition(create-delete)/Snap/Retime+RetimeCurve/ripple-marker-scope exactly per slate.edit.v1): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.05
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.07: the shared command pipeline (validate/affected-set/transaction) and the placement operations these compose with (e.g. Roll needs two adjacent clips already placed)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -232,7 +232,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.06 (undo/redo as a distinct mechanism from checkpoint/recovery: composite operation grouping, explicit commit-boundary (a transient drag/preview is never a committed command)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.06
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.07: the command pipeline's one-transaction-per-command contract
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -254,11 +254,10 @@ Kind/size: feature/M. Baseline: not-started.
 Outcome: ArcSlate.Infrastructure persists Project/Sequence/Timeline/MediaLibrary through the platform's single write path; fixtures/formats/arcslate/v1/ exists as the V1 project fixture; the storage schema version equals the highest applied migration.
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
-- WP-36:package-level-6-impacts-row-database-the package-level: §6 Impacts row "Database: the ArcSlate project store and its V1 migration baseline"; §4 ArcSlate.Infrastructure project store/media index/migration set (package-level: §6 Impacts row "Database: the ArcSlate project store and its V1 migration baseline"; §4 ArcSlate.Infrastructure project store/media index/migration set): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md — 
-- WP-36:database-impact-arcslate-project-store-a Database impact: ArcSlate project store and its V1 migration baseline (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md — 
+- WP-36:database-impact-arcslate-project-store-a Database impact: ArcSlate project store and its V1 migration baseline (§6) (package-level: §6 Impacts row "Database: the ArcSlate project store and its V1 migration baseline"; §4 ArcSlate.Infrastructure project store/media index/migration set; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: published store abstraction with the single transactional write path (validate->authorize->begin->apply->journal->advance revision->commit->notify)
 - [artifact] PLT.04: published migration runner (numbered, transactional-per-step, idempotent, resumable)
 - [artifact] SLATE.02: Project/Sequence domain types to persist
@@ -287,7 +286,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.06 (project checkpoints as an explicit user mechanism distinct from undo; crash recovery to the last committed boundary with explicit loss reporting; migration from prior project versions with semantic preservation): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.06
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.02: published append-only journal with durable-before-acknowledged commits
 - [artifact] PLT.03: published snapshot/recovery mechanism with typed outcomes (clean / recovered-with-loss / unrecoverable-with-evidence)
 - [artifact] SLATE.09: the undo mechanism this task must remain distinct from
@@ -313,11 +312,10 @@ Kind/size: feature/L. Baseline: not-started.
 Outcome: The full slate.project.v1/graph.v1 wire projection round-trips metadata-only (no media bytes) with every edit and Offline Media preserved; nested-sequence and graph cycles are rejected; an unknown imported effect definition is retained and stays inert rather than silently activated.
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
-- WP-36:the-unlabelled-final-review-closure-para the unlabelled final-review closure paragraph: "Implement the complete slate.project.v1/graph.v1 model: bins, exact sequence video/audio/colour config, track roles, generators/nesting/adjustment/title/subtitle, graph definition/instance identity and keyframe time scope. Metadata-only cross-device round-trip preserves every edit with Offline Media. Reject graph/nesting cycles and preserve unknown imported effects inert." (the unlabelled final-review closure paragraph: "Implement the complete slate.project.v1/graph.v1 model: bins, exact sequence video/audio/colour config, track roles, generators/nesting/adjustment/title/subtitle, graph definition/instance identity and keyframe time scope. Metadata-only cross-device round-trip preserves every edit with Offline Media. Reject graph/nesting cycles and preserve unknown imported effects inert."): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md — 
-- WP-36:unlabelled-final-review-closure-complete Unlabelled final-review closure: complete slate.project.v1/graph.v1 model, generators/nesting/adjustment/title/subtitle, cycle rejection, unknown-effect inert (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md — 
+- WP-36:unlabelled-final-review-closure-complete Unlabelled final-review closure: complete slate.project.v1/graph.v1 model, generators/nesting/adjustment/title/subtitle, cycle rejection, unknown-effect inert (the unlabelled final-review closure paragraph: "Implement the complete slate.project.v1/graph.v1 model: bins, exact sequence video/audio/colour config, track roles, generators/nesting/adjustment/title/subtitle, graph definition/instance identity and keyframe time scope. Metadata-only cross-device round-trip preserves every edit with Offline Media. Reject graph/nesting cycles and preserve unknown imported effects inert."; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: Timeline/Track/TimelineItem structural model to project
 - [artifact] SLATE.08: nested-sequence and adjustment-layer semantics from the edit operation set
 - [contract] CON.06: published slate.project.v1 / slate.graph.v1 generated records in ArcForges.Contracts.LocalRpc.Slate (wire keys per 26-product-behavior-profiles.md §4: transform/crop/opacity/colourAdjustment/audioGain/pan/composite/audioMix, generated-source keys colour/gradient/counter/testPattern/title)
@@ -345,7 +343,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.07
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -371,7 +369,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-36.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\36-arcslate-project-and-timeline.md, anchor rule-wp-36.90
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.01: all WP-36 tasks complete
 - [artifact] SLATE.11: all WP-36 tasks complete
 - [artifact] SLATE.12: all WP-36 tasks complete
@@ -401,7 +399,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.00
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: the compiled common ABI/preamble/pack-8 record layer all family wrappers build on
 - [artifact] NAT.07: published functional arc_media_reader_*/probe exports in ArcForges.Native.Media (beyond the current 3-function version/build/error probe)
 - [artifact] NAT.08: published arc_media_writer_*/convert/resample exports
@@ -432,7 +430,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.01
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.15: the ABI boundary/wrapper this decode path calls through
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] NAT.14: production ContentSandbox.Runtime.<rid> parser composition
@@ -459,7 +457,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.02
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.16: decoded frames/audio buffers to schedule
 - [artifact] SLATE.01: the exact tick/grid time model
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -486,7 +484,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.03 (graph topology/ports/EffectDefinition-vs-Instance/keyframe-scope/curve-evaluation engine, including the built-in definitions and formulas of 26-product-behavior-profiles.md §5 (transform/crop/opacity/colourAdjustment/audioGain/pan, hold/linear/bezier keyframe evaluation, RetimeCurve); excludes execution of any node that requires a native pixel/sample operation): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.03
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: TimelineItem/Clip/Track to attach graphs and adjustment layers to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -512,7 +510,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.03 (execution of graph nodes that require a real pixel/sample operation (video convert/scale/transform), and generated media (colour/gradient/counter/test-pattern/title per 26§5)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.03
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.18: the graph/port/keyframe engine these nodes plug into
 - [artifact] SLATE.15: the ABI boundary
 - [artifact] NAT.08: published arc_media_video_convert export
@@ -541,7 +539,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.04
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.01: the sample grid and half-open range algebra this mixing rule is defined over
 - [artifact] SLATE.18: the processing graph's audio-buffer port type and node composition
 - [artifact] SLATE.16: decoded audio buffers to mix
@@ -571,7 +569,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.05
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.03: MediaAsset identity for cache keys
 - [artifact] SLATE.16: decode to generate proxy/thumbnail source frames
 - [artifact] NAT.08: published media writer to encode proxy media
@@ -601,7 +599,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-37.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.06
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.17: the playback engine/clock/quality-state this viewer displays and controls
 - [artifact] NAT.15: published ArcGraphicsNative presentable-surface exports
 - [artifact] PLT.27: published windows/panels/layout foundation
@@ -627,11 +625,10 @@ Outcome: A clean AOT package consumer plus representative decode, synchronisatio
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-37.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, anchor rule-wp-37.90
-- WP-37:the-unlabelled-final-review-closure-para the unlabelled final-review closure paragraph: consume actual Platform media packages, test portable baseline render codecs/graph-source semantics/audio-grid mixing together, confirm unsupported native capabilities cannot be advertised, and that font/colour/source identity affects the render snapshot (the last clause is jointly satisfied here and at SLATE.26) (the unlabelled final-review closure paragraph: consume actual Platform media packages, test portable baseline render codecs/graph-source semantics/audio-grid mixing together, confirm unsupported native capabilities cannot be advertised, and that font/colour/source identity affects the render snapshot (the last clause is jointly satisfied here and at SLATE.26)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md — 
-- WP-37:unlabelled-final-review-closure-consume Unlabelled final-review closure: consume actual Platform media packages, portable baseline codec/graph/audio-grid verification, unsupported-capability-cannot-be-advertised, font/colour/source identity affects render snapshot (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md — 
+- WP-37:unlabelled-final-review-closure-consume Unlabelled final-review closure: consume actual Platform media packages, portable baseline codec/graph/audio-grid verification, unsupported-capability-cannot-be-advertised, font/colour/source identity affects render snapshot (the unlabelled final-review closure paragraph: consume actual Platform media packages, test portable baseline render codecs/graph-source semantics/audio-grid mixing together, confirm unsupported native capabilities cannot be advertised, and that font/colour/source identity affects the render snapshot (the last clause is jointly satisfied here and at SLATE.26); package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.15: all WP-37 tasks complete
 - [artifact] SLATE.22: all WP-37 tasks complete
 - [artifact] SLATE.18: package task delivered
@@ -661,7 +658,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-38.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.00
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.18: the processing graph's colour-data port type
 - [artifact] SLATE.03: MediaAsset input colour metadata
 - [artifact] NAT.10: published arc_color_config_open/arc_color_processor_create/arc_color_apply exports (immutable OCIO config/processor)
@@ -689,7 +686,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-38.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.01
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.19: processed frame buffers to measure
 - [artifact] NAT.15: published graphics CPU surface
 - [artifact] PLT.27: published panel foundation
@@ -714,11 +711,11 @@ Outcome: A RenderRequest captures sequence/range/preset/destination/options and 
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-38.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.02
-- WP-37:final-review-closure-clause-font-colour final-review closure clause: font/colour/source identity affects the render snapshot (the snapshot-binding half; the native-package-consumption half is SLATE.23) (final-review closure clause: font/colour/source identity affects the render snapshot (the snapshot-binding half; the native-package-consumption half is SLATE.23)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md — 
-- WP-37:unlabelled-final-review-closure-consume Unlabelled final-review closure: consume actual Platform media packages, portable baseline codec/graph/audio-grid verification, unsupported-capability-cannot-be-advertised, font/colour/source identity affects render snapshot (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md — 
+- WP-37:final-review-closure-clause-font-colour final-review closure clause: font/colour/source identity affects the render snapshot (the snapshot-binding half; the native-package-consumption half is SLATE.23) (final-review closure clause: font/colour/source identity affects the render snapshot (the snapshot-binding half; the native-package-consumption half is SLATE.23)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, package-level obligation
+- WP-37:unlabelled-final-review-closure-consume Unlabelled final-review closure: consume actual Platform media packages, portable baseline codec/graph/audio-grid verification, unsupported-capability-cannot-be-advertised, font/colour/source identity affects render snapshot (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\37-arcslate-playback-and-processing.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: the timeline structure to snapshot
 - [artifact] SLATE.09: the undo/revision concept this snapshot binds to
 - [artifact] SLATE.10: the project store, to read a committed revision
@@ -745,7 +742,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-38.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.04
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.24: colour-output configuration the preset references
 - [artifact] NAT.08: the exact three writer profile identities (matroska-ffv1-pcm/wav-pcm/mp4-mpeg4-aac)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -770,11 +767,11 @@ Outcome: Render runs as a native Product Job (progress, pause, resume, cancellat
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-38.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.03
-- WP-38:security-impact-output-paths-validated-n Security impact: output paths validated, no arbitrary write location (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md — 
-- WP-38:additional-completion-requirement-conten Additional completion requirement: content-origin vectors on render/subtitle output paths, including unknown input and failed publication (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md — 
+- WP-38:security-impact-output-paths-validated-n Security impact: output paths validated, no arbitrary write location (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, package-level obligation
+- WP-38:additional-completion-requirement-conten Additional completion requirement: content-origin vectors on render/subtitle output paths, including unknown input and failed publication (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.26: the render plan/snapshot this executes
 - [artifact] SLATE.27: the validated export preset
 - [artifact] SLATE.19: the native-backed graph evaluator to produce pixels
@@ -804,11 +801,11 @@ Outcome: SubtitleTrack/SubtitleCue exist as an independent track role (never a t
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-38.05 (authored subtitles and SRT/WebVTT import/export: exact canonical ticks, declared nearest-ms bounded loss on export (<=0.5ms), explicit collapsed-interval handling, retained sidecar/origin): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.05
-- WP-38:additional-completion-requirement-conten Additional completion requirement: content-origin vectors on render/subtitle output paths, including unknown input and failed publication (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md — 
-- WP-38:unlabelled-final-review-closure-srt-webv Unlabelled final-review closure: SRT/WebVTT preview/import/export plus local extraction ProductJob/TranscriptRecord adoption (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md — 
+- WP-38:additional-completion-requirement-conten Additional completion requirement: content-origin vectors on render/subtitle output paths, including unknown input and failed publication (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, package-level obligation
+- WP-38:unlabelled-final-review-closure-srt-webv Unlabelled final-review closure: SRT/WebVTT preview/import/export plus local extraction ProductJob/TranscriptRecord adoption (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: the track-role model subtitle tracks are a role of
 - [artifact] SLATE.01: the tick<->millisecond conversion boundary
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -833,11 +830,11 @@ Outcome: A local isolated ProductJob freezes the selected sequence revision/rang
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-38.05 (the final-review closure clause: local extraction ProductJob and TranscriptRecord review/adoption under expectedNative/undo/origin (slate.transcribe.v1)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.05
-- WP-38:additional-completion-requirement-conten Additional completion requirement: content-origin vectors on render/subtitle output paths, including unknown input and failed publication (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md — 
-- WP-38:unlabelled-final-review-closure-srt-webv Unlabelled final-review closure: SRT/WebVTT preview/import/export plus local extraction ProductJob/TranscriptRecord adoption (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md — 
+- WP-38:additional-completion-requirement-conten Additional completion requirement: content-origin vectors on render/subtitle output paths, including unknown input and failed publication (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, package-level obligation
+- WP-38:unlabelled-final-review-closure-srt-webv Unlabelled final-review closure: SRT/WebVTT preview/import/export plus local extraction ProductJob/TranscriptRecord adoption (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.29: the SubtitleTrack/Cue model adoption writes into
 - [artifact] SLATE.16: decode to extract PCM audio
 - [artifact] EXE.01: the native ProductJob engine (local isolated job)
@@ -866,7 +863,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-38.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.06
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.28: real render execution to produce the corpus outputs
 - [artifact] SLATE.27: every supported preset to cover
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -894,7 +891,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-38.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.90
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.24: all WP-38 tasks complete
 - [artifact] SLATE.31: all WP-38 tasks complete
 - [artifact] HAR.91: package task delivered
@@ -924,7 +921,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-39.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.00
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.07: the stable semantic edit-command set to expose
 - [artifact] SLATE.08: the remaining edit-command set
 - [artifact] SLATE.28: render execution to expose as a capability returning a ProductJobHandle
@@ -953,7 +950,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-39.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.01
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: the timeline structure to project into context
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -977,10 +974,10 @@ Outcome: Collect/Consolidate gathers external media into a managed portable form
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-39.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.02
-- WP-39:security-impact-media-path-handling-no-p Security impact: media path handling, no path leakage through references (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
+- WP-39:security-impact-media-path-handling-no-p Security impact: media path handling, no path leakage through references (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.04: the real relink/asset-resolution adapter
 - [artifact] SLATE.05: the media library to enumerate
 - [artifact] PLT.06: published chunked verifiable large-append store
@@ -1005,10 +1002,10 @@ Outcome: MediaResolutionStrategy resolves per-device asset locations; the relink
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-39.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.03
-- WP-39:security-impact-media-path-handling-no-p Security impact: media path handling, no path leakage through references (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
+- WP-39:security-impact-media-path-handling-no-p Security impact: media path handling, no path leakage through references (§6) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.03: the content-based relink algorithm
 - [artifact] SLATE.04: the real read adapter to re-verify content hash on relink
 - [artifact] SLATE.05: the media library
@@ -1036,7 +1033,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-39.04 (all work except the parts mapped to SLATE.42): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.04
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.10: the project store to declare a sync scope over
 - [contract] CON.09: published SyncService/ResourceService records for project-metadata sync scopes
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1061,10 +1058,10 @@ Outcome: Importing a real.otio file (through the pinned official library, behind
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-39.05 (import direction: OB-01..OB-05 numeric boundary, staged-before-commit import creating ArcSlate-owned canonical objects with provenance, item-level retained/approximated/omitted dispositions, media relink for Offline Media): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.05
-- WP-39:completion-gate-item-6-every-claimed-int Completion gate item 6: every claimed interchange version has a fixture and states fidelity before writing -- satisfies PG-07 for ArcSlate (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
+- WP-39:completion-gate-item-6-every-claimed-int Completion gate item 6: every claimed interchange version has a fixture and states fidelity before writing -- satisfies PG-07 for ArcSlate (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.06: the timeline structural model import populates
 - [artifact] SLATE.01: the canonical tick domain the OB-01..05 numeric boundary converts into
 - [artifact] NAT.06: the common ABI layer
@@ -1092,10 +1089,10 @@ Outcome: Export binds a committed sequence revision (reusing the same immutable-
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-39.05 (export direction: binds a committed sequence revision, writes a temporary destination and publishes atomically, item-level dispositions for everything outside the supported subset): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.05
-- WP-39:completion-gate-item-6-every-claimed-int Completion gate item 6: every claimed interchange version has a fixture and states fidelity before writing -- satisfies PG-07 for ArcSlate (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
+- WP-39:completion-gate-item-6-every-claimed-int Completion gate item 6: every claimed interchange version has a fixture and states fidelity before writing -- satisfies PG-07 for ArcSlate (§8) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.38: the shared OB-01..05 numeric adapter and FidelityEntry plumbing
 - [artifact] SLATE.26: the committed-revision-snapshot pattern
 - [artifact] NAT.12: published arc_otio_write export
@@ -1121,11 +1118,10 @@ Outcome: OTIO round-trip/projection and relocation fixtures, the package boundar
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-39.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.90
-- WP-39:the-unlabelled-final-review-closure-para the unlabelled final-review closure paragraph: Cloud data-model round-trip of complete Slate metadata/archive with originals absent, explicit managed asset uploads, exact grids, graph scopes, titles/subtitles/fonts/colour and ASR source/artifact references; an older DTO cannot truncate the native project before sync (the unlabelled final-review closure paragraph: Cloud data-model round-trip of complete Slate metadata/archive with originals absent, explicit managed asset uploads, exact grids, graph scopes, titles/subtitles/fonts/colour and ASR source/artifact references; an older DTO cannot truncate the native project before sync): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
-- WP-39:unlabelled-final-review-closure-cloud-da Unlabelled final-review closure: Cloud data-model round-trip of complete Slate metadata/archive, managed asset uploads, exact grids, graph scopes, fonts/colour, ASR references, anti-truncation (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
+- WP-39:unlabelled-final-review-closure-cloud-da Unlabelled final-review closure: Cloud data-model round-trip of complete Slate metadata/archive, managed asset uploads, exact grids, graph scopes, fonts/colour, ASR references, anti-truncation (the unlabelled final-review closure paragraph: Cloud data-model round-trip of complete Slate metadata/archive with originals absent, explicit managed asset uploads, exact grids, graph scopes, titles/subtitles/fonts/colour and ASR source/artifact references; an older DTO cannot truncate the native project before sync; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SLATE.33: all WP-39 tasks complete
 - [artifact] SLATE.39: all WP-39 tasks complete
 - [artifact] SLATE.34: package task delivered
@@ -1151,15 +1147,15 @@ Outcome: Two devices editing/opening the same ArcSlate project through the real 
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-39.04 (testing requirement: 'multi-device project convergence'): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, anchor rule-wp-39.04
-- WP-39:unlabelled-final-review-closure-paragrap unlabelled final-review closure paragraph (01-cloud-data-model.md structural-move-and-complete-media-replica-constraints) (unlabelled final-review closure paragraph (01-cloud-data-model.md structural-move-and-complete-media-replica-constraints)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md — 
+- WP-39:unlabelled-final-review-closure-paragrap unlabelled final-review closure paragraph (01-cloud-data-model.md structural-move-and-complete-media-replica-constraints) (unlabelled final-review closure paragraph (01-cloud-data-model.md structural-move-and-complete-media-replica-constraints)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\39-arcslate-integration-and-portability.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] SLATE.37: real SLATE.37 available
-- [artifact] CLOUD.39: real WP-25.02 available
-- [artifact] CLOUD.44: real WP-25.07 available
-- [artifact] SLATE.12: real SLATE.12 available
-- [artifact] SLATE.35: real SLATE.35 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] SLATE.37: real, delivered outcome of SLATE.37 (Cloud sync scope declaration)
+- [artifact] CLOUD.39: real, delivered outcome of CLOUD.39 (Guarded publication and convergent bootstrap)
+- [artifact] CLOUD.44: real, delivered outcome of CLOUD.44 (Multi-device convergence harness)
+- [artifact] SLATE.12: real, delivered outcome of SLATE.12 (Slate.project.v1/graph.v1 wire projection: bins, generators, nesting, adjustment, title/subtitle, cycle rejection)
+- [artifact] SLATE.35: real, delivered outcome of SLATE.35 (Collect, consolidate and the portable project package)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

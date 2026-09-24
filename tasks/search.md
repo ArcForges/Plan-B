@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Knowledge search and retrieval
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Knowledge search and retrieval
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.00
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.10: published SourceRecord/ContentOrigin typed record (origin, consent, egress) in Contracts public schema
 - [artifact] CLOUD.37: durable resource identity/revision for synced product content
 - [artifact] AIR.06: operator-funded web-search dispatch capability (Brave), or its contract-bound fixture
@@ -49,7 +49,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.01
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SRCH.00: admitted source registry entries to index
 - [artifact] AIR.00: bge-m3 embedding vectors for chunk content (or its fixture substitute)
 - [contract] CON.10: the data-model retrieval_chunk projection key (sourceId, sourceRev, embeddingModelId, embeddingProfileVersion, chunkHash) as a published schema
@@ -78,7 +78,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.02
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SRCH.01: scoped derived index to query against
 - [artifact] AIR.00: reranker (bge-reranker-base) call on the first 200 candidates, or its fixture substitute
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -106,7 +106,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.03
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SRCH.02: ranked candidate list to filter
 - [artifact] CLOUD.11: live owner/grant permission check API
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -132,7 +132,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.04
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SRCH.03: permission-rechecked candidates
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -157,7 +157,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SRCH.01: index/cache tables to partition
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -183,7 +183,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.06
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.00: deployed Workers AI embed/rerank adapter (real, not fixture)
 - [artifact] POL.08: active policy/config snapshot naming the admitted embedding/rerank model generation
 - [artifact] SRCH.01: scoped derived index production
@@ -212,7 +212,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-40.90 (full, including index capacity acceptance): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\40-knowledge-search-and-retrieval.md, anchor rule-wp-40.90
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SRCH.06: real query path evidence
 - [artifact] SRCH.03: package task delivered
 - [artifact] SRCH.04: package task delivered

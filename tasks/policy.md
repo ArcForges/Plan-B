@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Dynamic policy and configuration
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Dynamic policy and configuration
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.00
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -43,10 +43,10 @@ Outcome: policy.body.v1 and configuration.v1 bundles validate exactly against th
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-44.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.01
-- WP-44:operator-contract-closure-configuration Operator contract closure — configuration/policy owners (operator contract closure; configuration/policy owner: dry-run proposal/dual-approval/activation CAS as the typed proposal protocol): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md — 
+- WP-44:operator-contract-closure-configuration Operator contract closure — configuration/policy owners (operator contract closure; configuration/policy owner: dry-run proposal/dual-approval/activation CAS as the typed proposal protocol): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.12: policy.body.v1 and configuration.v1 published message schemas per architecture/contracts/08 §4/§6
 - [artifact] POL.01: boundary markers
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -73,7 +73,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.02
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.02: the activation validation pipeline
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -100,7 +100,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.03 (server-side flag/rollout definition, publication and byte/hash/bucket algorithm; on-device execution split to POL.09): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.03
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.01: boundary enforcement
 - [artifact] POL.02: schema/activation pipeline
 - [artifact] COM.05: explicit-setting/entitlement priority ordering
@@ -126,11 +126,11 @@ Outcome: All four kill-switch modes propagate promptly with a defined blast radi
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-44.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.04
-- WP-44:operator-contract-closure-the-kill-typed operator contract closure; the 'kill' typed operator RPC (operator contract closure; the 'kill' typed operator RPC): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md — 
-- WP-44:operator-contract-closure-configuration Operator contract closure — configuration/policy owners (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md — 
+- WP-44:operator-contract-closure-the-kill-typed operator contract closure; the 'kill' typed operator RPC (operator contract closure; the 'kill' typed operator RPC): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, package-level obligation
+- WP-44:operator-contract-closure-configuration Operator contract closure — configuration/policy owners (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.02: activation CAS pipeline
 - [contract] CON.14: the 'kill' operator RPC shape per registry04 §9.2
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -157,7 +157,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.05 (server-side resolution across application/workspace/device/installation scopes with fixed order, and the explainability endpoint/data; client-side consumption split to POL.09): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.02: published, validated bundles to resolve over
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -182,7 +182,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.06
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.02: schema/activation pipeline
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] UPD.08: the update feed actually stopping an offer for a blocked version
@@ -207,7 +207,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.07 (bundle publication with versioning and audit; server-side staleness signalling; the application-timing contract clients must honour. Client caching/fallback/mid-operation behaviour split to POL.09): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.07
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.02: validated bundle to publish
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -234,7 +234,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.03 (client execution of the deterministic rollout hash so the same subject/version selects the same result on-device): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.04: the deterministic rollout hashing algorithm specification
 - [artifact] POL.08: the published bundle wire format and staleness signal
 - [contract] CON.12: policy.body.v1/configuration.v1 generated client-side (C#) types
@@ -265,7 +265,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.90
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.09: client resolution evidence to attach
 - [artifact] POL.03: package task delivered
 - [artifact] POL.05: package task delivered
@@ -294,9 +294,9 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-44.07 (real fallback chain against a deployed publication endpoint): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\44-dynamic-policy-and-configuration.md, anchor rule-wp-44.07
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] POL.08: real POL.08 available
-- [artifact] POL.09: real POL.09 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] POL.08: real, delivered outcome of POL.08 (Publication, staleness and last-known-good (server side))
+- [artifact] POL.09: real, delivered outcome of POL.09 (Client-side policy resolution library (native/AOT))
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

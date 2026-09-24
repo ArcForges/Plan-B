@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Runtime proofs
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Runtime proofs
@@ -17,10 +17,10 @@ Outcome: ArcForges.ArcNotes publishes self-contained Native AOT per Tier-1/Tier-
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.00 (ArcNotes host only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.00
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: ArcForges.Contracts.Foundation/LocalRpc.Notes published package
 - [artifact] FND.01: Foundation/Application.Abstractions identity/error primitives
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -46,10 +46,10 @@ Outcome: ArcForges.ArcScope publishes self-contained Native AOT per Tier-1/Tier-
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.00 (ArcScope host only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.00
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: ArcForges.Contracts.Foundation/LocalRpc.Scope published package
 - [artifact] FND.01: Foundation/Application.Abstractions identity/error primitives
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -75,10 +75,10 @@ Outcome: ArcForges.ArcSlate publishes self-contained Native AOT per Tier-1/Tier-
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.00 (ArcSlate host only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.00
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: ArcForges.Contracts.Foundation/LocalRpc.Slate published package
 - [artifact] FND.01: Foundation/Application.Abstractions identity/error primitives
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -104,10 +104,10 @@ Outcome: Two published AOT desktop probe processes complete LocalBootstrap over 
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.01
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.05: local RPC generated server/client codegen (LocalBootstrap, ConnectCallback surface)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -132,10 +132,10 @@ Outcome: A published AOT desktop probe calls the real generated binary gRPC-Web 
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.02
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.92: ArcForges.Sdk.Client / generated gRPC-Web client, AOT-clean per accepted WP03.02 evidence
 - [artifact] PRF.07: a deployed Worker/Container ingress endpoint (from WP-06.04)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -160,10 +160,10 @@ Outcome: A published AOT desktop probe proves EventService.Watch and output serv
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.03
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.07: deployed Worker/Container/DO providing EventService.Watch
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -187,10 +187,10 @@ Outcome: ArcForges.Cloud.Host publishes/deploys as a Linux x64 Native AOT contai
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.04
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.92: ArcForges.Contracts.CloudInternal, native auth exception/catalog/index/revocation/realm schemas and independent signed vectors (fixture keys per WP02/06)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -216,10 +216,10 @@ Outcome: Minimal Account/Chat production React profiles build from Web root lock
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.05
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.92: @arcforges/api-client generated TS gRPC-Web client, AOT-irrelevant but descriptor/compat-checked
 - [artifact] PRF.07: a deployed Cloud AOT probe reachable same-origin through CF
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -245,10 +245,10 @@ Outcome: The process for admitting a third-party UI control into an AOT delivera
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.06
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [design] PLT.34: a candidate third-party control the desktop shell actually intends to use
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -272,10 +272,10 @@ Outcome: A Kotlin Android release build consumes the actual Maven Connect Kotlin
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.07
-- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md — 
+- WP-06:ss8-completion-gate-item-9-br-06-every-p SS8 completion gate item 9 / BR-06: every proof runs continuously on main-branch builds, not once (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, package-level obligation
 
 Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.90: io.github.arcforges:contracts-connect-client Maven artifact (public schema only, Connect Kotlin generated client)
 - [artifact] PRF.07: deployed Worker/Container/D1/DO/R2 foundation
 Completion prerequisites (may start earlier; cannot complete before these are complete):

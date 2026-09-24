@@ -18,7 +18,6 @@ it reads files only and never assigns, claims or starts work.
 from __future__ import annotations
 
 import argparse
-import fnmatch
 import heapq
 import json
 import re
@@ -471,20 +470,6 @@ def validate(g: Graph) -> tuple[list[str], list[str]]:
             if tid not in g.tasks:
                 errors.append(f'gate {gate}: unknown task {tid}')
     return errors, warnings
-
-
-def globs_overlap(a: str, b: str) -> bool:
-    pa, pb = a.rstrip('/'), b.rstrip('/')
-    base_a = pa.split('*', 1)[0].rstrip('/')
-    base_b = pb.split('*', 1)[0].rstrip('/')
-    if not base_a or not base_b:
-        return True
-    if base_a == base_b:
-        return True
-    if '*' not in pa and '*' not in pb:
-        return pa == pb
-    return (base_b.startswith(base_a + '/') and '*' in pa) or (base_a.startswith(base_b + '/') and '*' in pb) \
-        or fnmatch.fnmatch(pa, pb) or fnmatch.fnmatch(pb, pa)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -964,7 +949,7 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
     title = f'# ArcForges delivery task prompts — {g.lanes[only_lane]["title"]}' if only_lane else '# ArcForges delivery task prompts'
     out = [title, '',
            'Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.',
-           'Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,',
+           'Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,',
            'then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.', '']
     for lane in g.data['lanes']:
         if only_lane and lane['id'] != only_lane:
@@ -995,12 +980,14 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
                 else:
                     p = g.pobs[o['ref']]
                     f = wp_files(design)[o['ref'][3:5]].name
-                    b.append(f'- {o["ref"]} {p["title"]} ({o["part"]}): {design_win}\\docs\\planning\\work-packages\\{f} — {p.get("section", "")}')
+                    b.append(f'- {o["ref"]} {p["title"]} ({o["part"]}): {design_win}\\docs\\planning\\work-packages\\{f}'
+                             + (f', {p["section"]}' if p.get('section') else ', package-level obligation'))
             b.append('')
             ent = g.entry(t['id'])
             if ent:
                 b.append(f'Entry condition: {ent} (adoption of the owning repository) is complete in the Plan ledger.')
-            b.append('Start prerequisites (each must be complete in the Plan ledger before claiming):')
+            b.append('Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete'
+                     ' and each release prerequisite complete in the Plan ledger; DLV-24):')
             for e in t['start'] or []:
                 b.append(f'- [{e["type"]}] {e["task"]}: {e["need"]}')
             if not t['start']:
@@ -1095,16 +1082,40 @@ def ledger(plan: Path) -> dict[str, str]:
     return out
 
 
-def claimed(plan: Path) -> set[str]:
-    """Task ids with a claim branch on the Plan origin (read-only ls-remote)."""
+def claimed(plan: Path, grace_hours: int = 1) -> set[str]:
+    """Task ids currently owned through a claim branch (DLV-26/DLV-27).
+
+    Fetches claims/* into refs/remotes/origin/claims/* (read-only for the remote) and reads each
+    branch tip's claim.json. A claim is taken while its state is claimed or blocked and its lease,
+    plus a clock-skew grace period, has not expired; delivered and complete claims are taken too.
+    Released claims and expired leases are available for re-claim or takeover by a fast-forward append.
+    """
+    import datetime
     import subprocess
-    out = subprocess.run(['git', '-C', str(plan), 'ls-remote', 'origin', 'refs/heads/claims/*'],
-                         capture_output=True, text=True, check=True).stdout
-    ids = set()
-    for line in out.splitlines():
-        name = line.split('refs/heads/claims/', 1)[-1].strip()
-        ids.add(name.upper())
-    return ids
+    subprocess.run(['git', '-C', str(plan), 'fetch', '--quiet', 'origin',
+                    '+refs/heads/claims/*:refs/remotes/origin/claims/*'], check=True)
+    refs = subprocess.run(['git', '-C', str(plan), 'for-each-ref', '--format=%(refname:strip=4)',
+                           'refs/remotes/origin/claims/'], capture_output=True, text=True, check=True).stdout.split()
+    now = datetime.datetime.now(datetime.timezone.utc)
+    taken = set()
+    for name in refs:
+        shown = subprocess.run(['git', '-C', str(plan), 'show', f'refs/remotes/origin/claims/{name}:claim.json'],
+                               capture_output=True, text=True)
+        if shown.returncode != 0:
+            taken.add(name.upper())  # unreadable claim: treat as taken and let a human resolve it
+            continue
+        try:
+            rec = json.loads(shown.stdout)
+            state = rec.get('state', 'claimed')
+            lease = datetime.datetime.fromisoformat(rec.get('leaseUntil', '').replace('Z', '+00:00'))
+        except (ValueError, AttributeError):
+            taken.add(name.upper())
+            continue
+        if state in {'delivered', 'complete'}:
+            taken.add(name.upper())
+        elif state in {'claimed', 'blocked'} and lease + datetime.timedelta(hours=grace_hours) > now:
+            taken.add(name.upper())
+    return taken
 
 
 def ready(g: Graph, plan: Path, lane: str | None, with_claims: bool = False):
@@ -1139,7 +1150,7 @@ def main():
     ap.add_argument('--design', default=str(PLAN_ROOT.parent / 'ArcForges-Design-B'))
     ap.add_argument('--plan', default=str(PLAN_ROOT))
     ap.add_argument('--lane')
-    ap.add_argument('--claims', action='store_true', help='exclude tasks with a claim branch on the Plan origin (read-only ls-remote)')
+    ap.add_argument('--claims', action='store_true', help='exclude tasks owned by a live claim branch (fetches claims/* read-only)')
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     design, plan = Path(args.design).resolve(), Path(args.plan).resolve()
@@ -1174,7 +1185,7 @@ def main():
             rows, status = ready(g, plan, args.lane, args.claims)
             for tid in sorted(rows):
                 print(f'{tid}\t{g.tasks[tid]["repo"]}\t{g.tasks[tid]["title"]}')
-            print(f'{len(rows)} tasks satisfy the start rule' + ('' if args.claims else '; run with --claims or confirm no claim branch exists before claiming'))
+            print(f'{len(rows)} tasks satisfy the start rule' + ('' if args.claims else '; run with --claims to exclude tasks held by a live claim'))
     except Fail as exc:
         print('FAILED:', exc)
         return 1

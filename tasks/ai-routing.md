@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Workers AI routing and metering
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Workers AI routing and metering
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.00
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.10: published internal AI HTTP profile (model-intent/model-outcome/dispatch ports) from internal/ai-http/v1/schema.json
 - [artifact] POL.08: active model/route policy snapshot naming the admitted catalogue subset
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -47,7 +47,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.01
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] POL.02: the customerTariffs/supplierPrices keys in Private configuration.v1 and its signed activation mechanism
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -73,7 +73,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.02
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.08: real budget/credit/admission ports (reservation, settlement transaction participants)
 - [artifact] AIR.00: a dispatchable provider call to meter
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -99,7 +99,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.03
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.00: the adapter's admitted-catalogue validation
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -125,7 +125,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.04 (interaction record, redaction, and cost-transparency surfaces (Cloud side)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.04
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.02: metered attempts to record interactions against
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -150,7 +150,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.04 (transparency marking mechanism at the provider generation boundary; marking-coverage per artifact type): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.04
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.00: generated model output to mark
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -177,7 +177,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.02: the reservation/settlement engine to prove uncertainty handling against
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -204,7 +204,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.06
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.00: the adapter to exercise against the test environment
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -230,7 +230,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-43.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.07
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.00: the real adapter to record responses from
 - [artifact] AIR.02: the real settlement engine to reconcile the recorded evidence through
 - [artifact] AST.15: assistant admission path that carried the stubbed provider
@@ -258,10 +258,10 @@ Outcome: Real Workers AI Whisper ASR is proven through typed audio manifests and
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-43.90 (the final-review closure paragraph: real Workers AI Whisper with typed audio manifests/service object grants, supplier metering against actual response/manifest with missing usage retained uncertain, inference-late-outcome evidence-only reconciliation, bounded Workflow limits, stale-result non-publication): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.90
-- WP-43:final-review-closure-paragraph-real-whis Final-review closure paragraph: real Whisper/typed audio manifests, inference-late-outcome reconciliation, bounded Workflow limits, stale-result non-publication (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md — 
+- WP-43:final-review-closure-paragraph-real-whis Final-review closure paragraph: real Whisper/typed audio manifests, inference-late-outcome reconciliation, bounded Workflow limits, stale-result non-publication (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, package-level obligation
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.00: the slate.transcribe.v1 Whisper adapter and the separate lightweight InferenceWorkflow
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -286,10 +286,10 @@ Outcome: All AIR deliverables assemble under the selected repository/package/run
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-43.90 (remaining aggregation/receipt): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, anchor rule-wp-43.90
-- WP-43:p2-010-required-behavior-and-closure-rea P2-010 required behavior and closure: real ExecutionOwner task/turn + operator-funded compaction/search support, durable receipts vs temporary bodies outside D1/SQLite/backups/checkpoints (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md — 
+- WP-43:p2-010-required-behavior-and-closure-rea P2-010 required behavior and closure: real ExecutionOwner task/turn + operator-funded compaction/search support, durable receipts vs temporary bodies outside D1/SQLite/backups/checkpoints (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\43-managed-ai-routing-and-metering.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AIR.08: real-provider evidence
 - [artifact] AIR.01: package task delivered
 - [artifact] AIR.03: package task delivered

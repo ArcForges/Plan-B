@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Application presence and tool bridge
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Application presence and tool bridge
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.00
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.13: real device/installation/instance/session authority in D1 (not a placeholder)
 - [artifact] CLOUD.29: real Durable-Object-backed connection/authentication substrate
 - [contract] CON.11: published ApplicationService.List/Heartbeat/Disconnect wire definitions
@@ -48,7 +48,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.01
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.01: the real installation/epoch projection to freeze against
 - [contract] CON.10: published ToolRequest wire shape (contracts/03 §5.1 fields)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -75,7 +75,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.11: the Device.Runtime project skeleton and typed dispatch adapter interfaces built as the 17.01 fixture boundary
 - [artifact] APP.05: the exact WP-14.04 owner approval/authorization enforcement point
 - [artifact] PLT.43: published capability leases and trust verification
@@ -100,10 +100,10 @@ Outcome: Bridge request/result persisted in D1 using full ApplicationTarget and 
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-26.03 (Cloud-side D1 attempt-row persistence, hash dedup and cross-application delivery guard): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.03
-- WP-16:tool-result-acceptance-paragraph-between Tool-result acceptance paragraph (between §5 and §6): two distinct toolRequestIds in one attempt both persist and each replay returns its own original receipt; a changed result under the same (toolRequestId,attemptId,commandId) refuses with command.reused_identifier; lost acknowledgement never allocates a fresh command or drops the second result. Bound to the wire registry, TK-05 and task.tool_result -- the same key WP-26.03 uses. (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md — 
+- WP-16:tool-result-acceptance-paragraph-between Tool-result acceptance paragraph (between §5 and §6): two distinct toolRequestIds in one attempt both persist and each replay returns its own original receipt; a changed result under the same (toolRequestId,attemptId,commandId) refuses with command.reused_identifier; lost acknowledgement never allocates a fresh command or drops the second result. Bound to the wire registry, TK-05 and task.tool_result -- the same key WP-26.03 uses. (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.02: the real durable target queue to attach results to
 - [contract] CON.10: published (toolRequestId,attemptId,commandId)+hash wire shape, TK-05, task.tool_result
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -129,10 +129,10 @@ Outcome: Owner handler's normal in-process validation records the same (toolRequ
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-26.03 (Desktop command_log persistence and (toolRequestId,attemptId,commandId) agreement with the Cloud attempt row): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.03
-- WP-16:tool-result-acceptance-paragraph-between Tool-result acceptance paragraph (between §5 and §6): two distinct toolRequestIds in one attempt both persist and each replay returns its own original receipt; a changed result under the same (toolRequestId,attemptId,commandId) refuses with command.reused_identifier; lost acknowledgement never allocates a fresh command or drops the second result. Bound to the wire registry, TK-05 and task.tool_result -- the same key WP-26.03 uses. (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md — 
+- WP-16:tool-result-acceptance-paragraph-between Tool-result acceptance paragraph (between §5 and §6): two distinct toolRequestIds in one attempt both persist and each replay returns its own original receipt; a changed result under the same (toolRequestId,attemptId,commandId) refuses with command.reused_identifier; lost acknowledgement never allocates a fresh command or drops the second result. Bound to the wire registry, TK-05 and task.tool_result -- the same key WP-26.03 uses. (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\16-unified-execution-engine.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.03: the real owner-reauthorization call site to log results from
 - [artifact] EXE.01: the execution-persistence project to extend with the command_log table, rather than a parallel store
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -160,7 +160,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.04
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.02: the real durable target queue to gate with approval
 - [artifact] DEV.03: the real desktop local-presence enforcement to require
 - [artifact] PLT.39: published approval/steering/step-up mechanism
@@ -188,7 +188,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.02: the real durable target queue to expire/reconcile
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -214,7 +214,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.06
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.02: the real durable target queue whose ApplicationTarget freeze this enforces
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -240,7 +240,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.90
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] DEV.01: completed WP-26.00
 - [artifact] DEV.02: completed WP-26.01
 - [artifact] DEV.03: completed WP-26.02
@@ -274,9 +274,9 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-26.03 (cross-repo agreement proof beyond each side's own unit coverage): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\26-remote-action-and-tool-bridge.md, anchor rule-wp-26.03
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] DEV.04: real DEV.04 available
-- [artifact] DEV.05: real DEV.05 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] DEV.04: real, delivered outcome of DEV.04 (Execution and result deduplication -- Cloud D1 attempt/result store)
+- [artifact] DEV.05: real, delivered outcome of DEV.05 (Execution and result deduplication -- Desktop command_log agreement)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -300,9 +300,9 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-52.05 (all work except the parts mapped to AST.19, HAR.05): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] DEV.09: real DEV.09 available
-- [artifact] AST.19: real WP-52.05 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] DEV.09: real, delivered outcome of DEV.09 (Owned-artifact receipt and real integration)
+- [artifact] AST.19: real, delivered outcome of AST.19 (Real Cloud Harness turn loop replacing the fixture turn endpoint)
 - [artifact] HAR.02: real Harness approval and tool-dispatch path
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -327,13 +327,13 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-24.01 (device-targeted feed real integration): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\24-realtime-and-reliable-events.md, anchor rule-wp-24.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] CLOUD.29: real CLOUD.29 available
-- [artifact] CLOUD.30: real CLOUD.30 available
-- [artifact] CLOUD.31: real CLOUD.31 available
-- [artifact] CLOUD.33: real CLOUD.33 available
-- [artifact] CLOUD.34: real CLOUD.34 available
-- [artifact] DEV.09: real WP-26 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] CLOUD.29: real, delivered outcome of CLOUD.29 (Stream connection and authentication (EventService.Watch/ExecutionService.WatchOutput shells))
+- [artifact] CLOUD.30: real, delivered outcome of CLOUD.30 (Scoped subscription (owner/product/filter/recovery-generation binding))
+- [artifact] CLOUD.31: real, delivered outcome of CLOUD.31 (Cursor and gap handling (DO projection backed by D1 outbox))
+- [artifact] CLOUD.33: real, delivered outcome of CLOUD.33 (Publication and wake (D1 outbox to bounded DO feed via Queues))
+- [artifact] CLOUD.34: real, delivered outcome of CLOUD.34 (Bounded stream lifecycle)
+- [artifact] DEV.09: real, delivered outcome of DEV.09 (Owned-artifact receipt and real integration)
 - [artifact] AST.11: assistant Cloud client and device runtime
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none

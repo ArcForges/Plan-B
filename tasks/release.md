@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Release readiness and family release
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Release readiness and family release
@@ -20,7 +20,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.01 (ArcNotes' own licence inventory, SBOM, provenance attestation and verified NOTICE): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
 
 Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] NOTES.32: ArcNotes feature-complete release candidate
 - [artifact] UPD.08: the published ArcForges.Update package/client (the platform lane UPD area)
 - [release] NOTES.14: ArcNotes document core accepted
@@ -52,7 +52,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.01 (ArcScope's own licence inventory, SBOM, provenance attestation and verified NOTICE): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
 
 Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] SCOPE.26: ArcScope feature-complete release candidate
 - [artifact] UPD.08: the published ArcForges.Update package/client (the platform lane UPD area)
 - [release] SCOPE.11: ArcScope acquisition package accepted
@@ -84,7 +84,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.01 (ArcSlate's own licence inventory, SBOM, provenance attestation and verified NOTICE): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
 
 Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] SLATE.40: ArcSlate feature-complete release candidate
 - [artifact] UPD.08: the published ArcForges.Update package/client (the platform lane UPD area)
 - [release] SLATE.14: ArcSlate obligation package accepted
@@ -117,7 +117,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.01 (Android's own licence inventory, SBOM, provenance attestation and verified NOTICE): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
 
 Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] AND.23: every mobile gate satisfied (the Web and Android lanes AND area: signing, distribution, store gates)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -142,10 +142,10 @@ Outcome: Site/Account/Chat build once through the pinned Node/npm pipeline after
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-50.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.06
 - WP-50.01 (Web's own npm SBOM/provenance and CLI evidence): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
-- WP-50:browser-matrix-acceptance-unlabeled-para Browser matrix acceptance (unlabeled paragraph after WP-50.90): browser-support.v1 against the exact release artifact/OS/browser patches, supported/degraded/blocked flows including delayed-stream polling, refusal of unavailable required auth/step-up, safe-preview refusal, preserved pending work; no-JS static-site readability; joins WP23/45/47/48/49 production hashes with real browser evidence - a Playwright WebKit run alone does not claim Safari/OS authenticator proof (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md — 
+- WP-50:browser-matrix-acceptance-unlabeled-para Browser matrix acceptance (unlabeled paragraph after WP-50.90): browser-support.v1 against the exact release artifact/OS/browser patches, supported/degraded/blocked flows including delayed-stream polling, refusal of unavailable required auth/step-up, safe-preview refusal, preserved pending work; no-JS static-site readability; joins WP23/45/47/48/49 production hashes with real browser evidence - a Playwright WebKit run alone does not claim Safari/OS authenticator proof (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, package-level obligation
 
 Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] WEB.26: ArcChat Web Companion complete (the Web and Android lanes WEB area)
 - [release] WEB.09: Static Public Site complete (the Web and Android lanes WEB area)
 - [release] WEB.18: Account Portal complete (the Web and Android lanes WEB area)
@@ -174,7 +174,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.01 (Cloud/AI's own licence inventory, SBOM, provenance attestation and verified NOTICE): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] CLOUD.51: D1/R2 disaster-recovery mechanism complete
 - [release] AIR.90: Workers AI routing/metering complete (the AI lanes AIR area)
 - [artifact] GOV.03: Cloud's Native AOT build posture (GOV.03)
@@ -215,7 +215,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.01 (the audit mechanism (licence inventory, SBOM, provenance attestation, NOTICE-generation verification per artifact, copied-content audit) plus Contracts/public-SDK's own candidate audit and the cross-artifact provenance-completeness rollup): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.01
 
 Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] REL.01: ArcNotes' own licence/SBOM/provenance/NOTICE evidence row
 - [artifact] REL.02: ArcScope's own licence/SBOM/provenance/NOTICE evidence row
 - [artifact] REL.03: ArcSlate's own licence/SBOM/provenance/NOTICE evidence row
@@ -247,7 +247,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] COM.15: Commerce, Entitlement and Credits complete (the commerce, policy and operations lanes COM area)
 - [release] POL.10: Dynamic Policy and Configuration Control Plane complete (the commerce, policy and operations lanes POL area)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -275,7 +275,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.07 (full: alerting live and mapped to rehearsed runbooks, on-call arrangement in place, incident process exercised, support entry points live, enforcement/appeal paths operable, advisory process rehearsed): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.07
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] REL.06: Cloud deployed to the real production topology
 - [release] OPS.12: rehearsed runbooks and PG-04 closure (the commerce, policy and operations lanes OPS area)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -302,7 +302,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.02 (the shared production update-feed population (hashes, compatibility ranges, minimum versions) and code-signing/publication-pointer cutover only; per-product update-matrix testing is REL.01/REL.02/REL.03): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] REL.01: ArcNotes' own update matrix proven on all three platforms
 - [artifact] REL.02: ArcScope's own update matrix proven
 - [artifact] REL.03: ArcSlate's own update matrix proven
@@ -335,7 +335,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-50.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\50-full-platform-production-release.md, anchor rule-wp-50.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [release] REL.01: ArcNotes desktop release readiness complete
 - [release] REL.02: ArcScope desktop release readiness complete
 - [release] REL.03: ArcSlate desktop release readiness complete

@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — ArcScope Cloud simulator
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## ArcScope Cloud simulator
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-51.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.00
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.02: the module-boundary pattern the other 20 Cloud modules follow ('Twenty-one module boundaries')
 - [contract] CON.21: published SimulationService definition and scenario-version records
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -47,7 +47,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-51.01 (the pure-algorithmic half: fixed logical ticks driving canonical data; independently seeded RNG per channel and per fault source; the execution profile pinning numeric/RNG/generator/encoding versions; fault profiles (latency, jitter, drop, duplicate, reorder, disconnect, malformed frame, outlier) at explicit logical boundaries with provenance and counters; same-seed-same-hash and changed-seed-different-data tests; exact fault positions; one channel's RNG not perturbing another's): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.01
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.01: definitions, channel schema and AST evaluator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -72,11 +72,10 @@ Outcome: Deterministic committed samples and restart recovery pass under real DO
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-51.02 (full: architecture-23 DO alarm integration owner plus bounded Container segments, D1 checkpoint/fence/next_due_at, minutely rescue scan; default 1s and 0.25-10s segment bounds; no permanent hosted-service loop): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.02
 - WP-51.01 (the real-host half: identical hashes under real-time and accelerated pacing; exercise the SimulationPacer state diagram (duplicate/delayed alarm, exhausted automatic retries plus Cron rescue, Container cold start, pause/resume, epoch loss); record 24-hour run cost, alarm/Container/Queue counts and end-to-end pacing distribution against the proposed 5-second target, no hard real-time claim): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.01
-- WP-51:slice-recovery-acceptance-body-text-betw 'Slice recovery acceptance' body text (between §5 and §6, no substep id): kill the real Container before D1 publication, after the guarded segment/checkpoint/outbox batch, and before/after alarm scheduling; race a duplicate alarm with Cron rescue; assert one committed segment per run/range, deterministic continuation, no lost next-due intent, rejection of stale fences; alarm delivery itself may repeat; use the bounded mechanism in architecture 23 §1.2, never interactive BEGIN/COMMIT or an in-memory continuation loop ('Slice recovery acceptance' body text (between §5 and §6, no substep id): kill the real Container before D1 publication, after the guarded segment/checkpoint/outbox batch, and before/after alarm scheduling; race a duplicate alarm with Cron rescue; assert one committed segment per run/range, deterministic continuation, no lost next-due intent, rejection of stale fences; alarm delivery itself may repeat; use the bounded mechanism in architecture 23 §1.2, never interactive BEGIN/COMMIT or an in-memory continuation loop): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md — 
-- WP-51:slice-recovery-acceptance-paragraph-betw 'Slice recovery acceptance' paragraph between §5 and §6 (Container-kill matrix, duplicate-alarm/Cron-rescue race) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md — 
+- WP-51:slice-recovery-acceptance-body-text-betw 'Slice recovery acceptance' body text (between §5 and §6, no substep id): kill the real Container before D1 publication, after the guarded segment/checkpoint/outbox batch, and before/after alarm scheduling; race a duplicate alarm with Cron rescue; assert one committed segment per run/range, deterministic continuation, no lost next-due intent, rejection of stale fences; alarm delivery itself may repeat; use the bounded mechanism in architecture 23 §1.2, never interactive BEGIN/COMMIT or an in-memory continuation loop ('Slice recovery acceptance' body text (between §5 and §6, no substep id): kill the real Container before D1 publication, after the guarded segment/checkpoint/outbox batch, and before/after alarm scheduling; race a duplicate alarm with Cron rescue; assert one committed segment per run/range, deterministic continuation, no lost next-due intent, rejection of stale fences; alarm delivery itself may repeat; use the bounded mechanism in architecture 23 §1.2, never interactive BEGIN/COMMIT or an in-memory continuation loop; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.02: deterministic generators/faults
 - [artifact] CLOUD.05: published finite-durable-jobs mechanism (DO alarm scheduling, the generic durable-job abstraction a SimulationRun specialises per WP-51 BR-01)
 - [artifact] CLOUD.06: published shared atomic families and claims mechanism (lease fencing)
@@ -106,7 +105,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-51.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.03
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.03: fenced execution producing ticks to publish
 - [artifact] CLOUD.42: published blob lifecycle mechanism (immutable object write, incomplete-object sweep)
 - [artifact] CLOUD.04: published receipts/outbox/archive transactional-commit pattern
@@ -135,7 +134,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-51.04 (the Cloud API half: the eleven simulation.* operations as durable, idempotent, expected-state commands; authorised manifest listing; resumable hash-verifiable segment fetch over HTTP or object storage; revision-/cursor-based state polling): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.04
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.04: published manifests/checkpoints to expose
 - [artifact] CLOUD.21: published endpoint mapping and validation pattern
 - [artifact] CLOUD.24: published idempotency and rate-limiting mechanism
@@ -162,10 +161,10 @@ Outcome: A SimulatedDataSource adapter feeds the ordinary ArcScope acquisition p
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-51.04 (the ArcScope consumer half: feed retained canonical simulator output through the existing Scope measurement/replay consumer using its recorded profile and configuration; simulation labels remain synthetic, separate from AI origin; recompute statistical/pulse fixtures without changing measurement meaning or treating simulation as hardware evidence; ArcScope's clearly synthetic DataSource feeding the normal acquisition pipeline; seed and profile provenance surviving export and copy; simulated data flowing through session/capture/decoder/measurement/report unchanged; synthetic labelling surviving export): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.04
-- WP-51:7-required-evidence-addition-canonical-s §7 required evidence addition (canonical simulator replay retains measurement profile and synthetic provenance) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md — 
+- WP-51:7-required-evidence-addition-canonical-s §7 required evidence addition (canonical simulator replay retains measurement profile and synthetic provenance) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, package-level obligation
 
 Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.05: Cloud-side simulation.* operations and segment fetch
 - [contract] CON.21: published generated C# SimulationService client and records
 - [artifact] SCOPE.01: the DataSource/SourceAdapter contract
@@ -195,7 +194,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-51.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.03: real execution loop to enforce limits against
 - [artifact] COM.05: published entitlement resolver
 - [artifact] COM.07: published quota/usage/storage accounting
@@ -223,10 +222,10 @@ Outcome: Real AOT simulation -> R2 verified publication -> ArcScope ingest/measu
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-51.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.90
-- WP-51:8-additional-completion-requirement-the §8 additional completion requirement: the simulator remains an optional later source for already-defined measurement semantics, never a prerequisite for the earlier replay-based analysis package (confirms WP-34 does not wait on WP-51) (§8 additional completion requirement: the simulator remains an optional later source for already-defined measurement semantics, never a prerequisite for the earlier replay-based analysis package (confirms WP-34 does not wait on WP-51)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md — 
+- WP-51:8-additional-completion-requirement-the §8 additional completion requirement: the simulator remains an optional later source for already-defined measurement semantics, never a prerequisite for the earlier replay-based analysis package (confirms WP-34 does not wait on WP-51) (§8 additional completion requirement: the simulator remains an optional later source for already-defined measurement semantics, never a prerequisite for the earlier replay-based analysis package (confirms WP-34 does not wait on WP-51)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] SIM.01: all SIM tasks complete to assemble
 - [artifact] SIM.02: as above
 - [artifact] SIM.03: as above
@@ -256,15 +255,15 @@ Outcome: A real generated simulation run, published through real R2-verified seg
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-51.04 (final-review closure paragraph: real service-authorized R2 segments; consume WP34 measurement/report and WP35 import/portability outputs; Cloud->R2->native hash/timebase/provenance check; stale grant/fence refusal): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, anchor rule-wp-51.04
-- WP-51:required-implementation-and-closure-from 'Required implementation and closure from the final review' paragraph (real service-authorized R2 segments; consume WP34 measurement/report and WP35 import/portability outputs; Cloud->R2->native hash/timebase/provenance check; stale grant/fence refusal) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md — 
+- WP-51:required-implementation-and-closure-from 'Required implementation and closure from the final review' paragraph (real service-authorized R2 segments; consume WP34 measurement/report and WP35 import/portability outputs; Cloud->R2->native hash/timebase/provenance check; stale grant/fence refusal) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\51-arcscope-cloud-simulator.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] SIM.05: real SIM.05 available
-- [artifact] SIM.06: real SIM.06 available
-- [artifact] SCOPE.14: real SCOPE.14 available
-- [artifact] SCOPE.18: real SCOPE.18 available
-- [artifact] SCOPE.24: real SCOPE.24 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] SIM.05: real, delivered outcome of SIM.05 (Cloud-side simulation.* operations, manifest listing and segment fetch)
+- [artifact] SIM.06: real, delivered outcome of SIM.06 (ArcScope-side simulated DataSource and native ingestion)
+- [artifact] SCOPE.14: real, delivered outcome of SCOPE.14 (Measurements: scope.measurement.v1)
+- [artifact] SCOPE.18: real, delivered outcome of SCOPE.18 (Reports and reproducibility)
+- [artifact] SCOPE.24: real, delivered outcome of SCOPE.24 (Import, export and format fixtures)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -288,9 +287,9 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-21.06 (SimulationPacer real-consumer integration): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\21-cloud-host-and-persistence.md, anchor rule-wp-21.06
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] CLOUD.07: real CLOUD.07 available
-- [artifact] SIM.01: real WP-51 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] CLOUD.07: real, delivered outcome of CLOUD.07 (Capacity, Container/D1 integration producer and harness)
+- [artifact] SIM.01: real, delivered outcome of SIM.01 (Simulation definitions, immutable scenario versions and bounded AST evaluator)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

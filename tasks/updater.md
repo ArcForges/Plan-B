@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Desktop distribution and update
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Desktop distribution and update
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.00
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.40: secure key-handling/signature-verification patterns from Security
 - [artifact] FND.05: reason-code registry
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -47,7 +47,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed/target selection
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -72,7 +72,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.02: staged verified candidate
 - [artifact] PLT.32: lifecycle/shutdown handshake (WP-10.06)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -97,10 +97,10 @@ Outcome: The update journal is persisted outside install/data files; uses the ex
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-53.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.03
-- WP-53:versioned-installation-update-journal-pe Versioned installation update journal persisted outside install/data files; the updater never writes product data or implements schema migration (SS6 impacts, BR-05) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md — 
+- WP-53:versioned-installation-update-journal-pe Versioned installation update journal persisted outside install/data files; the updater never writes product data or implements schema migration (SS6 impacts, BR-05) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.03: safe apply/activation
 - [artifact] PLT.04: migration runner's read/write compatibility-horizon concept (WP-07.03)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -126,7 +126,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] POL.09: real activated Cloud policy distribution and the WP-45 advisory process
@@ -152,7 +152,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.47: emission/dimension surface (WP-12.00)
 - [artifact] FND.05: reason-code registry
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -179,7 +179,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.07
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed mechanics
 - [contract] CON.16: native auth exceptions, catalog/index/revocation/update/realm schemas and independent signed vectors
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -205,7 +205,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-53.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\53-desktop-distribution-and-update.md, anchor rule-wp-53.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] UPD.01: signed feed
 - [artifact] UPD.02: download/staging
 - [artifact] UPD.03: safe apply

@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Desktop platform mechanisms
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Desktop platform mechanisms
@@ -17,10 +17,10 @@ Outcome: IStore/CommitUnit/WriteCommand exist with the eight-step write path (va
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-07.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.00
-- WP-07:content-origin-carrier-projection-commit Content-origin carrier projection committed atomically with payload in the same owner transaction/journal boundary (SS2 required design input) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md — 
+- WP-07:content-origin-carrier-projection-commit Content-origin carrier projection committed atomically with payload in the same owner transaction/journal boundary (SS2 required design input) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.02: CommandId/effect-certainty types
 - [artifact] FND.03: Revision type
 - [artifact] FND.05: reason-code registry
@@ -49,7 +49,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.02: CommandId type
 - [artifact] FND.03: Revision/Sequence types
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -76,7 +76,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.02: journal append/replay implementation
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -103,7 +103,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.06: StorageSchemaVersion axis type
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -129,7 +129,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: store abstraction's write-path pattern
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -155,7 +155,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.02: execution/effect-certainty types for loss records
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -181,7 +181,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.06
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: store abstraction boundary
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -207,7 +207,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-07.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\07-local-persistence-foundation.md, anchor rule-wp-07.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: write path
 - [artifact] PLT.02: journal
 - [artifact] PLT.03: snapshot/recovery
@@ -236,10 +236,10 @@ Outcome: Generated gRPC over HTTP/2 runs on Windows Named Pipe/Unix domain socke
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-08.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.00
-- WP-08:no-product-listener-global-discovery-str No product listener/global discovery - structural constraint on every substep, most directly tested by transport/registration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md — 
+- WP-08:no-product-listener-global-discovery-str No product listener/global discovery - structural constraint on every substep, most directly tested by transport/registration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.04: proven AOT gRPC-over-OS-stream pattern from the two real helper-probe processes
 - [contract] CON.04: ArcForges.Contracts.LocalRpc.Platform/.Sandbox generated proto services
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -267,7 +267,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-08.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.09: transport/framing
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -290,10 +290,10 @@ Outcome: LocalBootstrap authentication with 30s lease/10s renewal, epoch fencing
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-08.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.02
-- WP-08:no-product-listener-global-discovery-str No product listener/global discovery - structural constraint on every substep, most directly tested by transport/registration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md — 
+- WP-08:no-product-listener-global-discovery-str No product listener/global discovery - structural constraint on every substep, most directly tested by transport/registration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.10: endpoint identity
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -318,7 +318,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-08.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.11: registration lifecycle
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -343,7 +343,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-08.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.09: transport
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -368,7 +368,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-08.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.09: transport
 - [artifact] FND.02: effect-certainty/Outcome types
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -394,7 +394,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-08.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.06
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.09: transport
 - [contract] CON.04: ContentSandboxService/slot-grant wire shapes in contracts/09-local-grpc-and-sandbox.md
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -420,7 +420,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-08.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\08-local-ipc-and-registration.md, anchor rule-wp-08.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.09: transport
 - [artifact] PLT.10: endpoint identity
 - [artifact] PLT.11: registration
@@ -451,7 +451,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.00
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: descriptor contract types (App/Installation/Instance identity wire shapes)
 - [artifact] FND.01: identity primitive types
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -477,10 +477,10 @@ Outcome: Capability/context/artifact/lifecycle/deep-link handlers register insid
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-09.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.01
-- WP-09:contribution-registration-state-durable Contribution/registration state durable across restarts (SS6 impacts) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md — 
+- WP-09:contribution-registration-state-durable Contribution/registration state durable across restarts (SS6 impacts) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.17: application identity/composition root
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -505,7 +505,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.17: identity/composition
 - [contract] CON.91: CapabilityDescriptor/OperationBinding wire schema
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -531,7 +531,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.19: capability registry
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -556,7 +556,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.17: identity/composition
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -581,7 +581,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.05: managed resource store's identity-to-location resolution
 - [artifact] PLT.17: identity/composition
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -607,7 +607,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.06
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.22: resource/artifact resolution
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -632,7 +632,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.07 (all work except the parts mapped to PLT.57): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.07
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.19: capability registry/selection
 - [artifact] PLT.20: availability
 - [artifact] PLT.21: context freezing
@@ -660,7 +660,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-09.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\09-capability-contribution-and-resource-model.md, anchor rule-wp-09.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.17: identity/composition
 - [artifact] PLT.18: contribution registration
 - [artifact] PLT.19: registry/selection
@@ -691,10 +691,10 @@ Outcome: Semantic tokens for colour/typography/spacing/radius/elevation/motion w
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-10.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.00
-- WP-10:reconciliation-of-the-five-legacy-src-bu Reconciliation of the five legacy src/BuildingBlocks/ArcForges.Desktop.{Experience,Graphics,Preview,RichContent,Text} scaffold projects per WP-01.02 into DesignSystem/Shell (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md — 
+- WP-10:reconciliation-of-the-five-legacy-src-bu Reconciliation of the five legacy src/BuildingBlocks/ArcForges.Desktop.{Experience,Graphics,Preview,RichContent,Text} scaffold projects per WP-01.02 into DesignSystem/Shell (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.01: a proven Avalonia Native AOT publish with zero trim/AOT diagnostics
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -718,10 +718,10 @@ Outcome: Multi-window-per-instance window model, dockable/collapsible panel host
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-10.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.01
-- WP-10:reconciliation-of-the-five-legacy-src-bu Reconciliation of the five legacy src/BuildingBlocks/ArcForges.Desktop.{Experience,Graphics,Preview,RichContent,Text} scaffold projects per WP-01.02 into DesignSystem/Shell (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md — 
+- WP-10:reconciliation-of-the-five-legacy-src-bu Reconciliation of the five legacy src/BuildingBlocks/ArcForges.Desktop.{Experience,Graphics,Preview,RichContent,Text} scaffold projects per WP-01.02 into DesignSystem/Shell (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.26: token system
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -747,7 +747,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.27: window/panel host
 - [artifact] PLT.20: capability availability evaluation (WP-09.03)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -774,7 +774,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.26: token/theming groundwork
 - [artifact] PLT.04: migration runner pattern (WP-07.03)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -800,7 +800,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.27: window/panel host
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -825,7 +825,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.26: token system
 - [artifact] FND.05: reason-code registry
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -851,7 +851,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.06
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.28: command registry
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -876,7 +876,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.07
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.27: window/panel/layout
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -902,7 +902,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.08 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.08
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.01: the established AOT-publish-with-zero-diagnostics harness/process
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -927,7 +927,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.90 (all work except the parts mapped to PLT.56): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.26: tokens
 - [artifact] PLT.27: windows/panels
 - [artifact] PLT.28: commands
@@ -961,7 +961,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.00
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.01: identity primitive types
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -986,7 +986,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.19: CapabilityDescriptor carrying risk level/trust requirement/side-effect class (WP-09.02)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -1011,7 +1011,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.02 (all work except the parts mapped to PLT.57): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.36: actor chain
 - [artifact] PLT.37: risk model
 - [artifact] PLT.10: LocalRpc session handshake (WP-08.01/08.02)
@@ -1039,7 +1039,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.37: risk model
 - [artifact] PLT.01: durable persistence for the approval object
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1063,10 +1063,10 @@ Outcome: Platform secure storage/broker primitives scoped to realm/account/produ
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-11.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.04
-- WP-11:application-credential-boundary-shared-s Application credential boundary: shared security packages use the caller application/installation storage namespace; deny sibling credential reads; no device-SSO signing broker (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md — 
+- WP-11:application-credential-boundary-shared-s Application credential boundary: shared security packages use the caller application/installation storage namespace; deny sibling credential reads; no device-SSO signing broker (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.36: actor chain
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] CLOUD.18: real Cloud authentication
@@ -1092,7 +1092,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.38: decision pipeline
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -1117,7 +1117,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.06
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.21: context freezing (WP-09.04)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -1142,7 +1142,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.07
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.38: decision pipeline
 - [artifact] PLT.01: durable persistence for lease state
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1168,7 +1168,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.08 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.08
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.36: actor chain
 - [artifact] PLT.01: persistence write path
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1193,10 +1193,10 @@ Outcome: The first-party C# Native AOT ContentSandbox, generated gRPC broker/con
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-11.09 (full; production ContentSandbox helper, real transport): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.09
-- WP-11:local-grpc-closure-ss7-own-actual-signed Local gRPC closure (SS7): own actual signed restricted gRPC helper, launch-secret/OS-descriptor allowlist, hostile-fixture containment, private-copy/digest validation, ConnectorBroker security boundary (real connector providers are WP41) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md — 
+- WP-11:local-grpc-closure-ss7-own-actual-signed Local gRPC closure (SS7): own actual signed restricted gRPC helper, launch-secret/OS-descriptor allowlist, hostile-fixture containment, private-copy/digest validation, ConnectorBroker security boundary (real connector providers are WP41) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.15: LocalRpc brokered large-data mechanism (WP-08.06)
 - [artifact] PLT.09: LocalRpc transport/restricted launch identity (WP-08.00/08.01)
 - [contract] CON.04: ArcForges.Contracts.LocalRpc.Sandbox generated ContentSandboxService/session/grant schema
@@ -1226,7 +1226,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.36: actor chain
 - [artifact] PLT.37: risk model
 - [artifact] PLT.38: decision pipeline
@@ -1262,7 +1262,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-12.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.00
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] FND.01: identity primitive types (instance identity, build id)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -1287,7 +1287,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-12.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.01
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.47: emission surface
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] CLOUD.01: a real Cloud hop to prove the full HTTP/queue/worker/realtime/provider chain
@@ -1310,10 +1310,10 @@ Outcome: Secret-bearing and content types have no logging representation; a scru
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-12.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.02
-- WP-12:eng-policy-telemetry-policy-json-creatio eng/policy/telemetry-policy.json creation: dimension allowlist, metric label allowlist, sampling and retention configuration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md — 
+- WP-12:eng-policy-telemetry-policy-json-creatio eng/policy/telemetry-policy.json creation: dimension allowlist, metric label allowlist, sampling and retention configuration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.40: SecretRef type with no accessible string representation
 - [artifact] FND.05: reason-code registry
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1337,10 +1337,10 @@ Outcome: Metric labels and bounded trace policy enforced from observability arch
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-12.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.03
-- WP-12:eng-policy-telemetry-policy-json-creatio eng/policy/telemetry-policy.json creation: dimension allowlist, metric label allowlist, sampling and retention configuration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md — 
+- WP-12:eng-policy-telemetry-policy-json-creatio eng/policy/telemetry-policy.json creation: dimension allowlist, metric label allowlist, sampling and retention configuration (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, package-level obligation
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.49: redaction processor
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -1365,7 +1365,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-12.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.23: HealthDimension type (WP-09.06)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -1390,7 +1390,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-12.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.31: error presentation shell surface (WP-10.05)
 - [artifact] PLT.49: redaction
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -1417,7 +1417,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-12.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\12-observability-foundation.md, anchor rule-wp-12.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.47: emission/dimensions
 - [artifact] PLT.48: correlation/causation
 - [artifact] PLT.49: redaction
@@ -1448,9 +1448,9 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.13 (production parser composition and its own containment evidence): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.13
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] PLT.45: real PLT.45 available
-- [artifact] NAT.14: real WP-13.13 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] PLT.45: real, delivered outcome of PLT.45 (Content helper and OS-enforced isolation (ContentSandbox host))
+- [artifact] NAT.14: real, delivered outcome of NAT.14 (Pdf family: PDFium and production parser containment in the WP11 helper (NEW library))
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -1474,11 +1474,11 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-10.90 (the multi-product consumption evidence beyond a single clean package-only diagnostic): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\10-design-system-and-desktop-shell.md, anchor rule-wp-10.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] PLT.35: real PLT.35 available
-- [artifact] NOTES.03: real WP-18.00 available
-- [artifact] SCOPE.09: real WP-33.00 available
-- [artifact] SLATE.22: real WP-36.00 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] PLT.35: real, delivered outcome of PLT.35 (Publish DesignSystem/Shell packages and verify real integration)
+- [artifact] NOTES.03: real, delivered outcome of NOTES.03 (Editor interaction: caret, selection, IME composition, markdown-friendly input)
+- [artifact] SCOPE.09: real, delivered outcome of SCOPE.09 (Long-running capture in the shell)
+- [artifact] SLATE.22: real, delivered outcome of SLATE.22 (Viewer: source and sequence, professional transport)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -1503,10 +1503,10 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-11.02 (real invocation-pipeline attachment): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\11-security-foundation.md, anchor rule-wp-11.02
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] PLT.24: real PLT.24 available
-- [artifact] PLT.38: real PLT.38 available
-- [artifact] APP.01: real WP-14.00 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] PLT.24: real, delivered outcome of PLT.24 (Invocation pipeline)
+- [artifact] PLT.38: real, delivered outcome of PLT.38 (Decision pipeline and the four enforcement points)
+- [artifact] APP.01: real, delivered outcome of APP.01 (Assistant.Abstractions host ports and application identity)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

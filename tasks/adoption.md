@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Adoption stage
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Adoption stage
@@ -18,7 +18,7 @@ Outcome: The Plan ledger records, for every repository, the main head, open pull
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: baseline inputs): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -42,7 +42,7 @@ Outcome: Every delivery task owned by DesktopPlatform is classified inherited, i
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: DesktopPlatform review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -65,7 +65,7 @@ Outcome: Every delivery task owned by Contracts is classified against the record
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: Contracts review, including the reported WP-03.03 completion): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record including the reported-work location
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -88,7 +88,7 @@ Outcome: Every ArcNotes delivery task is classified; bootstrap scaffolding is re
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: ArcNotes review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -111,7 +111,7 @@ Outcome: Every ArcScope delivery task is classified; bootstrap scaffolding is re
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: ArcScope review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -134,7 +134,7 @@ Outcome: Every ArcSlate delivery task is classified; bootstrap scaffolding is re
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: ArcSlate review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -157,7 +157,7 @@ Outcome: Every delivery task owned by Cloud (core, commerce, policy, operations,
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: Cloud review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -180,7 +180,7 @@ Outcome: Every delivery task owned by AI is classified; the bootstrap Worker and
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: AI review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -203,7 +203,7 @@ Outcome: Every delivery task owned by Web is classified, including the existing 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: Web review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -226,7 +226,7 @@ Outcome: Every delivery task owned by Mobile is classified, including the develo
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: Mobile review): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -249,7 +249,7 @@ Outcome: Documentation findings that affect adoption decisions are resolved or s
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (adoption stage: documentation reconciliation): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] ADOPT.01: frozen baseline record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none

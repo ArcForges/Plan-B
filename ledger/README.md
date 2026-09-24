@@ -4,7 +4,7 @@ The ledger records the execution state of delivery tasks. Together with the Desi
 
 ## Claims
 
-Claims are branches, not files on `main`. `claims/<task-id>` (lower case) is created atomically by the claimant; its commits hold a `claim.json` with `task`, `claimant`, `claimedAt`, `leaseUntil` and `state` (`claimed`, `blocked`, `released`, `delivered` or `complete`). Renewal and takeover append fast-forward commits to the same branch. Claim branches are kept as history.
+Claims are branches, not files on `main`. `claims/<task-id>` (lower case) is created atomically by the claimant; its commits hold a `claim.json` with `task`, `claimant`, `claimedAt`, `leaseUntil` and `state` (`claimed`, `blocked`, `released`, `delivered` or `complete`). Renewal, re-claim of a released task and takeover after lease expiry append fast-forward commits to the same branch. Claim branches are never deleted or force-updated; they are the audit trail of ownership. Repository administrators may add a ruleset that blocks deletion and non-fast-forward updates of `claims/*`.
 
 ## Task records
 
@@ -27,7 +27,7 @@ claimant: worker-name
 - Untested coverage:
 ```
 
-`status` is one of `delivered` (outcome merged and published, a completion prerequisite still open), `complete`, `inherited` (satisfied by reviewed existing work during adoption) or `superseded` (replaced by a recorded planning change). A later record replaces an earlier one for the same task in the same file.
+`status` is one of `delivered` (outcome merged and published, a completion prerequisite still open), `complete`, `inherited` (satisfied by reviewed existing work during adoption) or `superseded` (replaced by a recorded planning change). Keep exactly one front-matter block per file: when a task moves from `delivered` to `complete`, or is superseded, edit the existing header in place and append the new evidence below it; do not add a second header block.
 
 ## Adoption records
 

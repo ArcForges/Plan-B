@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Cloud Harness
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Cloud Harness
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-52.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.00
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.01: the single Cloud host and its lease-fenced hosted services
 - [contract] CON.15: the generated internal AI HTTP port surface (claim/renew/reconcile/dispatch/control)
 - [contract] CON.10: published ToolRequest and StructuredValue records in the task/agent closure
@@ -50,7 +50,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-52.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.01
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.00: the turn-loop skeleton to assemble context inside
 - [contract] CON.11: typed TranscriptWindow/CompactionRecord records (model 05)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -77,7 +77,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-52.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.02
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.00: the turn-loop skeleton to interleave approval into
 - [contract] CON.10: published internal admission and commit-before-dispatch port schema
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -102,10 +102,10 @@ Outcome: execution.readOutput/watchOutput, transient-turn admission/ack/purge an
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-52.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.03
-- WP-52:sec-8-gate-item-9-every-surface-converge Sec.8 gate item 9: every surface converges to the same authoritative final answer/artifact with realtime disabled (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md — 
+- WP-52:sec-8-gate-item-9-every-surface-converge Sec.8 gate item 9: every surface converges to the same authoritative final answer/artifact with realtime disabled (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, package-level obligation
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.00: the turn-loop skeleton producing output to stream
 - [artifact] AIR.05: the ContentOrigin marking at the provider generation boundary
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -132,7 +132,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-52.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.04
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.00: dispatch-intent records to classify
 - [contract] AIR.06: the worked AI-provider uncertain-outcome/deadline-release pattern
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -160,7 +160,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-52.90 (structural assertion that the WP-17.01 fixture turn endpoint no longer exists (Sec.8 gate item 10)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.90
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.00: the complete real turn loop
 - [artifact] HAR.01: real context assembly/compaction
 - [artifact] HAR.02: real approval/crash recovery
@@ -197,10 +197,10 @@ Outcome: Automation definition/version, trigger schedule/event cursor, occurrenc
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-52.06 (automation definition/version, trigger schedule/event cursor, occurrence dedup, grant/budget snapshot, bounded leased dispatch through the existing outbox, disable/revoke control, and removal of the labelled WP-17 automation fixture -- excluding the Slate transcription closure scenario): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.06
-- WP-52:final-review-closure-paragraph-paid-slat Final-review closure paragraph: paid Slate transcription end-to-end, CF purge inventory paging, seven-day wait guards, post-backup unsafe-effect quarantine, real active/waiting/unknown states for WP-50 recovery (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md — 
+- WP-52:final-review-closure-paragraph-paid-slat Final-review closure paragraph: paid Slate transcription end-to-end, CF purge inventory paging, seven-day wait guards, post-backup unsafe-effect quarantine, real active/waiting/unknown states for WP-50 recovery (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.00: the RunWorkflow identity automation dispatches into
 - [artifact] HAR.04: effect-certainty classification for occurrence dispatch
 - [artifact] COM.05: service/grant expiry and budget snapshot ports
@@ -229,10 +229,10 @@ Outcome: The specified Worker/Workflow/DO roles are implemented and verified tog
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-52.90 (remaining aggregation/receipt beyond HAR.05's structural assertion): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.90
-- WP-52:p2-010-required-behavior-and-closure-ord P2-010 required behavior and closure: ordinary persistent/temporary ChatTurn and AgentTask through the same RunWorkflow, pure-read vs promoted-effectful mode (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md — 
+- WP-52:p2-010-required-behavior-and-closure-ord P2-010 required behavior and closure: ordinary persistent/temporary ChatTurn and AgentTask through the same RunWorkflow, pure-read vs promoted-effectful mode (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, package-level obligation
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] HAR.05: own-application execution proof
 - [artifact] HAR.06: real automation evidence
 - [artifact] HAR.91: package task delivered
@@ -259,14 +259,14 @@ Outcome: Actual WP-39 selected-audio upload through CF Whisper, normal C# meteri
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-52.06 (the Slate transcription closure paragraph from the final-review addendum): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.06
 - WP-38.05 (the ASR real-provider closure named explicitly: 'WP43 provides real model output and WP52 closes the paid end-to-end path'): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\38-arcslate-render-and-colour.md, anchor rule-wp-38.05
-- WP-52:final-review-closure-paragraph-paid-slat Final-review closure paragraph: paid Slate transcription end-to-end, CF purge inventory paging, seven-day wait guards, post-backup unsafe-effect quarantine, real active/waiting/unknown states for WP-50 recovery (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md — 
+- WP-52:final-review-closure-paragraph-paid-slat Final-review closure paragraph: paid Slate transcription end-to-end, CF purge inventory paging, seven-day wait guards, post-backup unsafe-effect quarantine, real active/waiting/unknown states for WP-50 recovery (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, package-level obligation
 
 Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] HAR.06: real HAR.06 available
-- [artifact] AIR.09: real AIR.09 available
-- [artifact] SLATE.30: real WP-39 available
-- [artifact] AIR.08: real WP-43.07 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] HAR.06: real, delivered outcome of HAR.06 (Durable Cloud automation, scheduling and automation-fixture removal)
+- [artifact] AIR.09: real, delivered outcome of AIR.09 (ASR/Whisper capability closure and inference-late-outcome reconciliation)
+- [artifact] SLATE.30: real, delivered outcome of SLATE.30 (Local transcription extraction ProductJob and TranscriptRecord adoption)
+- [artifact] AIR.08: real, delivered outcome of AIR.08 (Real-provider metering evidence and stubbed-path removal)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 

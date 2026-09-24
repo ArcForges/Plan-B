@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Application composition
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Application composition
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.00
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: published capability/resource contract records (descriptor/risk/context shapes)
 - [artifact] PLT.17: real ArcForges.Application.Abstractions (application identity and in-process composition), not the current placeholder assembly
 - [artifact] FND.01: real ArcForges.Foundation identity/error/version primitives, not the current placeholder assembly
@@ -48,7 +48,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.01
 
 Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published Assistant.Abstractions host ports and product identity
 - [artifact] PLT.24: real ICapabilityProvider.InvokeAsync invocation pipeline (owner-side decode/validate)
 - [artifact] PLT.38: published security decision pipeline enforcement point
@@ -76,7 +76,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.02
 
 Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published Assistant.Abstractions package (not project reference)
 - [artifact] APP.02: published ArcNotes application-services package surface
 - [artifact] PRF.04: proven Local RPC under Native AOT pattern
@@ -105,7 +105,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.03
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.02: real local persistence write path to kill/duplicate against
 - [artifact] FND.02: published execution identity and idempotency records (command identity)
 - [artifact] FND.03: published revision and sequence records
@@ -133,7 +133,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.04
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published host ports to render the approval surface through
 - [artifact] PLT.39: published approval/steering/step-up mechanism
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -160,7 +160,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.05
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published IContextProvider/IArtifactHandler/IResourceAccess host port shapes
 - [artifact] PLT.21: real context providers and freezing implementation
 - [artifact] PLT.22: real resources-and-artifacts implementation
@@ -189,7 +189,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.06
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published IHostLifecycle port
 - [artifact] PLT.32: published lifecycle/menus/shutdown shell pattern
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -215,7 +215,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-14.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\14-hub-and-minimal-provider-slice.md, anchor rule-wp-14.90
 
 Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: completed WP-14.00
 - [artifact] APP.02: completed WP-14.01
 - [artifact] APP.03: completed WP-14.02

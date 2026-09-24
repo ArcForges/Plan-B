@@ -32,23 +32,29 @@ The remote/web execution-prompt variants in this repository (`arcforges-implemen
 ## Selecting a task
 
 1. Pull the Plan and Design primaries (clean fast-forward only) so the graph, views and ledger are current.
-2. Run `python tools/delivery.py ready --claims`. A task is listed when its owning repository's adoption is complete, every contract/artifact/design prerequisite is delivered or complete, every release prerequisite is complete, and no claim branch exists.
+2. Run `python tools/delivery.py ready --claims`. A task is listed when its owning repository's adoption is complete, every contract/artifact/design prerequisite is delivered or complete, every release prerequisite is complete, and no live claim holds it (see below).
 3. Prefer tasks on the [critical path](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/schedule-analysis.md) and tasks that unblock many others; otherwise any ready task is valid. Check its declared shared resources: if another in-flight task holds an `exclusive` mode on the same resource, pick different work or coordinate with that resource's owner.
 
 ## Claiming a task
 
-A claim is an atomic branch creation in this repository (DLV-26). From Git Bash in `C:\MyFile\Projects\Plan-B`:
+A claim is an atomic update of the branch `claims/<task-id>` in this repository (DLV-26). From Git Bash in `C:\MyFile\Projects\Plan-B`, first fetch the claim refs and read any existing claim:
 
 ```bash
 T=CON.02; L=$(echo "$T" | tr 'A-Z' 'a-z'); WORKER="<your worker name>"
-git fetch origin
+git fetch origin "+refs/heads/claims/*:refs/remotes/origin/claims/*"
+git show "refs/remotes/origin/claims/$L:claim.json" 2>/dev/null || echo "no claim yet"
 BLOB=$(printf '{"task":"%s","claimant":"%s","claimedAt":"%s","leaseUntil":"%s","state":"claimed"}\n' \
   "$T" "$WORKER" "$(date -u +%FT%TZ)" "$(date -u -d '+2 days' +%FT%TZ)" | git hash-object -w --stdin)
 TREE=$(printf '100644 blob %s\tclaim.json\n' "$BLOB" | git mktree)
-git push origin "$(git commit-tree "$TREE" -m "Claim $T")":"refs/heads/claims/$L"
 ```
 
-The push fails if `claims/<task>` already exists, so two workers can never own one task. To renew the lease, build a new claim blob and push `git commit-tree "$TREE" -p "origin/claims/$L" -m "Renew $T"` to the same ref (a fast-forward). To release, push a commit whose claim state is `released`. Keep claim branches; they are the claim history.
+- **No claim branch yet:** push a parentless commit to create it. The push fails if the branch appeared meanwhile, so two workers can never own one task:
+  `git push origin "$(git commit-tree "$TREE" -m "Claim $T")":"refs/heads/claims/$L"`
+- **Branch exists with state `released`, or with state `claimed`/`blocked` whose `leaseUntil` is more than one hour in the past:** re-claim or take over by appending to it; the push fails if anyone else moved it first, in which case read the claim again:
+  `git push origin "$(git commit-tree "$TREE" -p "refs/remotes/origin/claims/$L" -m "Reclaim $T")":"refs/heads/claims/$L"`
+- **Branch exists with a live lease, or with state `delivered`/`complete`:** the task is not available.
+
+To renew the lease, append a new claim commit the same way. To release, append a commit whose state is `released`. Never delete or force-push a claim branch: its history is the audit trail of ownership. `python tools/delivery.py ready --claims` applies these same rules when it lists available tasks.
 
 ## Executing a task
 
@@ -68,7 +74,8 @@ The push fails if `claims/<task>` already exists, so two workers can never own o
 ## Interruption, blocking and takeover
 
 - The claimant resumes from the retained worktree, branch and pull request and renews the lease.
-- After a lease expires, another worker may take over only by appending a takeover commit to the existing claim branch (fast-forward; if the push fails, someone else moved it first). The new worker continues the same branch and pull request.
+- Another worker may take over only after reading the current claim and confirming that its lease expired more than one hour ago; it appends a takeover commit as described above and continues the same branch and pull request.
+- If a planning change supersedes a claimed task, the claimant pushes a `released` claim commit naming the superseding task, and the task's ledger record gets status `superseded`.
 - A blocked task records the concrete missing input in its claim. A missing prerequisite or design gap becomes a planning change: edit the Design graph, run `python tools/delivery.py generate` and `check`, and merge the Design and Plan pull requests.
 
 ## Coordination roles

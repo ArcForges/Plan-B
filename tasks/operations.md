@@ -1,7 +1,7 @@
 # ArcForges delivery task prompts — Operations, support and trust and safety
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it and no claim branch exists,
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
 then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Operations, support and trust and safety
@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.00
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -45,7 +45,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.01
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.01: alert routing to trigger incidents from
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -70,7 +70,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.02
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.02: the incident process the runbooks are executed within
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] CLOUD.51: the DR drill programme's runbooks
@@ -96,11 +96,11 @@ Outcome: An independently hosted status page publishes only user-facing capabili
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-45.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.03
-- WP-45:browser-matrix-acceptance-status-page-su browser matrix acceptance; status page supported/degraded/blocked browser behavior, static no-JS readability (browser matrix acceptance; status page supported/degraded/blocked browser behavior, static no-JS readability): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
-- WP-45:browser-matrix-acceptance-browser-suppor Browser matrix acceptance (browser-support.v1 supported/degraded/blocked) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
+- WP-45:browser-matrix-acceptance-status-page-su browser matrix acceptance; status page supported/degraded/blocked browser behavior, static no-JS readability (browser matrix acceptance; status page supported/degraded/blocked browser behavior, static no-JS readability): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, package-level obligation
+- WP-45:browser-matrix-acceptance-browser-suppor Browser matrix acceptance (browser-support.v1 supported/degraded/blocked) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, package-level obligation
 
 Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.01: capability health signals to map from
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -124,12 +124,12 @@ Outcome: The operator console runs on a separate origin with a separate identity
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-45.04 (all work except the parts mapped to OPS.13): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.04
-- WP-45:operator-contract-closure-the-real-conso Operator contract closure — the real console join (operator contract closure; the real console join — wiring every generated role/method pair into the console UI): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
-- WP-45:browser-matrix-acceptance-supported-degr browser matrix acceptance; supported/degraded/blocked browser behavior for the operator console's own flows (browser matrix acceptance; supported/degraded/blocked browser behavior for the operator console's own flows): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
-- WP-45:browser-matrix-acceptance-browser-suppor Browser matrix acceptance (browser-support.v1 supported/degraded/blocked) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
+- WP-45:operator-contract-closure-the-real-conso Operator contract closure — the real console join (operator contract closure; the real console join — wiring every generated role/method pair into the console UI): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, package-level obligation
+- WP-45:browser-matrix-acceptance-supported-degr browser matrix acceptance; supported/degraded/blocked browser behavior for the operator console's own flows (browser matrix acceptance; supported/degraded/blocked browser behavior for the operator console's own flows): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, package-level obligation
+- WP-45:browser-matrix-acceptance-browser-suppor Browser matrix acceptance (browser-support.v1 supported/degraded/blocked) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, package-level obligation
 
 Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.14: the OperatorService full RPC surface
 - [artifact] POL.05: the kill-switch RPC implementation
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -157,7 +157,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.05
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.05: the operator identity/audit infrastructure
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
@@ -183,7 +183,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.06
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.05: operator case-handling surface
 - [contract] CON.22: published support operations
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -209,7 +209,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.07
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.07: the support case/reference model
 - [artifact] OPS.05: operator audit infrastructure
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -233,11 +233,10 @@ Outcome: Transactional/broadcast email use the real WP-22 Postmark/SES adapters 
 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-45.08 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.08
-- WP-45:producer-prerequisites-consuming-wp-22-r producer prerequisites; consuming WP-22 real mail artifacts without deferring WP-22's own gate (producer prerequisites; consuming WP-22 real mail artifacts without deferring WP-22's own gate): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
-- WP-45:producer-prerequisites-wp45-08-must-cons Producer prerequisites (WP45.08 must consume real WP22 mail, no fixture) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md — 
+- WP-45:producer-prerequisites-wp45-08-must-cons Producer prerequisites (WP45.08 must consume real WP22 mail, no fixture) (producer prerequisites; consuming WP-22 real mail artifacts without deferring WP-22's own gate; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, package-level obligation
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.12: native/browser authentication's real Postmark/SES adapters
 - [artifact] OPS.02: the incident process
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -265,7 +264,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.09 (all work except the parts mapped to AND.26): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.09
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.09: the Notification module's adapter pattern and outbox convention
 - [contract] CON.22: published notification operations including push registration
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -293,7 +292,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.10 (all work except the parts mapped to OPS.13): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.10
 
 Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.06: the PackageCatalog producer's operator methods (GetCatalogSubmission etc.)
 - [contract] CON.14: the catalogReview/catalogRevoke operator RPC shapes
 - [artifact] OPS.05: the operator console's identity/step-up/audit shell
@@ -321,7 +320,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.90
 
 Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] OPS.11: the last domain producer's evidence to attach
 - [artifact] AND.26: package task delivered
 - [artifact] OPS.01: package task delivered
@@ -357,12 +356,12 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.10 (real operator console join): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.10
 
 Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
-Start prerequisites (each must be complete in the Plan ledger before claiming):
-- [artifact] COM.13: real COM.13 available
-- [artifact] POL.05: real POL.05 available
-- [artifact] OPS.05: real OPS.05 available
-- [artifact] CON.14: real CON.14 available
-- [artifact] OPS.11: real WP-45.10 available
+Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
+- [artifact] COM.13: real, delivered outcome of COM.13 (Operator financial-owner proposal/approval operations)
+- [artifact] POL.05: real, delivered outcome of POL.05 (Kill switches)
+- [artifact] OPS.05: real, delivered outcome of OPS.05 (Operator console and support access)
+- [artifact] CON.14: real, delivered outcome of CON.14 (Operator control service (OperatorService, full §9/9.1/9.2 protocol))
+- [artifact] OPS.11: real, delivered outcome of OPS.11 (Package review and revocation console)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
