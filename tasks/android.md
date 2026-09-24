@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-30.00 (all work except the parts mapped to AND.04): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.00
 - WP-30:3-binding-rules-apache-2-0-boundary-no-g §3 binding rules: Apache-2.0 boundary, no GPL-family implementation, immutable producer artifacts (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, package-level obligation
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.10: immutable toolchain compatibility manifest (exact AGP/Kotlin/Compose/Gradle versions proven together on a real release build)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -46,7 +46,7 @@ Outcome: The arch-27 module set (app, core/domain, core/data, core/network, core
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-30.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.01
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.01: renamed applicationId/namespace and pinned toolchain
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -72,7 +72,7 @@ Outcome: arm64 release / x64 emulator adapters for Compose, Credential Manager/p
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-30.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.02
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.02: core/security, core/data, core/network module shells
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -80,7 +80,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: Mobile:core/security/**; Mobile:core/data/**; Mobile:core/network/**
 Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
-Unblocks: AND.06, AND.07
+Unblocks: AND.06, AND.07, AND.08, AND.12
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Targeted offline unit tests for adapter contracts; install-on-real-device, permission-refusal, process-death and missing-Play-services scenarios are local opt-in under P2-017, not CI
 Completion evidence for the ledger: Adapter test matrix (permission refusal, process death, missing Play services, callback after account switch) with device identity recorded for local runs
@@ -100,7 +100,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-30.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.03
 - WP-30.00 (Kotlin Android foundation real package consumption): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.00
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.02: core/network module shell
 - [contract] CON.07: io.github.arcforges:contracts-proto / contracts-connect-client Maven coordinates
@@ -111,7 +111,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: Mobile:core/network/**
 Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
-Unblocks: AND.07
+Unblocks: AND.07, AND.08, AND.09, AND.10, AND.11, AND.12
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Targeted offline codec/adapter unit tests; real device/service calls against a deployed Cloud host are local opt-in evidence, not a CI gate (matches CloudHelloClient's existing pattern)
 Completion evidence for the ledger: Real packaged Maven consumer + service/device call evidence with exact hashes/versions/device identity
@@ -130,7 +130,7 @@ Outcome: Room schemas (local_schema, scope_partition, projection, draft, outbox,
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-30.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.04
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.02: core/data module shell
 - [contract] CON.11: model-05-equivalent typed records for projections/receipts
@@ -139,7 +139,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: Mobile:core/data/**
 Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
-Unblocks: AND.07
+Unblocks: AND.07, AND.08, AND.09, AND.10, AND.11
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline Room migration/instrumented-on-emulator-or-device tests for crash recovery, capacity refusal and atomic outbox writes; local opt-in for real-device runs under P2-017
 Completion evidence for the ledger: Migration test results; outbox capacity-refusal and awaitingReconciliation replay tests; no silent eviction of draft/outbox rows
@@ -158,14 +158,14 @@ Outcome: Per-account Keystore-encrypted secret/pending-store policy, session/log
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-30.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.05
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.03: Keystore/Credential Manager adapter wrapper
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
 Permitted write scope: Mobile:core/security/**
-Unblocks: AND.07
+Unblocks: AND.07, AND.08, AND.12
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit tests for encryption/purge/quarantine logic; device-restore-without-key, logout-while-requests-run, deep-link-spoof and secret-scan-of-release-logs are local opt-in under P2-017
 Completion evidence for the ledger: Secret scan of release logs/backup showing no credential leakage; device restore and logout-while-in-flight scenario results
@@ -184,7 +184,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-30.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, anchor rule-wp-30.90
 - WP-23.05 (Android real-consumer integration beyond the WP-06 probe): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\23-public-api-and-generated-clients.md, anchor rule-wp-23.05
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.03: OS adapters complete
 - [artifact] AND.04: gRPC-Web client complete
@@ -201,7 +201,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:app/**
-Unblocks: AND.08, AND.09, AND.10, AND.11, AND.12, CLOUD.28, CLOUD.66
+Unblocks: AND.08, AND.09, AND.10, AND.11, AND.12, CLOUD.28
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache restore/build/install on a real device is local opt-in evidence per P2-017; CI only runs the offline/static portion
 Completion evidence for the ledger: Owned-artifact-and-real-integration receipt: source commit, producer versions, candidate hashes, actual device identity, scenario, result, real-vs-fixture status per field
@@ -220,14 +220,17 @@ Outcome: System authentication, five-destination navigation and per-device appli
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-31.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.00
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AND.07: foundation candidate
+- [artifact] AND.03: the real Android foundation module AND.03 this feature is built on
+- [artifact] AND.04: the real Android foundation module AND.04 this feature is built on
+- [artifact] AND.05: the real Android foundation module AND.05 this feature is built on
+- [artifact] AND.06: the real Android foundation module AND.06 this feature is built on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- none
+- [integration] AND.07: foundation candidate proven against the deployed Cloud services
 
 Permitted write scope: Mobile:feature/home/**; Mobile:app/**
-Unblocks: AND.13, AND.14, AND.15
+Unblocks: AND.13, AND.14, AND.15, AND.19
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Instrumented UI tests offline where feasible; scope/permission, wrong/stale target, loss/retry and expiry scenarios against real WP22/23 are local opt-in
 Completion evidence for the ledger: Full account/attention path walkthrough against real Cloud endpoints
@@ -246,15 +249,17 @@ Outcome: Native composer/IME/branch/context, history modes/promotion and real bi
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-31.01 (all work except the parts mapped to AND.24): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.01
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AND.07: foundation candidate (real WP23/24 transport)
+- [artifact] AND.04: the real Android foundation module AND.04 this feature is built on
+- [artifact] AND.05: the real Android foundation module AND.05 this feature is built on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] AND.24: real CF Harness admission/generation/tool loop
+- [integration] AND.07: foundation candidate proven against the deployed Cloud services
 
 Permitted write scope: Mobile:feature/chat/**
 Permitted substitutes (never real integration evidence): SUB-fixture-turn-endpoint: client-side session/event/output/upload handling, typed state transitions, reconnection -- runs no model/planner/admission/metering itself Real producer ['HAR.00', 'HAR.02', 'HAR.03']; removed by HAR.05
-Unblocks: AND.13, AND.14, AND.15, AND.24
+Unblocks: AND.13, AND.14, AND.15, AND.19, AND.24
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline stream-codec/cursor unit tests; real-device streaming/reconnect scenarios against the deployed (fixture-backed until WP52.05) endpoint are local opt-in
 Completion evidence for the ledger: History/pending-input/stream/final-message consistency under every declared recovery outcome
@@ -272,16 +277,18 @@ Outcome: Task/approval/automation surfaces enforce action, risk, credit-consent 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-31.02 (all work except the parts mapped to AND.24, AND.25): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.02
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AND.07: foundation candidate
+- [artifact] AND.04: the real Android foundation module AND.04 this feature is built on
+- [artifact] AND.05: the real Android foundation module AND.05 this feature is built on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] AND.25: real device bridge with lease/current-grant/unknown-effect reconciliation
 - [integration] AND.24: real Harness planning/tool-proposal loop
+- [integration] AND.07: foundation candidate proven against the deployed Cloud services
 
 Permitted write scope: Mobile:feature/tasks/**
 Permitted substitutes (never real integration evidence): SUB-automation-fixture: client rendering of schedule/timezone/target/budget and action availability, offline-draft handling only Real producer ['HAR.06']; removed by HAR.06
-Unblocks: AND.13, AND.14, AND.15, AND.24, AND.25
+Unblocks: AND.13, AND.14, AND.15, AND.19, AND.24, AND.25
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline idempotency/state-machine unit tests; real bridge/Harness/commerce scenarios are local opt-in against deployed services
 Completion evidence for the ledger: One real owner outcome/settlement per command; no broad implicit grant or hidden background write
@@ -299,14 +306,15 @@ Outcome: Native preview/import/export/transfer flows handle missing/denied/unsup
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-31.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.03
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AND.07: foundation candidate (real WP25 R2 access)
+- [artifact] AND.04: the real Android foundation module AND.04 this feature is built on
+- [artifact] AND.05: the real Android foundation module AND.05 this feature is built on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- none
+- [integration] AND.07: foundation candidate proven against the deployed Cloud services
 
 Permitted write scope: Mobile:feature/library/**
-Unblocks: AND.13, AND.15
+Unblocks: AND.13, AND.15, AND.19
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline transfer-journal unit tests; resumable-upload/hash-mismatch/process-death-during-transfer scenarios are local opt-in on real devices
 Completion evidence for the ledger: No unavailable bytes represented as empty success; resumable journal survives process death
@@ -326,16 +334,19 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-31.04 (all work except the parts mapped to AND.26): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.04
 - WP-31:pg-24-completion-gate-paragraph-physical PG-24 completion-gate paragraph: physical arm64 push/Doze/background evidence (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, package-level obligation
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AND.07: foundation candidate
 - [contract] CON.22: published notification.registerPush and unregisterPush
+- [artifact] AND.03: the real Android foundation module AND.03 this feature is built on
+- [artifact] AND.04: the real Android foundation module AND.04 this feature is built on
+- [artifact] AND.06: the real Android foundation module AND.06 this feature is built on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - [integration] AND.26: live FCM sender adapter with a project-bound credential
+- [integration] AND.07: foundation candidate proven against the deployed Cloud services
 
 Permitted write scope: Mobile:feature/settings/**; Mobile:core/network/**
 Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
-Unblocks: AND.13, AND.15, AND.26
+Unblocks: AND.13, AND.15, AND.19, AND.26
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline notification-dedup/registration unit tests; physical-device push receipt, Doze/background behavior and no-GMS fallback are local opt-in per PG-24
 Completion evidence for the ledger: Physical device receipt of a real push; denied-permission and no-GMS durable-polling fallback observed
@@ -353,7 +364,7 @@ Outcome: The complete phone/tablet/back/IME/TalkBack/large-text/process-death/ac
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-31.05 (all work except the parts mapped to AND.25): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.05
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.08: auth/home built
 - [artifact] AND.09: chat built
@@ -384,7 +395,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-31.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.06
 - WP-30:3-binding-rules-apache-2-0-boundary-no-g §3 binding rules: Apache-2.0 boundary, no GPL-family implementation, immutable producer artifacts (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\30-mobile-shared-architecture.md, package-level obligation
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.08: features exist to audit
 - [artifact] AND.09: features exist to audit
@@ -413,7 +424,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-31.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.90
 - WP-31:pg-24-completion-gate-paragraph-physical PG-24 completion-gate paragraph: physical arm64 push/Doze/background evidence (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, package-level obligation
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.08: all WP31 substep tasks complete
 - [artifact] AND.09: all WP31 substep tasks complete
@@ -426,7 +437,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:app/**
-Unblocks: AND.16, AND.19
+Unblocks: AND.16
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Full physical-device release scenarios and injected failure matrix, local opt-in under P2-017
 Completion evidence for the ledger: Owned-artifact-and-real-integration receipt joining all producer manifests; distribution/store activation explicitly deferred to WP32
@@ -444,7 +455,7 @@ Outcome: AAB (Play) and a separately signed direct APK build automatically from 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.00
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.15: companion acceptance complete
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -470,7 +481,7 @@ Outcome: Kotlin/ART, Compose/public grpc-lite closure, min/target API, arm64 ass
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.01
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.16: signed candidate
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -495,7 +506,7 @@ Outcome: Direct/transitive Gradle/plugin/runtime/asset closure, licences, proven
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.02
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.16: signed candidate
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -521,9 +532,13 @@ Outcome: Absence of purchase buttons/embedded checkout/store billing/external pu
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.03
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AND.15: companion acceptance complete
+- [artifact] AND.08: every authentication and Home state to audit
+- [artifact] AND.09: every conversation state to audit
+- [artifact] AND.10: every task, approval and automation state to audit
+- [artifact] AND.11: every library and resource state to audit
+- [artifact] AND.12: every presence, push, link and settings state to audit
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -546,7 +561,7 @@ Outcome: arch-11 channel behavior and a notify-only signed update client are com
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.04
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.16: android-update.v1 feed format and fixture signing keys
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -573,7 +588,7 @@ Outcome: Full companion runs on minimum-supported and current physical-device pr
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.05 (all work except the parts mapped to AND.26): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.05
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.16: signed candidate
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -598,7 +613,7 @@ Outcome: Documentation and store/release/readme/platform matrices state Android-
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-32.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.06
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -625,7 +640,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-32.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.90
 - WP-32:pg-24-completion-gate-paragraph-recheck PG-24 completion-gate paragraph (recheck on distributed artifact) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, package-level obligation
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.17: release runtime inspection passed
 - [artifact] AND.18: dependency rights closed
@@ -657,7 +672,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-31.01 (real-integration closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.01
 - WP-31.02 (real-integration closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.02
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.09: real, delivered outcome of AND.09 (Conversations and context (AN07-AN10/15/16))
 - [artifact] AND.10: real, delivered outcome of AND.10 (Tasks, approvals and automation (AN11-AN13/19/25))
@@ -686,11 +701,15 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-31.02 (device-dispatch closure): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.02
 - WP-31.05 (real-52/26 evidence): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\31-arcchat-mobile-android.md, anchor rule-wp-31.05
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.10: real, delivered outcome of AND.10 (Tasks, approvals and automation (AN11-AN13/19/25))
 - [artifact] AND.13: real, delivered outcome of AND.13 (Native interaction and recovery: full experience-02 device matrix)
-- [artifact] DEV.09: real, delivered outcome of DEV.09 (Owned-artifact receipt and real integration)
+- [artifact] DEV.02: the real durable target queue
+- [artifact] DEV.03: real owner reauthorization on the desktop
+- [artifact] DEV.06: real remote approval and steering
+- [artifact] DEV.07: real offline expiry and unknown-effect recovery
+- [artifact] DEV.12: the cross-repository (toolRequestId, attemptId, commandId) agreement
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -716,7 +735,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-45.09 (device-delivery half): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\45-operations-support-and-trust-safety.md, anchor rule-wp-45.09
 - WP-32.05 (physical/no-GMS/permission evidence half): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\32-mobile-release-and-store-gates.md, anchor rule-wp-32.05
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.android is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AND.12: real, delivered outcome of AND.12 (Presence, push, links and settings (AN20-AN24))
 - [artifact] AND.23: real, delivered outcome of AND.23 (Distribution acceptance)

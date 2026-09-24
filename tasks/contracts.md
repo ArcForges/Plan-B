@@ -18,7 +18,7 @@ Outcome: public/proto/constraints.json and internal/proto/constraints.json are s
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - P2-018 (contention reduction that lets Contracts closures be authored concurrently): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -45,7 +45,7 @@ Outcome: CapabilityDescriptor, ActionDescriptor, ContextProvider/ContextDescript
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.03 (capability/action/context/version/health descriptor records only, plus EncodedBodyRef (the immutable oversized-body reference form); excludes the Sync mutation allowlist and cross-owner/wrong-revision/opaque-object/forbidden-path negative vectors, which are CON.03): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.03
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.91: published Foundation ResourceRef/ResourceVersionRef/ArtifactRef (already generated) as the base EncodedBodyRef.resource field type
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -53,7 +53,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: Contracts:public/proto/arcforges/foundation/v1/foundation.proto; Contracts:public/proto/constraints/foundation-descriptors.json; Contracts:fixtures/public/con-02-descriptors.json
 Shared resources (follow the owner protocol): RES-contracts-generated-baseline (regenerate): Never hand-edited or hand-merged: after rebasing, the author regenerates with the pinned generator and commits the result; CI rejects drift between schemas, descriptors and generated output.; RES-contracts-publication (append): Every merge to main publishes all Contracts packages at one allocated candidate version (Maven main as SNAPSHOT under the publication-channel profile); the integration owner keeps a single merge queue so publications stay ordered; no tag, republication or replacement version is created for verification.; RES-contracts-schema-sources (append): Each closure task edits only its own domain proto or HTTP-schema files and adds its own sharded constraint and fixture files; shared inventories (package inventory, foundation inventory, constraint aggregate) are append-only per closure. A proto file with several contributing tasks (operator, policy/configuration) has one designated author task and the others request changes through it. The integration owner merges closure pull requests one at a time and the next author rebases and regenerates.
-Unblocks: APP.01, CON.03, CON.06, CON.07, CON.10, CON.19, CON.20, CON.21, CON.22, SCOPE.20
+Unblocks: APP.01, CON.03, CON.06, CON.10, CON.19, CON.20, CON.21, CON.22, SCOPE.20
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline unit tests for descriptor round-trip (C#/TS), decode-limit fixtures (exact 64MiB boundary and 64MiB+1 refusal) reusing WP03.02's WireLimits constants, deterministic regeneration, generated-header/import checks; no macOS/device/live-service CI per P2-017.
 Completion evidence for the ledger: Independent fixture file con-02-descriptors.json; C#/TS conformance report; descriptor baseline diff.
@@ -72,7 +72,7 @@ Outcome: A generated/schema-derived validator enforces that Sync (registry04 §1
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.03 (the Sync mutation allowlist and oversized-body admission negative-vector half; ResourceRef/ResourceVersionRef/BlobRef schema itself is already done (CON.91/WP-03.01)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.03
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: EncodedBodyRef record
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -100,9 +100,9 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.04 (ContentSandboxService only, from annex 09 §§2-6 (OpenSession/RenewSession/GrantSlot/AckBuffer/ProbeMedia/OpenMediaReader/ReadMediaFrame/SeekMedia/CopyVideoFrame/CopyAudioFrame/CloseFrame/CloseReader/OpenImage/GetImageInfo/ReadImageTile/CloseImage/OpenPdf/GetPdfPage/ExtractPdfText/RenderPdfTile/ClosePdf/ReadOtio/WriteOtio/OtioReadChunk/CancelSession/CloseSession = 24 methods)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.04
 - WP-03:7-evidence-local-grpc-closure-complete-l §7 evidence: Local gRPC closure — complete.LocalRpc.Platform/.Sandbox typed parser/connector/hint/bootstrap methods before consumers (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [design] CON.05: none — annex09 is a frozen design input
+- none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -128,7 +128,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.04 (ExtensionHostService (remaining Handshake/Invoke/Stop; RenewLease already done), ILocalBootstrap (Challenge/Confirm/Renew), IConnectorBroker (ListDefinitions/ListConnections/BeginConnection/CompleteConnection/GetConnection/RevokeConnection); reserve removed Hub/SSO/transfer names (IHubRegistry/IHubRouting/DeviceSsoBrokerService) without registering them): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.04
 - WP-03:7-evidence-local-grpc-closure-complete-l §7 evidence: Local gRPC closure — complete.LocalRpc.Platform/.Sandbox typed parser/connector/hint/bootstrap methods before consumers (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -136,7 +136,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: Contracts:public/proto/arcforges/extensions/v1/extensions.proto; Contracts:internal/proto/arcforges/local/platform/v1/platform.proto; Contracts:fixtures/internal/con-05-extension-connector-bootstrap.json
 Shared resources (follow the owner protocol): RES-contracts-generated-baseline (regenerate): Never hand-edited or hand-merged: after rebasing, the author regenerates with the pinned generator and commits the result; CI rejects drift between schemas, descriptors and generated output.; RES-contracts-publication (append): Every merge to main publishes all Contracts packages at one allocated candidate version (Maven main as SNAPSHOT under the publication-channel profile); the integration owner keeps a single merge queue so publications stay ordered; no tag, republication or replacement version is created for verification.; RES-contracts-schema-sources (append): Each closure task edits only its own domain proto or HTTP-schema files and adds its own sharded constraint and fixture files; shared inventories (package inventory, foundation inventory, constraint aggregate) are append-only per closure. A proto file with several contributing tasks (operator, policy/configuration) has one designated author task and the others request changes through it. The integration owner merges closure pull requests one at a time and the next author rebases and regenerates.
-Unblocks: CON.04, CON.19, EXT.02, PRF.04
+Unblocks: CON.19, EXT.02, PRF.04
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline: replayed/cross-connection confirm, expired nonce, wrong child direction/role negative fixtures (annex09 §2/§6); structural test asserting Hub/SSO registration absence; no live OS pipe/socket (that is WP-06/WP-08/WP-09/WP-11).
 Completion evidence for the ledger: fixtures/internal/con-05-extension-connector-bootstrap.json; retirement-manifest structural test report.
@@ -156,7 +156,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.04 (the 'Product interfaces use generated records and static in-process adapters' half — full method surface for the four product-port packages plus ICapabilityProvider/IContextProvider/IArtifactHandler/IResourceAccess/IProductLifecycle/IDeepLinkTarget): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.04
 - WP-03:p2-010-required-behavior-and-closure-sou P2-010 required behavior and closure (source KnowledgePolicy/Patch/View, typed one-use overrides, Notes run/atom/table-cell positions, complete initial owner/profile records) (P2-010 required behavior: source KnowledgePolicy/Patch/View and typed one-use overrides (source.getPolicy/setPolicy/clearPolicy, source.createConsent/revokeConsent) fall inside IChatOperations/context-provider scope; stable Notes run/atom/table-cell positions (NotesTextPosition already exists in content.proto from WP03.01 — this task only needs to verify no gap remains for table-cell addressing); package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: CapabilityDescriptor/ContextDescriptor shapes
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -183,9 +183,9 @@ Outcome: IdentityService/WorkspaceService/DeviceService are generated with all l
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (IdentityService (29 ops)/WorkspaceService (4)/DeviceService (6) from registry04 §5, plus contracts07 §1 native PKCE token endpoint and the four /session/v1 browser routes as declared JSON exceptions): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [contract] CON.02: none blocking — this domain does not depend on descriptors
+- none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -210,7 +210,7 @@ Outcome: EntitlementService/CommerceService generated with all listed operations
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (EntitlementService (6 ops) + CommerceService (~14 ops) from registry04 §5, all declared 'frozen' compatibility class per catalogue00 CC-04): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -237,7 +237,7 @@ Outcome: SyncService/ResourceService/TransferService generated with all listed o
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (SyncService (~10 ops incl. listScopes/pullChanges/pushChange/pushBatch/getAggregate/listConflicts/resolveConflict/requestFullResync/getBootstrapPage), ResourceService transfer ops (beginUpload/completeUpload/getDownloadTicket/getMetadata/release/getUploadStatus/renewUploadTicket), TransferService (realm-transfer.v1: requestExport/previewImport/commitImport/get/list/cancel) from registry04 §5 and contracts07 §5): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.03: the closed Sync mutation allowlist validator
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -265,7 +265,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.05 (TaskService(~9)/ApprovalService(2)/BridgeService(3)/public ChatOperationsService(~25)/AgentService(3)/AutomationService(9)/search.query from registry04 §5, plus internal/ai-http/v1 schema.json (ai-internal npm/CloudInternal package) for the C#<->AI-Worker internal HTTP ports in contracts05 §3): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 - WP-03:p2-010-required-behavior-and-closure-sou P2-010 required behavior and closure (source KnowledgePolicy/Patch/View, typed one-use overrides, Notes run/atom/table-cell positions, complete initial owner/profile records) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: CapabilityDescriptor
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -293,7 +293,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.05 (the annex10 13 new operations (ApplicationService.List/Heartbeat/Disconnect, HistoryService.BeginImport/FinalizeImport/GetImport/CancelImport, ExecutionService.StartTransientTurn/ReadOutput/WatchOutput/AcknowledgeOutput/PurgeTransient, EventService.Watch) plus EventService.Poll's 17 hint payloads (CA-12) and StreamFrame/OutputChunk/StreamPosition/StreamReset server-streaming framing): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 - WP-03:current-application-and-stream-contract Current application and stream contract completeness (annex10+manifest11, explicitly required before 03 completion) ('Current application and stream contract completeness' package-level obligation — explicitly required before 03 completion, not a.90-deferred item): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.10: TaskSnapshot/ChatTurnProgress shapes for ExecutionProgress's oneof
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -320,7 +320,7 @@ Outcome: The five contracts08 schema families are authored as closed JSON schema
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (extension/policy schemas named in WP-03 §4's projects table ('Selected CF/auth/provider HTTP exceptions') and contracts08 in full:.arcpkg manifest.v1, workflow.v1 DAG, panel.v1 declarative UI, PolicyBundle body.v1, internal ConfigurationDocument (20 sections)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -347,7 +347,7 @@ Outcome: arcforges.catalog.v1 generated with the 7 public CatalogService operati
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (the public CatalogService (search/getPackage/listVersions/registerPublisher/verifyPublisher/submitVersion/getSubmission, 7 ops) and PublisherView/CatalogPackageView/CatalogVersionView/CatalogSubmissionView/CatalogReviewDecision records from registry04 §4/§5): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -375,7 +375,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.05 (OperatorService's ~29 methods with all eight authorization fields and the OC-03 role matrix): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 - WP-03:operator-contract-closure-package-level 'Operator contract closure' package-level obligation — schema and negative vectors only; WP-23 owns real identity/dispatch, WP-42 financial owners, WP-44 config/policy owners, WP-45 the console join ('Operator contract closure' package-level obligation — schema and negative vectors only; WP-23 owns real identity/dispatch, WP-42 financial owners, WP-44 config/policy owners, WP-45 the console join; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.13: CatalogSubmissionView/CatalogVersionView
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -402,7 +402,7 @@ Outcome: The remaining ~15 contracts05 internal HTTP ports and their records are
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.90 ('Private CF binding/event definitions' input — the remaining contracts05 ports not already covered by CON.10 (ai-internal): /internal/objects/v1/* (authorize/part-receipt/verification/job-grant/job-authorize), /internal/ai/v1/dispatch|control|delete (Worker-side), inference-job family (embedding/rerank), and CfDeletionTarget/CfDeletionReceipt/SessionBinding/BackupManifest records): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.90
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.11: ExecutionOwner/StreamPosition shapes
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -429,7 +429,7 @@ Outcome: The four signed-format schemas are authored under public/http (or a ded
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.07 (full — publish catalog-index.v1, catalog-revocations.v1, android-update.v1 and realm.v1 schemas, canonical signing vectors and separate fixture trust roots; production keys are explicitly WP-53 output, not a WP-03 input): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.07
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -457,7 +457,7 @@ Outcome: A canonical-semantic-hash implementation (per registry04 §2's exact al
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.06 (full — wire bigint/decimal-coefficient-scale/oneof-presence/unknown-field/additive-response-evolution profile; canonical semantic hash distinct from wire byte hash; independent versioning of descriptors from applications; supported-window enforcement (previous-client/current-server and current-client/minimum-server matrices); deletion/tag-reuse/type-change failure tests): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.06
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.92: already-published Foundation/PublicApi as the 'previous stable' fixture
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -484,7 +484,7 @@ Outcome: A generator/policy-test tool reads manifest11's ~380-row scope-class ta
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03:7-evidence-operation-by-actor-reachabili §7 evidence: operation-by-actor reachability matrix (AZ-04) for public/local/operator/CF/exception bindings (§7 evidence requirement: 'Generate an operation-by-actor reachability matrix for every public/local/operator/CF/exception binding under catalogue 00 AZ-04, with all seven effective authorization fields and source profile. Fail unclassified/ambiguous fields...'; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -512,7 +512,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-03.90 (all work except the parts mapped to CON.15): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.90
 - WP-03:8-completion-gate-6-items-p2-009-vg-04-f §8 completion gate (6 items) + P2-009/VG-04/F-026 scoped gate contributions (§8 completion gate items 1-6 and the P2-009/VG-04/F-026 gate contributions; package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: all CON.02-CON.18 tasks complete and published
 - [contract] CON.18: full operation-scope manifest with zero pending rows
@@ -558,7 +558,7 @@ Outcome: NotesService is generated with all notes.* operations (notebooks, folde
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (notes.* operations (17), their records, eight authorization fields and vectors): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: capability/action/context/resource descriptor and oversized-body reference records
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -585,7 +585,7 @@ Outcome: SimulationService is generated with all simulation.* operations (defini
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (simulation.* operations (12), their records, authorization fields and vectors): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: capability/action/context/resource descriptor and oversized-body reference records
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -612,7 +612,7 @@ Outcome: Support case, notification and push registration, data export request/s
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-03.05 (support.*, notification.*, data.*, preference.*, policy.getBundle and export.* operations (15), records and vectors): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\03-contract-foundation-and-licence-split.md, anchor rule-wp-03.05
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.contracts is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.02: capability/action/context/resource descriptor and oversized-body reference records
 Completion prerequisites (may start earlier; cannot complete before these are complete):

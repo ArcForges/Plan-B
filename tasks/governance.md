@@ -117,7 +117,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.04 (banned-symbol scanner mechanism in the shared engine; DesktopPlatform's own banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 - WP-05.02 (wire the existing WP00.00 forbidden-term scanner into DesktopPlatform's own PR build as a failing policy test): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.02
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.03: a build that fails on warnings/AOT diagnostics (GOV.03)
 - [artifact] GOV.01: exported glossary-terms.json/invariants.json policy data (GOV.01)
@@ -149,7 +149,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.02 (wire the forbidden-term scanner into Contracts' own PR build as a failing policy test): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.02
 - WP-05.04 (Contracts banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: published shared AT-*/RP-* rule engine, fixture compiler and project-graph reader
 - [contract] CON.90: Contracts' public/internal Apache-2.0 project split and generated proto baseline
@@ -181,7 +181,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.03 (ArcNotes' generated-client consumption checks (RPC interface carries generated descriptor identity)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.03
 - WP-05.04 (ArcNotes banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: published shared rule engine
 - [artifact] GOV.05: contract/serialization policy helpers for generated-client checks
@@ -213,7 +213,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.03 (ArcScope's generated-client consumption checks): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.03
 - WP-05.04 (ArcScope banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.05 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.05.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: published shared rule engine
 - [artifact] GOV.05: contract/serialization policy helpers
@@ -245,7 +245,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.03 (ArcSlate's generated-client consumption checks): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.03
 - WP-05.04 (ArcSlate banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.06 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.06.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: published shared rule engine
 - [artifact] GOV.05: contract/serialization policy helpers
@@ -277,7 +277,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.03 (Cloud's own generated public API/RPC descriptor checks): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.03
 - WP-05.04 (Cloud banned-API fixtures, weighted toward AOT-path reflection/dynamic-codegen since Cloud is the Native AOT host): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: published shared rule engine
 - [artifact] GOV.05: contract/serialization policy helpers
@@ -309,7 +309,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.03 (AI's generated-client consumption checks): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.03
 - WP-05.04 (AI banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.08.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: published shared rule engine
 - [artifact] GOV.05: contract/serialization policy helpers
@@ -340,7 +340,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.04 (Web banned dependency/route fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 - WP-05:web-repository-and-architecture-assertio Web repository and architecture assertions (unlabeled paragraph after WP-05.06): Node/TS import and dependency checks - one Web workspace/lock, exact Node/npm/generator pins, SDK-to-UI licence separation, generated wire types only, no private/server/local-RPC imports, desktop JS/DOM prohibition scoped to desktop graphs, no obsolete Blazor target, no esproj in portable managed references, no implicit npm install or production dev/HMR server, no TS fixtures/test helpers in the release route graph (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, package-level obligation
 
-Entry condition: ADOPT.09 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.09.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.03: the one Node/npm workspace and Windows esproj adapter (GOV.03)
 - [artifact] GOV.01: licence boundary declarations (mobile-only/public-SDK Apache set)
@@ -371,7 +371,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.02 (wire the forbidden-term scanner into Mobile's own PR build): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.02
 - WP-05.04 (Mobile banned-API fixtures): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.04
 
-Entry condition: ADOPT.10 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.10.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.03: pinned JDK 21/Kotlin/Compose/AGP toolchain (GOV.03)
 - [artifact] GOV.04: the rule DATA (forbidden-term list, licence-boundary declarations, banned-API categories) as portable JSON, not the.NET engine itself
@@ -399,7 +399,7 @@ Outcome: A build-produced report classifies all 429 catalogued invariants as enf
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-05.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: at least one owning package's real policy-test run to classify (DesktopPlatform's own AT-*/RP-* results)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -426,7 +426,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-05.06 (full: six checks over docs/ in ArcForges-Design, plus the 23+8-row Phase-1/Phase-2 decision-coverage check against traceability-matrix.md): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.06
 - P2-018 (delivery-graph validation replacing the retired package-level graph check): C:\MyFile\Projects\ArcForges-Design-B\docs\decisions\phase-2-specification-decisions.md, anchor rule-p2-018
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.01: the citation/anchor index and continuing drift check installed by GOV.01 (PG-21)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -453,7 +453,7 @@ Outcome: Each of the nine repositories enforces its own boundary independently, 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-05.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, anchor rule-wp-05.90
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.04: DesktopPlatform's own policy suite green
 - [artifact] GOV.05: Contracts' own policy suite green
@@ -489,7 +489,7 @@ Outcome: A build-produced reachability matrix classifies every public/local/oper
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-05:section-7-operation-by-actor-az-04-autho Section 7 operation-by-actor AZ-04 authorization reachability matrix (public/local/operator/CF/exception bindings, hostile actor-chain fixtures, resource/context/connector egress denials) and section 8 'Identity boundary evidence' (owner/deployment identity chain; automation loses authorization when its owner loses eligibility) - both unlabeled, no WP-05.MM anchor (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\05-architecture-and-repository-policy-tests.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.governance is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.18: generated catalogue 00 (operation-catalogue.md) AZ-04 authorization-field descriptors
 Completion prerequisites (may start earlier; cannot complete before these are complete):

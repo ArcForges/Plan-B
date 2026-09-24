@@ -18,7 +18,7 @@ Outcome: Assistant.Persistence.Sqlite implements the full data-model-05 schema (
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.00
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] APP.01: published Assistant.Abstractions product/profile identity
 - [contract] CON.91: published Foundation contract types (identity/error/revision)
@@ -28,7 +28,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Core/**; DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Persistence.Sqlite/**; DesktopPlatform:tests/AssistantCoreTests/**
 Shared resources (follow the owner protocol): RES-assistant-store-schema (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.; RES-desktopplatform-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.
-Unblocks: AST.02, AST.03, AST.04, AST.05, AST.06, AST.07, AST.08, AST.09, AST.22
+Unblocks: AST.02, AST.03, AST.04, AST.05, AST.06, AST.07, AST.08, AST.09, AST.10, AST.11, AST.22
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit tests: DDL with foreign keys, migrations, disk-full, branch fork, concurrent-window stale revision, duplicate terminal frame, interrupted send; no live environment.
 Completion evidence for the ledger: Schema/migration hash, transaction-kill and disk-full test results, one-store-per-application-profile proof.
@@ -47,7 +47,7 @@ Outcome: Immutable ancestry and fork-at-message; per-window draft revisions with
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: the real history store's branch/message tables
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -55,7 +55,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Core/**
 Shared resources (follow the owner protocol): RES-assistant-store-schema (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.
-Unblocks: AST.09
+Unblocks: AST.09, AST.10
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit tests: concurrent windows, draft preserved during another send, parent/child isolation.
 Completion evidence for the ledger: Concurrent-window and fork-isolation test results.
@@ -73,7 +73,7 @@ Outcome: Typed local refs, authorized file staging/preview, resource ownership a
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.02
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: the real history store's attachment table
 - [artifact] APP.06: the real WP-14.05 context/artifact freeze and preview port
@@ -100,7 +100,7 @@ Outcome: Accepted project/instruction/profile CRUD, validation, immutable per-ex
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.03
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: the real history store's project/profile tables
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -108,7 +108,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Core/**
 Shared resources (follow the owner protocol): RES-assistant-store-schema (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.
-Unblocks: AST.09
+Unblocks: AST.09, AST.10
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit tests: conflict/revision, active-execution immutability.
 Completion evidence for the ledger: Immutable-snapshot-during-active-execution test results.
@@ -126,7 +126,7 @@ Outcome: Accepted skill/version/permission metadata and selection, without insta
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.04
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: the real history store's skill table
 - [artifact] PLT.42: published instruction provenance mechanism
@@ -135,7 +135,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Core/**
 Shared resources (follow the owner protocol): RES-assistant-store-schema (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.
-Unblocks: AST.09
+Unblocks: AST.09, AST.10
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit tests: untrusted-instruction and cross-app-source-denied cases.
 Completion evidence for the ledger: Skill selection/provenance test results.
@@ -153,14 +153,14 @@ Outcome: Indexes only committed non-deleted normal history in the owning partiti
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: the real committed-message store to index
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
 Permitted write scope: DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Core/**
-Unblocks: AST.09
+Unblocks: AST.09, AST.10
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline unit tests: delete/rebuild, partial index, isolation leak checks.
 Completion evidence for the ledger: Rebuild and isolation-leak test results.
@@ -178,7 +178,7 @@ Outcome: Produces/consumes assistant-history.v1 from committed local snapshots, 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.06
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: the real committed history store to export from
 - [contract] CON.11: published assistant-history.v1 format definition
@@ -188,7 +188,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 Permitted write scope: DesktopPlatform:src/BuildingBlocks/ArcForges.Assistant.Core/**
 Shared resources (follow the owner protocol): RES-assistant-store-schema (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.
 Permitted substitutes (never real integration evidence): SUB-assistant-history-fixture: local offline export/import round-trip, malformed/hash/foreign-reference handling, branch-cycle and cancel-import handling only -- no Cloud upload Real producer ['CLOUD.45']; removed by AST.21
-Unblocks: AST.09, AST.15, AST.21
+Unblocks: AST.09, AST.10, AST.15, AST.21
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline full round-trip tests: malformed/hash/foreign references, draft exclusion, branch cycles, canceled import; no Cloud in CI.
 Completion evidence for the ledger: Round-trip hash manifests, malformed/cycle/cancel test results, named-fixture manifest entry for this substitute.
@@ -207,7 +207,7 @@ Outcome: AionUi component evidence/provenance recorded; the actual candidate Ass
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.07
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: published Assistant.Core/Assistant.Persistence.Sqlite candidate packages
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -232,7 +232,7 @@ Outcome: WP15 built/packed once from a clean environment; all applicable UX acce
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-15.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\15-arcchat-conversation-core.md, anchor rule-wp-15.90
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.01: completed WP-15.00
 - [artifact] AST.02: completed WP-15.01
@@ -247,7 +247,6 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: DesktopPlatform:artifacts/evidence/**
 Shared resources (follow the owner protocol): RES-desktopplatform-policy-data (append): Generated policy data is regenerated from its pinned source and never hand-edited; the reason-code registry is append-only with stable codes; each task adds its own test classes and evidence rows.
-Unblocks: AST.10, AST.11
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Build/pack once; UX-C history ledger rows recorded; P2-017 scope only.
 Completion evidence for the ledger: Source commit, package versions/hashes, UX-C rows, named-fixture manifest (assistant-history.v1 export fixture).
@@ -265,10 +264,15 @@ Outcome: All AS01 to AS13 docked/floating/expanded surfaces are reachable throug
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.00
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AST.09: the accepted WP15 conversation/branch/project/profile/skill/search/export core to host
 - [artifact] EXE.01: the real execution chain to surface job state in navigation
+- [artifact] AST.01: the real application history store the shell hosts
+- [artifact] AST.02: real branches and window drafts to navigate
+- [artifact] AST.04: real projects and profiles to navigate
+- [artifact] AST.05: real skills to navigate
+- [artifact] AST.06: real local search to surface
+- [artifact] AST.07: real local history export and import to surface
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -293,11 +297,11 @@ Outcome: Reusable Cloud.Client (session/event/output/upload) and Device.Runtime 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
-- [artifact] AST.09: assistant_turn/assistant_outbox records to attach Cloud TaskRef/turn output to
 - [contract] CON.10: published generated C#/TypeScript/Kotlin gRPC-Web client stubs and numbered wire registry
 - [artifact] PRF.05: proven generated gRPC-Web under Native AOT pattern
+- [artifact] AST.01: the history store assistant_turn and assistant_outbox records the Cloud client writes into
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -323,7 +327,7 @@ Outcome: AS06/11/12 implemented with actor/target/context/egress/cost/expiry and
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.02
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.10: the navigation shell to compose this surface into
 - [artifact] APP.05: the exact WP-14.04 owner approval enforcement point
@@ -350,7 +354,7 @@ Outcome: Task timeline, tools, artifacts, cancellation/steering and ProductJob l
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.03
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.10: the navigation shell to compose this surface into
 - [artifact] EXE.01: the real execution chain (ProductJobRecord/JobAttempt) to link to
@@ -378,7 +382,7 @@ Outcome: Existing Cloud-owned rule/occurrence UI implemented: schedule/timezone/
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.04
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.10: the navigation shell to compose this surface into
 - [contract] CON.10: published Cloud-owned rule/occurrence record shapes
@@ -406,7 +410,7 @@ Outcome: Local/cloud/temporary disclosure, mode selection, Cloud promotion/copy 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.10: the navigation shell to compose this surface into
 - [artifact] AST.07: the real assistant-history.v1 local export/import surface
@@ -434,7 +438,7 @@ Outcome: AS03/08 own-app selection/preview/navigation implemented using the froz
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.06
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.10: the navigation shell to compose this surface into
 - [artifact] APP.06: the exact frozen WP-14.05 context/artifact preview port
@@ -460,7 +464,7 @@ Outcome: Assistant.Avalonia/Core/Sqlite/Cloud candidates published; a clean Nati
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.07
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.10: completed WP-17.00
 - [artifact] AST.11: completed WP-17.01
@@ -469,10 +473,9 @@ Start prerequisites (before claiming, each contract/artifact/design prerequisite
 - [artifact] AST.14: completed WP-17.04
 - [artifact] AST.15: completed WP-17.05
 - [artifact] AST.16: completed WP-17.06
-- [artifact] APP.08: completed WP14 acceptance
-- [artifact] EXE.09: completed WP16 acceptance
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- none
+- [integration] APP.08: WP-14 acceptance complete
+- [integration] EXE.09: WP-16 acceptance complete
 
 Permitted write scope: DesktopPlatform:samples/AssistantHost/**; DesktopPlatform:artifacts/evidence/**
 Shared resources (follow the owner protocol): RES-desktopplatform-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-desktopplatform-policy-data (append): Generated policy data is regenerated from its pinned source and never hand-edited; the reason-code registry is append-only with stable codes; each task adds its own test classes and evidence rows.
@@ -494,7 +497,7 @@ Outcome: WP17 built/packed once from a clean environment; all applicable UX acce
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-17.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\17-arcchat-independent-core.md, anchor rule-wp-17.90
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.17: completed WP-17.07 package acceptance
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -520,7 +523,7 @@ Outcome: HV-09 structural test 'no client runs a model loop' plus a live streame
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-52.05 (all work except the parts mapped to DEV.13, HAR.05): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.11: real, delivered outcome of AST.11 (Cloud client and device runtime (fixture turn endpoint boundary))
 - [artifact] HAR.00: real Harness turn loop
@@ -547,7 +550,7 @@ Outcome: a live scheduled occurrence executes and cascades with storm protection
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-52.06 (all work except the parts mapped to HAR.06, HAR.91): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\52-cloud-harness.md, anchor rule-wp-52.06
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.14: real, delivered outcome of AST.14 (Automation client (automation fixture state transitions))
 - [artifact] HAR.06: real, delivered outcome of HAR.06 (Durable Cloud automation, scheduling and automation-fixture removal)
@@ -573,7 +576,7 @@ Outcome: a real deployed Cloud export/snapshot job round-trips the same assistan
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.08 (all work except the parts mapped to CLOUD.45, CLOUD.58, NOTES.33): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.08
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.07: real, delivered outcome of AST.07 (Local history export and import (assistant-history.v1))
 - [artifact] CLOUD.45: real, delivered outcome of CLOUD.45 (Real Cloud Notes and Chat export producers)
@@ -599,7 +602,7 @@ Outcome: AST.15's Cloud promotion/copy UI successfully drives a real restartable
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.09 (full; consumer-side real integration): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.09
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.assistant is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] AST.15: real, delivered outcome of AST.15 (History and AI admission (local/cloud/temporary modes))
 - [artifact] CLOUD.46: real, delivered outcome of CLOUD.46 (Application Cloud history and restartable import)

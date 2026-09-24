@@ -18,7 +18,7 @@ Outcome: A provider-agnostic adapter boundary exists in Billing with a typed cap
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.00
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -44,7 +44,7 @@ Outcome: Offers, prices and policy versions exist as effective-dated policy data
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.01
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -70,7 +70,7 @@ Outcome: Purchase intent is the idempotency anchor for hosted checkout; one inte
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.02
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.01: provider adapter's hosted-checkout port and capability description
 - [artifact] COM.02: Offer/Price/PriceVersion read model
@@ -99,7 +99,7 @@ Outcome: Every provider event is persisted before processing, signature-verified
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.03
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.01: adapter signature-verification capability and typed event shape
 - [artifact] COM.03: CheckoutAttempt/Order identifiers to correlate events against
@@ -128,7 +128,7 @@ Outcome: Immutable grants and revocations resolve deterministically into an enti
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.04
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -155,7 +155,7 @@ Outcome: Entitlement is distributed with its version for client caching, realtim
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.05 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.05
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.05: EntitlementSnapshot + EntitlementVersion
 - [artifact] CLOUD.23: typed-query/revision-precondition pattern
@@ -182,7 +182,7 @@ Outcome: Quota (limit) and usage (measurement) live in separate stores keyed to 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.06
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.07: the published capacity/quota kernel (Capacity and Container/D1 integration producer)
 - [artifact] COM.05: versioned entitlement grants
@@ -209,7 +209,7 @@ Outcome: Purchased (no-expiry) and compensation (disclosed-expiry) credit lots e
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.07
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.05: entitlement kind determination (which grant authorises which credit class)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -237,7 +237,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-42:p2-010-required-behavior-and-closure-thr P2-010 required behavior and closure; three ledgers with unresolved holds through their existing deadline (P2-010 required behavior and closure; three ledgers with unresolved holds through their existing deadline): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, package-level obligation
 - WP-42:p2-010-required-behavior-and-closure P2-010 required behavior and closure (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.03: Order/Payment records
 - [artifact] COM.04: verified ProviderEvent stream
@@ -264,7 +264,7 @@ Outcome: A refund verifiably rolls entitlement back, dispute records are tracked
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.09 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.09
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.05: entitlement rollback path
 - [artifact] COM.09: ledger entries to export
@@ -291,7 +291,7 @@ Outcome: entitlement.service_term exists as an interval keyed on (kind, period_r
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.11 (service_term interval model keyed on (kind, period_ref); the three separated identities (subscription_ref stable / period_ref per paid interval / provider-event dedup in commerce.provider_event); union-of-overlap effective term; plan-change supersede. Capacity bucket/refill/reservation half split to COM.12.): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.11
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.03: paid period identifiers (checkout/order confirmation producing a period_ref-worthy paid interval)
 - [artifact] COM.05: offer assignment and entitlement kind
@@ -319,7 +319,7 @@ Outcome: The capacity bucket refills by a per-period saturating accrual independ
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42.11 (entitlement.capacity_bucket refill algorithm (§7.2), capacity_policy_period history, capacity_reservation with three funding sources, idempotent once-per-contiguous-run initialisation, and atomic admission with the service-term check first): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.11
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.11: service_term interval and (kind,period_ref) rows
 - [artifact] COM.08: CreditReservation reserve/settle/release primitive
@@ -328,7 +328,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Modules.Entitlement/**/Capacity/**
 Shared resources (follow the owner protocol): RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
-Unblocks: COM.14, HAR.02, SIM.07
+Unblocks: AIR.02, COM.14, HAR.02, SIM.07
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline deterministic tests only (no wall-clock sleep): full-hold-then-consume-then-read fixture, fractional saturation, changed plan, overlap, genuine gap, unchanged renewal, grandfathered above-ceiling balance, the CT-13 refill fixture (identical result whether refill runs once or a thousand times over an interval containing a ceiling raise, reduction and rate change, asserting 11 at t=11), clock rollback/restart/reconnect/second-device/racing-replica watermark tests, ceiling-reduction-preserves-held-funding test, ledger-unit-separation test (customerCredit carries micro-credits with no currency; the other two carry money with currency; no query sums them).
 Completion evidence for the ledger: The CT-13 refill fixture result exactly (11 at t=11, not 21 or 12); watermark non-rewind evidence across restart/second-device/racing-replica; ceiling-reduction-preserves-funding result.
@@ -347,7 +347,7 @@ Outcome: The financial-owner operator RPCs (grant/revokeGrant/issueCredit/adjust
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-42:operator-contract-closure-financial-owne Operator contract closure — financial owners (grant/revokeGrant/issueCredit/adjustCredit/refund) (operator contract closure; financial-owner RPC implementations: grant, revokeGrant, issueCredit, adjustCredit, refund): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.14: the OperatorService full RPC surface (ProposeAction/ApproveAction/execute, grant/revokeGrant/issueCredit/adjustCredit/refund message shapes, eight authorization fields, negative vectors) per registry04 §9
 - [artifact] CLOUD.21: real identity/dispatch conformance for operator calls
@@ -378,7 +378,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-42.10 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, anchor rule-wp-42.10
 - WP-42:p2-010-required-behavior-and-closure P2-010 required behavior and closure (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.12: passing durable term/capacity/refill state (WP-42.11 evidence)
 - [artifact] COM.03: purchase pipeline end to end
@@ -412,7 +412,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-42:p2-010-required-behavior-and-closure-act P2-010 required behavior and closure; active Pass/subscription mutual exclusion, no immediate proration, exact renewal/reset periods (P2-010 required behavior and closure; active Pass/subscription mutual exclusion, no immediate proration, exact renewal/reset periods): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, package-level obligation
 - WP-42:p2-010-required-behavior-and-closure P2-010 required behavior and closure (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\42-commerce-entitlement-and-credits.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.commerce is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] COM.14: technical commerce closure results to attach to the receipt
 - [artifact] COM.06: package task delivered

@@ -18,7 +18,7 @@ Outcome: Per-installation extension processes start on demand and stop when idle
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.00
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.45: the OS-level process isolation / ContentSandbox primitives (broker grants, syscall restriction)
 - [contract] PLT.19: the typed capability/resource contribution model
@@ -45,7 +45,7 @@ Outcome: Identity is verified against the installed manifest before any contribu
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.01
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.00: a running extension process to handshake with
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -70,7 +70,7 @@ Outcome: The typed extension-point layer exists as ordinary versioned contracts 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.02
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.05: the published foundation/value-model proto types this layer extends
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -97,7 +97,7 @@ Outcome: Panel declarations from a closed, versioned element vocabulary render w
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.03
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.02: the closed StructuredValue/panel.v1 schema
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -122,7 +122,7 @@ Outcome: manifest.v1/workflow.v1/panel.v1 validators exist from published Contra
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.04 (manifest.v1/workflow.v1/panel.v1 validators and the immutable staged install/update/drain/migration/revocation/rollback state machine): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.04
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.02: the closed value model workflow.v1 nodes are typed against
 - [artifact] CON.16: WP-03 fixture signing/catalog keys (catalog/index/revocation/update/realm schemas + independent signed vectors)
@@ -150,7 +150,7 @@ Outcome: Each of the six contribution kinds registers and executes through the l
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.04 (the six package contribution kinds (skill/template/workflow/mcp/connector/extension) runtime registration and execution wiring): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.04
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.04: the lifecycle state machine to register kinds into
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -176,7 +176,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-41.05 (Cloud PackageCatalog producer: DNS publisher verification, immutable submissions, review-state/revocation authority, signed static index): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.05
 - WP-41:packagecatalog-ownership-paragraph-sec-5 PackageCatalog ownership paragraph (Sec.5-6 boundary): OperatorService is sole authenticator/caller; neither Extensions Runtime nor console writes PackageCatalog tables (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, package-level obligation
 
-Entry condition: ADOPT.07 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.07.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] CLOUD.16: publisher identity/PAT and operator authentication
 - [artifact] CLOUD.42: durable blob storage for submitted package archives
@@ -204,7 +204,7 @@ Outcome: Desktop and CLI consume the signed static index and PackageCatalog meth
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-41.05 (desktop/CLI catalog consumers): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.05
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.06: the real signed static index format and PackageCatalog API
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -231,7 +231,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-41.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.06
 - WP-41:sec-8-gate-item-8-mcp-vocabulary-mapping Sec.8 gate item 8: MCP vocabulary mapping + SDK version pin -- VG-02 (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, package-level obligation
 
-Entry condition: ADOPT.03 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.03.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.02: the published extension protocol/value-model proto to generate from
 - [artifact] CLOUD.16: publisher PAT issuance
@@ -259,7 +259,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-41.07 (local MCP stdio placement behind the owned connector child process): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.07
 - WP-41:sec-8-gate-item-8-mcp-vocabulary-mapping Sec.8 gate item 8: MCP vocabulary mapping + SDK version pin -- VG-02 (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.00: the extension host's process supervision primitives
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -285,7 +285,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-41.07 (Cloud MCP HTTP placement through the AI Worker adapter): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.07
 - WP-41:sec-8-gate-item-8-mcp-vocabulary-mapping Sec.8 gate item 8: MCP vocabulary mapping + SDK version pin -- VG-02 (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, package-level obligation
 
-Entry condition: ADOPT.08 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.08.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [contract] CON.15: the internal AI HTTP port surface to attach an MCP adapter route to
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -311,7 +311,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-41.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, anchor rule-wp-41.90
 - WP-41:sec-8-gate-item-9-extension-protocol-con Sec.8 gate item 9: extension protocol conformance suite -- PG-09 (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\41-extension-platform-and-integrations.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.extensions is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] EXT.00: all prior EXT tasks complete (EXT.00-EXT.10)
 - [artifact] EXT.01: package task delivered

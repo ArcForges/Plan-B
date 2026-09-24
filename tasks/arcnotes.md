@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18.00 (notebook->folder hierarchy, stable folder IDs, document placement, notebook-owned structural commands, no-documents-in-documents; final-review paragraph: typed structural outbox entries, multi-root local tokens, move classification mapping/preview, offline create->move->edit crash test): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.00
 - WP-18:final-review-paragraph-s5-before-18-90-i Final-review paragraph (S5, before 18.90): independent verification of 02-desktop-data-model; typed structural outbox entries; multi-root local tokens; complete move classification mapping/preview; offline create->move->edit and crash-before/after-acknowledgement test; scalar-definition fixtures follow the fixed profile (WP-28 repeats with real property/view UI) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: published ArcForges.Persistence.Sqlite commit-unit (state+command+journal+revision+outbox in one transaction)
 - [contract] CON.91: NotebookView, FolderView, NotesDocument wire records in ArcForges.Contracts.PublicApi
@@ -28,7 +28,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: ArcNotes:src/ArcForges.ArcNotes.Domain/Notebooks/**; ArcNotes:src/ArcForges.ArcNotes.Domain/Folders/**; ArcNotes:src/ArcForges.ArcNotes.Infrastructure/Migrations/0001_*; ArcNotes:tests/ArcForges.ArcNotes.Tests/Domain/Structural/**
 Shared resources (follow the owner protocol): RES-arcnotes-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-arcnotes-composition (append): Each feature registers services and capabilities through its own registration module; the composition root only lists modules; ordering conflicts are resolved at merge.; RES-arcnotes-migrations (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.
-Unblocks: HAR.05, NOTES.06, NOTES.07, NOTES.14, NOTES.19, NOTES.20, NOTES.35
+Unblocks: NOTES.06, NOTES.07, NOTES.14, NOTES.19, NOTES.20, NOTES.35
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline unit tests (deep folders, cycle denial, reorder, cross-notebook move, delete/restore, immutable revision references); AOT compile; no live Cloud call in this task's own tests
 Completion evidence for the ledger: folder structure/document placement ownership+revision rule test results; structural-command atomicity results; offline create->move->edit crash-recovery result
@@ -50,7 +50,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18:p2-010-required-behavior-and-closure-bot P2-010 required behavior and closure (bottom of file): stable run/atom/cell IDs, NotesTextPosition/NotesCommand, explicit IME conflict preservation, disabled stale undo with original recoverable inverse, no unspecified rebase (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 - WP-18:s8-additional-completion-requirement-con S8 additional completion requirement: content paths pass the stated content-origin vectors, including unknown input and failed publication (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: same persistence commit-unit as NOTES.01
 - [contract] CON.91: Block, BlockBody, BlockProperties, RichText, TextSpan, InlineAtom, LinkSpec, MathContent, TableBlock/TableRow/TableCell wire records
@@ -81,7 +81,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18.00 (P2-010 closure: stable run/atom/cell IDs, NotesTextPosition/NotesCommand, explicit IME conflict preservation, disabled stale undo with original recoverable inverse): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.00
 - WP-18:p2-010-required-behavior-and-closure-bot P2-010 required behavior and closure (bottom of file): stable run/atom/cell IDs, NotesTextPosition/NotesCommand, explicit IME conflict preservation, disabled stale undo with original recoverable inverse, no unspecified rebase (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.27: published ArcForges.Desktop.Experience / design-system shell package for Avalonia hosting
 - [artifact] APP.01: the independent-product hosting/composition pattern (how ArcNotes.Desktop is composed as its own process under the shared shell)
@@ -109,9 +109,10 @@ Outcome: A block layout engine realises only the viewport window plus bounded ov
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.01 (virtualised block layout with measurement caching, scroll anchoring to (blockId, offset), bounded nesting, 10000-block scale-corpus responsiveness): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.01
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.26: same design-system/shell package as NOTES.03
+- [artifact] PLT.27: the published windows, panels and layout package NOTES.03 also hosts on
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -136,7 +137,7 @@ Outcome: Code blocks highlight from a bounded, statically registered grammar set
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.01 (code highlighting from a bounded statically-registered grammar set degrading to plain text; math rendering with explicit unsupported-construct marking; run every notes.math.v1 accepted/unsupported/malformed/depth/length vector): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.01
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.27: same shell package as NOTES.03/04
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -162,7 +163,7 @@ Outcome: Document and block links target stable identities with optional alias; 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.02
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.01: notebook/document identity
 - [artifact] NOTES.02: Block/BlockId model
@@ -190,7 +191,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.03
 - WP-18:s8-additional-completion-requirement-pro S8 additional completion requirement: property types and persistence agree with the frozen query profile; no local culture defaults affect stored meaning (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.01: Document aggregate
 - [contract] CON.91: PropertyDefinition, PropertyValue, ScalarValue, SelectOption wire records and their constraint sidecars (constraints.json rules propertyDefinition/scalarValue)
@@ -219,7 +220,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18.04 (managed/external attachment classification, availability states, metadata-card and thin-preview levels for images/files, bounded off-thread image decode with EXIF orientation, no-embedding structural test, malformed-input degradation for images, egress test (no preview path fetches a remote resource)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.04
 - WP-18:s8-additional-completion-requirement-con S8 additional completion requirement: content paths pass the stated content-origin vectors, including unknown input and failed publication (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.05: managed_resource / resource_reference tables (content-addressed blob store) from the persistence foundation
 - [artifact] NOTES.02: attachment block kind (image/attachment BlockBody variants)
@@ -247,7 +248,7 @@ Outcome: PDF attachments render through the in-product viewer with (attachmentCo
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.04 (PDF viewer (pdfViewer attachment presentation), page-anchored annotation targets, citation anchors, routing hostile PDF parsing through WP-11.09 ContentSandbox, PG-12 completion, PDF-specific malformed-input containment): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.04
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.45: the restricted fixture-parser ContentSandbox runtime (host, protocol, launch mechanics)
 - [artifact] NAT.06: the functional native ABI 1.1 (architecture/contracts/06-native-functional-abi.md) that DesktopPlatform's Native.* wrappers implement
@@ -278,7 +279,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18.00 (P2-010 closure: disabled stale undo with original recoverable inverse, no unspecified rebase (undo portion)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.00
 - WP-18:p2-010-required-behavior-and-closure-bot P2-010 required behavior and closure (bottom of file): stable run/atom/cell IDs, NotesTextPosition/NotesCommand, explicit IME conflict preservation, disabled stale undo with original recoverable inverse, no unspecified rebase (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.02: EditTransaction computed inverses
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -304,9 +305,11 @@ Outcome: Kill-during-edit/migration and corrupted-tail recovery reach the last c
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.06
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.02: the journal/recovery pipeline and StorageSchemaVersion migration apparatus
+- [artifact] PLT.03: real snapshot and crash/corruption recovery
+- [artifact] PLT.04: the real migration runner and StorageSchemaVersion apparatus
 Completion prerequisites (may start earlier; cannot complete before these are complete):
 - none
 
@@ -330,7 +333,7 @@ Outcome: ArcNotes registers query/read/create/edit/artifact-production capabilit
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.07 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.07
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.18: the Platform capability/resource contribution model (capability/extension descriptor package)
 - [contract] CON.91: CapabilityArguments, CapabilityResult, ToolProposal, ToolResult wire records
@@ -339,7 +342,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 
 Permitted write scope: ArcNotes:src/ArcForges.ArcNotes.AssistantIntegration/**; ArcNotes:tests/ArcForges.ArcNotes.Tests/AssistantIntegration/**
 Shared resources (follow the owner protocol): RES-arcnotes-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-arcnotes-composition (append): Each feature registers services and capabilities through its own registration module; the composition root only lists modules; ordering conflicts are resolved at merge.
-Unblocks: NOTES.14
+Unblocks: HAR.05, NOTES.14
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline unit tests: capability descriptor validation, owner-side refusal tests, idempotency test per write capability
 Completion evidence for the ledger: capability descriptor and owner-side refusal results per WP-18.07 completion gate
@@ -358,7 +361,7 @@ Outcome: A drift report compares the bound AFFiNE (81df4751a3) and SiYuan (eef10
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.08 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.08
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -386,7 +389,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-18.00 (final-review paragraph: independent verification of 02-desktop-data-model; scalar-definition fixtures follow the fixed profile): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.00
 - WP-18:final-review-paragraph-s5-before-18-90-i Final-review paragraph (S5, before 18.90): independent verification of 02-desktop-data-model; typed structural outbox entries; multi-root local tokens; complete move classification mapping/preview; offline create->move->edit and crash-before/after-acknowledgement test; scalar-definition fixtures follow the fixed profile (WP-28 repeats with real property/view UI) (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.01: own-lane completion
 - [artifact] NOTES.02: own-lane completion
@@ -402,7 +405,7 @@ Start prerequisites (before claiming, each contract/artifact/design prerequisite
 - [artifact] NOTES.12: own-lane completion
 - [artifact] NOTES.13: package task delivered
 Completion prerequisites (may start earlier; cannot complete before these are complete):
-- [integration] NOTES.35: downstream feed only - this gate does not wait on it, but its evidence later feeds PG-17 at WP-25.07
+- none
 
 Permitted write scope: ArcNotes:docs/release-notes.md; ArcNotes:tests/ArcForges.ArcNotes.Tests/Integration/Wp18/**
 Unblocks: REL.01
@@ -423,7 +426,7 @@ Outcome: An incremental FTS index over document/block content, properties, tags 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-19.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.00
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.02: block content to index
 - [artifact] PLT.07: journal-driven derived-store update pattern (data-model 03 S1: DS-01..DS-07)
@@ -451,7 +454,7 @@ Outcome: Query supports text/property/tag/structural filters with explainable ba
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-19.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.01
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.15: the FTS index to query
 - [artifact] NOTES.07: property/tag store
@@ -478,7 +481,7 @@ Outcome: search_anchor rows (block_id, offset range, content_fingerprint) surviv
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-19.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.02
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.15: search index/derived-store plumbing
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -506,7 +509,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-19.03 (full - eq/ne/isMissing/isPresent for all declared scalar kinds, all/any/not composition, DocumentId ordering under the profile bounds; later value operators and property sorting explicitly unavailable until WP-28): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.03
 - WP-19:s8-additional-completion-requirement-the S8 additional completion requirement: the initial view stores the final profile/bindings; neither invents a temporary semantic profile nor claims full table/query delivery before WP-28 (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.16: query evaluation
 - [artifact] NOTES.07: property definitions
@@ -534,7 +537,7 @@ Outcome: Import from Markdown/plain-text sources (including an Obsidian-style va
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-19.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.04
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.01: notebook/document placement
 - [artifact] NOTES.02: EditTransaction write path (origin=import)
@@ -564,7 +567,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-19.05 (full - client-side export flow, fidelity manifest, offline-refuses-new-export-without-losing-drafts behaviour): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.05
 - WP-19:s6-impacts-no-notes-printing-pdf-export S6 Impacts: no Notes printing/PDF-export feature is added (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.01: acknowledged-revision snapshot source
 - [contract] CON.91: ArtifactRef and ExportRequest-shaped wire records (INotesOperations.ExportAsync returns ArtifactRef per architecture/contracts/02-local-rpc-operations.md)
@@ -594,7 +597,7 @@ Outcome: A dependency-policy test fails the build on any Git or LFS client packa
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-19.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.06
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] GOV.03: the dependency-policy analyzer infrastructure
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -620,7 +623,7 @@ Outcome: Independent import/search/export and missing-resource outcomes are reco
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-19.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\19-arcnotes-search-and-portability.md, anchor rule-wp-19.90
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.15: own-lane completion
 - [artifact] NOTES.16: own-lane completion
@@ -652,7 +655,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28.00 (full - all eight declared scalar kinds/config bounds/exact encodings; rename preserves semantic bindings; dependent type/option changes refused after preview; trashed definitions make views visibly invalid): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.00
 - WP-28:final-review-paragraph-s5-before-28-90-i Final-review paragraph (S5, before 28.90): independent verification of 04-protobuf-wire-registry; cross-notebook move with real scalar definitions/select options/tags - stale target semantics, incomplete mapping and conflicting destination mappings refuse atomically; explicit approved removals remain in history (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.07: the basic document-level property model this extends
 - [contract] CON.91: PropertyDefinition.type/profile/numberScale/semanticRevision fields and the notesQuery/scalarPredicate/scalarValue constraint rules
@@ -680,7 +683,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28.01 (local evaluator + fixture-based conformance suite covering every v1 operator, boolean/missing behaviour, AST limit, ordinal/decimal/instant comparison, signed dataset-bound pagination): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.01
 - WP-28:s8-additional-completion-requirement-eve S8 additional completion requirement: every scalar/query/profile vector passes on both owners; all supported list/table operations implemented without new product design choices (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.23: full property schema
 - [artifact] NOTES.16: the existing local query/permission plumbing from WP-19.01
@@ -710,7 +713,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28.02 (full - list/table projections with visible-properties/sorting/filtering configuration, D1 to D4/numeric/checkbox/offset/equal-key/mutation-restart vectors, kind-switch preserves query): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.02
 - WP-28:s8-additional-completion-requirement-eve S8 additional completion requirement: every scalar/query/profile vector passes on both owners; all supported list/table operations implemented without new product design choices (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.24: the query evaluator
 - [artifact] NOTES.18: the WP-19.03 saved-view list projection this extends to table+full filter/sort depth
@@ -737,7 +740,7 @@ Outcome: Property values are editable directly in a view, going through the same
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-28.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.03
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.26: the view surface to edit through
 - [artifact] NOTES.02: the single EditTransaction write path (SetProperty operation)
@@ -763,7 +766,7 @@ Outcome: A plain note with no properties carries no property panel, no schema, n
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-28.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.04
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.23: the property schema whose absence is being proven cost-free
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -788,7 +791,7 @@ Outcome: Every actually-shipped scalar-property/list/table schema version upgrad
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-28.05 (supported-schema migration: actual shipped scalar-property/list/table schemas migrate preserving stable IDs and additive fields; reading additive unknown fields): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.05
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.11: the migration framework this extends to property/view tables
 - [artifact] NOTES.23: the schemas being migrated
@@ -818,7 +821,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28.05 (Cloud export includes declared property/view metadata and a fidelity report, verified through the real WP-25.08 producer): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.05
 - WP-28:p2-010-required-behavior-and-closure-bot P2-010 required behavior and closure (bottom of file): verify local hydrated/pending export + actual Cloud export; source-policy/one-use context permission; notebook/document/query/structural conflict behavior (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.20: the Cloud export client this extends
 - [artifact] NOTES.23: property schema to describe in the manifest
@@ -846,7 +849,7 @@ Outcome: Every view kind meets responsiveness and memory budgets on the scale co
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-28.06 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.06
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.26: the view kinds being scale-tested
 - [artifact] NOTES.04: the virtualised layout engine reused for large table/list bodies
@@ -875,7 +878,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28:final-review-paragraph-s5-before-28-90-i Final-review paragraph (S5, before 28.90): independent verification of 04-protobuf-wire-registry; cross-notebook move with real scalar definitions/select options/tags - stale target semantics, incomplete mapping and conflicting destination mappings refuse atomically; explicit approved removals remain in history (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, package-level obligation
 - WP-28:p2-010-required-behavior-and-closure-bot P2-010 required behavior and closure (bottom of file): verify local hydrated/pending export + actual Cloud export; source-policy/one-use context permission; notebook/document/query/structural conflict behavior (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, package-level obligation
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.23: own-lane completion
 - [artifact] NOTES.24: own-lane completion
@@ -908,7 +911,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28.05 (Cloud export fidelity for property/view metadata): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.05
 - WP-25.08 (Notes/Chat export producer (owned by the Cloud lane; Chat half is the assistant lanes WP-15.06)): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.08
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.20: real, delivered outcome of NOTES.20 (Cloud Notes export client and its named fixture endpoint)
 - [artifact] NOTES.30: real, delivered outcome of NOTES.30 (Cloud export fidelity for property/view metadata)
@@ -936,7 +939,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-28.01 (native-vs-Cloud conformance suite execution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.01
 - WP-28.90 (independent local/Cloud query vectors, no mock Cloud acceptance): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\28-arcnotes-properties-and-views.md, anchor rule-wp-28.90
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.24: real, delivered outcome of NOTES.24 (Query model: local evaluator and notes.scalar.v1 conformance fixtures)
 - [artifact] CLOUD.37: real, delivered outcome of CLOUD.37 (Cloud Notes authority and sync scopes)
@@ -962,7 +965,7 @@ Outcome: ArcNotes documents/blocks/attachments/deletions converge to verifiably 
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-25.07 (Notes object-kind coverage of the convergence harness; the real ArcNotes-client side of the three-device convergence harness): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\25-sync-engine-and-blob-lifecycle.md, anchor rule-wp-25.07
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NOTES.01: real, delivered outcome of NOTES.01 (Notebook/folder hierarchy, document placement and structural commands)
 - [artifact] NOTES.02: real, delivered outcome of NOTES.02 (Block/inline content model, EditTransaction engine, kind conversions and clipboard)
@@ -978,7 +981,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: 
-Unblocks: CLOUD.47, NOTES.02, NOTES.14
+Unblocks: CLOUD.47, NOTES.02
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Local real-integration run of the affected scenario in an existing environment, recorded once; offline and static checks in CI; no hosted runtime, device, browser, live-service or inference CI (P2-017).
 Completion evidence for the ledger: ArcNotes documents/blocks/attachments/deletions converge to verifiably identical state across three devices under concurrent editing, an extended offline device, and a mid-sync crash
@@ -997,7 +1000,7 @@ Outcome: the full PG-12 gate: a malformed/hostile PDF opened through ArcNotes' a
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-18.04 (full - owned by the ArcNotes lane, listed here only because it is the gate-closing consumer of this area's PLT.45; real PDF viewer integration and malformed native input containment): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\18-arcnotes-document-core.md, anchor rule-wp-18.04
 
-Entry condition: ADOPT.04 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.04.arcnotes is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.45: real, delivered outcome of PLT.45 (Content helper and OS-enforced isolation (ContentSandbox host))
 - [artifact] NAT.14: real, delivered outcome of NAT.14 (Pdf family: PDFium and production parser containment in the WP11 helper (NEW library))

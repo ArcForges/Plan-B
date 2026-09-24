@@ -19,7 +19,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.00 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.00
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.18: generated CapabilityKey allowlist and static registration mechanism (Capabilities package)
 - [artifact] PLT.09: local RPC structured-argument decode path (DP-02 boundary dispatch assembly)
@@ -48,7 +48,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.01 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.01
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.01: the real local persistence single-writer journal/checkpoint mechanism
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -75,7 +75,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.02 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.02
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -102,7 +102,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.03 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.03
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.01: a shape for an AOT-published desktop shell capable of hosting a display surface
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -129,7 +129,7 @@ Outcome: Each of the four probes has a written conclusion (proved / not proved /
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-13.04 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.04
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.01: Probe A result
 - [artifact] NAT.02: Probe B result
@@ -160,7 +160,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - none
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -189,7 +189,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_io_v1, arc_reader_options_v1, arc_frame_v1, arc_region_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -218,7 +218,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_video_convert_v1, arc_audio_convert_v1, arc_writer_options_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -247,7 +247,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_device_options_v1, arc_device_state_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -276,7 +276,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_colour_options_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -305,7 +305,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_image_options_v1, arc_region_v1)
 - [artifact] PLT.45: published ContentSandbox.Contracts/Broker/foundation Runtime.<rid>
@@ -335,7 +335,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_io_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -364,7 +364,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_instrument_options_v1, arc_transfer_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -393,7 +393,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PLT.45: published ArcForges.ContentSandbox.Contracts,.Broker and the foundation Runtime.<rid> package (built around a deliberately hostile first-party TEST parser)
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_pdf_page_v1)
@@ -424,7 +424,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13:ss1-nd-05-probe-scaffolds-13-00-13-03-ar SS1/ND-05: probe scaffolds (13.00-13.03) are cleanup-or-regression-fixture; production 13.05-13.16 code is retained and maintained -- different lifecycle rules for the two groups even though both may live under similar directories (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 - WP-13:ss4-major-types-note-no-native-pointer-b SS4 major-types note: no native pointer becomes a managed domain identifier or a wire field (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: compiled common ABI headers/layouts (arc_surface_options_v1, arc_region_v1)
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -452,7 +452,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Media + Runtime.<rid> only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.07: complete arc_media_reader_* export set
 - [artifact] NAT.08: complete arc_media_writer_*/convert/resample export set
@@ -482,7 +482,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Colour + Runtime.<rid> only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.10: complete arc_color_* export set
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -510,7 +510,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Image + Runtime.<rid> only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.11: complete arc_image_* export set
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -538,7 +538,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Otio + Runtime.<rid> only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.12: complete arc_otio_* export set
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -566,7 +566,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Instruments + Runtime.<rid> only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.13: complete arc_instruments_* export set
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -594,7 +594,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Pdf + Runtime.<rid>, plus the ContentSandbox.Runtime.<rid> republication from 13.13): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.14: complete arc_pdf_* export set and the composed ContentSandbox parser registration
 - [artifact] PLT.45: the WP11-owned host/broker/launcher mechanics stay the versioning authority for ContentSandbox.Runtime identity
@@ -623,7 +623,7 @@ Obligations (authoritative definitions; satisfy exactly these parts and their te
 - WP-13.15 (ArcForges.Native.Graphics + Runtime.<rid> only): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.15
 - WP-13:producer-artifacts-and-integration-md-wp producer-artifacts-and-integration.md WP13 row: 'Probe-only 1.0, missing functional export or dependency prevents completion' (package-level obligation contribution): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, package-level obligation
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.15: complete arc_graphics_* export set
 Completion prerequisites (may start earlier; cannot complete before these are complete):
@@ -650,7 +650,7 @@ Outcome: AD01-AD08 recorded for FFmpeg, miniaudio, OCIO, OIIO, OpenEXR, Imath, O
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-13.16 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.16
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.20: Media package closure (FFmpeg/miniaudio/libusb positions)
 - [artifact] NAT.21: Colour package closure (OCIO position)
@@ -682,7 +682,7 @@ Outcome: Actual candidate NuGet restore/native loading and desktop AOT; C# AOT g
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-06.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\06-aot-jit-and-wasm-publish-proof.md, anchor rule-wp-06.90
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] PRF.01: real, delivered outcome of PRF.01 (ArcNotes desktop Native AOT package proof)
 - [artifact] PRF.02: real, delivered outcome of PRF.02 (ArcScope desktop Native AOT package proof)
@@ -715,7 +715,7 @@ Outcome: Decode/seek/drain, encode->independent decode, image tiles, colour, OTI
 Obligations (authoritative definitions; satisfy exactly these parts and their tests/gates):
 - WP-13.90 (full): C:\MyFile\Projects\ArcForges-Design-B\docs\planning\work-packages\13-high-risk-technical-probes.md, anchor rule-wp-13.90
 
-Entry condition: ADOPT.02 (adoption of the owning repository) is complete in the Plan ledger.
+Entry condition: adoption slice ADOPT.02.native is complete in the Plan ledger (DLV-22).
 Start prerequisites (before claiming, each contract/artifact/design prerequisite must be delivered or complete and each release prerequisite complete in the Plan ledger; DLV-24):
 - [artifact] NAT.06: real, delivered outcome of NAT.06 (Common native ABI: preambles, pack8 records, ownership, cancellation, bounded buffers)
 - [artifact] NAT.07: real, delivered outcome of NAT.07 (Media family: reader, probe, frame and seek (arc_media_reader_*))
