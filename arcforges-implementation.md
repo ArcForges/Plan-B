@@ -1,25 +1,13 @@
 # ArcForges implementation
 
-## Current task
+## Execution state
 
-```text
-Implement ArcForges Substep 03.03 — Capability and resource contract types.
+There is no single Current task. Implementation is a set of delivery tasks with typed prerequisites, and any number of workers may execute different ready tasks at the same time. The authoritative rules are the Design [delivery model](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md) (decision P2-018); this document is the operating procedure.
 
-Owning document: C:\MyFile\Projects\ArcForges-Design\docs\planning\work-packages\03-contract-foundation-and-licence-split.md
-Owning section: WP-03.03; anchor: rule-wp-03.03.
-Scope: this substep, its nested sections, and applicable package-wide obligations.
-Required upstream work packages: WP-02.
-Earlier substeps in this work package: 03.00, 03.01, 03.02. Verify their required stage evidence.
-
-Related formal documents; resolve the relevant rules and follow their references:
-- C:\MyFile\Projects\ArcForges-Design\docs\assurance\wp03-02-implementation-evidence.md
-- C:\MyFile\Projects\ArcForges-Design\docs\architecture\02-contracts-and-protocols.md
-- C:\MyFile\Projects\ArcForges-Design\docs\architecture\contracts\00-operation-catalogue.md
-- C:\MyFile\Projects\ArcForges-Design\docs\architecture\contracts\04-protobuf-wire-registry.md
-- C:\MyFile\Projects\ArcForges-Design\docs\architecture\contracts\10-application-scope-and-streams.md
-- C:\MyFile\Projects\ArcForges-Design\docs\architecture\contracts\11-operation-scope-manifest.md
-```
-
+- **Now:** the adoption stage has not run, so the only ready task is `ADOPT.01` (freeze the adoption baseline). Each repository's adoption task (`ADOPT.02`–`ADOPT.10`, and `ADOPT.11` for Design and Plan) then opens that repository's tasks; repositories open independently.
+- **Accepted baseline:** WP00, WP01, WP02 and WP03.00–03.02 (tasks `GOV.01`–`GOV.03`, `CON.90`–`CON.92`), recorded as inherited by adoption.
+- **Reported, unverified:** the user reported WP03.03 complete on 2026-09-23. No source, pull request or receipt was present when this plan was written; `ADOPT.03` locates and reviews it before `CON.02`/`CON.03` are recorded as inherited.
+- **Find work:** `python tools/delivery.py ready --claims` (optionally `--lane <lane>`). The [task list](list.md) indexes every task; each lane file under [`tasks/`](tasks/) holds one self-contained prompt per task.
 
 ## Project background
 
@@ -33,27 +21,73 @@ The goal is the complete accepted commercial product: usable client workflows, c
 
 ## Authoritative material and source locations
 
-Formal Design: C:\MyFile\Projects\ArcForges-Design.
+Formal Design: `C:\MyFile\Projects\ArcForges-Design-B`. Read its repository instructions and current decisions. The planning entry points are `docs/planning/delivery/README.md` (delivery model), the task records in `docs/planning/delivery/lanes/`, `docs/planning/README.md`, `docs/planning/implementation-sequence.md` (principles and mock policy) and `docs/planning/producer-artifacts-and-integration.md`. Work packages in `docs/planning/work-packages/` are the obligation catalogue: a task's obligations link to the substeps whose "what must be fully done", testing requirements and completion gates it must satisfy. Concrete behavior is defined across `docs/requirements`, `docs/architecture` (including `contracts` and `data-model`), `docs/experience` and `docs/assurance`. Current accepted amendments govern older text; filenames and historical inventories do not override them. Deprecated-input bodies are excluded from implementation reading.
 
-Read its applicable repository instructions and current decisions. The planning entry points are docs/planning/README.md, docs/planning/implementation-sequence.md, docs/planning/work-packages/README.md and docs/planning/producer-artifacts-and-integration.md. Concrete behavior is defined across docs/requirements, docs/architecture (including contracts and data-model), docs/experience and docs/assurance. Current accepted amendments govern older text; filenames and historical inventories do not override them. Deprecated-input bodies are excluded from implementation reading.
+Implementation repositories are under `C:\MyFile\Projects\ArcForges`: DesktopPlatform, Contracts, ArcNotes, ArcScope, ArcSlate, Cloud, AI, Web and Mobile. Each is a separate Git repository; a task names its one owning repository and any other repository it touches.
 
-Implementation repositories are under C:\MyFile\Projects\ArcForges: DesktopPlatform, Contracts, ArcNotes, ArcScope, ArcSlate, Cloud, AI, Web and Mobile. Each is a separate Git repository. Determine which owners this substep actually changes from the formal layout, package registry and work package.
+Read-only reference sources are `C:\MyFile\Projects\AionUi`, `AFFiNE`, `siyuan`, `Serial-Studio`, `ArcVideo` and `ArcVideoFoundation`. Start with their completed matrices under Design's `docs/assurance/reference-coverage` and inspect the relevant source or drift only. Respect per-file licences, provenance and excluded subtrees; a rewrite does not erase upstream obligations. `C:\MyFile\Projects\StartArcForges` is a packaged-artifact layout/notice reference only: do not execute, unpack or reverse engineer its binaries. Reference features do not create additional product requirements.
 
-Read-only reference sources are C:\MyFile\Projects\AionUi, C:\MyFile\Projects\AFFiNE, C:\MyFile\Projects\siyuan, C:\MyFile\Projects\Serial-Studio, C:\MyFile\Projects\ArcVideo and C:\MyFile\Projects\ArcVideoFoundation. Start with their completed matrices under Design's docs/assurance/reference-coverage and inspect the relevant source or drift only. Respect per-file licenses, provenance and excluded subtrees; a rewrite does not erase upstream obligations. C:\MyFile\Projects\StartArcForges is a packaged-artifact layout/notice reference only: do not execute, unpack or reverse engineer its binaries. Reference features do not create additional product requirements.
+The remote/web execution-prompt variants in this repository (`arcforges-implementation-remote.md`, `list-remote.md`) are excluded from this execution model and are not maintained; do not use them as execution authority.
+
+## Selecting a task
+
+1. Pull the Plan and Design primaries (clean fast-forward only) so the graph, views and ledger are current.
+2. Run `python tools/delivery.py ready --claims`. A task is listed when its owning repository's adoption is complete, every contract/artifact/design prerequisite is delivered or complete, every release prerequisite is complete, and no live claim holds it (see below).
+3. Prefer tasks on the [critical path](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/schedule-analysis.md) and tasks that unblock many others; otherwise any ready task is valid. Check its declared shared resources: if another in-flight task holds an `exclusive` mode on the same resource, pick different work or coordinate with that resource's owner.
+
+## Claiming a task
+
+A claim is an atomic update of the branch `claims/<task-id>` in this repository (DLV-26). From Git Bash in `C:\MyFile\Projects\Plan-B`, first fetch the claim refs and read any existing claim:
+
+```bash
+T=CON.02; L=$(echo "$T" | tr 'A-Z' 'a-z'); WORKER="<your worker name>"
+git fetch origin "+refs/heads/claims/*:refs/remotes/origin/claims/*"
+git show "refs/remotes/origin/claims/$L:claim.json" 2>/dev/null || echo "no claim yet"
+BLOB=$(printf '{"task":"%s","claimant":"%s","claimedAt":"%s","leaseUntil":"%s","state":"claimed"}\n' \
+  "$T" "$WORKER" "$(date -u +%FT%TZ)" "$(date -u -d '+2 days' +%FT%TZ)" | git hash-object -w --stdin)
+TREE=$(printf '100644 blob %s\tclaim.json\n' "$BLOB" | git mktree)
+```
+
+- **No claim branch yet:** push a parentless commit to create it. The push fails if the branch appeared meanwhile, so two workers can never own one task:
+  `git push origin "$(git commit-tree "$TREE" -m "Claim $T")":"refs/heads/claims/$L"`
+- **Branch exists with state `released`, or with state `claimed`/`blocked` whose `leaseUntil` is more than one hour in the past:** re-claim or take over by appending to it; the push fails if anyone else moved it first, in which case read the claim again:
+  `git push origin "$(git commit-tree "$TREE" -p "refs/remotes/origin/claims/$L" -m "Reclaim $T")":"refs/heads/claims/$L"`
+- **Branch exists with a live lease, or with state `delivered`/`complete`:** the task is not available.
+
+To renew the lease, append a new claim commit the same way. To release, append a commit whose state is `released`. Never delete or force-push a claim branch: its history is the audit trail of ownership. `python tools/delivery.py ready --claims` applies these same rules when it lists available tasks.
+
+## Executing a task
+
+- Read the task record and its prompt, every obligation it links, the prerequisite tasks' published outputs and the applicable repository instructions. Verify relevant facts, finish research and decisions, then establish one complete ordered plan before editing. Repair conflicting authoritative documentation through a Design pull request before dependent implementation.
+- Work in a retained Git worktree of the owning repository on branch `task/<task-id>` (lower case). Title pull requests `[<TASK-ID>] <summary>` and link the task record in the body. Append to the task's open pull request rather than creating a parallel one.
+- Stay inside the task's write scope. Touch a declared shared resource only through its owner protocol (generated baselines are regenerated after rebase, migrations are numbered at merge, registries are appended). An undeclared conflict discovered at merge is resolved by the repository integration owner and recorded as a planning change if it will recur.
+- Consume producers only through published candidates: update the exact pin you need through a reviewed dependency change. Use only the substitutes the task lists; never register a substitute in a release composition.
+- Preserve product behavior, package IDs, signing continuity, immutable releases and unrelated work. A genuine architecture conflict stops the task and is raised (D-001); the claim records the blocked state.
+
+## Completing a task
+
+1. Merge the task's pull requests after review with all retained applicable checks green, and confirm any producer candidate's publication receipt.
+2. If a completion prerequisite is still open, record the task as `delivered`; it becomes `complete` when the prerequisite completes.
+3. Open a Plan pull request that adds `ledger/tasks/<TASK-ID>.md` in the [ledger format](ledger/README.md): source commits, candidate identities, validation actually performed, local runtime evidence, substitutes still in use and untested coverage. Review and merge it (this repository has no CI). Several ledger records may share one pull request.
+4. Push a final claim commit with state `complete` (or `delivered`). Package and gate acceptance records go to Design `docs/assurance` when a package closure or gate task completes.
+
+## Interruption, blocking and takeover
+
+- The claimant resumes from the retained worktree, branch and pull request and renews the lease.
+- Another worker may take over only after reading the current claim and confirming that its lease expired more than one hour ago; it appends a takeover commit as described above and continues the same branch and pull request.
+- If a planning change supersedes a claimed task, the claimant pushes a `released` claim commit naming the superseding task, and the task's ledger record gets status `superseded`.
+- A blocked task records the concrete missing input in its claim. A missing prerequisite or design gap becomes a planning change: edit the Design graph, run `python tools/delivery.py generate` and `check`, and merge the Design and Plan pull requests.
+
+## Coordination roles
+
+- **Repository integration owner** (one per repository): merge order compatible with prerequisites, shared-resource protocols, generated baselines, main health and candidate publication. There is no family-wide merge order.
+- **Architecture Owner:** contract and design changes (PA-02) and planning changes to the graph.
+- **Release Engineering Owner:** release tasks, production signing, feeds and store pointers.
+- **Workers:** own one claimed task at a time each; review may be done by any other worker or owner.
 
 ## Execution and validation policy
 
-This policy governs both implementation profiles and every task block. It follows [Design P2-017](https://github.com/ArcForges/ArcForges-Design/blob/main/docs/decisions/phase-2-specification-decisions.md#rule-p2-017) and the [CI/local policy](https://github.com/ArcForges/ArcForges-Design/blob/main/docs/assurance/ci-and-local-validation-policy.md).
-
-## Collect, plan and implement
-
-Use Current task as the execution entry point. The user's latest instructions determine whether to start, continue to subsequent numbered substeps, or stop; this document neither authorizes starting work by itself nor imposes a mandatory stop after one substep. Inspect actual roots, remotes, branches, dirty state, worktrees, related PRs, current Design and invoked workflow scripts. Finish research and decisions, then establish one complete ordered plan before editing. Repair conflicting authoritative documentation before dependent implementation. Preserve product behavior, package IDs, signing continuity, immutable releases and unrelated work.
-
-Use a retained Git worktree for every change. Append commits to an existing related open PR; otherwise create a new worktree/PR. Do not reopen closed PRs or modify unrelated dependency PRs. Prefix PR titles with the work package and substep, such as `[WP02 · SubStep 02.04]`.
-
-One coordinator owns dependency order, review and merging. Independent repositories may use subagents with non-overlapping ownership. Serialize CPU-heavy local builds/tests and reuse existing caches. Routine decisions and authorized merging require no renewed approval.
-
-## Validation restrictions
+This policy governs every task and the adoption stage. It follows Design P2-017 and the CI/local validation policy, as amended in coordination wording by P2-018.
 
 - No macOS CI job, runner or matrix, including self-hosted, scheduled and manual workflows. Local macOS source support may remain; never claim an unproduced macOS artifact or unobserved platform result.
 - No hosted physical-device/emulator, desktop GUI, browser E2E, live service/RPC, real inference/Workflow, installed-package consumer or public-release install/upgrade tests. Remove hidden default check/build/publish invocations and obsolete artifact/status dependencies.
@@ -67,10 +101,10 @@ One coordinator owns dependency order, review and merging. Independent repositor
 
 ## Network and resources
 
-Use the normal network path. Do not configure proxy 7890 or another proxy. On a failed network operation, stop and report the exact operation rather than changing networking or repeatedly retrying. Do not invoke wsl.exe or WSL wrappers; use a directly available WSL terminal only if necessary. Parallelize independent source work, not competing heavy local builds.
+Use the normal network path. Do not configure proxy 7890 or another proxy. On a failed network operation, stop and report the exact operation rather than changing networking or repeatedly retrying. Do not invoke wsl.exe or WSL wrappers; use a directly available WSL terminal only if necessary. Run at most one CPU-heavy local build or test per workstation at a time and reuse existing caches; coding and review continue in parallel.
 
 ## Review and merge
 
-Review each complete PR and fix findings. Documentation repositories that have no CI merge directly after review. In code repositories, every PR, including documentation-only changes, must run the existing applicable CI and may merge automatically only after all retained latest-head checks succeed. Do not skip configured checks or weaken branch protection to merge documentation changes. Remove obsolete runtime/macOS job references rather than adding fake passing gates. Do not bypass retained build/security/signing failures.
+Review each complete PR and fix findings. Documentation repositories that have no CI merge directly after review. In code repositories, every PR, including documentation-only changes, must run the existing applicable CI and may merge only after all retained latest-head checks succeed. Do not skip configured checks or weaken branch protection to merge documentation changes. Remove obsolete runtime/macOS job references rather than adding fake passing gates. Do not bypass retained build/security/signing failures.
 
 Post-merge verification is limited to the expected merge commit, required build/publication/deployment job result and clean fast-forward primary update. Do not start another public-download/hash/install/device/browser/runtime cycle. Keep branches and worktrees, protect credentials and report actual results and material untested coverage. Deployment success is not a live test, and compilation is not physical-device or full commercial acceptance.
