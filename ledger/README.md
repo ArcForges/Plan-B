@@ -76,7 +76,7 @@ epoch: 1
 
 Keep exactly one front-matter block per file. When a delivered task completes through its follow-up, or a task is superseded, edit the existing header in place and append the new evidence below it. Bundled tasks that share a pull request keep separate records.
 
-`python tools/delivery.py check` validates every record: its front matter, file name, known task, status and uniqueness. The tool refuses to compute readiness from a ledger that fails these checks.
+`python C:\MyFile\Projects\Plan-B\tools\delivery.py check --plan <Plan worktree> --design C:\MyFile\Projects\ArcForges-Design-B`, with the Design primary checkout at current `main`, validates every record in the named Plan working tree: its front matter, file name, known task, status and uniqueness. Always name both roots; without `--plan` this command checks the Plan primary checkout instead of your change ([Planning and ledger changes](../arcforges-implementation.md#planning-and-ledger-changes)). The tool refuses to compute readiness from a ledger that fails these checks.
 
 ## Adoption records
 

@@ -30,7 +30,7 @@ The retired serial task list remains in Git history (`list.md` at commit `0fa610
 
 ## Authoritative state and the delivery tool
 
-Run the tool from any Plan checkout or retained worktree, in Git Bash or PowerShell: `python C:\MyFile\Projects\Plan-B\tools\delivery.py <command>` (keep the Plan primary checkout fast-forwarded so the tool itself is current). Execution commands read the **authoritative state**: the merged `main` of Design and Plan and the Plan record branches, fetched on every call into a private ref namespace, so concurrent workers never move a ref another worker has read. Unmerged commits and uncommitted edits in any checkout, including your own, never count; `ready --local` shows such an unreviewed state for review and is never a basis for claiming.
+Run the tool by its absolute path from any directory, in Git Bash or PowerShell: `python C:\MyFile\Projects\Plan-B\tools\delivery.py <command>` (keep the Plan primary checkout fast-forwarded so the tool itself is current). The current directory never selects the Plan or Design checkout the tool reads. Execution commands read no working tree, only the **authoritative state**: the merged `main` of Design and Plan and the Plan record branches, fetched on every call into a private ref namespace, so concurrent workers never move a ref another worker has read. Unmerged commits and uncommitted edits in any checkout, including your own, never count; `ready --local --plan <Plan worktree> --design <Design worktree>` shows such an unreviewed state of the named working trees for review and is never a basis for claiming.
 
 The tool fails closed. An invalid graph or ledger authorizes no work. An invalid claim, lease or role record keeps its item unavailable until a reviewed fix repairs it. A claim that changed concurrently writes nothing (exit 2). A failed network operation stops with the exact operation (exit 3): report it and stop.
 
@@ -43,11 +43,19 @@ The tool fails closed. An invalid graph or ledger authorizes no work. An invalid
 | `update <ID> --worker W --epoch N ...` | Renew and record handoff checkpoints; set `blocked`, `delivered` or `complete` |
 | `release <ID> --worker W --epoch N --note ...` | Voluntary handoff, or the end of a lease or role |
 | `build-slot run --worker W --task T -- <command>` | Run one CPU-heavy local build or test under the workstation lock |
-| `check`, `generate` | Validate, or regenerate, the graph, views and ledger of working trees for planning and ledger pull requests |
+| `check --plan P --design D`, `generate --plan P --design D` | Validate, or regenerate, the graph, views and ledger of the named Plan and Design working trees for planning and ledger pull requests; always name both ([Planning and ledger changes](#planning-and-ledger-changes)) |
 
 **Keys.** Every ID has one key, in lower case with dots replaced by hyphens (`CON.02` → `con-02`, `ADOPT.03.contracts` → `adopt-03-contracts`). It names the claim `claims/<key>`, the task branch `task/<key>` and the ledger record `ledger/tasks/<key>.md`. Never use the dotted ID in a branch or file name: Git for Windows cannot store names such as `con.02`.
 
-For a planning change, edit Design in a retained worktree and run `check` and `generate` from a Plan worktree with `--design <Design worktree>`. Without `--design` the tool uses `ArcForges-Design-B` beside the Plan primary checkout, whichever Plan checkout runs it.
+## Planning and ledger changes
+
+`check` and `generate` read and write only the working trees named by `--plan` and `--design`. Their defaults ignore the current directory: `--plan` defaults to the checkout holding the copy of the tool that runs, so `C:\MyFile\Projects\Plan-B\tools\delivery.py` uses the Plan primary checkout, and `--design` defaults to `ArcForges-Design-B` beside the Plan primary checkout (or `ARCFORGES_DESIGN` when set). Run that way from a worktree, `check` validates the primary checkouts and can pass while your worktree holds a stale view. Always name both roots:
+
+- **Planning change:** edit the Design graph in a retained Design worktree, then run `python C:\MyFile\Projects\Plan-B\tools\delivery.py generate --plan <Plan worktree> --design <Design worktree>` and `check` with the same roots. `generate` rewrites every view in both trees.
+- **Ledger-only change:** `python C:\MyFile\Projects\Plan-B\tools\delivery.py check --plan <Plan worktree> --design C:\MyFile\Projects\ArcForges-Design-B`, with the Design primary checkout fast-forwarded to current `main`; `check` only reads it.
+- **Change to `tools/delivery.py`:** run the worktree's own copy, `python <Plan worktree>\tools\delivery.py`, with the same explicit roots.
+
+Never run `generate` against a primary checkout, and never edit a primary checkout.
 
 ## Sessions and roles
 
@@ -111,7 +119,7 @@ Renew at least once a day while you hold a claim. Push before recording: an unpu
 ## Completing a task
 
 1. Confirm the producer candidate's publication receipt where the task publishes one.
-2. Open a Plan pull request titled `[<TASK-ID>] Record <summary>` that adds `ledger/tasks/<key>.md` in the [ledger format](ledger/README.md): `delivered` while a completion prerequisite is open, otherwise `complete`. Several records may share one pull request, each with its own file. Review it, run `python tools/delivery.py check`, and merge it through the Plan integration role (Plan has no CI).
+2. Open a Plan pull request titled `[<TASK-ID>] Record <summary>` that adds `ledger/tasks/<key>.md` in the [ledger format](ledger/README.md): `delivered` while a completion prerequisite is open, otherwise `complete`. Several records may share one pull request, each with its own file. Review it, run `python C:\MyFile\Projects\Plan-B\tools\delivery.py check --plan <Plan worktree> --design C:\MyFile\Projects\ArcForges-Design-B` with the Design primary checkout at current `main` ([Planning and ledger changes](#planning-and-ledger-changes)), and merge it through the Plan integration role (Plan has no CI).
 3. After the ledger pull request merges, record `update <ID> --worker W --epoch N --state delivered` or `--state complete`; the tool refuses until the merged ledger says so. A delivered task has no owner while it waits, so take other work.
 4. **Completion follow-up** ([DLV-41](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-41)): when `ready` lists a delivered task under completion follow-ups, any worker claims it (the next epoch), performs the task's own remaining acceptance for the scenarios its completion prerequisites name, amends the existing ledger record in place (`status: complete`, new evidence appended) through a reviewed pull request, and records `--state complete`. Upstream completion alone is not the task's acceptance.
 5. Package and gate acceptance records go to Design `docs/assurance` when a package closure or gate task completes.
@@ -123,7 +131,7 @@ Renew at least once a day while you hold a claim. Push before recording: an unpu
 - **Recovery of an expired claim** (its worker or coordinator disappeared): `ready` and `status` show it. Take over only when the lease expired more than one hour ago, the branch and pull request show no activity since then, and a release request comment on the pull request, where one exists, has gone unanswered for at least one hour. Then `claim <ID> --worker W --takeover --reason "<those checks>"`, review the earlier commits, and continue the same branch and pull request. Leases and roles are recovered the same way, without the pull request checks.
 - **Merged but not yet recorded:** the record shows the merge commits and next actions (publication confirmation, ledger); the successor continues from there and never re-implements.
 - **Interrupted before any push:** only the record's notes survive; the successor redoes the unpushed part from them.
-- **Blocked:** record the concrete missing input. A missing prerequisite or design gap becomes a planning change (edit the Design graph, run `generate` and `check`, merge the Design and Plan pull requests); an architecture conflict is raised under D-001. If you stop while blocked, release the claim with the blocker kept in the record so the next worker sees it.
+- **Blocked:** record the concrete missing input. A missing prerequisite or design gap becomes a planning change (edit the Design graph, run `generate` and `check` with both roots named as in [Planning and ledger changes](#planning-and-ledger-changes), merge the Design and Plan pull requests); an architecture conflict is raised under D-001. If you stop while blocked, release the claim with the blocker kept in the record so the next worker sees it.
 - **Superseded:** if a planning change supersedes a claimed task, release it naming the superseding task; the ledger records it as superseded.
 
 ## Leases, roles and the workstation build slot
