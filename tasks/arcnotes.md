@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — ArcNotes
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## ArcNotes
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task NOTES.01 — Notebook/folder hierarchy, document
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-01 (python tools/delivery.py claim NOTES.01 --worker <name>); task branch task/notes-01 in ArcNotes; ledger record ledger/tasks/notes-01.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: ArcNotes.Domain has Notebook/Folder/Document aggregates with fractional-ordinal placement, cycle-denial, cross-notebook move and trash/restore, each structural edit a single-write-path transaction producing a typed structural outbox entry (contentProposal|namedStructuralCommand union per data-model 02).
 
@@ -40,7 +42,8 @@ Execute ArcForges delivery task NOTES.02 — Block/inline content model, EditTra
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-02 (python tools/delivery.py claim NOTES.02 --worker <name>); task branch task/notes-02 in ArcNotes; ledger record ledger/tasks/notes-02.md.
 Kind/size: feature/XL. Baseline: not-started.
 Outcome: A closed Block/InlineContent domain model and EditTransaction operation set (InsertBlock, RemoveBlock, MoveBlock, SetBlockKind, SplitBlock, MergeBlocks, ReplaceInlineRange, ApplyMark, SetBlockAttribute, SetProperty) exist with computed inverses, atomic apply, declared conversion mappings and no markup-string round-trip anywhere on an internal path.
 
@@ -72,7 +75,8 @@ Execute ArcForges delivery task NOTES.03 — Editor interaction: caret, selectio
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-03 (python tools/delivery.py claim NOTES.03 --worker <name>); task branch task/notes-03 in ArcNotes; ledger record ledger/tasks/notes-03.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The ArcNotes.Desktop editor surface handles grapheme/bidi-correct caret and selection, commits exactly one transaction per IME composition positioned from the real caret rectangle, and supports the closed set of markdown input rules and the slash menu, all built on NOTES.02's EditTransaction model.
 
@@ -102,7 +106,8 @@ Execute ArcForges delivery task NOTES.04 — Virtualised block layout, measureme
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-04 (python tools/delivery.py claim NOTES.04 --worker <name>); task branch task/notes-04 in ArcNotes; ledger record ledger/tasks/notes-04.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: A block layout engine realises only the viewport window plus bounded overscan, caches measurement by (blockId, contentFingerprint, availableWidth, fontScale, locale), and anchors scroll position to (blockId, offset) so a remote edit above the viewport never moves the reader.
 
@@ -130,7 +135,8 @@ Execute ArcForges delivery task NOTES.05 — Rich content kinds: code highlighti
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-05 (python tools/delivery.py claim NOTES.05 --worker <name>); task branch task/notes-05 in ArcNotes; ledger record ledger/tasks/notes-05.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Code blocks highlight from a bounded, statically registered grammar set with graceful plain-text degradation; math blocks render the notes.math.v1 supported grammar subset with an explicit unsupported-construct marker and never execute TeX; table blocks support the interaction set (insert/delete row/column, merge/split-free V1 spans).
 
@@ -156,7 +162,8 @@ Execute ArcForges delivery task NOTES.06 — Links, backlinks and outline over t
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-06 (python tools/delivery.py claim NOTES.06 --worker <name>); task branch task/notes-06 in ArcNotes; ledger record ledger/tasks/notes-06.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Document and block links target stable identities with optional alias; a derived link_index produces the backlinks panel and outline; renaming never breaks a link; a broken link has an explicit state.
 
@@ -183,7 +190,8 @@ Execute ArcForges delivery task NOTES.07 — Document-level typed properties and
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-07 (python tools/delivery.py claim NOTES.07 --worker <name>); task branch task/notes-07 in ArcNotes; ledger record ledger/tasks/notes-07.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: System/user property separation, missing/empty/false/zero distinction, decimal/date/offset validation, label rename vs refused dependent type change, tag cross-cutting classification whose deletion never deletes documents, and plain notes with zero property overhead.
 
@@ -212,7 +220,8 @@ Execute ArcForges delivery task NOTES.08 — Managed and external attachments (n
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-08 (python tools/delivery.py claim NOTES.08 --worker <name>); task branch task/notes-08 in ArcNotes; ledger record ledger/tasks/notes-08.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Managed attachments enter the managed resource store with content-hash identity; external references record location+availability; small drags default to managed, large/external prompt; image preview decodes off-thread bounded with EXIF applied; every preview degradation states its reason; no preview path performs a network fetch.
 
@@ -241,7 +250,8 @@ Execute ArcForges delivery task NOTES.09 — PDF in-product viewer, page anchors
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-09 (python tools/delivery.py claim NOTES.09 --worker <name>); task branch task/notes-09 in ArcNotes; ledger record ledger/tasks/notes-09.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: PDF attachments render through the in-product viewer with (attachmentContentHash, pageIndex, rectOrTextRange) page anchors, all parsing routed through ContentSandbox, and a real native-parser-crash test proving the parent process survives with a metadata-card fallback.
 
@@ -270,7 +280,8 @@ Execute ArcForges delivery task NOTES.10 — Undo, history, checkpoint and trash
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-10 (python tools/delivery.py claim NOTES.10 --worker <name>); task branch task/notes-10 in ArcNotes; ledger record ledger/tasks/notes-10.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Session undo (composite grouping, selection-restoring, coalescing boundaries, agent-edit attribution, remote-change rebase-never-retarget), document history, explicit checkpoints and trash-with-restore exist as four independently behaving mechanisms, none substituting for another.
 
@@ -298,7 +309,8 @@ Execute ArcForges delivery task NOTES.11 — Crash recovery and upgrade/downgrad
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-11 (python tools/delivery.py claim NOTES.11 --worker <name>); task branch task/notes-11 in ArcNotes; ledger record ledger/tasks/notes-11.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Kill-during-edit/migration and corrupted-tail recovery reach the last committed boundary with explicit loss reporting; migration from every prior schema version preserves semantics against golden fixtures; downgrade is defined (reverse migration or clean refusal).
 
@@ -326,7 +338,8 @@ Execute ArcForges delivery task NOTES.12 — ArcNotes capability surface registr
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-12 (python tools/delivery.py claim NOTES.12 --worker <name>); task branch task/notes-12 in ArcNotes; ledger record ledger/tasks/notes-12.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: ArcNotes registers query/read/create/edit/artifact-production capabilities each with risk level, side-effect class, reversibility and approval posture; owner-side validation refuses regardless of caller assertion.
 
@@ -354,7 +367,8 @@ Execute ArcForges delivery task NOTES.13 — ArcNotes reference-matrix drift che
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-13 (python tools/delivery.py claim NOTES.13 --worker <name>); task branch task/notes-13 in ArcNotes; ledger record ledger/tasks/notes-13.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: A drift report compares the bound AFFiNE (81df4751a3) and SiYuan (eef105683) commits against their current upstream state, assesses any newly introduced material against accepted ArcNotes scope, and re-verifies the AFFiNE licence split (packages/backend, packages/common/native remain proprietary).
 
@@ -380,7 +394,8 @@ Execute ArcForges delivery task NOTES.14 — Owned-artifact and real-integration
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-14 (python tools/delivery.py claim NOTES.14 --worker <name>); task branch task/notes-14 in ArcNotes; ledger record ledger/tasks/notes-14.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: Independent editor/store/recovery fixtures, helper isolation and content-origin/attachment checks are recorded against the real staged artifacts consumed at this point; the package is not signed off while any contract/owner/recovery rule still needs design during coding.
 
@@ -419,7 +434,8 @@ Execute ArcForges delivery task NOTES.15 — Local full-text index over hydrated
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-15 (python tools/delivery.py claim NOTES.15 --worker <name>); task branch task/notes-15 in ArcNotes; ledger record ledger/tasks/notes-15.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: An incremental FTS index over document/block content, properties, tags and attachment-extracted text follows the write path, never diverges after a crash, rebuilds fully from canonical data, and meets query latency budget on the scale corpus.
 
@@ -447,7 +463,8 @@ Execute ArcForges delivery task NOTES.16 — Query, ranking and permission over 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-16 (python tools/delivery.py claim NOTES.16 --worker <name>); task branch task/notes-16 in ArcNotes; ledger record ledger/tasks/notes-16.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Query supports text/property/tag/structural filters with explainable basic ranking; permission is applied during evaluation so a refused document never influences results or counts, including bounded notes.scalar.v1 predicates on the local hydrated path.
 
@@ -474,7 +491,8 @@ Execute ArcForges delivery task NOTES.17 — Citation anchors.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-17 (python tools/delivery.py claim NOTES.17 --worker <name>); task branch task/notes-17 in ArcNotes; ledger record ledger/tasks/notes-17.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: search_anchor rows (block_id, offset range, content_fingerprint) survive insert/delete/reorder/reparent edits where the cited content still exists, and report invalidity explicitly rather than drifting.
 
@@ -501,7 +519,8 @@ Execute ArcForges delivery task NOTES.18 — Saved views (list projection only).
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-18 (python tools/delivery.py claim NOTES.18 --worker <name>); task branch task/notes-18 in ArcNotes; ledger record ledger/tasks/notes-18.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A saved_view row (notebook scope, query profile, semantic-definition bindings, view revision) produces a list projection; deleting a view never deletes content; results always reflect current data. Full typed query/table delivery is explicitly NOT emulated here - it is WP-28 (NOTES.24/26).
 
@@ -530,7 +549,8 @@ Execute ArcForges delivery task NOTES.19 — Non-destructive Markdown/plain-text
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-19 (python tools/delivery.py claim NOTES.19 --worker <name>); task branch task/notes-19 in ArcNotes; ledger record ledger/tasks/notes-19.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Import from Markdown/plain-text sources (including an Obsidian-style vault layout) produces a reviewable import plan then a report of created/transformed/skipped items; the source is never modified; a partial failure leaves a coherent result and clear report.
 
@@ -559,7 +579,8 @@ Execute ArcForges delivery task NOTES.20 — Cloud Notes export client and its n
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-20 (python tools/delivery.py claim NOTES.20 --worker <name>); task branch task/notes-20 in ArcNotes; ledger record ledger/tasks/notes-20.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The Notes Cloud-export client builds a snapshot request over acknowledged revisions and validates the returned Markdown/attachments/metadata/fidelity-report shape against a named, registered fixture endpoint; the client itself is real and complete, only the server side is a fixture.
 
@@ -590,7 +611,8 @@ Execute ArcForges delivery task NOTES.21 — Repository-projection prohibition (
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-21 (python tools/delivery.py claim NOTES.21 --worker <name>); task branch task/notes-21 in ArcNotes; ledger record ledger/tasks/notes-21.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: A dependency-policy test fails the build on any Git or LFS client package reference from any ArcNotes project; a structural test asserts no type implements or is named as a projection writer; the exclusion is explained in the product UI rather than merely absent.
 
@@ -616,7 +638,8 @@ Execute ArcForges delivery task NOTES.22 — Owned-artifact and real-integration
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-22 (python tools/delivery.py claim NOTES.22 --worker <name>); task branch task/notes-22 in ArcNotes; ledger record ledger/tasks/notes-22.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: Independent import/search/export and missing-resource outcomes are recorded; public value profiles and owner authorization remain compatible; no Git mirror, DOCX or newly invented export suite exists.
 
@@ -647,7 +670,8 @@ Execute ArcForges delivery task NOTES.23 — Typed property schemas: full bounde
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-23 (python tools/delivery.py claim NOTES.23 --worker <name>); task branch task/notes-23 in ArcNotes; ledger record ledger/tasks/notes-23.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Property definitions cover text, number, date, dateTime, single-select, multi-select, checkbox, URL with exact notes.scalar.v1 encodings; relation and derived are structurally excluded (no join engine, no formula evaluator); a full lifecycle (create/rename/type-change-with-preview/delete) is enforced with no silent data loss.
 
@@ -675,7 +699,8 @@ Execute ArcForges delivery task NOTES.24 — Query model: local evaluator and no
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-24 (python tools/delivery.py claim NOTES.24 --worker <name>); task branch task/notes-24 in ArcNotes; ledger record ledger/tasks/notes-24.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: A local query evaluator over properties/tags/links/content/structure implements notes.scalar.v1 exactly (operators, missing/isMissing/isPresent semantics, AST bounds, stable sort with DocumentId tiebreak, dataset-token pagination) with permission applied during evaluation and stability under concurrent mutation, proven against a committed fixture-vector suite usable by both native and Cloud evaluators.
 
@@ -705,7 +730,8 @@ Execute ArcForges delivery task NOTES.26 — View kinds: list and table projecti
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-26 (python tools/delivery.py claim NOTES.26 --worker <name>); task branch task/notes-26 in ArcNotes; ledger record ledger/tasks/notes-26.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Table and list views project the same NOTES.24 query with identical ordering (missing last, ascending DocumentId tiebreak); switching kinds preserves the query; deleting a view destroys no content. Board/gallery/calendar/timeline are structurally absent, not merely unimplemented.
 
@@ -733,7 +759,8 @@ Execute ArcForges delivery task NOTES.27 — Editing through a view.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-27).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-27 (python tools/delivery.py claim NOTES.27 --worker <name>); task branch task/notes-27 in ArcNotes; ledger record ledger/tasks/notes-27.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Property values are editable directly in a view, going through the same EditTransaction write path (SetProperty) as document editing, with full validation and permission - never a shortcut.
 
@@ -759,7 +786,8 @@ Execute ArcForges delivery task NOTES.28 — Lightness preservation for plain no
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-28).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-28 (python tools/delivery.py claim NOTES.28 --worker <name>); task branch task/notes-28 in ArcNotes; ledger record ledger/tasks/notes-28.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: A plain note with no properties carries no property panel, no schema, no measurable performance cost; the property system is opt-in per document and per collection.
 
@@ -784,7 +812,8 @@ Execute ArcForges delivery task NOTES.29 — Supported-schema migration for prop
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-29).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-29 (python tools/delivery.py claim NOTES.29 --worker <name>); task branch task/notes-29 in ArcNotes; ledger record ledger/tasks/notes-29.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Every actually-shipped scalar-property/list/table schema version upgrades preserving stable IDs and additive unknown fields, with no canvas-era or invented historical fixture.
 
@@ -813,7 +842,8 @@ Execute ArcForges delivery task NOTES.30 — Cloud export fidelity for property/
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-30).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-30 (python tools/delivery.py claim NOTES.30 --worker <name>); task branch task/notes-30 in ArcNotes; ledger record ledger/tasks/notes-30.md.
 Kind/size: feature/S. Baseline: not-started.
 Outcome: The Cloud export manifest built by NOTES.20 additionally declares property/view metadata with an accurate fidelity report, verified against the real WP-25.08 export producer (not a mock).
 
@@ -842,7 +872,8 @@ Execute ArcForges delivery task NOTES.31 — Scale: large collections, many prop
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-31).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-31 (python tools/delivery.py claim NOTES.31 --worker <name>); task branch task/notes-31 in ArcNotes; ledger record ledger/tasks/notes-31.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Every view kind meets responsiveness and memory budgets on the scale corpus through virtualisation and indexing; a soak test on a large view holds memory within the product ceiling.
 
@@ -868,7 +899,8 @@ Execute ArcForges delivery task NOTES.32 — Owned-artifact and real-integration
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-32).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/notes-32 (python tools/delivery.py claim NOTES.32 --worker <name>); task branch task/notes-32 in ArcNotes; ledger record ledger/tasks/notes-32.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: Independent local/Cloud query vectors, null/missing/invalid values, sorting/tie-breaks and snapshot pagination are recorded; the producer edge to WP-40 is kept (WP-28 provides for WP-40, never blocks on it).
 
@@ -903,7 +935,8 @@ Execute ArcForges delivery task NOTES.33 — Real Cloud Notes export join replac
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-33).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes). Also touches: Cloud.
+Claim and handoff record: claims/notes-33 (python tools/delivery.py claim NOTES.33 --worker <name>); task branch task/notes-33 in ArcNotes; ledger record ledger/tasks/notes-33.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Real host/database/object-store Notes export across concurrent edits, notebook moves, deleted attachments, quota limits, expiry, restart, cancellation and paid-term end; structural removal of the runtime fixture registration NOTES.20 created
 
@@ -931,7 +964,8 @@ Execute ArcForges delivery task NOTES.34 — Cross-evaluator conformance of note
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-34).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes). Also touches: Cloud.
+Claim and handoff record: claims/notes-34 (python tools/delivery.py claim NOTES.34 --worker <name>); task branch task/notes-34 in ArcNotes; ledger record ledger/tasks/notes-34.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Identical operator, ordering and pagination semantics between ArcNotes' local evaluator (NOTES.24) and Cloud's D1-backed evaluator, on the same authorized, fully hydrated revision set, per the arcnotes.md S7.1 acceptance vectors
 
@@ -958,7 +992,8 @@ Execute ArcForges delivery task NOTES.35 — ArcNotes participates in the three-
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-35).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes). Also touches: Cloud.
+Claim and handoff record: claims/notes-35 (python tools/delivery.py claim NOTES.35 --worker <name>); task branch task/notes-35 in ArcNotes; ledger record ledger/tasks/notes-35.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: ArcNotes documents/blocks/attachments/deletions converge to verifiably identical state across three devices under concurrent editing, an extended offline device, and a mid-sync crash
 
@@ -993,7 +1028,8 @@ Execute ArcForges delivery task NOTES.37 — ArcNotes PDF attachment viewer agai
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcnotes.md (anchor task-notes-37).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner). Also touches: DesktopPlatform.
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes). Also touches: DesktopPlatform.
+Claim and handoff record: claims/notes-37 (python tools/delivery.py claim NOTES.37 --worker <name>); task branch task/notes-37 in ArcNotes; ledger record ledger/tasks/notes-37.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: the full PG-12 gate: a malformed/hostile PDF opened through ArcNotes' attachment viewer cannot crash or compromise the parent product, and licence/provenance evidence for the PDF dependency closure is complete.
 

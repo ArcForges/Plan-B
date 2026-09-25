@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Application composition
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Application composition
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task APP.01 — Assistant.Abstractions host ports and
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/app-01 (python tools/delivery.py claim APP.01 --worker <name>); task branch task/app-01 in DesktopPlatform; ledger record ledger/tasks/app-01.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Assistant.Abstractions published with IHostContext/IHostActions/IHostResources/IHostNavigation/IHostLifecycle/IHostPlatformServices, product/profile identity and lifetime; two independent application identities cannot share stores/registration.
 
@@ -40,7 +42,8 @@ Execute ArcForges delivery task APP.02 — Minimal ArcNotes application services
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/app-02 (python tools/delivery.py claim APP.02 --worker <name>); task branch task/app-02 in ArcNotes; ledger record ledger/tasks/app-02.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Real read/create/append document commands through typed application handlers and local persistence, with descriptor/risk/context validation and one write path shared by UI and own-app capability invocation. Professional document completion remains WP18.
 
@@ -68,7 +71,8 @@ Execute ArcForges delivery task APP.03 — Clean Native AOT package-consumer com
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/app-03 (python tools/delivery.py claim APP.03 --worker <name>); task branch task/app-03 in ArcNotes; ledger record ledger/tasks/app-03.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: A clean Native AOT ArcNotes consumer built purely from published Platform/Contracts packages and in-process typed host ports; no source reference or local-RPC product loop. Package-only restore, publish/run, command/cancel/result and owner refusal proven.
 
@@ -97,7 +101,8 @@ Execute ArcForges delivery task APP.04 — Idempotency and revision against the 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/app-04 (python tools/delivery.py claim APP.04 --worker <name>); task branch task/app-04 in DesktopPlatform; ledger record ledger/tasks/app-04.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Command receipt and expected local revision exercised against the real store; draft/conflict behavior and unknown-outcome classification preserved under duplicate command, stale revision and process-kill-around-commit.
 
@@ -125,7 +130,8 @@ Execute ArcForges delivery task APP.05 — Approval at the owner.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/app-05 (python tools/delivery.py claim APP.05 --worker <name>); task branch task/app-05 in DesktopPlatform; ledger record ledger/tasks/app-05.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Expiry/modified-input/revocation cannot bypass owner checks.
 
@@ -152,7 +158,8 @@ Execute ArcForges delivery task APP.06 — Context and artifact integration.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/app-06 (python tools/delivery.py claim APP.06 --worker <name>); task branch task/app-06 in DesktopPlatform; ledger record ledger/tasks/app-06.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Own-app resource references frozen at selection time, preview opened through the product port, egress enforced separately, provenance preserved. Selection changes after freeze, missing resource, denied export and bounded artifact all handled.
 
@@ -181,7 +188,8 @@ Execute ArcForges delivery task APP.07 — Independent lifecycle.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/app-07 (python tools/delivery.py claim APP.07 --worker <name>); task branch task/app-07 in DesktopPlatform; ledger record ledger/tasks/app-07.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Launch/save works with Cloud unavailable and the assistant view closed; views dispose independently from services; two windows with different drafts and independent app crash lose no canonical data.
 
@@ -207,7 +215,8 @@ Execute ArcForges delivery task APP.08 — Owned-artifact receipt and UX accepta
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\app-composition.md (anchor task-app-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/app-08 (python tools/delivery.py claim APP.08 --worker <name>); task branch task/app-08 in DesktopPlatform; ledger record ledger/tasks/app-08.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: WP14 built/packed once from a clean environment; all applicable UX acceptance groups recorded; package/contract/owner/version compatibility and failure/recovery evidence attached; no later-provider fixture used to close a real WP14 gate.
 

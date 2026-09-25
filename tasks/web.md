@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Web
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Web
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task WEB.01 — React static generation and determini
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-01 (python tools/delivery.py claim WEB.01 --worker <name>); task branch task/web-01 in Web; ledger record ledger/tasks/web-01.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: React Router build-time pre-rendering (SSR disabled) generates the full public locale/URL inventory, documentation versions, sitemap, metadata and redirects, deterministically, with no Account/Chat route bundle or private config leaking into the static output.
 
@@ -38,7 +40,8 @@ Execute ArcForges delivery task WEB.02 — Versioned public content and pricing 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-02 (python tools/delivery.py claim WEB.02 --worker <name>); task branch task/web-02 in Web; ledger record ledger/tasks/web-02.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Catalogue, release metadata, changelog and legal versions are consumed from declared versioned local inputs with no live provider fetch during build; the pricing projection shows its effective version/time.
 
@@ -64,7 +67,8 @@ Execute ArcForges delivery task WEB.03 — Rendering and performance.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-03 (python tools/delivery.py claim WEB.03 --worker <name>); task branch task/web-03 in Web; ledger record ledger/tasks/web-03.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Above-the-fold content ships in delivered HTML, assets are content-hashed with short-lived HTML caching, no blocked third-party resource sits on the critical path, and p75 LCP/INP/CLS budgets are met.
 
@@ -90,7 +94,8 @@ Execute ArcForges delivery task WEB.04 — Internationalisation.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-04 (python tools/delivery.py claim WEB.04 --worker <name>); task branch task/web-04 in Web; ledger record ledger/tasks/web-04.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Locale-scoped URLs with alternate-language annotations, no client-only switching and no trapping redirect; every user-visible string, including generated pages, is localisable.
 
@@ -115,7 +120,8 @@ Execute ArcForges delivery task WEB.05 — Documentation, downloads and legal su
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-05 (python tools/delivery.py claim WEB.05 --worker <name>); task branch task/web-05 in Web; ledger record ledger/tasks/web-05.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Versioned per-product documentation, a no-account-gate download surface serving signed artifacts with published hashes, an update feed surface, and versioned legal pages with effective dates.
 
@@ -141,7 +147,8 @@ Execute ArcForges delivery task WEB.06 — Accessibility and analytics.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-06 (python tools/delivery.py claim WEB.06 --worker <name>); task branch task/web-06 in Web; ledger record ledger/tasks/web-06.md.
 Kind/size: feature/S. Baseline: not-started.
 Outcome: Accessibility semantics and keyboard-only navigation on every page; minimal privacy-preserving analytics with no cross-site identifier and no consent wall.
 
@@ -166,7 +173,8 @@ Execute ArcForges delivery task WEB.07 — Independence and atomic deployment.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-07 (python tools/delivery.py claim WEB.07 --worker <name>); task branch task/web-07 in Web; ledger record ledger/tasks/web-07.md.
 Kind/size: release/S. Baseline: not-started.
 Outcome: The site remains fully available during a full Cloud outage, deploys atomically per surface from a promoted artifact, and rollback restores the previous artifact set.
 
@@ -192,7 +200,8 @@ Execute ArcForges delivery task WEB.08 — Owned consumer design system (package
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-08 (python tools/delivery.py claim WEB.08 --worker <name>); task branch task/web-08 in Web; ledger record ledger/tasks/web-08.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: packages/ui grows from a placeholder Shell/Button into a full design-token system (typography, spacing, color, themes), owned accessible primitives, a test-only component catalogue, approved visual baselines and reusable account/usage/chat primitives, with localization/long-label/mobile-nav/focus/reduced-motion/loading-error-empty variants.
 
@@ -219,7 +228,8 @@ Execute ArcForges delivery task WEB.09 — Verify the owned Site artifact and re
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-09 (python tools/delivery.py claim WEB.09 --worker <name>); task branch task/web-09 in Web; ledger record ledger/tasks/web-09.md.
 Kind/size: integration/S. Baseline: not-started.
 Outcome: The React-generated static Site with localization/SEO and no production Node server is verified end to end; independently published product/version/download metadata is consumed through the fixed release contract, with pending later owners and their closing gates recorded.
 
@@ -252,7 +262,8 @@ Execute ArcForges delivery task WEB.10 — Account shell: route graph, deploymen
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-10 (python tools/delivery.py claim WEB.10 --worker <name>); task branch task/web-10 in Web; ledger record ledger/tasks/web-10.md.
 Kind/size: producer/XL. Baseline: not-started.
 Outcome: The apps/app workspace member is created with the account deployment profile: route graph/shell composed from packages/ui + generated TS SDK + TanStack Query, Android callback/assetlinks wiring, responsive overview/navigation, safe public runtime config, error boundaries, and loading/empty/pending/expired states with cache-clear-and-abort on user/workspace change.
 
@@ -279,7 +290,8 @@ Execute ArcForges delivery task WEB.11 — Real browser session and step-up acce
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-11 (python tools/delivery.py claim WEB.11 --worker <name>); task branch task/web-11 in Web; ledger record ledger/tasks/web-11.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Passkey/email verification/recovery, live opaque cookie session, server-controlled expiry/revocation and sensitive-action step-up work on the real account origin topology; no bearer/refresh token ever enters the app.
 
@@ -305,7 +317,8 @@ Execute ArcForges delivery task WEB.12 — Account and security surfaces.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-12 (python tools/delivery.py claim WEB.12 --worker <name>); task branch task/web-12 in Web; ledger record ledger/tasks/web-12.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Profile, authentication methods, passkey management, sessions, device list with trust/revocation, recovery configuration and the security-event view are complete, with step-up required on every sensitive action.
 
@@ -330,7 +343,8 @@ Execute ArcForges delivery task WEB.13 — Workspace, storage and usage.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-13 (python tools/delivery.py claim WEB.13 --worker <name>); task branch task/web-13 in Web; ledger record ledger/tasks/web-13.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Single-owner workspace settings (no membership/invitation/role/seat surface), service-term/included-capacity display with recovery timing and extra-credit opt-in, storage from committed objects, usage-against-quota with visible reset boundaries, and data-health visibility.
 
@@ -356,7 +370,8 @@ Execute ArcForges delivery task WEB.14 — Subscription, capacity, credits and h
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-14 (python tools/delivery.py claim WEB.14 --worker <name>); task branch task/web-14 in Web; ledger record ledger/tasks/web-14.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Consumer subscription/management views use public server projections and generated operations; paid-term state, replenishing capacity and purchased credits display separately; hosted checkout opens in-browser and shows confirming until verified Cloud state changes; no client/provider redirect grants entitlement.
 
@@ -383,7 +398,8 @@ Execute ArcForges delivery task WEB.15 — Data export and deletion.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-15 (python tools/delivery.py claim WEB.15 --worker <name>); task branch task/web-15 in Web; ledger record ledger/tasks/web-15.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Export requests show progress and download; deletion requests show a grace period and an explicit, accurate statement of what is and is not deleted, including that local data is untouched.
 
@@ -409,7 +425,8 @@ Execute ArcForges delivery task WEB.16 — Origin security and performance (acco
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-16 (python tools/delivery.py claim WEB.16 --worker <name>); task branch task/web-16 in Web; ledger record ledger/tasks/web-16.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A strict CSP with no default inline script, per-origin cookie/CORS/CSRF posture, no secret in the bundle, sandboxed preview of user content, and bundle-size/first-interactive budgets with regression gates.
 
@@ -435,7 +452,8 @@ Execute ArcForges delivery task WEB.17 — Offline, degradation and accessibilit
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-17 (python tools/delivery.py claim WEB.17 --worker <name>); task branch task/web-17 in Web; ledger record ledger/tasks/web-17.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Honest offline behaviour preserving unsent input, a cloud-outage state naming unavailable capabilities with reasons rather than blanking, and full keyboard-only accessibility on every major workflow.
 
@@ -463,7 +481,8 @@ Execute ArcForges delivery task WEB.18 — Verify the owned Account artifact and
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-18 (python tools/delivery.py claim WEB.18 --worker <name>); task branch task/web-18 in Web; ledger record ledger/tasks/web-18.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Real browser evidence against the AOT release closes cookie secrecy, CSRF, expiry/revocation, privacy/export and admission/usage display; the account deployment profile is the sole account application with no AGPL import into Mobile.
 
@@ -497,7 +516,8 @@ Execute ArcForges delivery task WEB.19 — Chat shell: route composition and des
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-19 (python tools/delivery.py claim WEB.19 --worker <name>); task branch task/web-19 in Web; ledger record ledger/tasks/web-19.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Chat routes are composed in the same ArcForges.Web.App codebase using owned UI tokens/components and the generated TS SDK; Account/Chat assets, cookies, query scopes and public config are independently selected and validated; responsive conversation navigation/composer/task panel and native-product handoff work with keyboard/reduced-motion support.
 
@@ -524,7 +544,8 @@ Execute ArcForges delivery task WEB.20 — Conversation and generated output str
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-20 (python tools/delivery.py claim WEB.20 --worker <name>); task branch task/web-20 in Web; ledger record ledger/tasks/web-20.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The full Chat UI uses annex-10 gRPC-Web binary output/event streams with durable recovery; Cloud history is authoritative except memory-only temporary UI; an interrupted stream is always shown as interrupted, never complete.
 
@@ -550,7 +571,8 @@ Execute ArcForges delivery task WEB.21 — Tasks, approval and steering.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-21 (python tools/delivery.py claim WEB.21 --worker <name>); task branch task/web-21 in Web; ledger record ledger/tasks/web-21.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Task/run/step/tool-call surfaces with progress; approve/reject/cancel/pause/retry/steer as idempotent commands; local-presence-required operations are clearly refused with an explanation; no missed notification loses a pending approval.
 
@@ -576,7 +598,8 @@ Execute ArcForges delivery task WEB.22 — Artifacts and sandboxing.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-22 (python tools/delivery.py claim WEB.22 --worker <name>); task branch task/web-22 in Web; ledger record ledger/tasks/web-22.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Artifact preview runs inside an isolated sandbox so untrusted content never executes in the application origin; downloads verify permission at access; no public share links exist in V1.
 
@@ -602,7 +625,8 @@ Execute ArcForges delivery task WEB.23 — One-application remote control.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-23 (python tools/delivery.py claim WEB.23 --worker <name>); task branch task/web-23 in Web; ledger record ledger/tasks/web-23.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Device applications are listed, an explicit authorized product/installation is selected and frozen per task target; no browser local connection, another-product tool or local-only desktop chat access exists; an offline target shows an honest queued state with expiry.
 
@@ -627,7 +651,8 @@ Execute ArcForges delivery task WEB.24 — Offline, degradation and accessibilit
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-24 (python tools/delivery.py claim WEB.24 --worker <name>); task branch task/web-24 in Web; ledger record ledger/tasks/web-24.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Honest offline messaging preserving unsent input; realtime loss degrades to polling with backfill; a cloud outage reports unavailable capabilities rather than blanking; every core workflow completes by keyboard.
 
@@ -655,7 +680,8 @@ Execute ArcForges delivery task WEB.25 — Performance budgets (chat).
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-25 (python tools/delivery.py claim WEB.25 --worker <name>); task branch task/web-25 in Web; ledger record ledger/tasks/web-25.md.
 Kind/size: feature/S. Baseline: not-started.
 Outcome: Bundle size, first-interactive and interaction-responsiveness budgets are measured per release candidate with a regression gate that catches a deliberate regression.
 
@@ -681,7 +707,8 @@ Execute ArcForges delivery task WEB.26 — Verify the owned Chat artifact and re
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-26 (python tools/delivery.py claim WEB.26 --worker <name>); task branch task/web-26 in Web; ledger record ledger/tasks/web-26.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: A full real admitted CF turn/tool/approval/reconnect sequence is exercised in a browser using the fixed same-origin session and generated AI gRPC-Web route; a blocked/expired live stream reconciles to the authoritative result without leaking session credentials.
 
@@ -712,7 +739,8 @@ Execute ArcForges delivery task WEB.27 — Real CF Harness generation/tool loop 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-27).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-27 (python tools/delivery.py claim WEB.27 --worker <name>); task branch task/web-27 in Web; ledger record ledger/tasks/web-27.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: real admitted generation and tool proposal replace the contract-bound fixture turn endpoint in Chat
 
@@ -741,7 +769,8 @@ Execute ArcForges delivery task WEB.28 — Real desktop tool dispatch from the b
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-28).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-28 (python tools/delivery.py claim WEB.28 --worker <name>); task branch task/web-28 in Web; ledger record ledger/tasks/web-28.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: a browser-initiated remote task actually reaches a desktop through the durable bridge
 
@@ -773,7 +802,8 @@ Execute ArcForges delivery task WEB.29 — Real commerce/policy provider evidenc
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-29).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/web-29 (python tools/delivery.py claim WEB.29 --worker <name>); task branch task/web-29 in Web; ledger record ledger/tasks/web-29.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: hosted checkout, entitlement reasons and rate-limit/recovery text reflect a real test-mode ledger and policy service, not contract fixtures
 
@@ -800,7 +830,8 @@ Execute ArcForges delivery task WEB.30 — Real React Web client against deploye
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-30).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web). Also touches: Cloud.
+Claim and handoff record: claims/web-30 (python tools/delivery.py claim WEB.30 --worker <name>); task branch task/web-30 in Web; ledger record ledger/tasks/web-30.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Real TS gRPC-Web client, cookie/CSRF/Origin session behavior and realtime streams against the deployed Cloud, beyond MSW fixtures
 
@@ -831,7 +862,8 @@ Execute ArcForges delivery task WEB.31 — Full browser-support.v1 matrix across
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\web.md (anchor task-web-31).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web). Also touches: Cloud.
+Claim and handoff record: claims/web-31 (python tools/delivery.py claim WEB.31 --worker <name>); task branch task/web-31 in Web; ledger record ledger/tasks/web-31.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Supported/degraded/blocked behavior across every output's flows on real browser/OS patches; WP-50 joins all production hashes and real browser evidence
 

@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Application presence and tool bridge
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Application presence and tool bridge
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task DEV.01 — Application presence (ApplicationServ
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-01 (python tools/delivery.py claim DEV.01 --worker <name>); task branch task/dev-01 in Cloud; ledger record ledger/tasks/dev-01.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: ApplicationService.List/Heartbeat/Disconnect implemented with DO projection of D1 installation authority; separate app rows per device; 30s expiry/10s renewal, restarted epoch, app-offline-without-device-wide-false-availability proven.
 
@@ -40,7 +42,8 @@ Execute ArcForges delivery task DEV.02 — Durable target queue.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-02 (python tools/delivery.py claim DEV.02 --worker <name>); task branch task/dev-02 in Cloud; ledger record ledger/tasks/dev-02.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: ToolRequest freezes product/device/installation and current instance epoch; commands/receipts remain in D1. Another application cannot claim; duplicate/lost ack/expiry and per-owner budget proven.
 
@@ -67,7 +70,8 @@ Execute ArcForges delivery task DEV.03 — Owner reauthorization (Device.Runtime
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/dev-03 (python tools/delivery.py claim DEV.03 --worker <name>); task branch task/dev-03 in DesktopPlatform; ledger record ledger/tasks/dev-03.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Device.Runtime invokes registered typed in-process product handlers after current grant/resource/revision/egress checks; no local product RPC, shared database or delegation through a shared integration owner.
 
@@ -94,7 +98,8 @@ Execute ArcForges delivery task DEV.04 — Execution and result deduplication --
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-04 (python tools/delivery.py claim DEV.04 --worker <name>); task branch task/dev-04 in Cloud; ledger record ledger/tasks/dev-04.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Bridge request/result persisted in D1 using full ApplicationTarget and (toolRequestId,attemptId,commandId) plus result hash; multiple tool requests per attempt both persist; identical replay returns its own receipt; changed result hash refuses; stale epoch and cross-application delivery rejected.
 
@@ -123,7 +128,8 @@ Execute ArcForges delivery task DEV.05 — Execution and result deduplication --
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/dev-05 (python tools/delivery.py claim DEV.05 --worker <name>); task branch task/dev-05 in DesktopPlatform; ledger record ledger/tasks/dev-05.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Owner handler's normal in-process validation records the same (toolRequestId,attemptId,commandId) plus result hash into a local command_log; agrees with the Cloud attempt row (BI-03); duplicate delivery and uncertain external effect handled locally.
 
@@ -152,7 +158,8 @@ Execute ArcForges delivery task DEV.06 — Remote approval and steering.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-06 (python tools/delivery.py claim DEV.06 --worker <name>); task branch task/dev-06 in Cloud; ledger record ledger/tasks/dev-06.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: One-target approvals, sensitive local-presence requirements and ordinary steering bounds preserved; mobile biometric cannot substitute for target presence; stale approval fails.
 
@@ -180,7 +187,8 @@ Execute ArcForges delivery task DEV.07 — Offline expiry and recovery.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-07 (python tools/delivery.py claim DEV.07 --worker <name>); task branch task/dev-07 in Cloud; ledger record ledger/tasks/dev-07.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Explicit offline queue expiry/reconciliation; changing the selected app cannot retarget queued work. Disconnect/revoke/reinstall proven with no silent alternate product/device selection.
 
@@ -206,7 +214,8 @@ Execute ArcForges delivery task DEV.08 — Frozen application locality.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-08 (python tools/delivery.py claim DEV.08 --worker <name>); task branch task/dev-08 in Cloud; ledger record ledger/tasks/dev-08.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Cloud-only steps may run without a desktop; every device step in one execution remains in the frozen product scope. Own-app multi-tool workflow passes; cross-product capability absent/future.
 
@@ -232,7 +241,8 @@ Execute ArcForges delivery task DEV.09 — Owned-artifact receipt and real integ
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-09 (python tools/delivery.py claim DEV.09 --worker <name>); task branch task/dev-09 in Cloud; ledger record ledger/tasks/dev-09.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: WP26 built/packed once from a clean environment across both repositories; all applicable UX acceptance groups recorded; failure/recovery and the real boundaries above proven; no later-provider fixture closes a real WP26 gate.
 
@@ -265,7 +275,8 @@ Execute ArcForges delivery task DEV.12 — Cross-repo (toolRequestId,attemptId,c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-12 (python tools/delivery.py claim DEV.12 --worker <name>); task branch task/dev-12 in Cloud; ledger record ledger/tasks/dev-12.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: BI-03: the Cloud attempt row and the desktop command_log genuinely agree under concurrent/duplicate/lost-ack delivery, not just each side's own unit tests
 
@@ -291,7 +302,8 @@ Execute ArcForges delivery task DEV.13 — Real Harness-planned tool request flo
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/dev-13 (python tools/delivery.py claim DEV.13 --worker <name>); task branch task/dev-13 in Cloud; ledger record ledger/tasks/dev-13.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: an actual Cloud-planned Agent Task step (not a scripted ToolRequest) reaches a real desktop, is locally re-authorized, executed and its result accepted -- the real integration producer-artifacts.md names as closing WP26's remaining fixture-content gap
 
@@ -323,7 +335,8 @@ Execute ArcForges delivery task DEV.14 — Real device tool bridge over the depl
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\device-bridge.md (anchor task-dev-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform). Also touches: Cloud.
+Claim and handoff record: claims/dev-14 (python tools/delivery.py claim DEV.14 --worker <name>); task branch task/dev-14 in DesktopPlatform; ledger record ledger/tasks/dev-14.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: The device tool path (pull, local re-authorisation, generated decode, typed invocation, idempotent result) works over the real deployed stream transport -- this is explicitly must-be-real-early per implementation-sequence §3, owned jointly with the assistant lanes WP-26
 

@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Cloud Harness
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Cloud Harness
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task HAR.00 — Turn loop, tool batching and bounds (
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-00).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/har-00 (python tools/delivery.py claim HAR.00 --worker <name>); task branch task/har-00 in AI; ledger record ledger/tasks/har-00.md.
 Kind/size: service/XL. Baseline: not-started.
 Outcome: The sole RunWorkflow implements deterministic Workflow identity with C# claim/epoch/generation and actual deployed Worker version; iteration/context references and model/tool dispatch intent persist before effects; immutable outcome receipts persist before continuation; model/tool/parallel/progress/time/step budgets and declared conflict sets are enforced, with a 60-second execution lease renewed every 20 seconds during long awaits.
 
@@ -28,7 +30,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] AIR.00: a dispatchable model/tool call target
 
 Permitted write scope: AI:src/workflows/RunWorkflow.ts; Cloud:src/Cloud/ArcForges.Cloud.Modules.Task/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
 Permitted substitutes (never real integration evidence): SUB-provider-response-fixture: turn-loop/dispatch-intent/budget/conflict-set state-machine correctness under scripted responses Real producer ['AIR.00']; removed by HAR.05; SUB-same-app-fixture-tool: tool-batching, conflict-set enforcement and parallel-limit mechanics Real producer ['AST.11']; removed by HAR.05
 Unblocks: AND.24, AST.19, CLOUD.67, HAR.01, HAR.02, HAR.03, HAR.04, HAR.05, HAR.06, WEB.27
 
@@ -42,7 +44,8 @@ Execute ArcForges delivery task HAR.01 — Context assembly and compaction.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/har-01 (python tools/delivery.py claim HAR.01 --worker <name>); task branch task/har-01 in AI; ledger record ledger/tasks/har-01.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Context assembles through authorized C# ports in a fixed order, pages under one snapshot hash, and retains immutable source pins/content origins; invocable capabilities are filtered before model declaration with budget truncation disclosed; compaction refs are stored derived; source/revision and active grant are revalidated before mutation.
 
@@ -57,7 +60,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] SRCH.00: a retrieval/context source to pull from (fixture-backed lexical-only path is sufficient at start)
 
 Permitted write scope: AI:src/workflows/context.ts; Cloud:src/Cloud/ArcForges.Cloud.Modules.Task/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.
 Unblocks: HAR.05
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Large-context paging, permission loss, stale source, prior-compaction-version, unsupported-capability tests; no raw prompts in Workflow checkpoints; all four model-05 context vectors (under budget, compaction, protected overflow, changed branch) plus wrong role/tool-pair, hash and origin-installation negatives; HC-09 refusal and no-customer-debit-for-compaction assertions; both inline and transient-object input.
@@ -69,7 +72,8 @@ Execute ArcForges delivery task HAR.02 — Approval, cancellation and crash reco
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/har-02 (python tools/delivery.py claim HAR.02 --worker <name>); task branch task/har-02 in AI; ledger record ledger/tasks/har-02.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Approval waiting is bounded (selected wait/reconcile steps, seven-day bound) with reauthorization on resume; explicit cancel/pause/steer controls and C# reconciliation exist; wait/cancel/recovery always yields one canonical outcome or an explicit unknownEffect via the intent-to-owner/provider-evidence-to-deadline-to-user-decision ladder; a UI session closing never cancels a durable Task.
 
@@ -84,7 +88,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] COM.12: the real admission/commit-before-dispatch port
 
 Permitted write scope: AI:src/workflows/approval.ts; Cloud:src/Cloud/ArcForges.Cloud.Modules.Task/Approvals/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
 Unblocks: CLOUD.67, DEV.13, HAR.05
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Restart Workflow/Cloud during wait/model/tool, missed wake event, expired/stale proposal, cancel race, generation rotation, late evidence tests.
@@ -96,7 +100,8 @@ Execute ArcForges delivery task HAR.03 — Generated streaming and durable outpu
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/har-03 (python tools/delivery.py claim HAR.03 --worker <name>); task branch task/har-03 in AI; ledger record ledger/tasks/har-03.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: execution.readOutput/watchOutput, transient-turn admission/ack/purge and DO projections work per annex 10/model 05; Cloud histories commit canonically while local histories recover verified transient output without a Cloud Chat body; a stream projection never becomes message authority or determines Task state.
 
@@ -112,7 +117,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] AST.15: local history recovery of transient output on the client bridge
 
 Permitted write scope: AI:src/streams/RunStream.ts
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.
 Unblocks: AND.24, AST.19, CLOUD.67, HAR.05, WEB.27
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Scope/permission, wrong/stale target, loss/retry, expiry and applicable native UI cases; cross-replica read, miss-is-not-eviction, takeover, realtime-disabled equivalence, buffer-lifecycle tests; the same four model-05 context vectors and HC-09/no-debit assertions as HAR.01 (shared testing-requirement text in the WP).
@@ -124,7 +129,8 @@ Execute ArcForges delivery task HAR.04 — Provider failure and effect-certainty
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/har-04 (python tools/delivery.py claim HAR.04 --worker <name>); task branch task/har-04 in Cloud; ledger record ledger/tasks/har-04.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Failure classification keys on whether dispatch occurred, never on whether bytes returned; the unknown path releases customer holds at the reconciliation deadline while retaining supplier liability; no failure path silently resolves unknown to didNotHappen, and no dispatched request is retried automatically.
 
@@ -139,7 +145,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Modules.Task/EffectCertainty/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
 Unblocks: HAR.05, HAR.06, OPS.03
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Timeout-before-first-token asserting unknown-not-retry; lost response reconciled against the provider's own record; platform-caused retry charged once and fully visible in supplier cost; deadline-expiry releasing customer hold while retaining supplier liability.
@@ -151,7 +157,8 @@ Execute ArcForges delivery task HAR.05 — Own-application execution proof and f
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/har-05 (python tools/delivery.py claim HAR.05 --worker <name>); task branch task/har-05 in AI; ledger record ledger/tasks/har-05.md.
 Kind/size: integration/XL. Baseline: not-started.
 Outcome: Two end-to-end oracles pass: the ArcNotes embedded assistant processes its own selected document plus local/cloud history, and Android/Web explicitly target an authorized ArcNotes installation for an approved Notes command -- covering typed transcript/compaction, promotion/export, binary streams and offline recovery. The WP-17.01 fixture turn endpoint is structurally proven absent from the codebase.
 
@@ -179,7 +186,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: AI:src/workflows/RunWorkflow.ts; AI:tests/Cloud.Tests.Integration/OwnApp/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.
 Unblocks: HAR.90
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Protected-context overflow, stale summary/branch, large transient object, forged tool history, interrupted output/final hash, lost ack, app restart, revoke/epoch change, refused cross-product target -- real device/AOT binary tests run locally/affected-scope per P2-017 (no desktop GUI or device CI), not as a hosted CI job.
@@ -192,7 +199,8 @@ Execute ArcForges delivery task HAR.06 — Durable Cloud automation, scheduling 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/har-06 (python tools/delivery.py claim HAR.06 --worker <name>); task branch task/har-06 in Cloud; ledger record ledger/tasks/har-06.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Automation definition/version, trigger schedule/event cursor, occurrence dedup and grant/budget snapshot live in C# Task-owned tables; bounded leased jobs dispatch the same RunWorkflow identity through the existing outbox; disabled/revoked automation stops future occurrences; the labelled WP-17 automation fixture is removed.
 
@@ -210,7 +218,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] AND.24: Android companion switched to real automation occurrences
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Modules.Task/Automation/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
 Permitted substitutes (never real integration evidence): SUB-automation-fixture: client rendering of schedule/timezone/target/budget and action availability, offline-draft handling only Real producer ['HAR.06']; removed by HAR.06
 Unblocks: AST.20, HAR.90, HAR.91
 
@@ -224,7 +232,8 @@ Execute ArcForges delivery task HAR.90 — Verify owned artifact and real integr
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-90).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/har-90 (python tools/delivery.py claim HAR.90 --worker <name>); task branch task/har-90 in AI; ledger record ledger/tasks/har-90.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The specified Worker/Workflow/DO roles are implemented and verified together; context, model/tool loop, approval, retries, cancel, streams and schedule execution run against real C# transactions/ports and selected Workers AI; the named WP-17 fixtures are confirmed removed; this package owns the first complete AI same-application workflow.
 
@@ -253,7 +262,8 @@ Execute ArcForges delivery task HAR.91 — Paid Slate transcription end-to-end a
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\harness.md (anchor task-har-91).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner). Also touches: ArcSlate.
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai). Also touches: ArcSlate.
+Claim and handoff record: claims/har-91 (python tools/delivery.py claim HAR.91 --worker <name>); task branch task/har-91 in AI; ledger record ledger/tasks/har-91.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Actual WP-39 selected-audio upload through CF Whisper, normal C# metering/final artifact and explicit local subtitle adoption; partial/unknown outcome, cancellation, budget bound, origin and no-raw-video-upload; paged exact CF purge inventory, stale controls/late evidence, seven-day wait budget guards, post-backup unsafe-effect quarantine; real active/waiting/unknown states for WP-50 recovery.
 

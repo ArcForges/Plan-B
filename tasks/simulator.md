@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — ArcScope Cloud simulator
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## ArcScope Cloud simulator
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task SIM.01 — Simulation definitions, immutable sce
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-01 (python tools/delivery.py claim SIM.01 --worker <name>); task branch task/sim-01 in Cloud; ledger record ledger/tasks/sim-01.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Definitions and immutable scenario versions exist; the channel schema (stable ids, value types, units, rate, timestamp semantics) and the V1 generator set (constant, sine, square, triangle, sawtooth, seeded noise, seeded random walk, pulse, step sequence, CSV replay) are defined; the bounded AST (constants, time/tick, channel references, arithmetic, comparison, conditionals, allowlisted numeric functions) validates acyclic dependencies and depth/node-count/per-tick-operation bounds before admission, with no scripting/dynamic compilation/reflection/file access/networking possible.
 
@@ -39,7 +41,8 @@ Execute ArcForges delivery task SIM.02 — Deterministic generators, seeded RNG 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-02 (python tools/delivery.py claim SIM.02 --worker <name>); task branch task/sim-02 in Cloud; ledger record ledger/tasks/sim-02.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Same seed and profile produce identical canonical hashes; a changed seed produces different data; every injected fault carries provenance/counters and is exactly positioned; RNG streams are provably independent across channels and fault sources.
 
@@ -65,7 +68,8 @@ Execute ArcForges delivery task SIM.03 — Fenced slices and SimulationPacer (DO
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-03 (python tools/delivery.py claim SIM.03 --worker <name>); task branch task/sim-03 in Cloud; ledger record ledger/tasks/sim-03.md.
 Kind/size: service/XL. Baseline: not-started.
 Outcome: Deterministic committed samples and restart recovery pass under real DO alarm delivery, Container execution and D1 checkpoint/fence; the proposed 5s latency is measured and recorded, never claimed as hard real time; every SimulationPacer state-diagram race (duplicate alarm, exhausted retry, sleeping Container, pause/cancel race, duplicate segment, delayed catch-up, accelerated mode) passes.
 
@@ -97,7 +101,8 @@ Execute ArcForges delivery task SIM.04 — Canonical publication, checkpoints an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-04 (python tools/delivery.py claim SIM.04 --worker <name>); task branch task/sim-04 in Cloud; ledger record ledger/tasks/sim-04.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Canonical batches are written as immutable objects; manifest entries carry run/profile identity, sequence, logical range, count, encoding, byte length and hash; the manifest row is the commit point with the checkpoint advanced in the same transaction; incomplete objects are invisible and swept; recovery produces byte-identical remaining canonical data across pause/resume, host loss and lease takeover; real Entitlement/Scope/Resource quota is reserved and the current monotonic lease fence is verified in every commit.
 
@@ -126,7 +131,8 @@ Execute ArcForges delivery task SIM.05 — Cloud-side simulation.* operations, m
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-05 (python tools/delivery.py claim SIM.05 --worker <name>); task branch task/sim-05 in Cloud; ledger record ledger/tasks/sim-05.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The eleven simulation.* operations are durable, idempotent and expected-state; a client can list authorised manifests and fetch segments resumably with hash verification; state polling works with realtime disabled.
 
@@ -155,7 +161,8 @@ Execute ArcForges delivery task SIM.06 — ArcScope-side simulated DataSource an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/sim-06 (python tools/delivery.py claim SIM.06 --worker <name>); task branch task/sim-06 in ArcScope; ledger record ledger/tasks/sim-06.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: A SimulatedDataSource adapter feeds the ordinary ArcScope acquisition pipeline; simulated data is usable in every normal ArcScope workflow (session, capture, decoder, measurement, report) while remaining labelled synthetic everywhere, including through export/copy; with realtime disabled, a client reaches the same state via the polling fallback.
 
@@ -186,7 +193,8 @@ Execute ArcForges delivery task SIM.07 — Limits, entitlement and lifecycle.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-07 (python tools/delivery.py claim SIM.07 --worker <name>); task branch task/sim-07 in Cloud; ledger record ledger/tasks/sim-07.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Deployment policy bounds (channels, rates, duration, AST work, per-workspace/global concurrency, queue/wait time, storage, egress, retention) are enforced before and during execution with capacity reservation; service-entitlement gating is independent of AI credits; term expiry/suspension stops generation at a durable boundary as canceled with reason; a 24-hour bounded-resource soak holds within bounds.
 
@@ -216,7 +224,8 @@ Execute ArcForges delivery task SIM.08 — Owned-artifact verification and real 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-08 (python tools/delivery.py claim SIM.08 --worker <name>); task branch task/sim-08 in Cloud; ledger record ledger/tasks/sim-08.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Real AOT simulation -> R2 verified publication -> ArcScope ingest/measurement proves deterministic results and failure recovery, with no Workers AI dependency or AI debit; PG-14b evidence recorded, including the 24-hour soak.
 
@@ -249,7 +258,8 @@ Execute ArcForges delivery task SIM.09 — Real Cloud->R2->ArcScope-native simul
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-09 (python tools/delivery.py claim SIM.09 --worker <name>); task branch task/sim-09 in Cloud; ledger record ledger/tasks/sim-09.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: A real generated simulation run, published through real R2-verified segments, ingested by ArcScope's real (non-simulator) measurement/report/import-export consumers, with hash/timebase/provenance checked end to end and stale grant/fence attempts refused. No simulator fixture stands in for a hardware claim anywhere in this chain.
 
@@ -279,7 +289,8 @@ Execute ArcForges delivery task SIM.10 — Real ArcScope simulator admission aga
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\simulator.md (anchor task-sim-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/sim-10 (python tools/delivery.py claim SIM.10 --worker <name>); task branch task/sim-10 in Cloud; ledger record ledger/tasks/sim-10.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Simulator admission and SimulationPacer DO infrastructure work against the real deployed capacity harness, not a local-only simulation
 

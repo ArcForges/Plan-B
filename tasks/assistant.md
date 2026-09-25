@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Embedded assistant
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Embedded assistant
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task AST.01 — Single application history store (mod
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-01 (python tools/delivery.py claim AST.01 --worker <name>); task branch task/ast-01 in DesktopPlatform; ledger record ledger/tasks/ast-01.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Assistant.Persistence.Sqlite implements the full data-model-05 schema (assistant_conversation/branch/message/draft/turn/receipt/outbox/history_import/attachment/project/conversation_project/profile/skill/context/task_projection/compaction), migrations and typed payloads, plus Android logical-schema fixtures. Competing model-02 conversation tables retired.
 
@@ -40,7 +42,8 @@ Execute ArcForges delivery task AST.02 — Branches and window drafts.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-02 (python tools/delivery.py claim AST.02 --worker <name>); task branch task/ast-02 in DesktopPlatform; ledger record ledger/tasks/ast-02.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Immutable ancestry and fork-at-message; per-window draft revisions with a shared committed service within one application. Concurrent windows, draft preserved during another send, parent/child isolation proven.
 
@@ -66,7 +69,8 @@ Execute ArcForges delivery task AST.03 — Attachments and provenance.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-03 (python tools/delivery.py claim AST.03 --worker <name>); task branch task/ast-03 in DesktopPlatform; ledger record ledger/tasks/ast-03.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Typed local refs, authorized file staging/preview, resource ownership and explicit egress; attachment selection is never treated as upload consent. Missing/hostile file, lost URI/path grant, source labels, quota and temporary exclusion covered.
 
@@ -93,7 +97,8 @@ Execute ArcForges delivery task AST.04 — Projects and profiles.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-04 (python tools/delivery.py claim AST.04 --worker <name>); task branch task/ast-04 in DesktopPlatform; ledger record ledger/tasks/ast-04.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Accepted project/instruction/profile CRUD, validation, immutable per-execution snapshots and application partitioning; conflict/revision handling and profile change cannot alter an active execution.
 
@@ -119,7 +124,8 @@ Execute ArcForges delivery task AST.05 — Skills.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-05 (python tools/delivery.py claim AST.05 --worker <name>); task branch task/ast-05 in DesktopPlatform; ledger record ledger/tasks/ast-05.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Accepted skill/version/permission metadata and selection, without installing an external agent or granting authority from content; untrusted instructions remain content, cross-app source denied.
 
@@ -146,7 +152,8 @@ Execute ArcForges delivery task AST.06 — Local search.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-06 (python tools/delivery.py claim AST.06 --worker <name>); task branch task/ast-06 in DesktopPlatform; ledger record ledger/tasks/ast-06.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Indexes only committed non-deleted normal history in the owning partition, with exact citations/branches and a rebuildable index; delete/rebuild, partial index and no temporary/other-app leak proven.
 
@@ -171,7 +178,8 @@ Execute ArcForges delivery task AST.07 — Local history export and import (assi
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-07 (python tools/delivery.py claim AST.07 --worker <name>); task branch task/ast-07 in DesktopPlatform; ledger record ledger/tasks/ast-07.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Produces/consumes assistant-history.v1 from committed local snapshots, preserving branch/message/resource provenance and missing-resource reports; import remaps identities. Complete offline without Cloud, implicit upload or mode conversion. Cloud promotion itself remains WP-25.
 
@@ -200,7 +208,8 @@ Execute ArcForges delivery task AST.08 — Reference and package proof (AionUi e
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-08 (python tools/delivery.py claim AST.08 --worker <name>); task branch task/ast-08 in DesktopPlatform; ledger record ledger/tasks/ast-08.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: AionUi component evidence/provenance recorded; the actual candidate Assistant.Core/Assistant.Persistence.Sqlite package consumed from a clean test application with no reference runtime or imported agent scope.
 
@@ -225,7 +234,8 @@ Execute ArcForges delivery task AST.09 — Owned-artifact receipt and UX accepta
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-09 (python tools/delivery.py claim AST.09 --worker <name>); task branch task/ast-09 in DesktopPlatform; ledger record ledger/tasks/ast-09.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: WP15 built/packed once from a clean environment; all applicable UX acceptance groups recorded; package/contract/owner/version compatibility and failure/recovery evidence attached; no later-provider fixture closes a real WP15 gate.
 
@@ -257,7 +267,8 @@ Execute ArcForges delivery task AST.10 — Complete assistant navigation shell.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-10 (python tools/delivery.py claim AST.10 --worker <name>); task branch task/ast-10 in DesktopPlatform; ledger record ledger/tasks/ast-10.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: All AS01 to AS13 docked/floating/expanded surfaces are reachable through the architecture-27 AssistantHost API; the same composition code works independently in each product. All actions reachable at minimum size; window/draft/account/keyboard/accessibility matrix passes.
 
@@ -290,7 +301,8 @@ Execute ArcForges delivery task AST.11 — Cloud client and device runtime (fixt
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-11 (python tools/delivery.py claim AST.11 --worker <name>); task branch task/ast-11 in DesktopPlatform; ledger record ledger/tasks/ast-11.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Reusable Cloud.Client (session/event/output/upload) and Device.Runtime (own-app registration/presence, pull/claim/result, typed dispatch adapter) implemented against generated gRPC-Web contracts; own-app typed dispatch adapters work end-to-end in-process. Named future-owner fixtures stand in for WP-23 through WP-26 and WP-52 until those exist.
 
@@ -320,7 +332,8 @@ Execute ArcForges delivery task AST.12 — Security and approval surface.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-12 (python tools/delivery.py claim AST.12 --worker <name>); task branch task/ast-12 in DesktopPlatform; ledger record ledger/tasks/ast-12.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: AS06/11/12 implemented with actor/target/context/egress/cost/expiry and local-presence escalation; no persistent allow-all or cross-product grant, stale approval refused.
 
@@ -347,7 +360,8 @@ Execute ArcForges delivery task AST.13 — Task centre.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-13 (python tools/delivery.py claim AST.13 --worker <name>); task branch task/ast-13 in DesktopPlatform; ledger record ledger/tasks/ast-13.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Task timeline, tools, artifacts, cancellation/steering and ProductJob links with effect certainty; canceled/interrupted/unknown/complete distinguishable, closing the view does not cancel.
 
@@ -375,7 +389,8 @@ Execute ArcForges delivery task AST.14 — Automation client (automation fixture
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-14 (python tools/delivery.py claim AST.14 --worker <name>); task branch task/ast-14 in DesktopPlatform; ledger record ledger/tasks/ast-14.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Existing Cloud-owned rule/occurrence UI implemented: schedule/timezone/target/budget and action availability; offline edits remain drafts and never imply local scheduling.
 
@@ -403,7 +418,8 @@ Execute ArcForges delivery task AST.15 — History and AI admission (local/cloud
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-15 (python tools/delivery.py claim AST.15 --worker <name>); task branch task/ast-15 in DesktopPlatform; ledger record ledger/tasks/ast-15.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Local/cloud/temporary disclosure, mode selection, Cloud promotion/copy UI and real local lifecycle implemented, with named Cloud fixtures for the promotion target; no implicit upload; denied-admission/credit-consent and transient-output-recovery states covered.
 
@@ -431,7 +447,8 @@ Execute ArcForges delivery task AST.16 — Preview and host context.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-16 (python tools/delivery.py claim AST.16 --worker <name>); task branch task/ast-16 in DesktopPlatform; ledger record ledger/tasks/ast-16.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: AS03/08 own-app selection/preview/navigation implemented using the frozen WP-14.05 host ports, with safe fallback for unsupported native preview; no live-selection mutation, no another-product destination, citations/resources keep ownership.
 
@@ -457,7 +474,8 @@ Execute ArcForges delivery task AST.17 — Complete package acceptance (Assistan
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-17 (python tools/delivery.py claim AST.17 --worker <name>); task branch task/ast-17 in DesktopPlatform; ledger record ledger/tasks/ast-17.md.
 Kind/size: acceptance/L. Baseline: not-started.
 Outcome: Assistant.Avalonia/Core/Sqlite/Cloud candidates published; a clean Native AOT host consumes only required packages; every accepted assistant capability is mapped; UX-A/B/C/H pass locally; real Cloud/AI fixtures remain explicit and close only at WP-26/WP-52.
 
@@ -490,7 +508,8 @@ Execute ArcForges delivery task AST.18 — Owned-artifact receipt and real integ
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-18 (python tools/delivery.py claim AST.18 --worker <name>); task branch task/ast-18 in DesktopPlatform; ledger record ledger/tasks/ast-18.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: WP17 built/packed once from a clean environment; all applicable UX acceptance groups recorded; later external evidence (WP-26/WP-41/WP-52) remains explicitly named, not fabricated.
 
@@ -516,7 +535,8 @@ Execute ArcForges delivery task AST.19 — Real Cloud Harness turn loop replacin
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-19 (python tools/delivery.py claim AST.19 --worker <name>); task branch task/ast-19 in DesktopPlatform; ledger record ledger/tasks/ast-19.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: HV-09 structural test 'no client runs a model loop' plus a live streamed turn against the deployed Harness, deleting the fixture turn endpoint structurally
 
@@ -543,7 +563,8 @@ Execute ArcForges delivery task AST.20 — Real durable Cloud automation schedul
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ast-20 (python tools/delivery.py claim AST.20 --worker <name>); task branch task/ast-20 in DesktopPlatform; ledger record ledger/tasks/ast-20.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: a live scheduled occurrence executes and cascades with storm protection, observed end-to-end from the AST.14 client
 
@@ -569,7 +590,8 @@ Execute ArcForges delivery task AST.21 — Real Cloud Notes/Chat export producer
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform). Also touches: Cloud.
+Claim and handoff record: claims/ast-21 (python tools/delivery.py claim AST.21 --worker <name>); task branch task/ast-21 in DesktopPlatform; ledger record ledger/tasks/ast-21.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: a real deployed Cloud export/snapshot job round-trips the same assistant-history.v1 archive that AST.07's offline fixture produces, for both ArcChat and ArcNotes history
 
@@ -595,7 +617,8 @@ Execute ArcForges delivery task AST.22 — Real Cloud application-history restar
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\assistant.md (anchor task-ast-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform). Also touches: Cloud.
+Claim and handoff record: claims/ast-22 (python tools/delivery.py claim AST.22 --worker <name>); task branch task/ast-22 in DesktopPlatform; ledger record ledger/tasks/ast-22.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: AST.15's Cloud promotion/copy UI successfully drives a real restartable import, including lost-finalize-ack, changed-local-history and account-switch recovery
 

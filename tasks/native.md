@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Native producers and probes
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Native producers and probes
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task NAT.01 — Probe A: device tool execution under 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-01 (python tools/delivery.py claim NAT.01 --worker <name>); task branch task/nat-01 in DesktopPlatform; ledger record ledger/tasks/nat-01.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Inside a published Native AOT desktop binary, a stub ToolRequest is pulled, re-authorised locally, resolved through the generated allowlist to a CapabilityKey, decoded into a typed product request, invoked and returns an idempotent result -- with an AOT publish log showing zero diagnostics and a negative test proving no reflection-based registration/decode path compiles or exists.
 
@@ -40,7 +42,8 @@ Execute ArcForges delivery task NAT.02 — Probe B: block editor, store, undo an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-02 (python tools/delivery.py claim NAT.02 --worker <name>); task branch task/nat-02 in DesktopPlatform; ledger record ledger/tasks/nat-02.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: A minimal block editor over the local store demonstrates create/edit/reorder, undo/redo across a composite operation, and recovery from a hard process kill mid-edit that returns to the last committed boundary with uncommitted work explicitly reported as loss -- proving undo, revision, checkpoint and journal are four distinct mechanisms.
 
@@ -67,7 +70,8 @@ Execute ArcForges delivery task NAT.03 — Probe C: high-throughput acquisition 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-03 (python tools/delivery.py claim NAT.03 --worker <name>); task branch task/nat-03 in DesktopPlatform; ledger record ledger/tasks/nat-03.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Sustained acquisition from a real transport (at least one real TCP/UDP/serial configuration, not an in-memory generator, per BR-06) runs above the intended product target through a ring buffer with responsive plot downsampling; overrun is counted and timestamped, pausing the view never stops recording, and disconnect leaves an explicit gap.
 
@@ -94,7 +98,8 @@ Execute ArcForges delivery task NAT.04 — Probe D: native decode and audio/vide
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-04 (python tools/delivery.py claim NAT.04 --worker <name>); task branch task/nat-04 in DesktopPlatform; ledger record ledger/tasks/nat-04.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Native decode through a thin C ABI shim displays one frame in the desktop shell with audio/video synchronised against a shared timeline clock; safe handles, managed-side input validation, a clean sanitiser run and a sacrificial-process crash test all pass; hardware acceleration is discovered at runtime with a proven software fallback.
 
@@ -109,7 +114,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:benchmarks/probes/media/**
-Shared resources (follow the owner protocol): RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.05, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Frame-display run; audio/video sync measurement; sanitiser run (ASan/UBSan); sacrificial-process crash test; forced-software-path run
@@ -122,7 +127,8 @@ Execute ArcForges delivery task NAT.05 — Probe evidence, licence positions, co
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-05 (python tools/delivery.py claim NAT.05 --worker <name>); task branch task/nat-05 in DesktopPlatform; ledger record ledger/tasks/nat-05.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Each of the four probes has a written conclusion (proved / not proved / downstream constraint / open items); every native dependency the probes introduced has a recorded licence position; the tests/HardwareLab device inventory is created (device/firmware/driver versions) -- seeding PG-08 (completed later by NAT.28/WP-13.16).
 
@@ -151,7 +157,8 @@ Execute ArcForges delivery task NAT.06 — Common native ABI: preambles, pack8 r
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-06 (python tools/delivery.py claim NAT.06 --worker <name>); task branch task/nat-06 in DesktopPlatform; ledger record ledger/tasks/nat-06.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: annex-06 common preambles, fixed numeric keys, pack8 records, ownership/cancellation/bounded-buffer helpers compile as C17/C++20 headers and C# layouts for all seven families; every field offset and all 17 normative sizes are asserted; wrong-size/version/null/closed-handle cases and zero-leaked-output-on-failure are proven. ArcForges.Native.Abstractions managed package (status/handle types only) is published. The five existing probe-library identities (incl. arc_metal_*) are retained unchanged.
 
@@ -167,7 +174,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/shared/**; DesktopPlatform:native/*/include/arc/**; DesktopPlatform:src/Native/ArcForges.Native.Abstractions/**
-Shared resources (follow the owner protocol): RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.07, NAT.08, NAT.09, NAT.10, NAT.11, NAT.12, NAT.13, NAT.14, NAT.15, NAT.30, NOTES.09, SLATE.15, SLATE.38
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Compile C17/C++20 headers and C# layouts on the admitted RIDs; offset/size assertions; wrong-size/version/null/closed-handle negative tests
@@ -180,7 +187,8 @@ Execute ArcForges delivery task NAT.07 — Media family: reader, probe, frame an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-07 (python tools/delivery.py claim NAT.07 --worker <name>); task branch task/nat-07 in DesktopPlatform; ledger record ledger/tasks/nat-07.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: arc_media_reader_open/stream/seek/next/close and arc_media_buffer_* implemented over the selected FFmpeg demux/decode path and the WP11 restricted helper; stream metadata, delayed frames, EOF and seek epochs preserved; every export has a behavioral oracle and bounded isolated execution.
 
@@ -196,7 +204,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcmedia-ffmpeg-abi/src/**; DesktopPlatform:native/arcmedia-ffmpeg-abi/include/**; DesktopPlatform:native/arcmedia-ffmpeg-abi/tests/**; DesktopPlatform:src/Native/ArcForges.Native.Media/**
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.20, NAT.30, SLATE.04, SLATE.15
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Known two-frame seek, malformed input, B-frame/drain, tiled copy, exact audio sample bounds, repeated cancel/close against the actual FFmpeg dependency build; sanitiser build for parser paths (SB-03/SB-04)
@@ -209,7 +217,8 @@ Execute ArcForges delivery task NAT.08 — Media family: convert, resample and m
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-08 (python tools/delivery.py claim NAT.08 --worker <name>); task branch task/nat-08 in DesktopPlatform; ledger record ledger/tasks/nat-08.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: arc_media_video_convert, arc_media_resampler_* and arc_media_writer_* implemented with the fixed portable profiles (FFV1/PCM/WAV, MP4 MPEG4-AAC); resampler delay/PTS preserved; writer commits only after complete output/sidecars/hash.
 
@@ -225,7 +234,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcmedia-ffmpeg-abi/src/**; DesktopPlatform:native/arcmedia-ffmpeg-abi/include/**; DesktopPlatform:native/arcmedia-ffmpeg-abi/tests/**; DesktopPlatform:src/Native/ArcForges.Native.Media/**
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.20, NAT.30, SLATE.15, SLATE.19, SLATE.20, SLATE.21, SLATE.27, SLATE.28
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Independent fresh decode of FFV1/PCM/WAV and MP4 MPEG4-AAC; resample length, finish-twice, cancel/abort, disk-full corruption rejection
@@ -238,7 +247,8 @@ Execute ArcForges delivery task NAT.09 — Media family: audio devices (miniaudi
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-09 (python tools/delivery.py claim NAT.09 --worker <name>); task branch task/nat-09 in DesktopPlatform; ledger record ledger/tasks/nat-09.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: arc_media_audio_* implemented over miniaudio device/context/ring primitives with explicit negotiation, bounded rings, counters, disconnect/reopen; missing output device permits video-only playback with a stated reason without blocking offline export.
 
@@ -254,7 +264,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcmedia-ffmpeg-abi/src/**; DesktopPlatform:native/arcmedia-ffmpeg-abi/include/**; DesktopPlatform:native/arcmedia-ffmpeg-abi/tests/**; DesktopPlatform:src/Native/ArcForges.Native.Media/**
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.20, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Physical output/input, underflow, overflow, device loss, exclusive-use refusal, no-device video clock, offline render -- physical audio hardware is ordinary (most dev machines have one), not a scarce PG-08 lab resource
@@ -267,7 +277,8 @@ Execute ArcForges delivery task NAT.10 — Colour family: OCIO transforms.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-10 (python tools/delivery.py claim NAT.10 --worker <name>); task branch task/nat-10 in DesktopPlatform; ledger record ledger/tasks/nat-10.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: arc_color_* implemented with immutable OCIO config/processor assets and alpha-correct CPU transforms; no ambient file/network config lookup; named refusal of invalid transforms.
 
@@ -283,7 +294,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcslate-color-abi/**; DesktopPlatform:src/Native/ArcForges.Native.Colour/**
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.21, NAT.30, SLATE.24
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Independent RGB/alpha vectors, alpha 0, unknown space, tampered bundle, preview/render agreement
@@ -296,7 +307,8 @@ Execute ArcForges delivery task NAT.11 — Image family: still-image codecs (PNG
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-11 (python tools/delivery.py claim NAT.11 --worker <name>); task branch task/nat-11 in DesktopPlatform; ledger record ledger/tasks/nat-11.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: arc_image_* implemented with PNG/TIFF/EXR metadata and bounded tile reads/writes via OIIO/OpenEXR/Imath; hostile reads execute only in the WP11 helper.
 
@@ -313,7 +325,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcslate-image-abi/**; DesktopPlatform:src/Native/ArcForges.Native.Image/**
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.22, NAT.30, SLATE.21
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Bit depth/metadata round trip, edge tiles, decompression bomb, failed codec, incomplete-output refusal
@@ -326,7 +338,8 @@ Execute ArcForges delivery task NAT.12 — Otio family: OTIO0.18.1 interchange.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-12 (python tools/delivery.py claim NAT.12 --worker <name>); task branch task/nat-12 in DesktopPlatform; ledger record ledger/tasks/nat-12.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: arc_otio_read/write implemented under the official OTIO0.18.1 library with the selected schema allowlist and fidelity report; exact tick conversion preserved; unsupported schema/malicious path/parser-death cases reported as loss before commit, never silently.
 
@@ -342,7 +355,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcslate-otio-abi/**; DesktopPlatform:src/Native/ArcForges.Native.Otio/**
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.23, NAT.30, SLATE.38, SLATE.39
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Mixed/fractional rate round trip, unsupported schema, malicious path, parser death, reported loss before commit -- PG-15 evidence class
@@ -355,7 +368,8 @@ Execute ArcForges delivery task NAT.13 — Instruments family: serial and USB de
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-13 (python tools/delivery.py claim NAT.13 --worker <name>); task branch task/nat-13 in DesktopPlatform; ledger record ledger/tasks/nat-13.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: A new arcinstruments-abi native library and ArcForges.Native.Instruments managed package implement arc_instruments_* over generic OS serial and explicit libusb interface/endpoint open/read/write/cancel/close; identity revalidated at open; no auto-detach of unrelated drivers, no vendor SDK.
 
@@ -371,7 +385,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcinstruments-abi/**; DesktopPlatform:src/Native/ArcForges.Native.Instruments/**; DesktopPlatform:native/CMakeLists.txt; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.24, NAT.30, SCOPE.04
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Enumeration, explicit interface claim, control/bulk/interrupt transfers, partial writes, cancellation callback, hot unplug, driver absence, permission denial on Tier 1 -- against the PG-08 hardware inventory for the physical-device cases
@@ -384,7 +398,8 @@ Execute ArcForges delivery task NAT.14 — Pdf family: PDFium and production par
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-14 (python tools/delivery.py claim NAT.14 --worker <name>); task branch task/nat-14 in DesktopPlatform; ledger record ledger/tasks/nat-14.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: A new arcpdf-abi native library and ArcForges.Native.Pdf managed package implement arc_pdf_* over actual PDFium; PDFium and all approved parser wrappers are composed into the existing WP-11.09 ContentSandbox host using generated local gRPC controls (no second helper, no duplicate DTO owner); the next immutable ContentSandbox.Runtime.<rid> version is published; test-parser production registration is removed (hostile regression fixture retained). Contributes real evidence to PG-12 and PG-22.
 
@@ -401,7 +416,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcpdf-abi/**; DesktopPlatform:src/Native/ArcForges.Native.Pdf/**; DesktopPlatform:src/DesktopHelpers/ArcForges.ContentSandbox/**; DesktopPlatform:native/CMakeLists.txt; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Permitted substitutes (never real integration evidence): SUB-hostile-test-parser: OS-level containment mechanics only (AppContainer/Job Object, Landlock/seccomp, App-Sandbox/XPC denial, resource bounds, crash/hang/parent-death cleanup) against a deliberately hostile FIRST-PARTY test parser, not real format-parsing correctness Real producer ['NAT.14']; removed by PLT.54
 Unblocks: NAT.25, NAT.30, NOTES.09, NOTES.37, PLT.45, PLT.54, SLATE.04, SLATE.16
 
@@ -415,7 +430,8 @@ Execute ArcForges delivery task NAT.15 — Graphics family: portable CPU surface
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-15 (python tools/delivery.py claim NAT.15 --worker <name>); task branch task/nat-15 in DesktopPlatform; ledger record ledger/tasks/nat-15.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: A new arcgraphics-abi native library and ArcForges.Native.Graphics managed package implement ArcGraphicsNative CPU surface/upload/present/fence/device-loss behavior on all admitted RIDs; the existing arcgraphics-metal-abi probe ABI is preserved unchanged as a private optional backend, not claimed as functional acceleration by itself.
 
@@ -431,7 +447,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:native/arcgraphics-abi/**; DesktopPlatform:src/Native/ArcForges.Native.Graphics/**; DesktopPlatform:native/CMakeLists.txt; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.26, NAT.30, SLATE.19, SLATE.22, SLATE.25
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): CPU display/readback, ownership and fence lifetime, device loss and forced software path; each advertised accelerator exercised with its actual driver where locally available
@@ -444,7 +460,8 @@ Execute ArcForges delivery task NAT.20 — Media package production: all 6 RIDs.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-20 (python tools/delivery.py claim NAT.20 --worker <name>); task branch task/nat-20 in DesktopPlatform; ledger record ledger/tasks/nat-20.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: ArcForges.Native.Media.Runtime.<rid> published for win-x64, win-arm64, osx-arm64, osx-x64, linux-x64, linux-arm64 with matched tested bytes, headers/import libraries, native manifests and complete dependency closures; isolated clean-cache C17 and C# AOT consumers pass on each admitted RID.
 
@@ -461,7 +478,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Media.Runtime.win-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Media.Runtime.osx-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Media.Runtime.osx-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Media.Runtime.linux-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Media.Runtime.linux-arm64/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17 and C# AOT consumers per RID; missing/transitive/wrong-RID library, hash collision, absent export, revoked artifact, source-unavailable negatives
@@ -474,7 +491,8 @@ Execute ArcForges delivery task NAT.21 — Colour package production: all 6 RIDs
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-21 (python tools/delivery.py claim NAT.21 --worker <name>); task branch task/nat-21 in DesktopPlatform; ledger record ledger/tasks/nat-21.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: ArcForges.Native.Colour.Runtime.<rid> published for all 6 RIDs with matched tested bytes/headers/manifests/dependency closures.
 
@@ -489,7 +507,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Colour.Runtime.win-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Colour.Runtime.osx-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Colour.Runtime.osx-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Colour.Runtime.linux-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Colour.Runtime.linux-arm64/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17/C# AOT consumers per RID; same negative matrix as NAT.20
@@ -502,7 +520,8 @@ Execute ArcForges delivery task NAT.22 — Image package production: all 6 RIDs.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-22 (python tools/delivery.py claim NAT.22 --worker <name>); task branch task/nat-22 in DesktopPlatform; ledger record ledger/tasks/nat-22.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: ArcForges.Native.Image.Runtime.<rid> published for all 6 RIDs with matched tested bytes/headers/manifests/dependency closures.
 
@@ -517,7 +536,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Image.Runtime.win-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Image.Runtime.osx-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Image.Runtime.osx-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Image.Runtime.linux-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Image.Runtime.linux-arm64/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17/C# AOT consumers per RID; same negative matrix as NAT.20
@@ -530,7 +549,8 @@ Execute ArcForges delivery task NAT.23 — Otio package production: all 6 RIDs.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-23 (python tools/delivery.py claim NAT.23 --worker <name>); task branch task/nat-23 in DesktopPlatform; ledger record ledger/tasks/nat-23.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: ArcForges.Native.Otio.Runtime.<rid> published for all 6 RIDs with matched tested bytes/headers/manifests/dependency closures.
 
@@ -545,7 +565,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Otio.Runtime.win-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Otio.Runtime.osx-arm64/**; DesktopPlatform:src/Native/ArcForges.Native.Otio.Runtime.osx-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Otio.Runtime.linux-x64/**; DesktopPlatform:src/Native/ArcForges.Native.Otio.Runtime.linux-arm64/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17/C# AOT consumers per RID; same negative matrix as NAT.20
@@ -558,7 +578,8 @@ Execute ArcForges delivery task NAT.24 — Instruments package production: all 6
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-24 (python tools/delivery.py claim NAT.24 --worker <name>); task branch task/nat-24 in DesktopPlatform; ledger record ledger/tasks/nat-24.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: ArcForges.Native.Instruments.Runtime.<rid> published for all 6 RIDs.
 
@@ -573,7 +594,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Instruments.Runtime.*/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30, SCOPE.11
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17/C# AOT consumers per RID; same negative matrix as NAT.20
@@ -586,7 +607,8 @@ Execute ArcForges delivery task NAT.25 — Pdf package production: all 6 RIDs + 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-25 (python tools/delivery.py claim NAT.25 --worker <name>); task branch task/nat-25 in DesktopPlatform; ledger record ledger/tasks/nat-25.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: ArcForges.Native.Pdf.Runtime.<rid> published for all 6 RIDs; the composed ContentSandbox.Runtime.<rid> (real parser closure) is rebuilt/signed once and published as the next immutable version per admitted RID.
 
@@ -602,7 +624,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Pdf.Runtime.*/**; DesktopPlatform:src/DesktopHelpers/ArcForges.ContentSandbox/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30, NOTES.37
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17/C# AOT consumers per RID; PG-22 hostile-parser containment re-run at package level (not just source level)
@@ -615,7 +637,8 @@ Execute ArcForges delivery task NAT.26 — Graphics package production: all 6 RI
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-26 (python tools/delivery.py claim NAT.26 --worker <name>); task branch task/nat-26 in DesktopPlatform; ledger record ledger/tasks/nat-26.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: ArcForges.Native.Graphics.Runtime.<rid> published for all 6 RIDs, CPU path mandatory everywhere, optional accelerators labelled per RID.
 
@@ -630,7 +653,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:src/Native/ArcForges.Native.Graphics.Runtime.*/**; DesktopPlatform:eng/packaging/packages.json
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-desktopplatform-package-inventory (append): Each producer task adds its own package entry; every merge to main packs and publishes all packages at one version; consumers pin the candidate produced by the merge of the capability they need, never waiting for a package closure task; one merge queue.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.28, NAT.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Clean-cache C17/C# AOT consumers per RID; forced-software-path verified on every RID even where an accelerator is also present
@@ -643,7 +666,8 @@ Execute ArcForges delivery task NAT.28 — Dependency adoption receipts and hard
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-28).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-28 (python tools/delivery.py claim NAT.28 --worker <name>); task branch task/nat-28 in DesktopPlatform; ledger record ledger/tasks/nat-28.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: AD01-AD08 recorded for FFmpeg, miniaudio, OCIO, OIIO, OpenEXR, Imath, OTIO, libusb, PDFium and every shipped transitive dependency; the hardware-lab inventory (serial/audio/GPU plus an actual USB device with vendor/product identity, explicit interface/endpoint, firmware and driver versions) is completed; SBOM/licence/source and enabled-feature lists matched to actual packaged files.
 
@@ -675,7 +699,8 @@ Execute ArcForges delivery task NAT.29 — Verify the owned WP06 artifact set an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-29).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-29 (python tools/delivery.py claim NAT.29 --worker <name>); task branch task/nat-29 in DesktopPlatform; ledger record ledger/tasks/nat-29.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Actual candidate NuGet restore/native loading and desktop AOT; C# AOT gRPC/gRPC-Web plus selected auth/storage/SQL adapters; Kotlin/Jetpack Compose generated-client calls; React client calls; a minimal deployed CF<->reachable C#<->R2 chain -- a bounded foundation probe, explicitly not the full WP-52 Cloud Harness
 
@@ -708,7 +733,8 @@ Execute ArcForges delivery task NAT.30 — Verify the complete native producer s
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\native.md (anchor task-nat-30).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/nat-30 (python tools/delivery.py claim NAT.30 --worker <name>); task branch task/nat-30 in DesktopPlatform; ledger record ledger/tasks/nat-30.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Decode/seek/drain, encode->independent decode, image tiles, colour, OTIO, PDF, instruments, graphics CPU/fallback, cancel/lifetime/hostile-helper vectors and missing-DLL/wrong-RID negative consumers, all against actual WP07 to WP12 mechanisms (persistence, local RPC, shell, ContentSandbox, telemetry) -- probe-only exports never pass; this is the gate WP14/WP33/WP36 consumers wait behind
 

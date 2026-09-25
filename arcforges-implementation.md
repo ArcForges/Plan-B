@@ -2,11 +2,11 @@
 
 ## Execution state
 
-There is no single Current task. Implementation is a set of delivery tasks with typed prerequisites, and any number of workers may execute different ready tasks at the same time. The authoritative rules are the Design [delivery model](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md) (decision P2-018); this document is the operating procedure.
+There is no single Current task. Implementation is a set of delivery tasks with typed prerequisites, and any number of workers execute different ready tasks at the same time. The authoritative rules are the Design [delivery model](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md) (decision P2-018); this document is the operating procedure, and [single-task-command.md](single-task-command.md) holds the entry prompts that start a worker, a coordinator, an integration owner or a resumption.
 
 - **Baseline:** implementation is complete through WP03.02. WP00, WP01, WP02 and WP03.00–03.02 are accepted (tasks `GOV.01`–`GOV.03`, `CON.90`–`CON.92`) and are recorded as inherited by adoption. WP03.03 has not started; its closures are the open tasks `CON.02` and `CON.03`.
-- **Now:** the adoption stage has not run, so the only ready task is `ADOPT.01` (freeze the adoption baseline). It then opens 58 adoption slices, one per repository and lane (`ADOPT.NN.<lane>`, for example `ADOPT.03.contracts`); each recorded slice opens the tasks of its own lane in its own repository, independently of every other slice. The repository records `ADOPT.02`–`ADOPT.10` hold repository-wide facts and close after their slices; `ADOPT.11` reconciles Design and Plan.
-- **Find work:** `python tools/delivery.py ready --claims` (optionally `--lane <lane>`). The [task list](list.md) indexes every task; each lane file under [`tasks/`](tasks/) holds one self-contained prompt per task.
+- **Progress:** determine it only from the authoritative state below, never from this document. When this procedure was written the adoption stage had not run and the only ready task was `ADOPT.01` (freeze the adoption baseline). It opens 58 adoption slices, one per repository and lane (`ADOPT.NN.<lane>`); each recorded slice opens the tasks of its own lane in its own repository, independently of every other slice. The repository records `ADOPT.02`–`ADOPT.10` close after their slices; `ADOPT.11` reconciles Design and Plan.
+- **Find work:** `python tools/delivery.py ready`. The [task list](list.md) indexes every task and adoption slice; each lane file under [`tasks/`](tasks/) holds one self-contained prompt per task and slice.
 
 ## Project background
 
@@ -26,69 +26,111 @@ Implementation repositories are under `C:\MyFile\Projects\ArcForges`: DesktopPla
 
 Read-only reference sources are `C:\MyFile\Projects\AionUi`, `AFFiNE`, `siyuan`, `Serial-Studio`, `ArcVideo` and `ArcVideoFoundation`. Start with their completed matrices under Design's `docs/assurance/reference-coverage` and inspect the relevant source or drift only. Respect per-file licences, provenance and excluded subtrees; a rewrite does not erase upstream obligations. `C:\MyFile\Projects\StartArcForges` is a packaged-artifact layout/notice reference only: do not execute, unpack or reverse engineer its binaries. Reference features do not create additional product requirements.
 
-The remote/web execution-prompt variants in this repository (`arcforges-implementation-remote.md`, `list-remote.md`) are excluded from this execution model and are not maintained; do not use them as execution authority. The retired serial task list remains in Git history (`list.md` at commit `0fa610d`) as traceability only; it is not an execution entry.
+The retired serial task list remains in Git history (`list.md` at commit `0fa610d`) as traceability only; it is not an execution entry.
 
-## Selecting a task
+## Authoritative state and the delivery tool
 
-1. Pull the Plan and Design primaries (clean fast-forward only) so the graph, views and ledger are current.
-2. Run `python tools/delivery.py ready --claims`. A task is listed when the adoption slice for its repository and lane is complete, every contract/artifact/design prerequisite is delivered or complete, every release prerequisite is complete, and no live claim holds it (see below). Adoption slices are listed the same way once `ADOPT.01` is complete.
-3. Prefer tasks on the [critical path](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/schedule-analysis.md) and tasks that unblock many others; otherwise any ready task is valid. Check its declared shared resources: an `exclusive` resource is needed only for the phase that uses it and is taken then through a short lease (see below), so another task's lease never prevents preparing or reviewing this one.
+Run the tool from any Plan checkout or retained worktree, in Git Bash or PowerShell: `python C:\MyFile\Projects\Plan-B\tools\delivery.py <command>` (keep the Plan primary checkout fast-forwarded so the tool itself is current). Execution commands read the **authoritative state**: the merged `main` of Design and Plan and the Plan record branches, fetched on every call into a private ref namespace, so concurrent workers never move a ref another worker has read. Unmerged commits and uncommitted edits in any checkout, including your own, never count; `ready --local` shows such an unreviewed state for review and is never a basis for claiming.
 
-## Claiming a task
+The tool fails closed. An invalid graph or ledger authorizes no work. An invalid claim, lease or role record keeps its item unavailable until a reviewed fix repairs it. A claim that changed concurrently writes nothing (exit 2). A failed network operation stops with the exact operation (exit 3): report it and stop.
 
-A claim is an atomic update of the branch `claims/<task-id>` in this repository (DLV-26). Tasks and adoption slices are claimed the same way; a slice ID such as `ADOPT.03.contracts` becomes the branch `claims/adopt.03.contracts`. From Git Bash in `C:\MyFile\Projects\Plan-B`, first fetch the claim refs and read any existing claim:
+| Command | Purpose |
+|---|---|
+| `ready [--lane L] [--repo R] [--json]` | Tasks and slices that may be claimed now, with resume or recovery notes, and completion follow-ups |
+| `status [--worker W] [--repo R] [--json]` | Every claim, lease and role with holder, lease and handoff; delivered tasks still waiting; vacant integration roles; the local build slot |
+| `show <ID> [--json]` | One record with its history, and the task's ledger and start-rule state |
+| `claim <ID> --worker W` | Claim a ready task or slice, a completion follow-up, a lease (`RES-...` with `--task`) or a role (`integration:<Repository>`) |
+| `update <ID> --worker W --epoch N ...` | Renew and record handoff checkpoints; set `blocked`, `delivered` or `complete` |
+| `release <ID> --worker W --epoch N --note ...` | Voluntary handoff, or the end of a lease or role |
+| `build-slot run --worker W --task T -- <command>` | Run one CPU-heavy local build or test under the workstation lock |
+| `check`, `generate` | Validate, or regenerate, the graph, views and ledger of working trees for planning and ledger pull requests |
 
-```bash
-T=CON.02; L=$(echo "$T" | tr 'A-Z' 'a-z'); WORKER="<your worker name>"; EPOCH=1
-git fetch origin "+refs/heads/claims/*:refs/remotes/origin/claims/*"
-git show "refs/remotes/origin/claims/$L:claim.json" 2>/dev/null || echo "no claim yet"
-BLOB=$(printf '{"task":"%s","claimant":"%s","claimedAt":"%s","leaseUntil":"%s","epoch":%s,"state":"claimed"}\n' \
-  "$T" "$WORKER" "$(date -u +%FT%TZ)" "$(date -u -d '+2 days' +%FT%TZ)" "$EPOCH" | git hash-object -w --stdin)
-TREE=$(printf '100644 blob %s\tclaim.json\n' "$BLOB" | git mktree)
-```
+**Keys.** Every ID has one key, in lower case with dots replaced by hyphens (`CON.02` → `con-02`, `ADOPT.03.contracts` → `adopt-03-contracts`). It names the claim `claims/<key>`, the task branch `task/<key>` and the ledger record `ledger/tasks/<key>.md`. Never use the dotted ID in a branch or file name: Git for Windows cannot store names such as `con.02`.
 
-- **No claim branch yet:** keep `EPOCH=1` and push a parentless commit to create it. The push fails if the branch appeared meanwhile, so two workers can never own one task:
-  `git push origin "$(git commit-tree "$TREE" -m "Claim $T")":"refs/heads/claims/$L"`
-- **Branch exists with state `released`:** re-claim by appending a commit with `EPOCH` set to the current epoch plus one; the push fails if anyone else moved it first, in which case read the claim again:
-  `git push origin "$(git commit-tree "$TREE" -p "refs/remotes/origin/claims/$L" -m "Reclaim $T")":"refs/heads/claims/$L"`
-- **Branch exists with state `claimed`/`blocked` whose `leaseUntil` is more than one hour in the past:** the claim is eligible for recovery, which is not proof that the claimant stopped. Take over only if the task branch and pull request show no activity since the lease expired and, where a pull request exists, a release request has been posted on it without reply; then append a takeover commit with the next epoch as above, naming the justification in the commit message.
-- **Branch exists with a live lease, or with state `delivered`/`complete`:** the task is not available.
+For a planning change, edit Design in a retained worktree and run `check` and `generate` from a Plan worktree with `--design <Design worktree>`. Without `--design` the tool uses `ArcForges-Design-B` beside the Plan primary checkout, whichever Plan checkout runs it.
 
-To renew the lease, append a new claim commit with the same epoch. To release, append a commit whose state is `released`. Never delete or force-push a claim branch: its history is the audit trail of ownership. `python tools/delivery.py ready --claims` applies the availability rules when it lists tasks; the recovery checks above remain the worker's responsibility.
+## Sessions and roles
 
-### Exclusive resource leases
+Every session chooses a **worker name** unique to that session (for example `w-<host>-<yyyymmdd>-<n>`) and uses it for every claim, lease, role and review it makes. Coordination state lives only in claim, lease and role records, pull requests and the ledger ([DLV-40](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-40), [DLV-42](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-42)); never keep it only in a conversation.
 
-A task that needs a shared resource in `exclusive` mode (for example the deployed Cloud test environment during a live run, a signing authority or a physical device) takes a lease only for the phase that uses it (DLV-37): use the commands above with `claims/` replaced by `leases/` in the fetch, show and push commands, `L` set to the lower-case resource ID and `T` set to the task that holds the lease. Acquire several leases in ascending resource-id order; if one cannot be acquired, release the ones already held. Release every lease before waiting on review, CI or another producer. `append`, `regenerate` and `read` modes need no lease: follow the resource's protocol in the Design [shared-resource registry](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/shared-resources.md).
+- **Worker.** Implements one claimed task or bundle at a time. While that task waits on review, CI or a merge queue it may review another pull request, take a vacant integration role, claim a completion follow-up or claim another ready task, keeping every claim it holds renewed with a current handoff record. It resumes its own claims first (`status --worker W`) and then takes new work until the user's instruction ends.
+- **Reviewer.** A session other than the task's claimant when one is available; a worker operating alone reviews its own complete diff and says so. The review comment on the pull request names the exact head commit it approved.
+- **Integration owner.** One session per repository holds `roles/integration-<repository>` (`claim integration:<Repository> --worker W`). It merges approved pull requests of that repository, applies the shared-resource protocols, confirms publication and keeps `main` green. Any worker may assume a vacant role to merge approved pull requests and release it with a note when done; a busy repository may keep a dedicated owner that renews the role while it works. `status` shows every holder and every vacant role.
+- **Coordinator** (optional). Maintains capacity: starts workers up to the requested number (separate sessions, or subagents when the user asks for them), replaces workers that stop, directs idle workers to completion follow-ups, reviews and vacant integration roles, and reports. It holds no state of its own, so any session replaces it by running `status`.
+
+**Selecting work.** Take, in this order: your own live claims and pull requests; completion follow-ups; released tasks that carry a handoff (continue them, never restart them); ready tasks on the [critical path](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/schedule-analysis.md) or that unblock the most work; review requests and vacant integration roles with approved pull requests. Stay within the scope the user gave (tasks, lanes or repositories). If nothing is available, report what the ready set waits on (`show <ID>` names the unsatisfied prerequisites) and stop rather than invent work.
+
+## Claiming
+
+1. Run `ready`, choose, then `python tools/delivery.py claim <TASK-ID> --worker W`. The tool re-reads the exact claim commit, verifies the start rule (or the follow-up rule) from the authoritative state, writes the next record as a compare-and-swap on that commit and verifies the result; if anyone moved the claim meanwhile, nothing is written.
+   - No claim yet: epoch 1.
+   - Released: the next epoch, keeping the earlier handoff. Continue its branch and pull request.
+   - Delivered, with every completion prerequisite complete: a completion follow-up at the next epoch (see [Completing a task](#completing-a-task)).
+   - Held with a live lease, complete, or invalid: not available.
+   - Lease expired more than one hour ago: recovery only, under [Interruption, handoff and recovery](#interruption-handoff-and-recovery), with `--takeover --reason "<the checks you made>"`.
+2. Note the epoch the tool prints. Every later `update` and `release` names it, and the tool refuses any change unless the record's tip names you at that epoch.
+3. Before the first edit, look for an existing `task/<key>` branch and open pull requests titled with the task ID, even if the record lists none, and continue them.
+
+## Durable handoff
+
+The claim record carries the handoff ([DLV-40](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-40)): repository, task branch, worktree path (host-specific, informational), pull requests, last pushed head, reviewed commit, merge commits, `done` and `next` actions, validation performed, blocker and note. Record it with `update`, which also renews the lease (24 hours by default), at every checkpoint:
+
+| Checkpoint | Record with `update <ID> --worker W --epoch N` |
+|---|---|
+| First commit pushed to `task/<key>` (push early; work-in-progress commits are fine) | `--head <SHA> --worktree <path> --done ... --next ...` |
+| Pull request opened or updated for review | `--pr <URL> --head <SHA> --next "await review"` |
+| Review approved | `--reviewed <SHA>` |
+| Merged | `--merge <merge SHA> --next "confirm publication" --next "record the ledger"` |
+| Publication receipt and ledger pull request | `--pr <ledger PR URL> --validation ...` |
+| Blocked, or unblocked | `--state blocked --blocker "<concrete missing input>"`, or `--state claimed` (clears the blocker) |
+| Before stopping, pausing or running out of context | push the branch, then `--done ... --next ...`, or `release` |
+
+Renew at least once a day while you hold a claim. Push before recording: an unpushed local worktree is lost to every other worker.
 
 ## Executing a task
 
-- Read the task record and its prompt, every obligation it links, the prerequisite tasks' published outputs and the applicable repository instructions. Verify relevant facts, finish research and decisions, then establish one complete ordered plan before editing. Repair conflicting authoritative documentation through a Design pull request before dependent implementation.
-- Work in a retained Git worktree of the owning repository on branch `task/<task-id>` (lower case). Title pull requests `[<TASK-ID>] <summary>` and link the task record in the body. Append to the task's open pull request rather than creating a parallel one. Several ready tasks with compatible scopes may share one pull request titled `[<TASK-ID>, <TASK-ID>] <summary>`; each keeps its own claim, ledger record and evidence, and a bundle never waits for a task that is not ready (DLV-38).
+- Take the task's self-contained prompt from its lane file under `tasks/`. Read the task record, every obligation it links, the prerequisite tasks' published outputs and the applicable repository instructions. Verify relevant facts, finish research and decisions, then establish one complete ordered plan before editing. Repair conflicting authoritative documentation through a Design pull request before dependent implementation.
+- Work in a retained Git worktree of the owning repository (for example `<repository>\.worktree\<key>`) on branch `task/<key>`. Title pull requests `[<TASK-ID>] <summary>` and put in the body the link to the task record and one claim line per task: `Claim: <TASK-ID> epoch <N> (<worker>)`. Append to the task's open pull request rather than creating a parallel one. Several ready tasks with compatible scopes may share one pull request titled `[<TASK-ID>, <TASK-ID>] <summary>`; each keeps its own claim, handoff record, ledger record and evidence, and a bundle never waits for a task that is not ready (DLV-38).
 - Before the first edit, bind the task's planned write scope to the repository's actual project and namespace layout; never rename existing packages or installation identities to match a planned path (ADP-07). Stay inside the task's write scope. Touch a declared shared resource only through its owner protocol (generated baselines are regenerated after rebase, migrations are numbered at merge, registries are appended). An undeclared conflict discovered at merge is resolved by the repository integration owner and recorded as a planning change if it will recur.
 - Consume producers only through published candidates: update the exact pin you need through a reviewed dependency change. Use only the substitutes the task lists; never register a substitute in a release composition.
 - Preserve product behavior, package IDs, signing continuity, immutable releases and unrelated work. Claiming a task never changes runtime authority: one canonical writer per store, module-owned Cloud tables and guarded cross-owner transactions stay as designed (DLV-39). A genuine architecture conflict stops the task and is raised (D-001); the claim records the blocked state.
 - If a delivered producer you pinned changes incompatibly, revalidate only the changed scope and move your pin through a reviewed change; your inputs are never rewritten while you work (DLV-36).
+- Run every CPU-heavy local build or test through the workstation build slot ([Leases, roles and the workstation build slot](#leases-roles-and-the-workstation-build-slot)).
+
+## Review, merge and fencing
+
+1. The claimant requests review with a pull request comment and records `--next "await review"`.
+2. The reviewer reviews the complete diff at one head commit and comments `Reviewed <full SHA> for [<TASK-ID>] epoch <N>: approved`, or lists findings. The claimant fixes findings and requests review of the new head, and records the approved commit with `--reviewed <SHA>`.
+3. The integration owner (the holder of `roles/integration-<repository>`; claim `integration:<Repository>` if it is vacant) confirms before merging:
+   - `show <TASK-ID>`: state `claimed`, the claimant and epoch of the pull request's claim line, and `reviewed` equal to the pull request's head commit;
+   - every retained applicable check on that head is green (repositories without CI merge after review);
+   - the shared-resource protocols are applied (rebase and regenerate baselines, allocate migration numbers, append registries).
+4. Merge only at the reviewed head, with a title that keeps the task IDs: `gh pr merge <N> --merge --match-head-commit <reviewed SHA> --subject "[<TASK-ID>] <summary> (#<N>)"` (a squash-merging repository uses `--squash` with the same subject). A head that moved after the review is reviewed again, never merged; commits pushed by an earlier epoch are reviewed by the current claimant first.
+5. The claimant records `--merge <merge SHA>`. The integration owner confirms the required post-merge job results and publication receipt, then releases the role with a note describing the queue, or keeps it while it keeps merging.
 
 ## Completing a task
 
-1. Before merging, the reviewer confirms that the pull request belongs to the claimant and epoch at the tip of the task's claim branch; a pull request from an earlier epoch is not merged. Merge the task's pull requests after review with all retained applicable checks green, and confirm any producer candidate's publication receipt.
-2. If a completion prerequisite is still open, record the task as `delivered`; it becomes `complete` when the prerequisite completes.
-3. Open a Plan pull request that adds `ledger/tasks/<TASK-ID>.md` in the [ledger format](ledger/README.md): source commits, candidate identities, validation actually performed, local runtime evidence, substitutes still in use and untested coverage. Review and merge it (this repository has no CI). Several ledger records may share one pull request.
-4. Push a final claim commit with state `complete` (or `delivered`). Package and gate acceptance records go to Design `docs/assurance` when a package closure or gate task completes.
+1. Confirm the producer candidate's publication receipt where the task publishes one.
+2. Open a Plan pull request titled `[<TASK-ID>] Record <summary>` that adds `ledger/tasks/<key>.md` in the [ledger format](ledger/README.md): `delivered` while a completion prerequisite is open, otherwise `complete`. Several records may share one pull request, each with its own file. Review it, run `python tools/delivery.py check`, and merge it through the Plan integration role (Plan has no CI).
+3. After the ledger pull request merges, record `update <ID> --worker W --epoch N --state delivered` or `--state complete`; the tool refuses until the merged ledger says so. A delivered task has no owner while it waits, so take other work.
+4. **Completion follow-up** ([DLV-41](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-41)): when `ready` lists a delivered task under completion follow-ups, any worker claims it (the next epoch), performs the task's own remaining acceptance for the scenarios its completion prerequisites name, amends the existing ledger record in place (`status: complete`, new evidence appended) through a reviewed pull request, and records `--state complete`. Upstream completion alone is not the task's acceptance.
+5. Package and gate acceptance records go to Design `docs/assurance` when a package closure or gate task completes.
 
-## Interruption, blocking and takeover
+## Interruption, handoff and recovery
 
-- The claimant resumes from the retained worktree, branch and pull request and renews the lease.
-- Another worker may take over only under the recovery conditions in [Claiming a task](#claiming-a-task): the lease expired more than one hour ago, the branch and pull request are idle, and a release request went unanswered. It appends a takeover commit with the next epoch, reviews the earlier commits before reusing them, and continues the same branch and pull request.
-- If a planning change supersedes a claimed task, the claimant pushes a `released` claim commit naming the superseding task, and the task's ledger record gets status `superseded`.
-- A blocked task records the concrete missing input in its claim. A missing prerequisite or design gap becomes a planning change: edit the Design graph, run `python tools/delivery.py generate` and `check`, and merge the Design and Plan pull requests.
+- **Your own interruption:** run `status --worker W` and continue each live claim, lease and role from its record, branch and pull request.
+- **Voluntary handoff:** push the branch, then `release <ID> --worker W --epoch N --note "handoff: <why>" --next ...`. Another worker re-claims at once (the next epoch), reviews the earlier commits and continues the same branch and pull request. Push nothing more after releasing.
+- **Recovery of an expired claim** (its worker or coordinator disappeared): `ready` and `status` show it. Take over only when the lease expired more than one hour ago, the branch and pull request show no activity since then, and a release request comment on the pull request, where one exists, has gone unanswered for at least one hour. Then `claim <ID> --worker W --takeover --reason "<those checks>"`, review the earlier commits, and continue the same branch and pull request. Leases and roles are recovered the same way, without the pull request checks.
+- **Merged but not yet recorded:** the record shows the merge commits and next actions (publication confirmation, ledger); the successor continues from there and never re-implements.
+- **Interrupted before any push:** only the record's notes survive; the successor redoes the unpushed part from them.
+- **Blocked:** record the concrete missing input. A missing prerequisite or design gap becomes a planning change (edit the Design graph, run `generate` and `check`, merge the Design and Plan pull requests); an architecture conflict is raised under D-001. If you stop while blocked, release the claim with the blocker kept in the record so the next worker sees it.
+- **Superseded:** if a planning change supersedes a claimed task, release it naming the superseding task; the ledger records it as superseded.
 
-## Coordination roles
+## Leases, roles and the workstation build slot
 
-- **Repository integration owner** (one per repository): merge order compatible with prerequisites, merging only pull requests of the current claim epoch, shared-resource protocols, generated baselines, main health and candidate publication, which may batch several ready tasks into one run. There is no family-wide merge order.
-- **Architecture Owner:** contract and design changes (PA-02) and planning changes to the graph.
-- **Release Engineering Owner:** release tasks, production signing, feeds and store pointers.
-- **Workers:** own one claimed task at a time each, or one bundle of compatible ready tasks; review may be done by any other worker or owner.
+- **Exclusive phases** ([DLV-11](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-11), [DLV-37](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-37)): a resource protocol that names an exclusive phase binds every task entering it. Today these are live runs against the deployed Cloud test environment (`RES-cloud-deployment`) or the AI deployment environment (`RES-ai-workflow-and-routes`), and the Android module-skeleton restructuring (`RES-mobile-build-config`). Take the lease only for that phase with `claim <RES-ID> --worker W --task <TASK-ID>` (you must hold the task's claim) and release it with `release <RES-ID> --worker W --epoch N --note ...` as soon as the phase ends, before waiting on review, CI or a producer. Acquire several leases in ascending resource-ID order and release all of them if one cannot be acquired. `append`, `regenerate` and `read` modes need no lease: follow the [shared-resource protocols](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/shared-resources.md).
+- **Integration roles** are claimed, renewed and released the same way (see [Review, merge and fencing](#review-merge-and-fencing)).
+- **Workstation build slot** ([DLV-31](https://github.com/ArcForges/ArcForges-Design-B/blob/main/docs/planning/delivery/README.md#rule-dlv-31)): run every CPU-heavy local build or test as `python C:\MyFile\Projects\Plan-B\tools\delivery.py build-slot run --worker W --task <TASK-ID> -- <command>`. On Windows run a batch file through `cmd /c` (for example `-- cmd /c gradlew.bat build`) and a shell script through `-- bash -lc "<script>"`. The tool holds the lock directory `%USERPROFILE%\.arcforges\build-slot` with an owner record and a heartbeat, waits while another build runs (keep coding or reviewing meanwhile), recovers a lock whose holder stopped, and releases it when the command ends. `build-slot status` shows the holder.
 
 ## Execution and validation policy
 
@@ -106,7 +148,7 @@ This policy governs every task and the adoption stage. It follows Design P2-017 
 
 ## Network and resources
 
-Use the normal network path. Do not configure proxy 7890 or another proxy. On a failed network operation, stop and report the exact operation rather than changing networking or repeatedly retrying. Do not invoke wsl.exe or WSL wrappers; use a directly available WSL terminal only if necessary. Run at most one CPU-heavy local build or test per workstation at a time and reuse existing caches; coding and review continue in parallel.
+Use the normal network path. Do not configure proxy 7890 or another proxy. On a failed network operation, stop and report the exact operation rather than changing networking or repeatedly retrying. Do not invoke wsl.exe or WSL wrappers; use a directly available WSL terminal only if necessary. Run at most one CPU-heavy local build or test per workstation at a time, through the build slot, and reuse existing caches; coding and review continue in parallel.
 
 ## Review and merge
 

@@ -1,11 +1,12 @@
 # ArcForges delivery task list
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-There is no Current task. Any number of workers may execute different ready tasks at the same time.
-Find ready tasks with `python tools/delivery.py ready`, claim one as described in `arcforges-implementation.md`,
-and paste its self-contained prompt from the lane file linked below. The order here is for reading only.
+There is no Current task. Any number of workers execute different ready tasks at the same time.
+This list is an index for reading and selection; its order is not a schedule. `python tools/delivery.py ready`
+lists what may be claimed now from the merged graph, ledger and claims. Each task's self-contained prompt is in
+the lane file linked from its section, and `arcforges-implementation.md` is the procedure.
 
-Tasks: 529 in 27 lanes, plus 58 adoption slices listed with their repository adoption task.
+Tasks: 529 in 27 lanes, plus 58 adoption slices listed in the adoption section.
 
 ## Adoption stage — [prompts](tasks/adoption.md)
 
@@ -22,6 +23,69 @@ Tasks: 529 in 27 lanes, plus 58 adoption slices listed with their repository ado
 | ADOPT.09 | Web | S | ADOPT.01 | Adopt Web |
 | ADOPT.10 | Mobile | S | ADOPT.01 | Adopt Mobile |
 | ADOPT.11 | Design | S | ADOPT.01 | Reconcile Design and Plan documentation for adoption |
+
+### Adoption slices
+
+| Slice | Repository | Size | Start prerequisites | Title (tasks it opens) |
+|---|---|---|---|---|
+| ADOPT.02.app-composition | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Application composition (6) |
+| ADOPT.02.assistant | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Embedded assistant (22) |
+| ADOPT.02.cloud | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Cloud core (2) |
+| ADOPT.02.device-bridge | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Application presence and tool bridge (3) |
+| ADOPT.02.execution | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Execution engine (9) |
+| ADOPT.02.extensions | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Extension platform and integrations (7) |
+| ADOPT.02.foundation | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Foundation values (7) |
+| ADOPT.02.governance | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Family governance and policy tests (4) |
+| ADOPT.02.native | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Native producers and probes (25) |
+| ADOPT.02.platform | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Desktop platform mechanisms (56) |
+| ADOPT.02.policy | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Dynamic policy and configuration (1) |
+| ADOPT.02.release | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Release readiness and family release (2) |
+| ADOPT.02.runtime-proofs | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Runtime proofs (4) |
+| ADOPT.02.updater | DesktopPlatform | S | ADOPT.01 | Adopt DesktopPlatform: Desktop distribution and update (8) |
+| ADOPT.03.contracts | Contracts | S | ADOPT.01 | Adopt Contracts: Contracts schema closures (22) |
+| ADOPT.03.extensions | Contracts | S | ADOPT.01 | Adopt Contracts: Extension platform and integrations (3) |
+| ADOPT.03.governance | Contracts | S | ADOPT.01 | Adopt Contracts: Family governance and policy tests (2) |
+| ADOPT.03.release | Contracts | S | ADOPT.01 | Adopt Contracts: Release readiness and family release (1) |
+| ADOPT.04.app-composition | ArcNotes | S | ADOPT.01 | Adopt ArcNotes: Application composition (2) |
+| ADOPT.04.arcnotes | ArcNotes | S | ADOPT.01 | Adopt ArcNotes: ArcNotes (35) |
+| ADOPT.04.governance | ArcNotes | S | ADOPT.01 | Adopt ArcNotes: Family governance and policy tests (1) |
+| ADOPT.04.release | ArcNotes | S | ADOPT.01 | Adopt ArcNotes: Release readiness and family release (1) |
+| ADOPT.04.runtime-proofs | ArcNotes | S | ADOPT.01 | Adopt ArcNotes: Runtime proofs (1) |
+| ADOPT.05.arcscope | ArcScope | S | ADOPT.01 | Adopt ArcScope: ArcScope (27) |
+| ADOPT.05.governance | ArcScope | S | ADOPT.01 | Adopt ArcScope: Family governance and policy tests (1) |
+| ADOPT.05.release | ArcScope | S | ADOPT.01 | Adopt ArcScope: Release readiness and family release (1) |
+| ADOPT.05.runtime-proofs | ArcScope | S | ADOPT.01 | Adopt ArcScope: Runtime proofs (1) |
+| ADOPT.05.simulator | ArcScope | S | ADOPT.01 | Adopt ArcScope: ArcScope Cloud simulator (1) |
+| ADOPT.06.arcslate | ArcSlate | S | ADOPT.01 | Adopt ArcSlate: ArcSlate (41) |
+| ADOPT.06.governance | ArcSlate | S | ADOPT.01 | Adopt ArcSlate: Family governance and policy tests (1) |
+| ADOPT.06.release | ArcSlate | S | ADOPT.01 | Adopt ArcSlate: Release readiness and family release (1) |
+| ADOPT.06.runtime-proofs | ArcSlate | S | ADOPT.01 | Adopt ArcSlate: Runtime proofs (1) |
+| ADOPT.07.ai-routing | Cloud | S | ADOPT.01 | Adopt Cloud: Workers AI routing and metering (6) |
+| ADOPT.07.cloud | Cloud | S | ADOPT.01 | Adopt Cloud: Cloud core (58) |
+| ADOPT.07.commerce | Cloud | S | ADOPT.01 | Adopt Cloud: Commerce, entitlement and credits (15) |
+| ADOPT.07.device-bridge | Cloud | S | ADOPT.01 | Adopt Cloud: Application presence and tool bridge (9) |
+| ADOPT.07.extensions | Cloud | S | ADOPT.01 | Adopt Cloud: Extension platform and integrations (1) |
+| ADOPT.07.governance | Cloud | S | ADOPT.01 | Adopt Cloud: Family governance and policy tests (1) |
+| ADOPT.07.harness | Cloud | S | ADOPT.01 | Adopt Cloud: Cloud Harness (2) |
+| ADOPT.07.operations | Cloud | S | ADOPT.01 | Adopt Cloud: Operations, support and trust and safety (9) |
+| ADOPT.07.policy | Cloud | S | ADOPT.01 | Adopt Cloud: Dynamic policy and configuration (10) |
+| ADOPT.07.release | Cloud | S | ADOPT.01 | Adopt Cloud: Release readiness and family release (3) |
+| ADOPT.07.runtime-proofs | Cloud | S | ADOPT.01 | Adopt Cloud: Runtime proofs (1) |
+| ADOPT.07.search | Cloud | S | ADOPT.01 | Adopt Cloud: Knowledge search and retrieval (8) |
+| ADOPT.07.simulator | Cloud | S | ADOPT.01 | Adopt Cloud: ArcScope Cloud simulator (9) |
+| ADOPT.08.ai-routing | AI | S | ADOPT.01 | Adopt AI: Workers AI routing and metering (5) |
+| ADOPT.08.extensions | AI | S | ADOPT.01 | Adopt AI: Extension platform and integrations (1) |
+| ADOPT.08.governance | AI | S | ADOPT.01 | Adopt AI: Family governance and policy tests (1) |
+| ADOPT.08.harness | AI | S | ADOPT.01 | Adopt AI: Cloud Harness (7) |
+| ADOPT.09.governance | Web | S | ADOPT.01 | Adopt Web: Family governance and policy tests (1) |
+| ADOPT.09.operations | Web | S | ADOPT.01 | Adopt Web: Operations, support and trust and safety (4) |
+| ADOPT.09.release | Web | S | ADOPT.01 | Adopt Web: Release readiness and family release (1) |
+| ADOPT.09.runtime-proofs | Web | S | ADOPT.01 | Adopt Web: Runtime proofs (1) |
+| ADOPT.09.web | Web | S | ADOPT.01 | Adopt Web: Web (31) |
+| ADOPT.10.android | Mobile | S | ADOPT.01 | Adopt Mobile: Android companion (26) |
+| ADOPT.10.governance | Mobile | S | ADOPT.01 | Adopt Mobile: Family governance and policy tests (1) |
+| ADOPT.10.release | Mobile | S | ADOPT.01 | Adopt Mobile: Release readiness and family release (1) |
+| ADOPT.10.runtime-proofs | Mobile | S | ADOPT.01 | Adopt Mobile: Runtime proofs (1) |
 
 ## Family governance and policy tests — [prompts](tasks/governance.md)
 

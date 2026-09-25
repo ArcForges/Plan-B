@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Android companion
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Android companion
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task AND.01 — Android production identity and stabl
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-01 (python tools/delivery.py claim AND.01 --worker <name>); task branch task/and-01 in Mobile; ledger record ledger/tasks/and-01.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: com.arcforges.mobile applicationId/namespace/source packages adopted, and a mutually compatible stable JDK21/AGP/Kotlin/Compose/Gradle tuple is pinned with wrapper checksums, version-catalog locks and generated-client compatibility evidence.
 
@@ -26,7 +28,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:app/build.gradle.kts; Mobile:app/src/main/AndroidManifest.xml; Mobile:app/src/main/kotlin/**; Mobile:gradle/libs.versions.toml; Mobile:gradle/locks/**; Mobile:gradle/verification-metadata.xml; Mobile:gradle/wrapper/gradle-wrapper.properties; Mobile:eng/policy/**; Mobile:eng/provenance/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.02, AND.04
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Windows/Linux full build, dependency-verification metadata check, package/certificate inspection under P2-017; device install and App Link fixture-key tests are local opt-in, not CI gates
@@ -39,7 +41,8 @@ Execute ArcForges delivery task AND.02 — Real Android module graph and AN01-AN
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-02 (python tools/delivery.py claim AND.02 --worker <name>); task branch task/and-02 in Mobile; ledger record ledger/tasks/and-02.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: The arch-27 module set (app, core/domain, core/data, core/network, core/security, core/designsystem, feature/home, feature/chat, feature/tasks, feature/library, feature/settings) exists as enforced Gradle modules with typed AN01-AN25 navigation/state contracts; features depend only on typed core ports.
 
@@ -53,7 +56,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:settings.gradle.kts; Mobile:build.gradle.kts; Mobile:core/domain/**; Mobile:core/data/**; Mobile:core/network/**; Mobile:core/security/**; Mobile:core/designsystem/**; Mobile:feature/home/**; Mobile:feature/chat/**; Mobile:feature/tasks/**; Mobile:feature/library/**; Mobile:feature/settings/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (exclusive): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (exclusive): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.03, AND.04, AND.05
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Architecture/import boundary tests (no React Native/iOS/AGPL imports, no cross-module leakage) as offline static checks; targeted offline unit tests per module
@@ -65,7 +68,8 @@ Execute ArcForges delivery task AND.03 — Android runtime and OS adapters (Comp
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-03 (python tools/delivery.py claim AND.03 --worker <name>); task branch task/and-03 in Mobile; ledger record ledger/tasks/and-03.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: arm64 release / x64 emulator adapters for Compose, Credential Manager/passkey fallback, Keystore, WorkManager, FCM with non-GMS fallback, and SAF/MediaStore/FileProvider exist in core/security, core/data and core/network, with no unsafe fallback path.
 
@@ -79,7 +83,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:core/security/**; Mobile:core/data/**; Mobile:core/network/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.06, AND.07, AND.08, AND.12
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Targeted offline unit tests for adapter contracts; install-on-real-device, permission-refusal, process-death and missing-Play-services scenarios are local opt-in under P2-017, not CI
@@ -92,7 +96,8 @@ Execute ArcForges delivery task AND.04 — Published gRPC-Web contract consumpti
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-04 (python tools/delivery.py claim AND.04 --worker <name>); task branch task/and-04 in Mobile; ledger record ledger/tasks/and-04.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: core/network wraps the pinned contracts-proto/contracts-connect-client Maven artifacts behind typed session/stream/retry/exact-value adapters, explicitly selecting binary gRPC-Web.
 
@@ -110,7 +115,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] CLOUD.21: publicly deployed Cloud host serving the generated business RPC surface
 
 Permitted write scope: Mobile:core/network/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.07, AND.08, AND.09, AND.10, AND.11, AND.12
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Targeted offline codec/adapter unit tests; real device/service calls against a deployed Cloud host are local opt-in evidence, not a CI gate (matches CloudHelloClient's existing pattern)
@@ -123,7 +128,8 @@ Execute ArcForges delivery task AND.05 — Room history, drafts, outbox and rece
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-05 (python tools/delivery.py claim AND.05 --worker <name>); task branch task/and-05 in Mobile; ledger record ledger/tasks/and-05.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Room schemas (local_schema, scope_partition, projection, draft, outbox, transfer, cursor, preferences) implement per-profile partitions with a durable, bounded, never-silently-evicted outbox; local canonical history is not evictable cache.
 
@@ -138,7 +144,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:core/data/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.07, AND.08, AND.09, AND.10, AND.11
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline Room migration/instrumented-on-emulator-or-device tests for crash recovery, capacity refusal and atomic outbox writes; local opt-in for real-device runs under P2-017
@@ -151,7 +157,8 @@ Execute ArcForges delivery task AND.06 — Secure per-account lifecycle: Keystor
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-06 (python tools/delivery.py claim AND.06 --worker <name>); task branch task/and-06 in Mobile; ledger record ledger/tasks/and-06.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Per-account Keystore-encrypted secret/pending-store policy, session/logout/revoke purge vs unsent-work quarantine/export, same-generation deep-link validation and current-foreground consent are implemented in core/security.
 
@@ -176,7 +183,8 @@ Execute ArcForges delivery task AND.07 — Foundation integration evidence: real
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-07 (python tools/delivery.py claim AND.07 --worker <name>); task branch task/and-07 in Mobile; ledger record ledger/tasks/and-07.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: A candidate APK is built, installed clean and exercises real sign-in/hydration/upload/reconnect on a physical device against actually deployed Cloud identity/API/realtime/sync; any Task/AI fixtures still present are named and confirmed compiled out of production before WP31.
 
@@ -213,7 +221,8 @@ Execute ArcForges delivery task AND.08 — Authentication, Home and workspace (A
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-08 (python tools/delivery.py claim AND.08 --worker <name>); task branch task/and-08 in Mobile; ledger record ledger/tasks/and-08.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: System authentication, five-destination navigation and per-device application selection are complete with real Cloud identity/presence and explicit history disclosure.
 
@@ -242,7 +251,8 @@ Execute ArcForges delivery task AND.09 — Conversations and context (AN07-AN10/
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-09 (python tools/delivery.py claim AND.09 --worker <name>); task branch task/and-09 in Mobile; ledger record ledger/tasks/and-09.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Native composer/IME/branch/context, history modes/promotion and real binary output streams work end-to-end for own-application scope, with no desktop local-history access.
 
@@ -270,7 +280,8 @@ Execute ArcForges delivery task AND.10 — Tasks, approvals and automation (AN11
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-10 (python tools/delivery.py claim AND.10 --worker <name>); task branch task/and-10 in Mobile; ledger record ledger/tasks/and-10.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Task/approval/automation surfaces enforce action, risk, credit-consent and consumption-only rules with one real owner outcome/settlement per command.
 
@@ -299,7 +310,8 @@ Execute ArcForges delivery task AND.11 — Library and resources (AN14-AN18/22).
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-11 (python tools/delivery.py claim AND.11 --worker <name>); task branch task/and-11 in Mobile; ledger record ledger/tasks/and-11.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Native preview/import/export/transfer flows handle missing/denied/unsupported states with correct local/cloud copy and deletion semantics.
 
@@ -326,7 +338,8 @@ Execute ArcForges delivery task AND.12 — Presence, push, links and settings (A
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-12 (python tools/delivery.py claim AND.12 --worker <name>); task branch task/and-12 in Mobile; ledger record ledger/tasks/and-12.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Presence/push/deep-link/settings surfaces stay usable through declared polling/notification fallback, with no purchase/store billing surface and no exposure of a revoked resource on background reconnect.
 
@@ -345,7 +358,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] AND.07: foundation candidate proven against the deployed Cloud services
 
 Permitted write scope: Mobile:feature/settings/**; Mobile:core/network/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.13, AND.15, AND.19, AND.26
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Offline notification-dedup/registration unit tests; physical-device push receipt, Doze/background behavior and no-GMS fallback are local opt-in per PG-24
@@ -357,7 +370,8 @@ Execute ArcForges delivery task AND.13 — Native interaction and recovery: full
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-13 (python tools/delivery.py claim AND.13 --worker <name>); task branch task/and-13 in Mobile; ledger record ledger/tasks/and-13.md.
 Kind/size: integration/L. Baseline: not-started.
 Outcome: The complete phone/tablet/back/IME/TalkBack/large-text/process-death/account-switch/denied-permission/no-GMS matrix from experience 02 passes against real services on a release APK, preserving typed effect uncertainty and drafts.
 
@@ -387,7 +401,8 @@ Execute ArcForges delivery task AND.14 — Scope and licence enforcement audit.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-14 (python tools/delivery.py claim AND.14 --worker <name>); task branch task/and-14 in Mobile; ledger record ledger/tasks/and-14.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: Full companion requirements, consumption-only restrictions, public-Maven-only imports, and absence of desktop secrets/device-local paths/excluded professional-editing surfaces are verified with complete provenance.
 
@@ -404,7 +419,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:eng/policy/**; Mobile:eng/provenance/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.15
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Package content/dependency/privacy static checks plus full surface-action inventory cross-check, offline
@@ -416,7 +431,8 @@ Execute ArcForges delivery task AND.15 — Complete companion acceptance.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-15 (python tools/delivery.py claim AND.15 --worker <name>); task branch task/and-15 in Mobile; ledger record ledger/tasks/and-15.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: A signed candidate joins real 31.00-31.06 evidence with producer manifests and the full compatible 52/26/25/42/45 integration manifest, verified through injected-failure scenarios with exact device/OS/server/worker/package identities.
 
@@ -448,7 +464,8 @@ Execute ArcForges delivery task AND.16 — Signed Android release artifacts (AAB
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-16 (python tools/delivery.py claim AND.16 --worker <name>); task branch task/and-16 in Mobile; ledger record ledger/tasks/and-16.md.
 Kind/size: release/S. Baseline: not-started.
 Outcome: AAB (Play) and a separately signed direct APK build automatically from reviewed main with monotonic versionCode, immutable provenance and tested WP03 update-schema compatibility.
 
@@ -474,7 +491,8 @@ Execute ArcForges delivery task AND.17 — Release runtime inspection.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-17 (python tools/delivery.py claim AND.17 --worker <name>); task branch task/and-17 in Mobile; ledger record ledger/tasks/and-17.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: Kotlin/ART, Compose/public grpc-lite closure, min/target API, arm64 assets, R8 rules and required permissions are verified on the actual signed APK/AAB, not source inspection.
 
@@ -499,7 +517,8 @@ Execute ArcForges delivery task AND.18 — Dependency and source rights closure 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-18 (python tools/delivery.py claim AND.18 --worker <name>); task branch task/and-18 in Mobile; ledger record ledger/tasks/and-18.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: Direct/transitive Gradle/plugin/runtime/asset closure, licences, provenance and reproducible SBOM/NOTICE are audited against the final companion candidate; public schema/tooling Apache origin and independently original app implementation are verified.
 
@@ -513,7 +532,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:eng/policy/**; Mobile:eng/provenance/**; Mobile:third-party/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.23
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Forbidden-licence fixture, unpinned/dynamic dependency and changed-checksum rejection tests, offline
@@ -525,7 +544,8 @@ Execute ArcForges delivery task AND.19 — Consumption-only enforcement.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-19 (python tools/delivery.py claim AND.19 --worker <name>); task branch task/and-19 in Mobile; ledger record ledger/tasks/and-19.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: Absence of purchase buttons/embedded checkout/store billing/external purchase CTAs/licence-key unlock is enforced by static route/dependency checks and exercised across every state including expired subscription and exhausted credits.
 
@@ -554,7 +574,8 @@ Execute ArcForges delivery task AND.20 — Play and direct-channel signed update
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-20 (python tools/delivery.py claim AND.20 --worker <name>); task branch task/and-20 in Mobile; ledger record ledger/tasks/and-20.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: arch-11 channel behavior and a notify-only signed update client are complete, consuming WP03's format/fixture keys now; channel-switch export/reinstall guidance is explicit.
 
@@ -568,7 +589,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:core/network/**; Mobile:feature/settings/**
-Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
+Shared resources (follow the owner protocol): RES-mobile-build-config (append): The module skeleton task registers all modules once and holds the lease `leases/res-mobile-build-config` while it restructures the build; later tasks edit only their module; catalog entries are appended and locks regenerated after rebase; dependency additions carry admission receipts.
 Unblocks: AND.23
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Expired/rollback/wrong-certificate/URL/hash and offline-stale-feed tests, offline where feasible
@@ -581,7 +602,8 @@ Execute ArcForges delivery task AND.21 — Physical device and recovery gates.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-21 (python tools/delivery.py claim AND.21 --worker <name>); task branch task/and-21 in Mobile; ledger record ledger/tasks/and-21.md.
 Kind/size: integration/L. Baseline: not-started.
 Outcome: Full companion runs on minimum-supported and current physical-device profiles across weak/offline network, permission denial, no-GMS, key-loss/backup-restore, process kill and OS background limits; forward-rescue release with a higher versionCode is proven (Android never downgrades as routine rollback).
 
@@ -606,7 +628,8 @@ Execute ArcForges delivery task AND.22 — Android scope statement.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-22 (python tools/delivery.py claim AND.22 --worker <name>); task branch task/and-22 in Mobile; ledger record ledger/tasks/and-22.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: Documentation and store/release/readme/platform matrices state Android-only scope; iOS/Swift/KMP/cross-platform UI are recorded as outside this delivery with no false retained-iOS claim.
 
@@ -632,7 +655,8 @@ Execute ArcForges delivery task AND.23 — Distribution acceptance.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-23 (python tools/delivery.py claim AND.23 --worker <name>); task branch task/and-23 in Mobile; ledger record ledger/tasks/and-23.md.
 Kind/size: release/M. Baseline: not-started.
 Outcome: The exact signed APK/AAB, manifest/hash/versionCode/certificate identity, compatible server/Contracts release and all gate receipts are archived and published through the automatic main graph; a clean-device download verifies signature/hash and exercises actual services.
 
@@ -664,7 +688,8 @@ Execute ArcForges delivery task AND.24 — Real CF Harness generation/tool loop 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-24 (python tools/delivery.py claim AND.24 --worker <name>); task branch task/and-24 in Mobile; ledger record ledger/tasks/and-24.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: real admitted generation, tool proposal and automation execution replace the contract-bound fixture turn endpoint on a physical device
 
@@ -693,7 +718,8 @@ Execute ArcForges delivery task AND.25 — Real desktop tool dispatch and unknow
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-25 (python tools/delivery.py claim AND.25 --worker <name>); task branch task/and-25 in Mobile; ledger record ledger/tasks/and-25.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: an Android-initiated remote task actually reaches a desktop through the durable bridge with correct lease/grant/reconciliation semantics
 
@@ -725,7 +751,8 @@ Execute ArcForges delivery task AND.26 — Real FCM sending and physical Android
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\android.md (anchor task-and-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/and-26 (python tools/delivery.py claim AND.26 --worker <name>); task branch task/and-26 in Mobile; ledger record ledger/tasks/and-26.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: PG-24: a project-bound FCM credential actually sends and a physical arm64 device actually receives, including duplicate/rotation/revocation and denied-permission/no-GMS recovery
 

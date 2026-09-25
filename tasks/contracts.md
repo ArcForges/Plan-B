@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Contracts schema closures
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Contracts schema closures
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task CON.01 — Shard contended eng inventory/constra
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-01 (python tools/delivery.py claim CON.01 --worker <name>); task branch task/con-01 in Contracts; ledger record ledger/tasks/con-01.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: public/proto/constraints.json and internal/proto/constraints.json are split into small per-domain shard files (mirroring the already-proven fixtures/public/wp03-NN.json pattern) merged by eng/contracts.py; eng/contract-packages.json and eng/foundation-inventory.json gain a documented append protocol; a short CONTRIBUTING note fixes the single Contracts integration owner who serially merges CON.* branches.
 
@@ -38,7 +40,8 @@ Execute ArcForges delivery task CON.02 — Capability/action/context/version/hea
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-02 (python tools/delivery.py claim CON.02 --worker <name>); task branch task/con-02 in Contracts; ledger record ledger/tasks/con-02.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: CapabilityDescriptor, ActionDescriptor, ContextProvider/ContextDescriptor, CompatibilityDescriptor/ContractVersion/FeatureSet and HealthSnapshot/InstancePresence/InstanceHealth/InstanceReadiness records (architecture 02-contracts-and-protocols.md §4/5/6/11/12 domain model) are generated in Foundation or PublicApi as appropriate, plus EncodedBodyRef (registry04 §4) wired into every ResponseMeta.value oneof tag-4 read projection; independent positive/negative fixtures cover descriptor shape and the >4MiB large-read-projection envelope (messageType/descriptorHash/byteLength/snapshotToken/ResourceVersionRef SHA256 check before decode).
 
@@ -65,7 +68,8 @@ Execute ArcForges delivery task CON.03 — Resource/Sync owner-body admission: c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-03 (python tools/delivery.py claim CON.03 --worker <name>); task branch task/con-03 in Contracts; ledger record ledger/tasks/con-03.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: A generated/schema-derived validator enforces that Sync (registry04 §10) accepts client-origin writes only for NotebookBody/NotesDocument/PropertyDefinition/SavedViewRecord/TagRecord and authorized ScopeMetadata/SlateMetadata (AggregateBody's Cloud-writable subset), refusing TaskSnapshot/AutomationView/ConversationBody/AgentProfile/SkillRecord/ChatProjectRecord/MemoryRecord/PreferenceRecord as client writes (Cloud-authored-only); externalBody indirection resolves to the same allowlist before validation. Independent negative vectors cover cross-owner reference, wrong-revision precondition, opaque/unknown AggregateBody variant, and forbidden-path (non-allowlisted body kind) attempts, plus compatible unknown-response preservation.
 
@@ -92,7 +96,8 @@ Execute ArcForges delivery task CON.04 — ContentSandbox service schema (24 met
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-04 (python tools/delivery.py claim CON.04 --worker <name>); task branch task/con-04 in Contracts; ledger record ledger/tasks/con-04.md.
 Kind/size: contract/L. Baseline: not-started.
 Outcome: internal/proto/arcforges/local/sandbox/v1/sandbox.proto has the complete ContentSandboxService with all 24 methods, generated into ArcForges.Contracts.LocalRpc.Sandbox; wrong-child-direction/removed-method/cross-product-registration negative fixtures pass; policy test asserts every method carries the generated service/descriptor identity (CA rule).
 
@@ -120,7 +125,8 @@ Execute ArcForges delivery task CON.05 — Extension/Connector/LocalBootstrap se
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-05 (python tools/delivery.py claim CON.05 --worker <name>); task branch task/con-05 in Contracts; ledger record ledger/tasks/con-05.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: Public ExtensionHostService gains Handshake/Invoke/Stop (Handshake already partially scoped by extensions.proto's ExtensionLease); internal LocalBootstrapService (platform/v1) and ConnectorBroker are generated with the exact bootstrap transcript (HMAC-SHA256 challenge/confirm, one-use 32-byte secret) and connector state machine from annex09 §§2,6; IHubRegistry/IHubRouting/DeviceSsoBrokerService names are reserved in a retirement manifest and asserted absent from active service registration by a structural test.
 
@@ -148,7 +154,8 @@ Execute ArcForges delivery task CON.06 — Product in-process port completion: I
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-06 (python tools/delivery.py claim CON.06 --worker <name>); task branch task/con-06 in Contracts; ledger record ledger/tasks/con-06.md.
 Kind/size: contract/L. Baseline: not-started.
 Outcome: Every method in manifest11's 'in-process' scope class (ICapabilityProvider, IContextProvider, IArtifactHandler, IResourceAccess, IProductLifecycle, IDeepLinkTarget, INotesOperations [26 methods], IScopeOperations [13], ISlateOperations [19], IChatOperations [8]) is generated as a typed request/result pair per registry04 §6, with product-port packages containing only in-process records (no listener/gRPC registration) and a policy test proving that.
 
@@ -176,7 +183,8 @@ Execute ArcForges delivery task CON.07 — Identity/session/device operation reg
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-07 (python tools/delivery.py claim CON.07 --worker <name>); task branch task/con-07 in Contracts; ledger record ledger/tasks/con-07.md.
 Kind/size: contract/L. Baseline: not-started.
 Outcome: IdentityService/WorkspaceService/DeviceService are generated with all listed operations, exact request/response field tags, and the eight authorization fields exported per operation; GET /session/v1/native/authorize, POST /session/v1/native/token and the four /session/v1 browser routes have generated strict-JSON exception schemas (reusing WP03.02's JsonSerializerContext posture); independent fixtures cover the identity journeys table in contracts07 §1 (account creation, email/passkey/OIDC login, recovery, step-up, refresh, logout, PAT).
 
@@ -203,7 +211,8 @@ Execute ArcForges delivery task CON.08 — Entitlement/commerce operation regist
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-08 (python tools/delivery.py claim CON.08 --worker <name>); task branch task/con-08 in Contracts; ledger record ledger/tasks/con-08.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: EntitlementService/CommerceService generated with all listed operations and exact fields; every operation is tagged compatibility-class=frozen per CC-04; independent fixtures cover the closed condition set's entitlement.*/commerce.* error rows.
 
@@ -230,7 +239,8 @@ Execute ArcForges delivery task CON.09 — Sync/resource-transfer/objects operat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-09 (python tools/delivery.py claim CON.09 --worker <name>); task branch task/con-09 in Contracts; ledger record ledger/tasks/con-09.md.
 Kind/size: contract/L. Baseline: not-started.
 Outcome: SyncService/ResourceService/TransferService generated with all listed operations; SyncService.pushChange/pushBatch enforce CON.03's mutation allowlist at the schema-validator boundary; realm-transfer.v1's included/excluded-roots manifest and chunked-batch (<=100 roots) semantics are schema-encoded per contracts07 §5.
 
@@ -257,7 +267,8 @@ Execute ArcForges delivery task CON.10 — Task/approval/bridge/chat/agent/autom
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-10 (python tools/delivery.py claim CON.10 --worker <name>); task branch task/con-10 in Contracts; ledger record ledger/tasks/con-10.md.
 Kind/size: contract/L. Baseline: not-started.
 Outcome: All listed public services generated with exact fields and eight authorization fields; @arcforges/ai-internal and CloudInternal gain the ~15 internal/ai/v1 HTTP port schemas (authorize/claim/renew/reconcile/context/model-intent/model-outcome/settle/prepare-tools/cloud-tool/wait/finalize/stream-state/late-outcome + the inference-job family) from contracts05 §3/§8 as closed JSON records with CommitReceipt-style semantics.
 
@@ -285,7 +296,8 @@ Execute ArcForges delivery task CON.11 — Application/history/execution/events 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-11 (python tools/delivery.py claim CON.11 --worker <name>); task branch task/con-11 in Contracts; ledger record ledger/tasks/con-11.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: ApplicationService/HistoryService/ExecutionService/EventService generated with all 13+1 operations, RequestMeta.applicationScope(8)/historyMode(11) and ToolRequest.targetApplication(16) appended without renumbering existing fields; the 17 EventService.Poll hint payloads (sync.changed through config.revisionActivated) generated from one event registry; binary server-streaming frames validated at 32KiB/frame; reserved future Hub/DeviceSso methods verified absent from active registration.
 
@@ -313,7 +325,8 @@ Execute ArcForges delivery task CON.12 — Extension and policy schemas: manifes
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-12 (python tools/delivery.py claim CON.12 --worker <name>); task branch task/con-12 in Contracts; ledger record ledger/tasks/con-12.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: The five contracts08 schema families are authored as closed JSON schemas (manifest.v1/workflow.v1/panel.v1 under public/http or a dedicated extensions schema path; policy body.v1 and configuration.v1 under public/http and internal/ai-http respectively) with generated C#/TS validators; independent vectors cover malformed archive, permission expansion, revoke-during-work, private-schema-rollback-refusal and the deterministic bucket-assignment hash vectors from contracts08 §5.
 
@@ -340,7 +353,8 @@ Execute ArcForges delivery task CON.13 — Package catalog operation registry (C
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-13 (python tools/delivery.py claim CON.13 --worker <name>); task branch task/con-13 in Contracts; ledger record ledger/tasks/con-13.md.
 Kind/size: contract/S. Baseline: not-started.
 Outcome: arcforges.catalog.v1 generated with the 7 public CatalogService operations and their records; DNS TXT publisher-verification challenge format and the PAT-eligible subset (catalog.search/getPackage/listVersions/submitVersion/getSubmission per catalogue00's PAT allowlist) are schema-encoded.
 
@@ -367,7 +381,8 @@ Execute ArcForges delivery task CON.14 — Operator control service (OperatorSer
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-14 (python tools/delivery.py claim CON.14 --worker <name>); task branch task/con-14 in Contracts; ledger record ledger/tasks/con-14.md.
 Kind/size: contract/L. Baseline: not-started.
 Outcome: internal/proto/arcforges/operator/v1/operator.proto generated with all 29 OperatorService methods (ListCases through catalog.review/catalog.revoke), OperatorCallContext(tag100)/OperatorProposalRef(tag101) appended per method, and the typed propose/approve/execute protocol (§9.2) with its 9 mutation-variant table rows (grant/revokeGrant/issueCredit/adjustCredit/refund/catalogReview/catalogRevoke/appeal/kill); independent negative vectors cover distinct-approver violation, stale hash/revision/configuration, role revocation, expiry, concurrent consumption and lost receipt; no direct SQL or public-SDK import of operator schema.
 
@@ -395,7 +410,8 @@ Execute ArcForges delivery task CON.15 — Cloudflare-internal HTTP bindings (AI
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-15 (python tools/delivery.py claim CON.15 --worker <name>); task branch task/con-15 in Contracts; ledger record ledger/tasks/con-15.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: The remaining ~15 contracts05 internal HTTP ports and their records are generated as closed JSON schemas in internal/ai-http/v1/schema.json (or a dedicated internal/cf-http/v1 if the CON.10 file is already large), reusing WP03.02's strict-JSON posture; independent vectors cover duplicate dispatch, lease takeover, R2 part mismatch and stale-epoch rejection per contracts05 §7's injection list (schema-level only — no live Worker).
 
@@ -422,7 +438,8 @@ Execute ArcForges delivery task CON.16 — Signed catalog/update/realm formats (
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-16 (python tools/delivery.py claim CON.16 --worker <name>); task branch task/con-16 in Contracts; ledger record ledger/tasks/con-16.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: The four signed-format schemas are authored under public/http (or a dedicated signed-formats path) with canonical signing-vector fixtures and a deterministic fixture-only trust root (Ed25519, distinct from any production key); malformed/expired/rollback/mixed-shard negative vectors exist per WP-03.07's gate; android-update.v1 matches registry04's tail-section field list exactly (packageId/channel/versionName/versionCode-as-string/minSdk/minSupportedVersionCode/apkUrl/sha256/size/signingCertificateSha256/releaseNotesUrl/publishedAt, expiry<=7 days).
 
@@ -450,7 +467,8 @@ Execute ArcForges delivery task CON.17 — Cross-language compatibility window +
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-17 (python tools/delivery.py claim CON.17 --worker <name>); task branch task/con-17 in Contracts; ledger record ledger/tasks/con-17.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: A canonical-semantic-hash implementation (per registry04 §2's exact algorithm: sorted ASCII property names, canonical integer/decimal strings, NFC where required) exists in C#/TS with shared golden vectors; a compatibility-matrix test harness runs previous-published-client-assembly against current server and current client against a pinned minimum-server descriptor set, both directions; deliberate deletion/tag-reuse/type-change mutations are injected and must fail the baseline-diff gate before publication.
 
@@ -477,7 +495,8 @@ Execute ArcForges delivery task CON.18 — Operation-scope manifest + authorizat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-18 (python tools/delivery.py claim CON.18 --worker <name>); task branch task/con-18 in Contracts; ledger record ledger/tasks/con-18.md.
 Kind/size: contract/S. Baseline: not-started.
 Outcome: A generator/policy-test tool reads manifest11's ~380-row scope-class table as its oracle, cross-references every currently-registered service method's exported eight authorization fields (capability/risk/approval/stepUp/localPresence/egress/patEligible/actorKinds), and fails the build on any unclassified, ambiguous, or nonexistent-idempotency-example method, or any tool reachability of a human-only approval/credential/commerce/policy method.
 
@@ -504,7 +523,8 @@ Execute ArcForges delivery task CON.19 — WP03.90 — verify the owned Contract
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-19 (python tools/delivery.py claim CON.19 --worker <name>); task branch task/con-19 in Contracts; ledger record ledger/tasks/con-19.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: Deterministic generation, compatibility/reserved-field checks (CON.17's harness), Apache closure, and independent precise-value/error/profile vectors all pass across the complete CON.02-CON.18 closure; all three generated client ecosystems (NuGet, npm, Maven/Kotlin) restore the actual published candidate artifacts in isolated consumer tests; the WP-03.90 completion receipt records exact artifact identities and real-vs-fixture status per obligation.
 
@@ -551,7 +571,8 @@ Execute ArcForges delivery task CON.20 — Notes public operation registry.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-20 (python tools/delivery.py claim CON.20 --worker <name>); task branch task/con-20 in Contracts; ledger record ledger/tasks/con-20.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: NotesService is generated with all notes.* operations (notebooks, folders, documents, revisions, checkpoints, restore and requestExport), exact fields, authorization profiles and independent vectors in C#, TypeScript and Kotlin.
 
@@ -578,7 +599,8 @@ Execute ArcForges delivery task CON.21 — Simulation operation registry.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-21 (python tools/delivery.py claim CON.21 --worker <name>); task branch task/con-21 in Contracts; ledger record ledger/tasks/con-21.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: SimulationService is generated with all simulation.* operations (definitions, scenario versions, run control, segments, segment tickets and state polling), exact fields and vectors in C#, TypeScript and Kotlin.
 
@@ -605,7 +627,8 @@ Execute ArcForges delivery task CON.22 — Account support, notification, data, 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-22 (python tools/delivery.py claim CON.22 --worker <name>); task branch task/con-22 in Contracts; ledger record ledger/tasks/con-22.md.
 Kind/size: contract/M. Baseline: not-started.
 Outcome: Support case, notification and push registration, data export request/state, preference, policy bundle and export-job status/cancel/download operations are generated with exact fields, authorization profiles and vectors in C#, TypeScript and Kotlin.
 
@@ -632,7 +655,8 @@ Execute ArcForges delivery task CON.90 — WP03.00 — split project structure (
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-90).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-90 (python tools/delivery.py claim CON.90 --worker <name>); task branch task/con-90 in Contracts; ledger record ledger/tasks/con-90.md.
 Kind/size: contract/M. Baseline: accepted.
 Outcome: 22 package identities (14 NuGet/5 npm/3 Maven) exist as real source-bearing projects with generators wired; native-grpc-only contracts-client retired from new publication.
 
@@ -658,7 +682,8 @@ Execute ArcForges delivery task CON.91 — WP03.01 — foundation contract types
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-91).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-91 (python tools/delivery.py claim CON.91 --worker <name>); task branch task/con-91 in Contracts; ledger record ledger/tasks/con-91.md.
 Kind/size: contract/L. Baseline: accepted.
 Outcome: 148 records (32 Foundation incl. ResourceRef/ResourceVersionRef/BlobRef/ArtifactRef/ContentOrigin, 116 PublicApi incl. all 16 AggregateBody branches) generated with safe value wrappers; 476 C#/TS conformance cases pass.
 
@@ -684,7 +709,8 @@ Execute ArcForges delivery task CON.92 — WP03.02 — serialization posture (ac
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\contracts.md (anchor task-con-92).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/con-92 (python tools/delivery.py claim CON.92 --worker <name>); task branch task/con-92 in Contracts; ledger record ledger/tasks/con-92.md.
 Kind/size: contract/M. Baseline: accepted.
 Outcome: Google.Protobuf/protobuf-es are the only business serializers; decode limits (4MiB/256KiB/32KiB/64MiB), strict HTTP-exception JSON codecs, explicit service catalogues, forbidden-serializer policy gate and a test-only Native AOT probe (13 libraries, Linux CI + Windows local) all pass.
 
