@@ -2134,6 +2134,17 @@ def slot_release(token: str) -> None:
             pass
 
 
+def windows_batch(cmd: list[str]) -> list[str]:
+    """Run a Windows batch file (gradlew.bat) through cmd /c by its full path. Workstations that set
+    NoDefaultCurrentDirectoryInExePath do not search the current directory for commands."""
+    if os.name != 'nt' or not cmd[0].lower().endswith(('.bat', '.cmd')):
+        return cmd
+    exe = Path(cmd[0])
+    if not exe.is_absolute() and (Path.cwd() / exe).is_file():
+        exe = Path.cwd() / exe
+    return ['cmd', '/c', str(exe), *cmd[1:]]
+
+
 def cmd_build_slot(args) -> int:
     path = slot_path()
     if args.action == 'status':
@@ -2158,6 +2169,7 @@ def cmd_build_slot(args) -> int:
         cmd = cmd[1:]
     if not cmd:
         raise Fail('give the command after --')
+    cmd = windows_batch(cmd)
     token = slot_acquire(worker, args.task, args.minutes, args.wait_minutes, ' '.join(cmd))
     stop = threading.Event()
 
