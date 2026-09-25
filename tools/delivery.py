@@ -852,10 +852,15 @@ def render_lane(g: Graph, lane: dict) -> str:
     if lane['id'] == 'adoption' and g.slices:
         out.append('## Adoption slices')
         out.append('')
-        out.append('Each slice classifies the tasks of one repository and lane against the frozen baseline and opens '
-                   'exactly those tasks when it is recorded ([DLV-22](../README.md#rule-dlv-22)). Slices are claimed and '
-                   'recorded separately (claim `claims/adopt-NN-<lane>`, record `ledger/tasks/adopt-NN-<lane>.md`); one '
-                   'reviewed pull request may carry several. The repository adoption task records the repository-wide '
+        out.append('Each slice classifies the tasks of one repository and lane against the frozen baseline and, when it is '
+                   'recorded, opens those tasks except the ones it classifies as inherited ([DLV-22](../README.md#rule-dlv-22)). '
+                   'Slices are claimed and recorded separately (claim `claims/adopt-NN-<lane>`, record '
+                   '`ledger/tasks/adopt-NN-<lane>.md`); one reviewed pull request may carry several. Every task a slice '
+                   'classifies as inherited, including each accepted-baseline task in its scope, also gets its own record '
+                   '`ledger/tasks/<key>.md` with `status: inherited` '
+                   '([ledger records produced by adoption](../adoption.md#3-ledger-records-produced-by-adoption)) in the '
+                   'same pull request as the slice record, so it never becomes ready; a task inherited with adjustment '
+                   'opens with its remaining scope. The repository adoption task records the repository-wide '
                    'facts and closes after all of its slices.')
         out.append('')
         out.append('| Slice | Repository | Lane | Tasks it opens | Accepted baseline in scope | Repository record |')
@@ -1179,8 +1184,9 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
             own_slices = sorted(s for s, v in g.slices.items() if v['adoptionTask'] == t['id'])
             if own_slices:
                 b.append('Adoption slices (claim, review and record each separately as ledger/tasks/<slice key>.md, for example '
-                         f'ledger/tasks/{key_of(own_slices[0])}.md; one pull request may carry several; each slice opens only '
-                         'its own repository lane; each has its own prompt under "Adoption slices" below):')
+                         f'ledger/tasks/{key_of(own_slices[0])}.md, plus one ledger/tasks/<key>.md with status inherited per '
+                         'task it classifies as inherited; one pull request may carry several; each slice opens only its own '
+                         'repository lane; each has its own prompt under "Adoption slices" below):')
                 for sid in own_slices:
                     scope = g.slice_tasks(sid)
                     acc = sum(1 for x in scope if g.tasks[x]['baseline']['state'] == 'accepted')
@@ -1252,14 +1258,23 @@ def render_slice_prompt(g: Graph, sid: str, design_win: str, plan_win: str) -> l
         'Tasks in scope (classify each exactly once as inherited, inherited with adjustment, gap or conflicting under ADP-02, '
         'using only reviewed evidence under ADP-03; bind planned write scopes to the actual layout under ADP-07):',
         '- ' + (', '.join(scope) if scope else 'none'),
-        f'Opens when the record is merged: {", ".join(opens) if opens else "no task"}.'
-        + (f' Accepted-baseline tasks recorded as inherited, each with its own ledger/tasks/<key>.md: {", ".join(accepted)}.' if accepted else ''), '',
-        'Permitted write scope: Plan:ledger/tasks/' + k + '.md' + ''.join(f'; Plan:ledger/tasks/{key_of(x)}.md' for x in accepted),
+        'Opens when the record is merged: '
+        + (f'{", ".join(opens)}, except any task this slice classifies as inherited.' if opens else 'no task.')
+        + ' Every task classified as inherited'
+        + (f', including the accepted-baseline tasks {", ".join(accepted)},' if accepted else '')
+        + ' gets its own ledger/tasks/<key>.md with status inherited (<key> is the task ID in lower case with dots replaced '
+        'by hyphens) in the same pull request as the slice record, so it never becomes ready. A task inherited with '
+        'adjustment gets no such record and opens with its remaining scope.', '',
+        'Permitted write scope: Plan:ledger/tasks/' + k + '.md' + ''.join(f'; Plan:ledger/tasks/{key_of(x)}.md' for x in accepted)
+        + f'; Plan:ledger/tasks/<key>.md (status inherited) for each {"other " if accepted else ""}task in scope classified '
+        'as inherited',
         'Validation (P2-017, ADP-06): review of merged source, retained CI results and receipts only; no builds, downloads '
         'or runtime checks.',
         'Completion evidence for the ledger: one row per task in scope with classification, evidence references, bound write '
-        'scope, remaining scope, conflicts raised under D-001 and blockers; adjustments that fit no existing task become a '
-        'planning change. Do not execute implementation tasks during adoption.',
+        'scope, remaining scope, conflicts raised under D-001 and blockers; for each task classified as inherited, its own '
+        'record with status inherited naming the obligation parts satisfied, the receipts and source commits relied on and '
+        'the untested coverage carried forward; adjustments that fit no existing task become a planning change. Do not '
+        'execute implementation tasks during adoption.',
         '```']
 
 

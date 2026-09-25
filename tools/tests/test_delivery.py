@@ -239,6 +239,33 @@ class DeliveryTests(unittest.TestCase):
         self.assertIn('Follow up succeeded', out)
         self.assertEqual(self.fx.run('claim', 'AND.09', '--worker', 'w3')[0], 2)
 
+    # ---- adoption records every inherited task (Design adoption stage, section 3) ------------
+
+    def test_each_task_a_slice_classifies_as_inherited_gets_its_own_record(self):
+        g = d.Graph(self.fx.design)
+        for sid in g.slices:
+            prompt = '\n'.join(d.render_slice_prompt(g, sid, 'D', 'P'))
+            scope = next(ln for ln in prompt.splitlines() if ln.startswith('Permitted write scope: '))
+            self.assertIn(f'Plan:ledger/tasks/{d.key_of(sid)}.md', scope)
+            self.assertIn('Plan:ledger/tasks/<key>.md (status inherited)', scope)
+            for tid in g.slice_tasks(sid):
+                if g.tasks[tid]['baseline']['state'] == 'accepted':
+                    self.assertIn(f'Plan:ledger/tasks/{d.key_of(tid)}.md', scope)
+        # The governance slice classifies GOV.14 as inherited: without its record the merged slice makes it ready.
+        for task, status in (('ADOPT.01', 'complete'), ('ADOPT.02.governance', 'complete'), ('GOV.01', 'inherited'),
+                             ('GOV.02', 'inherited'), ('GOV.03', 'inherited')):
+            self.fx.record(task, status)
+        self.fx.commit(self.fx.plan, 'governance slice')
+        code, out = self.fx.run('ready', '--lane', 'governance')
+        self.assertIn('GOV.14\tDesktopPlatform', out)
+        self.fx.record('GOV.14', 'inherited')
+        self.fx.commit(self.fx.plan, 'inherited record')
+        code, out = self.fx.run('ready', '--lane', 'governance')
+        self.assertEqual(code, 0, out)
+        self.assertIn('Ready to start (1):', out)
+        self.assertIn('GOV.04\tDesktopPlatform', out)
+        self.assertNotIn('GOV.14\t', out)
+
     # ---- authoritative state and worktrees (finding 7) ----------------------------------------
 
     def test_unmerged_checkout_changes_never_count(self):
