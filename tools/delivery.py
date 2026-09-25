@@ -1,29 +1,59 @@
 #!/usr/bin/env python3
-"""ArcForges delivery graph tool: validate, generate views, analyse and query readiness.
+"""ArcForges delivery tool: graph validation and views, authoritative readiness, claims and handoff.
 
 The authoritative scheduling data is Design `docs/planning/delivery/delivery-graph.json`
 (decision P2-018, rules in Design `docs/planning/delivery/README.md`). Every Markdown view in
-Design and Plan's `list.md` is generated from that one file; hand edits to generated regions are
-overwritten and detected by `check`.
+Design and Plan's `list.md` and `tasks/*.md` is generated from that one file; hand edits to
+generated regions are overwritten and detected by `check`.
 
-Commands (standard library only; documentation tooling, not a scheduler):
-  python tools/delivery.py check     [--design PATH] [--plan PATH]
-  python tools/delivery.py generate  [--design PATH] [--plan PATH]
-  python tools/delivery.py analyze   [--design PATH] [--workers 1,4,8,16,32]
-  python tools/delivery.py ready     [--design PATH] [--plan PATH] [--lane LANE]
+Planning commands read working trees (use them to review a planning or ledger change):
+  check     [--design PATH] [--plan PATH]   validate graph and ledger; confirm views are current
+  generate  [--design PATH] [--plan PATH]   regenerate every view
+  analyze   [--design PATH]                 schedule analysis as JSON
 
-`ready` lists tasks and adoption slices whose start rule (DLV-22/DLV-24) is satisfied according to
-Plan `ledger/tasks/*.md`; it reads files (and, with --claims, fetches claim refs) and never assigns,
-claims or starts work.
+Execution commands read the authoritative state: the merged `main` of Design and Plan plus the
+Plan record branches, fetched on every call into a private ref namespace. Changes in any local
+checkout never count; `ready --local` shows unreviewed working-tree state for review only.
+  ready     [--lane LANE] [--repo REPO] [--json] [--local]
+  status    [--worker NAME] [--repo REPO] [--json]
+  show      ID
+  claim     ID --worker NAME [--hours H] [--task TASK] [--takeover --reason TEXT]
+  update    ID --worker NAME --epoch N [--state STATE] [--hours H] [handoff options]
+  release   ID --worker NAME --epoch N --note TEXT [handoff options]
+  build-slot run --worker NAME --task ID [--minutes M] [--wait-minutes W] -- COMMAND ...
+  build-slot status | build-slot release --worker NAME
+
+ID is a task or adoption-slice ID (record `claims/<key>`), a shared resource `RES-...`
+(`leases/<key>`) or `integration:<Repository>` (`roles/integration-<repository>`). A key is the
+ID in lower case with dots replaced by hyphens (CON.02 -> con-02); it also names the task branch
+(`task/con-02`) and the ledger record (`ledger/tasks/con-02.md`). Git for Windows cannot store a
+ref or path whose stem is a reserved device name followed by an extension, such as `con.02`.
+
+Every record change is a compare-and-swap on the exact record commit observed. Exit status:
+0 success, 1 invalid state or usage (fail closed), 2 conflict or not available (nothing written),
+3 failed network operation (report it and stop; do not retry or change networking).
+Standard library only.
 """
 from __future__ import annotations
 
 import argparse
 import heapq
+import io
 import json
+import os
 import re
+import shutil
+import socket
+import subprocess
 import sys
+import tarfile
+import tempfile
+import threading
+import time
+import uuid
 from collections import Counter, defaultdict, deque
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 PLAN_ROOT = Path(__file__).resolve().parents[1]
@@ -57,11 +87,36 @@ END = '<!-- delivery-graph:end -->'
 
 
 class Fail(Exception):
-    pass
+    """Invalid input or state; the command fails closed (exit 1)."""
+    code = 1
+
+
+class Conflict(Fail):
+    """The item is held, not ready or changed concurrently; nothing was written (exit 2)."""
+    code = 2
+
+
+class NetworkFailure(Fail):
+    """A network operation failed (exit 3): report the exact operation and stop."""
+    code = 3
 
 
 def slug(task_id: str) -> str:
     return 'task-' + task_id.lower().replace('.', '-')
+
+
+def key_of(item_id: str) -> str:
+    """Ref, branch and ledger file key of an ID: lower case, dots replaced by hyphens.
+
+    Git for Windows rejects refs and paths whose stem is a reserved device name (CON, PRN, AUX,
+    NUL, COM1-9, LPT1-9) followed by an extension, so `con.02` can be neither a claim branch, a
+    task branch nor a ledger file on the Windows workstations. Upper case is avoided because
+    `CON-02` would read as a corpus identifier in generated Design views."""
+    return item_id.lower().replace('.', '-')
+
+
+def role_id(repo: str) -> str:
+    return f'integration:{repo}'
 
 
 def load_json(path: Path):
@@ -403,6 +458,8 @@ def validate(g: Graph) -> tuple[list[str], list[str]]:
             repo = w.split(':', 1)[0]
             if ':' not in w or (repo not in g.repos and repo != '*'):
                 errors.append(f'{tid}: invalid write scope {w}')
+            if w.startswith('Plan:ledger/tasks/') and not re.fullmatch(r'Plan:ledger/tasks/[a-z0-9]+(?:-[a-z0-9]+)*\.md', w):
+                errors.append(f'{tid}: ledger record {w} must use the lower-case hyphenated task key (DLV-26)')
         b = t.get('baseline', {})
         if b.get('state') not in BASELINE:
             errors.append(f'{tid}: invalid baseline state {b.get("state")}')
@@ -748,8 +805,11 @@ def render_lane(g: Graph, lane: dict) -> str:
         out.append('|---|---|')
         repo = g.repos[t['repo']]
         touches = ', '.join(t.get('alsoTouches', []))
-        out.append(f'| Owning repository | {t["repo"]} (`{repo["root"]}`); integration owner: {repo["integrationOwner"]}'
+        out.append(f'| Owning repository | {t["repo"]} (`{repo["root"]}`); integration owner: {repo["integrationOwner"]}, '
+                   f'the holder of `roles/{key_of("integration-" + t["repo"])}`'
                    + (f'; also touches {touches}' if touches else '') + ' |')
+        out.append(f'| Claim, branch and ledger | `claims/{key_of(t["id"])}` and ledger record `ledger/tasks/{key_of(t["id"])}.md` in '
+                   f'the Plan repository; task branch `task/{key_of(t["id"])}` ([DLV-26](../README.md#rule-dlv-26)) |')
         out.append(f'| Kind / size | {t["kind"]} / {t["size"]}' + (' · early risk proof' if t.get('earlyRiskProof') else '') + ' |')
         if t.get('packageAcceptance'):
             out.append(f'| Package acceptance | Records the {L.link(t["packageAcceptance"])} acceptance receipt after every task mapped to the '
@@ -794,8 +854,9 @@ def render_lane(g: Graph, lane: dict) -> str:
         out.append('')
         out.append('Each slice classifies the tasks of one repository and lane against the frozen baseline and opens '
                    'exactly those tasks when it is recorded ([DLV-22](../README.md#rule-dlv-22)). Slices are claimed and '
-                   'recorded separately; one reviewed pull request may carry several. The repository adoption task '
-                   'records the repository-wide facts and closes after all of its slices.')
+                   'recorded separately (claim `claims/adopt-NN-<lane>`, record `ledger/tasks/adopt-NN-<lane>.md`); one '
+                   'reviewed pull request may carry several. The repository adoption task records the repository-wide '
+                   'facts and closes after all of its slices.')
         out.append('')
         out.append('| Slice | Repository | Lane | Tasks it opens | Accepted baseline in scope | Repository record |')
         out.append('|---|---|---|---|---|---|')
@@ -919,7 +980,10 @@ def render_resources(g: Graph) -> str:
     out = ['# Shared Resources and Write Ownership', '', generated_header(rel),
            'Each shared file, registry, sequence, environment, key or pointer has exactly one owning role. '
            'Tasks declare how they touch it; the owner applies the protocol. Independent worktrees do not '
-           'remove semantic conflicts, so these declarations are part of task readiness and merge review.', '']
+           'remove semantic conflicts, so these declarations are part of task readiness and merge review. '
+           'A protocol that names an exclusive phase (a live run in a deployed environment, a heavy local build) '
+           'binds every task that enters that phase, for that phase only, whatever mode the task declares for its '
+           'other edits ([DLV-11](README.md#rule-dlv-11)).', '']
     out.append('| Resource | Kind | Owner | Tasks (mode) |')
     out.append('|---|---|---|---|')
     for rid in sorted(g.res):
@@ -1073,8 +1137,9 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
     title = f'# ArcForges delivery task prompts — {g.lanes[only_lane]["title"]}' if only_lane else '# ArcForges delivery task prompts'
     out = [title, '',
            'Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.',
-           'Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,',
-           'then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.', '']
+           'Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with',
+           '`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.',
+           'Tasks are ordered by lane for reading; the order is not a schedule.', '']
     for lane in g.data['lanes']:
         if only_lane and lane['id'] != only_lane:
             continue
@@ -1088,8 +1153,12 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
             b = ['```text', f'Execute ArcForges delivery task {t["id"]} — {t["title"]}.', '']
             b.append(f'Task record: {design_win}\\docs\\planning\\delivery\\lanes\\{t["lane"]}.md (anchor {slug(t["id"])}).')
             b.append(f'Delivery rules: {design_win}\\docs\\planning\\delivery\\README.md; execution: {plan_win}\\arcforges-implementation.md.')
-            b.append(f'Owning repository: {repo["root"]} (integration owner: {repo["integrationOwner"]}).'
+            b.append(f'Owning repository: {repo["root"]} (integration owner: {repo["integrationOwner"]}, the holder of '
+                     f'roles/{key_of("integration-" + t["repo"])}).'
                      + (f' Also touches: {", ".join(t["alsoTouches"])}.' if t.get('alsoTouches') else ''))
+            k = key_of(t['id'])
+            b.append(f'Claim and handoff record: claims/{k} (python tools/delivery.py claim {t["id"]} --worker <name>); '
+                     f'task branch task/{k} in {work_repo(g, t["id"])}; ledger record ledger/tasks/{k}.md.')
             b.append(f'Kind/size: {t["kind"]}/{t["size"]}. Baseline: {t["baseline"]["state"]}.')
             b.append(f'Outcome: {t["outcome"]}')
             b.append('')
@@ -1109,8 +1178,9 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
             b.append('')
             own_slices = sorted(s for s, v in g.slices.items() if v['adoptionTask'] == t['id'])
             if own_slices:
-                b.append('Adoption slices (claim, review and record each separately as ledger/tasks/<slice>.md; one pull request '
-                         'may carry several; each slice opens only its own repository lane; see the Design adoption stage):')
+                b.append('Adoption slices (claim, review and record each separately as ledger/tasks/<slice key>.md, for example '
+                         f'ledger/tasks/{key_of(own_slices[0])}.md; one pull request may carry several; each slice opens only '
+                         'its own repository lane; each has its own prompt under "Adoption slices" below):')
                 for sid in own_slices:
                     scope = g.slice_tasks(sid)
                     acc = sum(1 for x in scope if g.tasks[x]['baseline']['state'] == 'accepted')
@@ -1152,18 +1222,57 @@ def render_prompts(g: Graph, design: Path, plan: Path, only_lane: str | None = N
             b.append('```')
             out.extend(b)
             out.append('')
+        if lane['id'] == 'adoption' and g.slices:
+            out += ['## Adoption slices', '',
+                    'Each slice is claimed, executed, reviewed and recorded on its own; several may share one pull request.', '']
+            for sid in sorted(g.slices, key=lambda s: (g.slices[s]['adoptionTask'], s)):
+                out.extend(render_slice_prompt(g, sid, design_win, plan_win))
+                out.append('')
     return '\n'.join(out).rstrip() + '\n'
+
+
+def render_slice_prompt(g: Graph, sid: str, design_win: str, plan_win: str) -> list[str]:
+    s = g.slices[sid]
+    repo = g.repos[s['repo']]
+    k = key_of(sid)
+    scope = g.slice_tasks(sid)
+    accepted = [x for x in scope if g.tasks[x]['baseline']['state'] == 'accepted']
+    opens = [x for x in scope if x not in accepted]
+    return [
+        '```text',
+        f'Execute ArcForges adoption slice {sid} — {s["title"]}.', '',
+        f'Slice record: {design_win}\\docs\\planning\\delivery\\lanes\\adoption.md (anchor {slug(sid)}); adoption rules ADP-01 to '
+        f'ADP-08: {design_win}\\docs\\planning\\delivery\\adoption.md.',
+        f'Delivery rules: {design_win}\\docs\\planning\\delivery\\README.md; execution: {plan_win}\\arcforges-implementation.md.',
+        f'Repository reviewed: {repo["root"]} (lane {s["lane"]}); repository adoption task {s["adoptionTask"]} records the '
+        'repository-wide facts once and closes after all of its slices.',
+        f'Claim and handoff record: claims/{k} (python tools/delivery.py claim {sid} --worker <name>); task branch task/{k} '
+        f'in Plan; ledger record ledger/tasks/{k}.md with status complete.', '',
+        'Start prerequisites: [artifact] ADOPT.01: frozen baseline record.',
+        'Tasks in scope (classify each exactly once as inherited, inherited with adjustment, gap or conflicting under ADP-02, '
+        'using only reviewed evidence under ADP-03; bind planned write scopes to the actual layout under ADP-07):',
+        '- ' + (', '.join(scope) if scope else 'none'),
+        f'Opens when the record is merged: {", ".join(opens) if opens else "no task"}.'
+        + (f' Accepted-baseline tasks recorded as inherited, each with its own ledger/tasks/<key>.md: {", ".join(accepted)}.' if accepted else ''), '',
+        'Permitted write scope: Plan:ledger/tasks/' + k + '.md' + ''.join(f'; Plan:ledger/tasks/{key_of(x)}.md' for x in accepted),
+        'Validation (P2-017, ADP-06): review of merged source, retained CI results and receipts only; no builds, downloads '
+        'or runtime checks.',
+        'Completion evidence for the ledger: one row per task in scope with classification, evidence references, bound write '
+        'scope, remaining scope, conflicts raised under D-001 and blockers; adjustments that fit no existing task become a '
+        'planning change. Do not execute implementation tasks during adoption.',
+        '```']
 
 
 def render_index(g: Graph) -> str:
     """Plan list.md: compact index of every task with its prompt file."""
     out = ['# ArcForges delivery task list', '',
            'Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.',
-           'There is no Current task. Any number of workers may execute different ready tasks at the same time.',
-           'Find ready tasks with `python tools/delivery.py ready`, claim one as described in `arcforges-implementation.md`,',
-           'and paste its self-contained prompt from the lane file linked below. The order here is for reading only.', '',
+           'There is no Current task. Any number of workers execute different ready tasks at the same time.',
+           'This list is an index for reading and selection; its order is not a schedule. `python tools/delivery.py ready`',
+           'lists what may be claimed now from the merged graph, ledger and claims. Each task\'s self-contained prompt is in',
+           'the lane file linked from its section, and `arcforges-implementation.md` is the procedure.', '',
            f'Tasks: {len(g.data["tasks"])} in {sum(1 for l in g.lanes if any(t["lane"] == l for t in g.data["tasks"]))} lanes, '
-           f'plus {len(g.slices)} adoption slices listed with their repository adoption task.', '']
+           f'plus {len(g.slices)} adoption slices listed in the adoption section.', '']
     for lane in g.data['lanes']:
         tasks = [t for t in g.data['tasks'] if t['lane'] == lane['id']]
         if not tasks:
@@ -1178,6 +1287,15 @@ def render_index(g: Graph) -> str:
             pre = ', '.join(pre_list) or '—'
             out.append(f'| {t["id"]} | {t["repo"]} | {t["size"]} | {pre} | {md_escape(t["title"])} |')
         out.append('')
+        if lane['id'] == 'adoption' and g.slices:
+            out += ['### Adoption slices', '', '| Slice | Repository | Size | Start prerequisites | Title (tasks it opens) |',
+                    '|---|---|---|---|---|']
+            for sid in sorted(g.slices, key=lambda s: (g.slices[s]['adoptionTask'], s)):
+                scope = g.slice_tasks(sid)
+                opens = sum(1 for x in scope if g.tasks[x]['baseline']['state'] != 'accepted')
+                out.append(f'| {sid} | {g.slices[sid]["repo"]} | S | {ROOT_ADOPTION} | {md_escape(g.slices[sid]["title"])} '
+                           f'({opens}) |')
+            out.append('')
     return '\n'.join(out).rstrip() + '\n'
 
 
@@ -1204,131 +1322,994 @@ def views(g: Graph, design: Path, plan: Path) -> dict[Path, str]:
 
 
 # ----------------------------------------------------------------------------------------------
-# Ledger and readiness
+# Repository roots and Git access
 # ----------------------------------------------------------------------------------------------
 
-def ledger(plan: Path) -> dict[str, str]:
-    out = {}
-    for p in sorted((plan / 'ledger' / 'tasks').glob('*.md')):
-        head = p.read_text(encoding='utf-8').split('\n---', 1)[0]
-        m_task = re.search(r'^task:\s*(\S+)\s*$', head, re.M)
-        m_status = re.search(r'^status:\s*(\S+)\s*$', head, re.M)
-        if m_task and m_status:
-            out[m_task[1]] = m_status[1]
-    return out
+def primary_checkout(path: Path) -> Path | None:
+    """Primary checkout of the repository containing `path`; retained worktrees share its store."""
+    r = subprocess.run(['git', '-C', str(path), 'rev-parse', '--path-format=absolute', '--git-common-dir'],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        return None
+    common = Path(r.stdout.strip())
+    return common.parent if common.name == '.git' else None
 
 
-def claimed(plan: Path, grace_hours: int = 1) -> set[str]:
-    """Task ids currently owned through a claim branch (DLV-26/DLV-27).
-
-    Fetches claims/* into refs/remotes/origin/claims/* (read-only for the remote) and reads each
-    branch tip's claim.json. A claim is taken while its state is claimed or blocked and its lease,
-    plus a clock-skew grace period, has not expired; delivered and complete claims are taken too.
-    Released claims and expired leases are available for re-claim or takeover by a fast-forward append.
-    """
-    import datetime
-    import subprocess
-    fetch = ['git', '-C', str(plan), 'fetch', '--quiet', 'origin', '+refs/heads/claims/*:refs/remotes/origin/claims/*']
-    if subprocess.run(fetch).returncode != 0:
-        raise Fail('network operation failed: ' + ' '.join(fetch[3:]) + ' (report it and stop; do not retry or change networking)')
-    refs = subprocess.run(['git', '-C', str(plan), 'for-each-ref', '--format=%(refname:strip=4)',
-                           'refs/remotes/origin/claims/'], capture_output=True, text=True, check=True).stdout.split()
-    now = datetime.datetime.now(datetime.timezone.utc)
-    taken = set()  # lower-case ids; claim refs are lower case (claims/<task-id>)
-    for name in refs:
-        shown = subprocess.run(['git', '-C', str(plan), 'show', f'refs/remotes/origin/claims/{name}:claim.json'],
-                               capture_output=True, text=True)
-        if shown.returncode != 0:
-            taken.add(name.lower())  # unreadable claim: treat as taken and let a human resolve it
-            continue
-        try:
-            rec = json.loads(shown.stdout)
-            state = rec.get('state', 'claimed')
-            lease = datetime.datetime.fromisoformat(rec.get('leaseUntil', '').replace('Z', '+00:00'))
-        except (ValueError, AttributeError):
-            taken.add(name.lower())
-            continue
-        if state in {'delivered', 'complete'}:
-            taken.add(name.lower())
-        elif state in {'claimed', 'blocked'} and lease + datetime.timedelta(hours=grace_hours) > now:
-            taken.add(name.lower())
-    return taken
+def default_design() -> Path:
+    """$ARCFORGES_DESIGN, else ArcForges-Design-B beside the Plan primary checkout, so the default is
+    the same whether the tool runs from the primary checkout or from a retained Plan worktree."""
+    if os.environ.get('ARCFORGES_DESIGN'):
+        return Path(os.environ['ARCFORGES_DESIGN'])
+    return (primary_checkout(PLAN_ROOT) or PLAN_ROOT).parent / 'ArcForges-Design-B'
 
 
-def ready(g: Graph, plan: Path, lane: str | None, with_claims: bool = False):
-    """Readiness under DLV-22/DLV-24: contract, artifact and design prerequisites need the target delivered
-    (or complete/inherited); release prerequisites and the adoption slice need it complete (or inherited)."""
-    canon = {tid.lower(): tid for tid in g.tasks}
-    status = {canon.get(k.lower(), k): v for k, v in ledger(plan).items()}
-    delivered = {t for t, s in status.items() if s in {'delivered', 'complete', 'inherited'}}
-    complete = {t for t, s in status.items() if s in {'complete', 'inherited'}}
-    taken = claimed(plan) if with_claims else set()
-    rows = []
-    for tid, t in g.tasks.items():
-        if tid in delivered or status.get(tid) == 'superseded' or tid.lower() in taken:
-            continue
-        if t['baseline']['state'] == 'accepted':
-            continue  # recorded as inherited by the adoption stage, never re-executed
-        if lane and t['lane'] != lane:
-            continue
-        ok = all((e['task'] in complete) if e['type'] == 'release' else (e['task'] in delivered) for e in t['start'])
-        ent = g.entry(tid)
-        if ent and ent not in complete:
-            ok = False
-        if ok:
-            rows.append(tid)
-    return rows, status
+def require_graph(design: Path) -> Path:
+    if not (design / GRAPH_REL).is_file():
+        raise Fail(f'no Design checkout at {design} ({GRAPH_REL} missing); pass --design PATH or set ARCFORGES_DESIGN')
+    return design
 
 
-# ----------------------------------------------------------------------------------------------
+def git(repo: Path, *args: str, stdin: bytes | None = None, check: bool = True) -> subprocess.CompletedProcess:
+    r = subprocess.run(['git', '-C', str(repo), *args], input=stdin, capture_output=True)
+    r.out = r.stdout.decode('utf-8', 'replace')
+    r.err = r.stderr.decode('utf-8', 'replace')
+    if check and r.returncode != 0:
+        raise Fail(f'git {" ".join(args)} failed in {repo}: {r.err.strip()}')
+    return r
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('command', choices=['check', 'generate', 'analyze', 'ready'])
-    ap.add_argument('--design', default=str(PLAN_ROOT.parent / 'ArcForges-Design-B'))
-    ap.add_argument('--plan', default=str(PLAN_ROOT))
-    ap.add_argument('--lane')
-    ap.add_argument('--claims', action='store_true', help='exclude tasks owned by a live claim branch (fetches claims/* read-only)')
-    args = ap.parse_args()
-    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
-    design, plan = Path(args.design).resolve(), Path(args.plan).resolve()
+
+def network(repo: Path, *args: str) -> subprocess.CompletedProcess:
+    r = git(repo, *args, check=False)
+    if r.returncode != 0:
+        raise NetworkFailure(f'network operation failed: git -C {repo} {" ".join(args)}: {r.err.strip()} '
+                             '(report this operation and stop; do not retry or change networking)')
+    return r
+
+
+def fetch_refs(repo: Path, specs: list[tuple[str, str]]) -> dict[str, str]:
+    """Fetch remote refs into a private, unique ref namespace and return {name: commit}.
+
+    Nothing shared is written (no remote-tracking refs, no FETCH_HEAD), so workers that share one
+    repository through retained worktrees never move a ref another worker has just read."""
+    ns = f'refs/delivery-tmp/{uuid.uuid4().hex}'
     try:
-        g = Graph(design)
-        errors, warnings = validate(g)
-        if args.command in {'check', 'generate'}:
-            for w in warnings:
-                print('warning:', w)
-            if errors:
-                for e in errors:
-                    print('error:', e)
-                raise Fail(f'{len(errors)} graph errors')
-            files = views(g, design, plan)
-            if args.command == 'generate':
-                for p, text in files.items():
-                    p.parent.mkdir(parents=True, exist_ok=True)
-                    p.write_text(text, encoding='utf-8', newline='\n')
-                print(f'generated {len(files)} files')
-            else:
-                stale = [p for p, text in files.items() if not p.exists() or p.read_text(encoding='utf-8') != text]
-                for p in stale:
-                    print('stale view:', p)
-                if stale:
-                    raise Fail(f'{len(stale)} generated views are stale; run generate')
-                print(f'check passed: {len(g.data["tasks"])} tasks, {len(g.slices)} adoption slices, '
-                      f'{len(files)} views current, {len(warnings)} warnings')
-        elif args.command == 'analyze':
-            if errors:
-                raise Fail(f'{len(errors)} graph errors; run check')
-            print(json.dumps(analysis(g), indent=1))
-        elif args.command == 'ready':
-            rows, status = ready(g, plan, args.lane, args.claims)
-            for tid in sorted(rows):
-                print(f'{tid}\t{g.tasks[tid]["repo"]}\t{g.tasks[tid]["title"]}')
-            print(f'{len(rows)} tasks satisfy the start rule' + ('' if args.claims else '; run with --claims to exclude tasks held by a live claim'))
-    except Fail as exc:
-        print('FAILED:', exc)
-        return 1
+        network(repo, 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', '--refmap=', 'origin',
+                *[f'+{src}:{ns}/{dst}' for src, dst in specs])
+        out = {}
+        for line in git(repo, 'for-each-ref', '--format=%(objectname) %(refname)', ns + '/').out.splitlines():
+            sha, ref = line.split(' ', 1)
+            out[ref[len(ns) + 1:]] = sha
+        return out
+    finally:
+        doomed = git(repo, 'for-each-ref', '--format=delete %(refname)', ns + '/', check=False).out
+        if doomed.strip():
+            git(repo, 'update-ref', '--stdin', stdin=doomed.encode('utf-8'), check=False)
+
+
+def extract(repo: Path, commit: str, paths: list[str], dest: Path) -> None:
+    data = git(repo, 'archive', '--format=tar', commit, *paths).stdout
+    dest.mkdir(parents=True, exist_ok=True)
+    with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+        try:
+            archive.extractall(dest, filter='data')
+        except TypeError:  # Python before 3.12; the archive comes from our own repository
+            archive.extractall(dest)
+
+
+# ----------------------------------------------------------------------------------------------
+# Ledger, records and time
+# ----------------------------------------------------------------------------------------------
+
+LEDGER_STATUSES = {'delivered', 'complete', 'inherited', 'superseded'}
+TASK_STATES = {'claimed', 'blocked', 'released', 'delivered', 'complete'}
+HOLD_STATES = {'claimed', 'released'}
+LIVE = {'claimed', 'blocked'}
+KINDS_BY_NS = {'claims': 'task', 'leases': 'lease', 'roles': 'role'}
+DEFAULT_HOURS = {'task': 24.0, 'lease': 4.0, 'role': 12.0}
+GRACE = timedelta(hours=1)
+WORKER_NAME = re.compile(r'^[A-Za-z0-9][A-Za-z0-9._@-]{1,63}$')
+SHA_RE = re.compile(r'^[0-9a-f]{40}$')
+RECORD_FILE = 'claim.json'
+LIST_CAP = 40
+FRONT = re.compile(r'\A---\n(.*?)\n---\n', re.S)
+
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def iso(dt: datetime) -> str:
+    return dt.astimezone(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+
+
+def parse_time(value, field: str) -> datetime:
+    """A timezone-aware ISO-8601 timestamp; anything else is invalid (never guessed)."""
+    if not isinstance(value, str):
+        raise ValueError(f'{field} must be an ISO-8601 timestamp')
+    try:
+        dt = datetime.fromisoformat(value.replace('Z', '+00:00'))
+    except ValueError:
+        raise ValueError(f'{field} is not an ISO-8601 timestamp: {value}') from None
+    if dt.tzinfo is None:
+        raise ValueError(f'{field} has no timezone: {value}')
+    return dt
+
+
+def strict_json(text: str):
+    def hook(pairs):
+        out = {}
+        for k, v in pairs:
+            if k in out:
+                raise ValueError(f'duplicate key {k}')
+            out[k] = v
+        return out
+    return json.loads(text, object_pairs_hook=hook)
+
+
+def read_ledger(plan: Path, g: Graph) -> tuple[dict[str, dict], list[str]]:
+    """Ledger records keyed by task ID, and every format error (a malformed record fails closed)."""
+    known = {t.lower(): t for t in g.tasks}
+    out, errors = {}, []
+    for p in sorted((plan / 'ledger' / 'tasks').glob('*')):
+        where = f'ledger/tasks/{p.name}'
+        if p.name.startswith('.'):
+            continue  # placeholders such as .gitkeep
+        if p.is_dir() or p.suffix != '.md':
+            errors.append(f'{where}: not a Markdown record')
+            continue
+        text = p.read_text(encoding='utf-8').replace('\r\n', '\n')
+        m = FRONT.match(text)
+        if not m:
+            errors.append(f'{where}: missing front matter')
+            continue
+        fields = {}
+        for line in m[1].split('\n'):
+            k, sep, v = line.partition(':')
+            if not sep or not k.strip():
+                errors.append(f'{where}: malformed front-matter line {line!r}')
+                continue
+            if k.strip() in fields:
+                errors.append(f'{where}: duplicate field {k.strip()}')
+            fields[k.strip()] = v.strip()
+        if len(re.findall(r'^task:', text, re.M)) > 1:
+            errors.append(f'{where}: more than one front-matter block')
+        tid = known.get(fields.get('task', '').lower())
+        if tid is None or fields.get('task') != tid:
+            errors.append(f'{where}: unknown task {fields.get("task")!r}')
+            continue
+        if p.name != key_of(tid) + '.md':
+            errors.append(f'{where}: the record for {tid} must be named {key_of(tid)}.md')
+        if fields.get('status') not in LEDGER_STATUSES:
+            errors.append(f'{where}: unknown status {fields.get("status")!r}')
+        if tid in out:
+            errors.append(f'{where}: second record for {tid}')
+        out[tid] = {'status': fields.get('status'), 'file': p.name}
+    return out, errors
+
+
+@dataclass
+class Record:
+    ns: str
+    key: str
+    ident: str | None
+    sha: str
+    data: dict | None
+    errors: list
+
+    def availability(self, now: datetime) -> str:
+        """invalid, live, expired, released, delivered or complete. Anything unreadable is invalid,
+        and an invalid record keeps its item unavailable until it is repaired."""
+        if self.errors or not isinstance(self.data, dict):
+            return 'invalid'
+        state = self.data['state']
+        if state in LIVE:
+            return 'live' if now <= parse_time(self.data['leaseUntil'], 'leaseUntil') + GRACE else 'expired'
+        return state
+
+
+def record_errors(ns: str, ident: str | None, data) -> list[str]:
+    kind = KINDS_BY_NS[ns]
+    if ident is None:
+        return ['the branch names no known task, adoption slice, resource or repository']
+    if not isinstance(data, dict):
+        return ['the record is not a JSON object']
+    errs = []
+    if data.get('schema') != 1:
+        errs.append('schema must be 1')
+    if data.get('kind') != kind:
+        errs.append(f'kind must be {kind}')
+    if data.get('id') != ident:
+        errs.append(f'id {data.get("id")!r} does not match {ident}')
+    if not isinstance(data.get('claimant'), str) or not WORKER_NAME.match(data['claimant']):
+        errs.append('claimant is missing or invalid')
+    if type(data.get('epoch')) is not int or data['epoch'] < 1:
+        errs.append('epoch must be a positive integer')
+    state = data.get('state')
+    if state not in (TASK_STATES if kind == 'task' else HOLD_STATES):
+        errs.append(f'unknown state {state!r}')
+    for field in ('claimedAt', 'updatedAt'):
+        try:
+            parse_time(data.get(field), field)
+        except ValueError as exc:
+            errs.append(str(exc))
+    if state in LIVE:
+        try:
+            parse_time(data.get('leaseUntil'), 'leaseUntil')
+        except ValueError as exc:
+            errs.append(str(exc))
+    elif data.get('leaseUntil') is not None:
+        errs.append('leaseUntil must be null unless the state is claimed or blocked')
+    if kind == 'lease' and not isinstance(data.get('task'), str):
+        errs.append('a lease must name its holding task')
+    if not isinstance(data.get('handoff'), dict):
+        errs.append('handoff must be an object')
+    return errs
+
+
+def load_record(repo: Path, ns: str, key: str, ident: str | None, sha: str) -> Record:
+    r = git(repo, 'show', f'{sha}:{RECORD_FILE}', check=False)
+    if r.returncode != 0:
+        return Record(ns, key, ident, sha, None, [f'commit {sha[:12]} has no {RECORD_FILE}'])
+    try:
+        data = strict_json(r.out)
+    except ValueError as exc:
+        return Record(ns, key, ident, sha, None, [f'unreadable {RECORD_FILE}: {exc}'])
+    return Record(ns, key, ident, sha, data, record_errors(ns, ident, data))
+
+
+def record_ids(g: Graph) -> dict[tuple[str, str], str]:
+    ids = {('claims', key_of(t)): t for t in g.tasks}
+    ids.update({('leases', key_of(r)): r for r in g.res})
+    ids.update({('roles', key_of('integration-' + r)): role_id(r) for r in g.repos})
+    return ids
+
+
+def target(g: Graph, ident: str) -> tuple[str, str, str]:
+    """(namespace, key, canonical ID) of a task or slice ID, a RES-... resource or integration:<Repository>."""
+    low = ident.strip().lower()
+    if low.startswith('integration:'):
+        repo = next((r for r in g.repos if r.lower() == low.split(':', 1)[1]), None)
+        if repo is None:
+            raise Fail(f'unknown repository in {ident}')
+        return 'roles', key_of('integration-' + repo), role_id(repo)
+    for ns, pool in (('leases', g.res), ('claims', g.tasks)):
+        found = next((x for x in pool if x.lower() == low), None)
+        if found:
+            return ns, key_of(found), found
+    raise Fail(f'unknown task, adoption slice, resource or role: {ident}')
+
+
+def work_repo(g: Graph, tid: str) -> str:
+    """Repository that holds the task branch: adoption records live in Plan."""
+    t = g.tasks[tid]
+    repos = {w.split(':', 1)[0] for w in t.get('writes', [])}
+    if len(repos) == 1 and next(iter(repos)) in g.repos:
+        return next(iter(repos))
+    return 'Plan' if t.get('slice') else t['repo']
+
+
+class State:
+    """Authoritative execution state: merged Design and Plan `main` and the Plan record branches.
+
+    `local=True` reads the given working trees instead and never reads records; it shows an
+    unreviewed state for review and is never a basis for claiming."""
+
+    def __init__(self, design: Path, plan: Path, records: bool = True, local: bool = False):
+        self.now = utcnow()
+        self.records: dict[tuple[str, str], Record] = {}
+        if local:
+            self.graph = Graph(require_graph(design))
+            graph_errors, _ = validate(self.graph)
+            self.ledger, ledger_errors = read_ledger(plan, self.graph)
+            self.source = f'UNREVIEWED LOCAL STATE (Design {design}, Plan {plan}; claims not read)'
+        else:
+            d = fetch_refs(design, [('refs/heads/main', 'main')])
+            specs = [('refs/heads/main', 'main')]
+            if records:
+                specs += [(f'refs/heads/{ns}/*', f'{ns}/*') for ns in KINDS_BY_NS]
+            p = fetch_refs(plan, specs)
+            if 'main' not in d or 'main' not in p:
+                raise Fail('a remote has no main branch')
+            with tempfile.TemporaryDirectory(prefix='delivery-') as tmp:
+                extract(design, d['main'], ['docs/planning'], Path(tmp) / 'design')
+                extract(plan, p['main'], ['ledger'], Path(tmp) / 'plan')
+                self.graph = Graph(Path(tmp) / 'design')
+                graph_errors, _ = validate(self.graph)
+                self.ledger, ledger_errors = read_ledger(Path(tmp) / 'plan', self.graph)
+            ids = record_ids(self.graph)
+            for name, sha in p.items():
+                if name != 'main':
+                    ns, key = name.split('/', 1)
+                    self.records[(ns, key)] = load_record(plan, ns, key, ids.get((ns, key)), sha)
+            self.source = (f'merged Design main {d["main"][:12]} and Plan main {p["main"][:12]}'
+                           + (f', {len(self.records)} record branches' if records else '') + f', read {iso(self.now)}')
+        errors = [f'graph: {e}' for e in graph_errors] + [f'ledger: {e}' for e in ledger_errors]
+        if errors:
+            raise Fail('the scheduling state is invalid, so it authorizes no work until a reviewed change repairs it:\n  '
+                       + '\n  '.join(errors[:50]) + (f'\n  ... {len(errors) - 50} more' if len(errors) > 50 else ''))
+        self.delivered = {t for t, r in self.ledger.items() if r['status'] in {'delivered', 'complete', 'inherited'}}
+        self.complete = {t for t, r in self.ledger.items() if r['status'] in {'complete', 'inherited'}}
+
+    def status_of(self, tid: str) -> str | None:
+        return self.ledger.get(tid, {}).get('status')
+
+    def claim_record(self, tid: str) -> Record | None:
+        return self.records.get(('claims', key_of(tid)))
+
+    def missing_start(self, tid: str) -> list[str]:
+        """Unsatisfied start prerequisites and adoption entry (DLV-22, DLV-24)."""
+        g = self.graph
+        miss = [f'{e["task"]} ({e["type"]})' for e in g.tasks[tid]['start']
+                if not ((e['task'] in self.complete) if e['type'] == 'release' else (e['task'] in self.delivered))]
+        ent = g.entry(tid)
+        if ent and ent not in self.complete:
+            miss.append(f'{ent} (adoption)')
+        return miss
+
+    def pending_completion(self, tid: str) -> list[str]:
+        return [e['task'] for e in self.graph.tasks[tid]['complete'] if e['task'] not in self.complete]
+
+    def classify(self, lane: str | None = None, repo: str | None = None):
+        """Ready to start, completion follow-ups (DLV-41) and delivered tasks still waiting."""
+        start, follow, waiting = [], [], []
+        for tid, t in self.graph.tasks.items():
+            if (lane and t['lane'] != lane) or (repo and t['repo'].lower() != repo.lower()):
+                continue
+            status = self.status_of(tid)
+            if status in {'complete', 'inherited', 'superseded'} or t['baseline']['state'] == 'accepted':
+                continue
+            rec = self.claim_record(tid)
+            avail = rec.availability(self.now) if rec else 'none'
+            if status == 'delivered':
+                pending = self.pending_completion(tid)
+                if pending:
+                    waiting.append((tid, pending, rec))
+                elif avail in {'none', 'delivered', 'released', 'expired'}:
+                    follow.append((tid, avail, rec))
+                continue
+            if avail in {'none', 'released', 'expired'} and not self.missing_start(tid):
+                start.append((tid, avail, rec))
+        return start, follow, waiting
+
+    def phase(self, tid: str, avail: str) -> str:
+        """'start' or 'follow-up' when the task may be claimed now; otherwise a Conflict naming why."""
+        t = self.graph.tasks[tid]
+        status = self.status_of(tid)
+        if t['baseline']['state'] == 'accepted' or status in {'complete', 'inherited', 'superseded'}:
+            raise Conflict(f'{tid} is {status or "accepted baseline"} and is not claimable')
+        if status == 'delivered':
+            pending = self.pending_completion(tid)
+            if pending:
+                raise Conflict(f'{tid} is delivered; its completion follow-up opens when {", ".join(pending)} complete')
+            return 'follow-up'
+        if avail in {'delivered', 'complete'}:
+            raise Conflict(f'{tid} is {avail} on its claim but not in the merged ledger; merge its ledger record first')
+        missing = self.missing_start(tid)
+        if missing:
+            raise Conflict(f'{tid} is not ready; unsatisfied start prerequisites: {", ".join(missing)}')
+        return 'start'
+
+
+def describe(rec: Record | None, now: datetime) -> str:
+    if rec is None:
+        return 'no record'
+    if rec.errors or rec.data is None:
+        return 'INVALID record: ' + '; '.join(rec.errors)
+    d, h = rec.data, rec.data.get('handoff', {})
+    bits = [f'{d["state"]} by {d["claimant"]} epoch {d["epoch"]}']
+    if d.get('task') and rec.ns == 'leases':
+        bits.append(f'for {d["task"]}')
+    if d['state'] in LIVE:
+        bits.append(f'lease until {d["leaseUntil"]}' + ('' if rec.availability(now) == 'live' else ' (EXPIRED: recovery rules apply)'))
+    if h.get('branch'):
+        bits.append(f'branch {h.get("repository", "")}:{h["branch"]}')
+    for field in ('head', 'reviewed'):
+        if h.get(field):
+            bits.append(f'{field} {h[field][:12]}')
+    if h.get('prs'):
+        bits.append('PRs ' + ' '.join(h['prs']))
+    if h.get('merges'):
+        bits.append('merged ' + ' '.join(m[:12] for m in h['merges']))
+    if h.get('blocker'):
+        bits.append('BLOCKER: ' + h['blocker'])
+    if h.get('next'):
+        bits.append('next: ' + '; '.join(h['next']))
+    if h.get('note'):
+        bits.append('note: ' + h['note'])
+    return ' | '.join(bits)
+
+
+# ----------------------------------------------------------------------------------------------
+# Record operations: compare-and-swap on the exact observed commit (DLV-26, DLV-27, DLV-40)
+# ----------------------------------------------------------------------------------------------
+
+def observe(plan: Path, ns: str, key: str, ident: str) -> Record | None:
+    """The record at the remote tip, fetched privately. Every later write names this exact commit as
+    its parent, so the push is refused if anyone moved the branch after it was read."""
+    ref = f'refs/heads/{ns}/{key}'
+    if not network(plan, 'ls-remote', 'origin', ref).out.strip():
+        return None
+    sha = fetch_refs(plan, [(ref, 'observed')]).get('observed')
+    if not sha:
+        raise Conflict(f'{ref} disappeared while it was read; record branches must never be deleted')
+    return load_record(plan, ns, key, ident, sha)
+
+
+def push_record(plan: Path, ns: str, key: str, data: dict, parent: str | None, message: str) -> str:
+    text = json.dumps(data, indent=2, ensure_ascii=False) + '\n'
+    blob = git(plan, 'hash-object', '-w', '--stdin', stdin=text.encode('utf-8')).out.strip()
+    tree = git(plan, 'mktree', stdin=f'100644 blob {blob}\t{RECORD_FILE}\n'.encode('utf-8')).out.strip()
+    commit = git(plan, 'commit-tree', tree, *(['-p', parent] if parent else []), '-m', message).out.strip()
+    ref = f'refs/heads/{ns}/{key}'
+    r = git(plan, 'push', '--porcelain', 'origin', f'{commit}:{ref}', check=False)
+    if r.returncode != 0:
+        said = r.out + r.err
+        if re.search(r'^!\t', r.out, re.M) or re.search(r'\[rejected\]|\[remote rejected\]|non-fast-forward|fetch first', said):
+            raise Conflict(f'{ref} changed after it was read, or the push was refused; nothing was written. '
+                           f'Read it again with show and decide.\n{said.strip()}')
+        raise NetworkFailure(f'network operation failed: git -C {plan} push origin {commit}:{ref}: {r.err.strip()} '
+                             '(report this operation and stop; do not retry or change networking)')
+    tip = network(plan, 'ls-remote', 'origin', ref).out.split()
+    if not tip or tip[0] != commit:
+        raise Conflict(f'{ref} does not point at the pushed commit {commit[:12]}; read it again with show')
+    return commit
+
+
+def own(rec: Record | None, ident: str, worker: str, epoch: int) -> dict:
+    """The record, if and only if `worker` holds it live at `epoch`."""
+    if rec is None:
+        raise Conflict(f'{ident} has no record; claim it first')
+    if rec.errors or rec.data is None:
+        raise Fail(f'{ident} holds an invalid record: {"; ".join(rec.errors)}')
+    d = rec.data
+    if d['claimant'] != worker or d['epoch'] != epoch:
+        raise Conflict(f'{ident} is held by {d["claimant"]} at epoch {d["epoch"]}, not by {worker} at epoch {epoch}; '
+                       'nothing was written')
+    if d['state'] not in LIVE:
+        raise Conflict(f'{ident} is {d["state"]}; only a claimed or blocked record can be updated or released')
+    return d
+
+
+def apply_handoff(handoff: dict, args) -> dict:
+    h = json.loads(json.dumps(handoff))
+    for field in ('branch', 'worktree', 'note', 'blocker'):
+        value = getattr(args, field, None)
+        if value is not None:
+            h[field] = value or None
+    for field in ('head', 'reviewed'):
+        value = getattr(args, field, None)
+        if value is not None:
+            if value and not SHA_RE.match(value):
+                raise Fail(f'--{field} must be a full 40-character commit SHA')
+            h[field] = value or None
+    for field, option in (('prs', 'pr'), ('merges', 'merge'), ('done', 'done'), ('validation', 'validation')):
+        for value in getattr(args, option, None) or []:
+            if option == 'merge' and not SHA_RE.match(value):
+                raise Fail('--merge must be a full 40-character commit SHA')
+            items = h.setdefault(field, [])
+            if value not in items:
+                items.append(value)
+        if field in h:
+            h[field] = h[field][-LIST_CAP:]
+    if getattr(args, 'next', None):
+        h['next'] = list(args.next)
+    return h
+
+
+def worker_name(args) -> str:
+    name = args.worker or os.environ.get('ARCFORGES_WORKER', '')
+    if not WORKER_NAME.match(name or ''):
+        raise Fail('name the worker with --worker NAME (or ARCFORGES_WORKER): 2-64 characters of letters, digits, '
+                   'dot, underscore, @ or hyphen, unique to this session')
+    return name
+
+
+def cmd_claim(args) -> int:
+    worker = worker_name(args)
+    st = State(args.design, args.plan, records=False)
+    ns, key, ident = target(st.graph, args.id)
+    kind = KINDS_BY_NS[ns]
+    rec = observe(args.plan, ns, key, ident)
+    now = utcnow()
+    avail = rec.availability(now) if rec else 'none'
+    if avail == 'invalid':
+        raise Fail(f'{ns}/{key} holds an invalid record ({"; ".join(rec.errors)}); repair it through a reviewed fix first')
+    if avail == 'live':
+        raise Conflict(f'{ident} is held: {describe(rec, now)}')
+    if avail == 'complete':
+        raise Conflict(f'{ident} is complete')
+    if avail == 'expired' and not args.takeover:
+        raise Conflict(f'{ident} has an expired claim: {describe(rec, now)}\nTake it over only under the recovery '
+                       'rules, with --takeover --reason')
+    if args.takeover:
+        if avail != 'expired':
+            raise Fail('--takeover applies only to a record whose lease expired more than one hour ago')
+        if not (args.reason or '').strip():
+            raise Fail('--takeover needs --reason: the idle branch and pull request checks and the unanswered release request')
+    phase = st.phase(ident, avail) if kind == 'task' else None
+    holding = None
+    if kind == 'lease':
+        if not args.task:
+            raise Fail('a lease needs --task TASK-ID: the task whose claim you hold')
+        tns, tkey, holding = target(st.graph, args.task)
+        if tns != 'claims':
+            raise Fail('--task must name a task')
+        trec = observe(args.plan, tns, tkey, holding)
+        if trec is None or trec.availability(now) != 'live' or trec.data['claimant'] != worker:
+            raise Conflict(f'{worker} holds no live claim on {holding}; a lease is taken only for a task you hold')
+    prev = rec.data if rec else None
+    handoff = json.loads(json.dumps(prev.get('handoff', {}))) if prev else {}
+    if kind == 'task':
+        handoff.setdefault('repository', work_repo(st.graph, ident))
+        handoff.setdefault('branch', f'task/{key}')
+        for field in ('prs', 'merges', 'done', 'validation'):
+            handoff.setdefault(field, [])
+        for field in ('worktree', 'head', 'reviewed', 'blocker'):
+            handoff.setdefault(field, None)
+        if phase == 'follow-up' and (not prev or prev['state'] == 'delivered'):
+            handoff['next'] = ['perform the remaining acceptance for the scenarios the completion prerequisites name',
+                               'record completion by editing the ledger record through a reviewed Plan pull request']
+        elif not prev:
+            handoff['next'] = ['plan the task, then push the task branch at the first checkpoint']
+    handoff['host'] = socket.gethostname()
+    if args.takeover:
+        handoff['note'] = f'takeover from {prev["claimant"]} epoch {prev["epoch"]}: {args.reason.strip()}'
+    elif phase == 'follow-up':
+        handoff['note'] = 'completion follow-up (DLV-41)'
+    elif prev:
+        handoff['note'] = f'claimed after {prev["state"]} by {prev["claimant"]} epoch {prev["epoch"]}; review the earlier handoff and commits'
+    else:
+        handoff['note'] = None
+    epoch = prev['epoch'] + 1 if prev else 1
+    data = {'schema': 1, 'kind': kind, 'id': ident}
+    if kind == 'lease':
+        data['task'] = holding
+    data.update(claimant=worker, epoch=epoch, state='claimed', claimedAt=iso(now), updatedAt=iso(now),
+                leaseUntil=iso(now + timedelta(hours=args.hours or DEFAULT_HOURS[kind])), handoff=handoff)
+    verb = 'Take over' if args.takeover else ('Follow up' if phase == 'follow-up' else ('Claim' if not prev else 'Reclaim'))
+    message = f'{verb} {ident} epoch {epoch} by {worker}' + (f': {args.reason.strip()}' if args.takeover else '')
+    commit = push_record(args.plan, ns, key, data, rec.sha if rec else None, message)
+    print(f'{verb} succeeded: {ident} is held by {worker} at epoch {epoch} ({ns}/{key} @ {commit[:12]}), '
+          f'lease until {data["leaseUntil"]}.')
+    if kind == 'task':
+        print(f'Task branch: {handoff["repository"]} {handoff["branch"]}; ledger record: ledger/tasks/{key}.md.')
+        print(f'Record every checkpoint: python tools/delivery.py update {ident} --worker {worker} --epoch {epoch} ...')
+        if prev:
+            print('Continue from the earlier handoff: ' + describe(rec, now))
     return 0
+
+
+def cmd_update(args) -> int:
+    worker = worker_name(args)
+    st = State(args.design, args.plan, records=False)
+    ns, key, ident = target(st.graph, args.id)
+    kind = KINDS_BY_NS[ns]
+    rec = observe(args.plan, ns, key, ident)
+    d = own(rec, ident, worker, args.epoch)
+    state = args.state or d['state']
+    if kind != 'task' and state != 'claimed':
+        raise Fail('leases and roles are only renewed; end one with release')
+    handoff = apply_handoff(d['handoff'], args)
+    if state == 'claimed' and d['state'] == 'blocked' and args.blocker is None:
+        handoff['blocker'] = None  # unblocked
+    if state == 'blocked' and not handoff.get('blocker'):
+        raise Fail('--state blocked needs --blocker naming the concrete missing input')
+    if state in {'delivered', 'complete'} and st.status_of(ident) != state:
+        raise Fail(f'the merged ledger records {ident} as {st.status_of(ident) or "absent"}; merge its {state} ledger '
+                   f'record before recording {state} on the claim')
+    now = utcnow()
+    data = dict(d, state=state, updatedAt=iso(now), handoff=handoff,
+                leaseUntil=iso(now + timedelta(hours=args.hours or DEFAULT_HOURS[kind])) if state in LIVE else None)
+    verb = 'Renew' if state == d['state'] else state.capitalize()
+    commit = push_record(args.plan, ns, key, data, rec.sha, f'{verb} {ident} epoch {d["epoch"]} by {worker}')
+    print(f'{verb}: {ident} epoch {d["epoch"]} by {worker} is {state}'
+          + (f' until {data["leaseUntil"]}' if state in LIVE else '') + f' ({ns}/{key} @ {commit[:12]}).')
+    return 0
+
+
+def cmd_release(args) -> int:
+    worker = worker_name(args)
+    st = State(args.design, args.plan, records=False)
+    ns, key, ident = target(st.graph, args.id)
+    rec = observe(args.plan, ns, key, ident)
+    d = own(rec, ident, worker, args.epoch)
+    if not args.note.strip():
+        raise Fail('--note is required: why the record is released and what the next holder should do')
+    handoff = apply_handoff(d['handoff'], args)
+    handoff['note'] = args.note.strip()
+    data = dict(d, state='released', updatedAt=iso(utcnow()), leaseUntil=None, handoff=handoff)
+    commit = push_record(args.plan, ns, key, data, rec.sha, f'Release {ident} epoch {d["epoch"]} by {worker}: {args.note.strip()}')
+    print(f'Released {ident} (epoch {d["epoch"]}, {ns}/{key} @ {commit[:12]}). The next holder claims epoch {d["epoch"] + 1}.')
+    return 0
+
+
+def cmd_show(args) -> int:
+    st = State(args.design, args.plan, records=False)
+    ns, key, ident = target(st.graph, args.id)
+    rec = observe(args.plan, ns, key, ident)
+    if args.json:
+        print(json.dumps({'id': ident, 'ref': f'{ns}/{key}', 'commit': rec.sha if rec else None,
+                          'record': rec.data if rec else None, 'errors': rec.errors if rec else []}, indent=1))
+        return 0
+    print(f'{ident}: {ns}/{key}' + (f' @ {rec.sha}' if rec else ' (no record)'))
+    if rec:
+        print(describe(rec, utcnow()))
+        print(json.dumps(rec.data, indent=2, ensure_ascii=False) if rec.data is not None else '(unreadable)')
+        print('History:')
+        print(git(args.plan, 'log', '--format=  %h %cI %s', '-n', '30', rec.sha).out.rstrip())
+    if ns == 'claims':
+        t = st.graph.tasks[ident]
+        print(f'Ledger: {st.status_of(ident) or "no record"}; task branch {work_repo(st.graph, ident)}:task/{key}; '
+              f'ledger record ledger/tasks/{key}.md')
+        if not st.status_of(ident) and t['baseline']['state'] != 'accepted':
+            missing = st.missing_start(ident)
+            print('Start rule: ' + ('satisfied' if not missing else 'waiting for ' + ', '.join(missing)))
+    return 0
+
+
+def cmd_ready(args) -> int:
+    st = State(args.design, args.plan, records=not args.local, local=args.local)
+    start, follow, waiting = st.classify(args.lane, args.repo)
+    invalid = sorted((r for r in st.records.values() if r.availability(st.now) == 'invalid'), key=lambda r: (r.ns, r.key))
+    g = st.graph
+    if args.json:
+        row = lambda tid, avail, rec: {'task': tid, 'repository': g.tasks[tid]['repo'], 'title': g.tasks[tid]['title'],
+                                       'claim': avail, 'record': rec.data if rec else None}
+        print(json.dumps({'source': st.source, 'readyToStart': [row(*x) for x in sorted(start)],
+                          'completionFollowUps': [row(*x) for x in sorted(follow)],
+                          'invalidRecords': [{'ref': f'{r.ns}/{r.key}', 'errors': r.errors} for r in invalid]}, indent=1))
+        return 0
+    print(f'Authoritative state: {st.source}')
+    print(f'\nReady to start ({len(start)}):')
+    for tid, avail, rec in sorted(start):
+        print(f'{tid}\t{g.tasks[tid]["repo"]}\t{g.tasks[tid]["title"]}')
+        if avail == 'released':
+            print(f'\tresume the released work, do not restart it: {describe(rec, st.now)}')
+        elif avail == 'expired':
+            print(f'\tclaim lease expired; take over only under the recovery rules: {describe(rec, st.now)}')
+    print(f'\nReady to complete: completion follow-ups ({len(follow)}):')
+    for tid, avail, rec in sorted(follow):
+        print(f'{tid}\t{g.tasks[tid]["repo"]}\t{g.tasks[tid]["title"]}\t(completion prerequisites complete; {describe(rec, st.now)})')
+    if invalid:
+        print(f'\nInvalid records ({len(invalid)}); their items stay unavailable until repaired:')
+        for r in invalid:
+            print(f'{r.ns}/{r.key}: {"; ".join(r.errors)}')
+    return 0
+
+
+def cmd_status(args) -> int:
+    st = State(args.design, args.plan)
+    g, now = st.graph, st.now
+    start, follow, waiting = st.classify(repo=args.repo)
+    recs = sorted(st.records.values(), key=lambda r: (r.ns, r.key))
+
+    def wanted(r):
+        if args.worker and (not r.data or r.data.get('claimant') != args.worker):
+            return False
+        if args.repo and r.ns == 'claims' and r.ident in g.tasks and g.tasks[r.ident]['repo'].lower() != args.repo.lower():
+            return False
+        return True
+
+    groups = defaultdict(list)
+    for r in recs:
+        if not wanted(r):
+            continue
+        a = r.availability(now)
+        groups[(r.ns, a)].append(r)
+    if args.json:
+        print(json.dumps({
+            'source': st.source,
+            'records': [{'ref': f'{r.ns}/{r.key}', 'id': r.ident, 'availability': r.availability(now), 'commit': r.sha,
+                         'record': r.data, 'errors': r.errors} for r in recs if wanted(r)],
+            'waitingForCompletion': [{'task': t, 'pending': p} for t, p, _ in sorted(waiting)],
+            'completionFollowUps': [t for t, _, _ in sorted(follow)],
+            'vacantIntegrationRoles': sorted(r for r in g.repos if not any(
+                x.ns == 'roles' and x.ident == role_id(r) and x.availability(now) == 'live' for x in recs)),
+            'buildSlot': slot_owner(slot_path())}, indent=1))
+        return 0
+    print(f'Authoritative state: {st.source}')
+    sections = [
+        (('claims', 'live'), 'Claims held (claimed or blocked, lease live)'),
+        (('claims', 'expired'), 'Claims with expired leases (recovery rules apply)'),
+        (('claims', 'released'), 'Released claims (resume from the handoff; do not restart)'),
+        (('claims', 'delivered'), 'Delivered claims (no owner; see completion follow-ups)'),
+        (('leases', 'live'), 'Exclusive resource leases held'),
+        (('leases', 'expired'), 'Exclusive resource leases expired'),
+        (('roles', 'live'), 'Integration roles held'),
+        (('roles', 'expired'), 'Integration roles expired (recovery rules apply)'),
+    ]
+    for group, title in sections:
+        print(f'\n{title} ({len(groups[group])}):')
+        for r in groups[group]:
+            print(f'{r.ident}\t{describe(r, now)}')
+    held = {x.ident for x in recs if x.ns == 'roles' and x.availability(now) == 'live'}
+    print('\nVacant integration roles: ' + (', '.join(f'integration:{r}' for r in sorted(g.repos) if role_id(r) not in held) or 'none'))
+    print(f'\nDelivered tasks waiting for completion prerequisites ({len(waiting)}):')
+    for tid, pending, _ in sorted(waiting):
+        print(f'{tid}\twaiting for {", ".join(pending)}')
+    print(f'\nCompletion follow-ups ready ({len(follow)}): ' + (', '.join(t for t, _, _ in sorted(follow)) or 'none'))
+    print(f'Ready to start: {len(start)} (list them with ready)')
+    bad = [r for r in recs if r.availability(now) == 'invalid']
+    if bad:
+        print(f'\nInvalid records ({len(bad)}); their items stay unavailable until repaired:')
+        for r in bad:
+            print(f'{r.ns}/{r.key}: {"; ".join(r.errors)}')
+    owner = slot_owner(slot_path())
+    print('\nWorkstation build slot (this machine): ' + (f'held by {owner.get("worker")} for {owner.get("task")} until '
+                                                          f'{owner.get("expiresAt")}' if owner else 'free'))
+    return 0
+
+
+# ----------------------------------------------------------------------------------------------
+# Workstation build slot (DLV-31): one CPU-heavy local build or test at a time per workstation
+# ----------------------------------------------------------------------------------------------
+
+def slot_path() -> Path:
+    """One lock directory per user profile; every worker on the workstation runs this same tool."""
+    return Path(os.environ.get('ARCFORGES_BUILD_SLOT') or Path.home() / '.arcforges' / 'build-slot')
+
+
+def slot_owner(path: Path) -> dict | None:
+    try:
+        return json.loads((path / 'owner.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return None
+
+
+def slot_write(path: Path, owner: dict) -> None:
+    tmp = path / f'owner.{uuid.uuid4().hex}.tmp'
+    tmp.write_text(json.dumps(owner, indent=2) + '\n', encoding='utf-8')
+    os.replace(tmp, path / 'owner.json')
+
+
+def slot_stale(path: Path, owner: dict | None, now: datetime) -> bool:
+    if owner is None:  # being created, or abandoned before its owner record was written
+        try:
+            return time.time() - path.stat().st_mtime > 300
+        except OSError:
+            return False
+    try:
+        return parse_time(owner.get('expiresAt'), 'expiresAt') < now
+    except ValueError:
+        return True
+
+
+def slot_discard(path: Path, label: str, attempts: int = 20) -> bool:
+    """Move the lock aside atomically, then delete it; only one of several racing callers wins.
+    Windows refuses the rename while another process briefly holds the owner record open, so a
+    local retry covers that window. Returns False when the lock was not moved."""
+    aside = path.with_name(f'{path.name}.{label}-{uuid.uuid4().hex[:8]}')
+    for attempt in range(attempts):
+        try:
+            os.rename(path, aside)
+            break
+        except FileNotFoundError:
+            return False
+        except OSError:
+            if attempt == attempts - 1:
+                return False
+            time.sleep(0.25)
+    shutil.rmtree(aside, ignore_errors=True)
+    return True
+
+
+def slot_acquire(worker: str, task: str, minutes: float, wait_minutes: float, command: str, poll: float = 5.0) -> str:
+    path = slot_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    deadline = time.monotonic() + wait_minutes * 60
+    token, announced = uuid.uuid4().hex, False
+    while True:
+        try:
+            os.mkdir(path)
+        except FileExistsError:
+            owner = slot_owner(path)
+            if slot_stale(path, owner, utcnow()):
+                if not slot_discard(path, 'stale'):
+                    time.sleep(poll)
+                continue
+            if time.monotonic() >= deadline:
+                raise Conflict(f'workstation build slot busy: held by {owner and owner.get("worker")} for '
+                               f'{owner and owner.get("task")} until {owner and owner.get("expiresAt")}')
+            if not announced:
+                print(f'waiting for the workstation build slot (held by {owner and owner.get("worker")} for '
+                      f'{owner and owner.get("task")}); keep coding or reviewing meanwhile', flush=True)
+                announced = True
+            time.sleep(poll)
+            continue
+        now = utcnow()
+        slot_write(path, {'token': token, 'worker': worker, 'task': task, 'host': socket.gethostname(),
+                          'pid': os.getpid(), 'acquiredAt': iso(now),
+                          'expiresAt': iso(now + timedelta(minutes=minutes)), 'command': command})
+        return token
+
+
+def slot_release(token: str) -> None:
+    path = slot_path()
+    owner = slot_owner(path)
+    if owner and owner.get('token') == token and not slot_discard(path, 'released'):
+        owner['expiresAt'] = iso(datetime(2000, 1, 1, tzinfo=timezone.utc))  # let the next waiter recover it now
+        try:
+            slot_write(path, owner)
+        except OSError:
+            pass
+
+
+def cmd_build_slot(args) -> int:
+    path = slot_path()
+    if args.action == 'status':
+        owner = slot_owner(path)
+        print(json.dumps({'path': str(path), 'owner': owner}, indent=1) if args.json else
+              (f'held by {owner.get("worker")} for {owner.get("task")} ({owner.get("command")}) until {owner.get("expiresAt")}'
+               if owner else ('held (owner record not yet written)' if path.exists() else 'free')))
+        return 0
+    worker = worker_name(args)
+    if args.action == 'release':
+        owner = slot_owner(path)
+        if not owner:
+            print('the workstation build slot is free')
+            return 0
+        if owner.get('worker') != worker:
+            raise Conflict(f'the build slot is held by {owner.get("worker")}, not {worker}')
+        slot_discard(path, 'released')
+        print('released the workstation build slot')
+        return 0
+    cmd = list(args.cmd)
+    if cmd and cmd[0] == '--':
+        cmd = cmd[1:]
+    if not cmd:
+        raise Fail('give the command after --')
+    token = slot_acquire(worker, args.task, args.minutes, args.wait_minutes, ' '.join(cmd))
+    stop = threading.Event()
+
+    def heartbeat():
+        while not stop.wait(60):
+            owner = slot_owner(path)
+            if not owner or owner.get('token') != token:
+                return
+            owner['expiresAt'] = iso(utcnow() + timedelta(minutes=args.minutes))
+            try:
+                slot_write(path, owner)
+            except OSError:  # a reader held the record open; the next beat retries well before expiry
+                pass
+
+    beat = threading.Thread(target=heartbeat, daemon=True)
+    beat.start()
+    try:
+        return subprocess.call(cmd)
+    finally:
+        stop.set()
+        slot_release(token)
+
+
+# ----------------------------------------------------------------------------------------------
+# Planning commands and entry point
+# ----------------------------------------------------------------------------------------------
+
+def cmd_check(args, write: bool = False) -> int:
+    g = Graph(require_graph(args.design))
+    errors, warnings = validate(g)
+    for w in warnings:
+        print('warning:', w)
+    _, ledger_errors = read_ledger(args.plan, g)
+    errors += [f'ledger: {e}' for e in ledger_errors]
+    if errors:
+        for e in errors:
+            print('error:', e)
+        raise Fail(f'{len(errors)} graph or ledger errors')
+    files = views(g, args.design, args.plan)
+    if write:
+        for p, text in files.items():
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(text, encoding='utf-8', newline='\n')
+        print(f'generated {len(files)} files')
+        return 0
+    stale = [p for p, text in files.items() if not p.exists() or p.read_text(encoding='utf-8') != text]
+    for p in stale:
+        print('stale view:', p)
+    if stale:
+        raise Fail(f'{len(stale)} generated views are stale; run generate')
+    print(f'check passed: {len(g.data["tasks"])} tasks, {len(g.slices)} adoption slices, {len(files)} views current, '
+          f'{len(warnings)} warnings, ledger valid')
+    return 0
+
+
+def cmd_analyze(args) -> int:
+    g = Graph(require_graph(args.design))
+    errors, _ = validate(g)
+    if errors:
+        raise Fail(f'{len(errors)} graph errors; run check')
+    print(json.dumps(analysis(g), indent=1))
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest='command', required=True)
+
+    def roots(p):
+        p.add_argument('--design', type=Path, help='Design checkout (default: $ARCFORGES_DESIGN or the sibling of the Plan primary checkout)')
+        p.add_argument('--plan', type=Path, default=PLAN_ROOT, help='Plan checkout (default: the checkout holding this tool)')
+
+    def handoff(p):
+        p.add_argument('--branch')
+        p.add_argument('--worktree')
+        p.add_argument('--head', help='full SHA of the last pushed task-branch commit')
+        p.add_argument('--reviewed', help='full SHA of the head commit the review approved')
+        p.add_argument('--pr', action='append', help='pull request URL (repeatable)')
+        p.add_argument('--merge', action='append', help='full SHA of a merge commit (repeatable)')
+        p.add_argument('--done', action='append', help='completed action (repeatable)')
+        p.add_argument('--next', action='append', help='remaining action (repeatable; replaces the list)')
+        p.add_argument('--validation', action='append', help='validation actually performed (repeatable)')
+        p.add_argument('--blocker', help='concrete missing input; an empty string clears it')
+
+    for name in ('check', 'generate', 'analyze'):
+        roots(sub.add_parser(name))
+    p = sub.add_parser('ready')
+    roots(p)
+    p.add_argument('--lane')
+    p.add_argument('--repo')
+    p.add_argument('--json', action='store_true')
+    p.add_argument('--local', action='store_true', help='unreviewed working-tree state; never a basis for claiming')
+    p.add_argument('--claims', action='store_true', help=argparse.SUPPRESS)  # claims are always read now
+    p = sub.add_parser('status')
+    roots(p)
+    p.add_argument('--worker')
+    p.add_argument('--repo')
+    p.add_argument('--json', action='store_true')
+    p = sub.add_parser('show')
+    roots(p)
+    p.add_argument('id')
+    p.add_argument('--json', action='store_true')
+    p = sub.add_parser('claim')
+    roots(p)
+    p.add_argument('id')
+    p.add_argument('--worker')
+    p.add_argument('--hours', type=float)
+    p.add_argument('--task', help='for a lease: the task whose claim you hold')
+    p.add_argument('--takeover', action='store_true')
+    p.add_argument('--reason')
+    p = sub.add_parser('update')
+    roots(p)
+    p.add_argument('id')
+    p.add_argument('--worker')
+    p.add_argument('--epoch', type=int, required=True)
+    p.add_argument('--state', choices=['claimed', 'blocked', 'delivered', 'complete'])
+    p.add_argument('--hours', type=float)
+    p.add_argument('--note')
+    handoff(p)
+    p = sub.add_parser('release')
+    roots(p)
+    p.add_argument('id')
+    p.add_argument('--worker')
+    p.add_argument('--epoch', type=int, required=True)
+    p.add_argument('--note', required=True)
+    handoff(p)
+    p = sub.add_parser('build-slot')
+    slot = p.add_subparsers(dest='action', required=True)
+    s = slot.add_parser('run')
+    s.add_argument('--worker')
+    s.add_argument('--task', required=True)
+    s.add_argument('--minutes', type=float, default=60.0, help='lock expiry, extended every minute while the command runs')
+    s.add_argument('--wait-minutes', type=float, default=240.0)
+    s.add_argument('cmd', nargs=argparse.REMAINDER)
+    s = slot.add_parser('status')
+    s.add_argument('--json', action='store_true')
+    s = slot.add_parser('release')
+    s.add_argument('--worker')
+
+    args = ap.parse_args(argv)
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    if getattr(args, 'design', 'n/a') is None:
+        args.design = default_design()
+    commands = {'check': cmd_check, 'generate': lambda a: cmd_check(a, write=True), 'analyze': cmd_analyze,
+                'ready': cmd_ready, 'status': cmd_status, 'show': cmd_show, 'claim': cmd_claim,
+                'update': cmd_update, 'release': cmd_release, 'build-slot': cmd_build_slot}
+    try:
+        return commands[args.command](args) or 0
+    except Fail as exc:
+        print(f'FAILED: {exc}')
+        return exc.code
 
 
 if __name__ == '__main__':

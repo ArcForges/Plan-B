@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Knowledge search and retrieval
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Knowledge search and retrieval
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task SRCH.00 — Source admission and registration fo
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-00).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-00 (python tools/delivery.py claim SRCH.00 --worker <name>); task branch task/srch-00 in Cloud; ledger record ledger/tasks/srch-00.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Own-product content, explicitly selected uploads and authorized web sources are admitted into the search source registry with origin/egress and consent recorded; other-product, other-realm and private resources are rejected before any index write.
 
@@ -40,7 +42,8 @@ Execute ArcForges delivery task SRCH.01 — Scoped derived index production (D1 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-01 (python tools/delivery.py claim SRCH.01 --worker <name>); task branch task/srch-01 in Cloud; ledger record ledger/tasks/srch-01.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: D1 FTS scoped queries and per-workspace Vectorize namespaces are produced with mandatory realm/product/model-generation filters, source revision/policy checks, rebuild pointers, tombstone reconciliation and dimensional-change isolation (separate index, atomic reader switch, rollback window).
 
@@ -55,7 +58,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Modules.Retrieval/Indexing/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
 Permitted substitutes (never real integration evidence): SUB-embedding-rerank-fixture: index-write correctness (namespace scoping, filters, tombstones, dimension-change isolation) independent of real model variance Real producer ['AIR.00']; removed by SRCH.06
 Unblocks: SRCH.02, SRCH.05, SRCH.06
 
@@ -68,7 +71,8 @@ Execute ArcForges delivery task SRCH.02 — Hybrid retrieval, RRF fusion and bud
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-02 (python tools/delivery.py claim SRCH.02 --worker <name>); task branch task/srch-02 in Cloud; ledger record ledger/tasks/srch-02.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Lexical (D1 FTS) and semantic (Vectorize) candidates are fused with RRF(x)=sum(1/(60+rank_i(x))), exact-match priority preserved, the Notes scalar comparator never reordered by vector score, and RetrievalBudget defaults (candidates 200/500, evidence 20/100, contextTokens 8192/24000, perSource 5/20, graphDepth 1/3) enforced.
 
@@ -82,7 +86,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Modules.Retrieval/Ranking/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-cloud-host-composition (append): Each module registers through its own module entry point and route fragment; the host composition only lists modules; route and binding conflicts are resolved by the integration owner at merge.
 Permitted substitutes (never real integration evidence): SUB-embedding-rerank-fixture: index-write correctness (namespace scoping, filters, tombstones, dimension-change isolation) independent of real model variance Real producer ['AIR.00']; removed by SRCH.06
 Unblocks: SRCH.03, SRCH.06
 
@@ -95,7 +99,8 @@ Execute ArcForges delivery task SRCH.03 — Current permission recheck at query 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-03 (python tools/delivery.py claim SRCH.03 --worker <name>); task branch task/srch-03 in Cloud; ledger record ledger/tasks/srch-03.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Source owner permission and revision are rechecked after candidate retrieval and before any count/snippet/citation is returned; revocation during a query and a stale index can never expose content.
 
@@ -121,7 +126,8 @@ Execute ArcForges delivery task SRCH.04 — Evidence and citations.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-04 (python tools/delivery.py claim SRCH.04 --worker <name>); task branch task/srch-04 in Cloud; ledger record ledger/tasks/srch-04.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Retrieval results retain source kind, immutable reference, anchor, uncertainty/completeness and measurement/media precision; stale or missing sources are labelled and no citation is ever fabricated.
 
@@ -146,7 +152,8 @@ Execute ArcForges delivery task SRCH.05 — Privacy partitioning and cache isola
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-05 (python tools/delivery.py claim SRCH.05 --worker <name>); task branch task/srch-05 in Cloud; ledger record ledger/tasks/srch-05.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Cache, history and context are partitioned by product/profile per RI-01..03 (workspace+principal key, no cross-workspace reuse); temporary/local Cloud-processing content never enters Cloud search.
 
@@ -172,7 +179,8 @@ Execute ArcForges delivery task SRCH.06 — Real Cloud query path (fixture-to-re
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-06 (python tools/delivery.py claim SRCH.06 --worker <name>); task branch task/srch-06 in Cloud; ledger record ledger/tasks/srch-06.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: The retrieval path runs against real Workers AI embeddings/reranker and real D1/Vectorize with C# owner filtering; SUB-embedding-rerank-fixture is retired from the query path, and explicit lexical-only degradation is proven when the semantic path is unavailable.
 
@@ -190,7 +198,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] SRCH.90: index capacity acceptance evidence
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Modules.Retrieval/Indexing/**; Cloud:src/Cloud/ArcForges.Cloud.Modules.Retrieval/Ranking/**
-Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot; the AI deployment environment is exclusive during live runs.; RES-private-configuration (append): Each owning task adds its own configuration section; activation is a signed publication by the policy lane; no task edits another section.
+Shared resources (follow the owner protocol): RES-ai-workflow-and-routes (append): The Workflow entry is owned by the turn-loop task; other Harness tasks add steps through their own modules; the route-pin table changes only with a policy snapshot. Any task that runs against the AI deployment environment holds the lease `leases/res-ai-workflow-and-routes` for that live run only.; RES-private-configuration (append): Each owning task adds its own configuration section; activation is a signed publication by the policy lane; no task edits another section.
 Unblocks: SRCH.90
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Real compatible client/owner/index version test against deployed CF bindings (credentialed candidate gate, not ordinary CI, per P2-017's 'no real AI inference in CI'); explicit lexical-only degradation test.
@@ -202,7 +210,8 @@ Execute ArcForges delivery task SRCH.90 — Owned artifacts, real integration an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\search.md (anchor task-srch-90).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/srch-90 (python tools/delivery.py claim SRCH.90 --worker <name>); task branch task/srch-90 in Cloud; ledger record ledger/tasks/srch-90.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Every SRCH substep is built/packed once and consumed as exact candidate bytes from a clean environment; model04 launch-capacity.v1 account/realm vector and namespace budgets are enforced with reservation, old/new index overlap, tombstone reconciliation, threshold refusal before new paid admission, and rebuild pausing/recovery all proven.
 

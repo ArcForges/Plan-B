@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Commerce, entitlement and credits
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Commerce, entitlement and credits
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task COM.01 — Provider adapter boundary.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-01 (python tools/delivery.py claim COM.01 --worker <name>); task branch task/com-01 in Cloud; ledger record ledger/tasks/com-01.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: A provider-agnostic adapter boundary exists in Billing with a typed capability description; no provider type/identifier/webhook shape appears outside it, enforced by an architecture test.
 
@@ -37,7 +39,8 @@ Execute ArcForges delivery task COM.02 — Catalogue and versioned policy.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-02 (python tools/delivery.py claim COM.02 --worker <name>); task branch task/com-02 in Cloud; ledger record ledger/tasks/com-02.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Offers, prices and policy versions exist as effective-dated policy data with no commercial figure compiled into code, and historical orders are immune to later price changes.
 
@@ -63,7 +66,8 @@ Execute ArcForges delivery task COM.03 — Purchase pipeline.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-03 (python tools/delivery.py claim COM.03 --worker <name>); task branch task/com-03 in Cloud; ledger record ledger/tasks/com-03.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Purchase intent is the idempotency anchor for hosted checkout; one intent yields at most one order, a forged redirect grants nothing, and every checkout attempt carries complete internal metadata with no payment-instrument field anywhere in ArcForges.
 
@@ -92,7 +96,8 @@ Execute ArcForges delivery task COM.04 — Provider event inbox.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-04 (python tools/delivery.py claim COM.04 --worker <name>); task branch task/com-04 in Cloud; ledger record ledger/tasks/com-04.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Every provider event is persisted before processing, signature-verified, deduplicated, and processed through the fixed eight-step verification chain, with quarantine and alerting for unprocessable events and idempotent full-inbox replay.
 
@@ -121,7 +126,8 @@ Execute ArcForges delivery task COM.05 — Entitlement resolver.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-05 (python tools/delivery.py claim COM.05 --worker <name>); task branch task/com-05 in Cloud; ledger record ledger/tasks/com-05.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Immutable grants and revocations resolve deterministically into an entitlement snapshot with a per-capability reason and version, and rebuilding the snapshot from its grants/revocations always reproduces the stored snapshot.
 
@@ -148,7 +154,8 @@ Execute ArcForges delivery task COM.06 — Distribution and enforcement.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-06 (python tools/delivery.py claim COM.06 --worker <name>); task branch task/com-06 in Cloud; ledger record ledger/tasks/com-06.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Entitlement is distributed with its version for client caching, realtime notification is only a refresh hint, offline staleness is bounded, all cost-bearing enforcement happens server-side, and losing entitlement never deletes local data.
 
@@ -175,7 +182,8 @@ Execute ArcForges delivery task COM.07 — Quota, usage and storage accounting.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-07 (python tools/delivery.py claim COM.07 --worker <name>); task branch task/com-07 in Cloud; ledger record ledger/tasks/com-07.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Quota (limit) and usage (measurement) live in separate stores keyed to the entitlement period, storage accounting matches committed objects exactly, and an exceeded quota produces a typed, explained refusal.
 
@@ -202,7 +210,8 @@ Execute ArcForges delivery task COM.08 — Credits.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-08 (python tools/delivery.py claim COM.08 --worker <name>); task branch task/com-08 in Cloud; ledger record ledger/tasks/com-08.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Purchased (no-expiry) and compensation (disclosed-expiry) credit lots exist in integer micro-credits with funding order capacity to compensation to purchased, single-reservation-spans-both-pools accounting, reservation-expiry sweeping and a hard stop at zero with no floating point anywhere in the path.
 
@@ -228,7 +237,8 @@ Execute ArcForges delivery task COM.09 — Ledgers and reconciliation.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-09 (python tools/delivery.py claim COM.09 --worker <name>); task branch task/com-09 in Cloud; ledger record ledger/tasks/com-09.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: The three ledgers exist as separate append-only stores with scheduled two-way provider reconciliation expressing repairs as new typed records, never edits, and divergence above threshold alerts.
 
@@ -257,7 +267,8 @@ Execute ArcForges delivery task COM.10 — Refunds, disputes and evidence.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-10 (python tools/delivery.py claim COM.10 --worker <name>); task branch task/com-10 in Cloud; ledger record ledger/tasks/com-10.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: A refund verifiably rolls entitlement back, dispute records are tracked, and a commercial evidence export covering order/payment/event/entitlement-history/usage for a period is complete, reproducible and free of payment-instrument data.
 
@@ -284,7 +295,8 @@ Execute ArcForges delivery task COM.11 — Service term interval model.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-11 (python tools/delivery.py claim COM.11 --worker <name>); task branch task/com-11 in Cloud; ledger record ledger/tasks/com-11.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: entitlement.service_term exists as an interval keyed on (kind, period_ref) with subscription_ref stable across renewals, a renewal always creating a new period_ref row, a replayed provider event extending nothing twice, and a plan change superseding rather than editing.
 
@@ -312,7 +324,8 @@ Execute ArcForges delivery task COM.12 — Replenishing capacity bucket, refill 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-12 (python tools/delivery.py claim COM.12 --worker <name>); task branch task/com-12 in Cloud; ledger record ledger/tasks/com-12.md.
 Kind/size: service/XL. Baseline: not-started.
 Outcome: The capacity bucket refills by a per-period saturating accrual independent of evaluation frequency, backed by a monotonic durable watermark and exact rational carry, never claws back on a ceiling reduction, initialises exactly once per contiguous run, and admission is atomic with the service-term check first, committing before dispatch.
 
@@ -340,7 +353,8 @@ Execute ArcForges delivery task COM.13 — Operator financial-owner proposal/app
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-13 (python tools/delivery.py claim COM.13 --worker <name>); task branch task/com-13 in Cloud; ledger record ledger/tasks/com-13.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: The financial-owner operator RPCs (grant/revokeGrant/issueCredit/adjustCredit/refund) are implemented exactly once against the registry04 §9 typed proposal/approval protocol with all eight authorization fields, refusing public customer/PAT/agent access, and one approved proposal cannot execute twice.
 
@@ -370,7 +384,8 @@ Execute ArcForges delivery task COM.14 — Technical commerce closure and live-g
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-14 (python tools/delivery.py claim COM.14 --worker <name>); task branch task/com-14 in Cloud; ledger record ledger/tasks/com-14.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Deterministic provider normalization and the full sandbox lifecycle are proven with synthetic and Paddle/Payoneer-sandbox vectors, SubscriptionState exactly matches requirements-04, plan changes start next term without proration, and the live-payment/payout/refund/merchant gates are explicitly preserved as pending for WP50.
 
@@ -403,7 +418,8 @@ Execute ArcForges delivery task COM.15 — Owned-artifact receipt and closure.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\commerce.md (anchor task-com-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/com-15 (python tools/delivery.py claim COM.15 --worker <name>); task branch task/com-15 in Cloud; ledger record ledger/tasks/com-15.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: The package-level owned-artifact/real-integration receipt is recorded (source commit, producer version, candidate hashes, actual runtime/provider, scenario, result, real-vs-fixture status) and the P2-010 active-Pass/subscription-exclusivity and ledger-hold-deadline vectors pass.
 

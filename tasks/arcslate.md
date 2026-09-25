@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — ArcSlate
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## ArcSlate
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task SLATE.01 — Exact time model: canonical ticks, 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-01 (python tools/delivery.py claim SLATE.01 --worker <name>); task branch task/slate-01 in ArcSlate; ledger record ledger/tasks/slate-01.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: RationalRate, FrameTime, SampleTime, TimeRange and the 705,600,000 Hz tick domain exist with exact frame<->tick and sample<->tick round-trip on every supported rate, half-open range algebra (BO-01), and the five enumerated rounding sites (RP-02) as the only places a position rounds; a policy test asserts no other code path rounds.
 
@@ -37,7 +39,8 @@ Execute ArcForges delivery task SLATE.02 — Project and sequence domain model.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-02 (python tools/delivery.py claim SLATE.02 --worker <name>); task branch task/slate-02 in ArcSlate; ledger record ledger/tasks/slate-02.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Project (multi-sequence container) and Sequence (playable/renderable composition with its own SequenceSettings snapshot and output grids) exist as structurally distinct types over one shared MediaLibrary; Project != Sequence != media folder is asserted structurally.
 
@@ -63,7 +66,8 @@ Execute ArcForges delivery task SLATE.03 — Media asset/stream/metadata domain 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-03 (python tools/delivery.py claim SLATE.03 --worker <name>); task branch task/slate-03 in ArcSlate; ledger record ledger/tasks/slate-03.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: MediaAsset (stable logical identity, never a file path), MediaMetadata (streams/codecs/dimensions/rate/duration/colour/timecode/channel layout), MediaAvailability, and a relink algorithm that verifies asset identity/size/content-hash/metadata before reusing an origin hash all exist as pure domain types with no native type present.
 
@@ -89,7 +93,8 @@ Execute ArcForges delivery task SLATE.04 — Native media metadata/probe read ad
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-04 (python tools/delivery.py claim SLATE.04 --worker <name>); task branch task/slate-04 in ArcSlate; ledger record ledger/tasks/slate-04.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Importing a real media file populates MediaMetadata through the owned arc_media_probe ABI running behind the ContentSandbox boundary; malformed metadata and a child crash both preserve the native project (structure and edit decisions intact); content-origin is captured on import per the frozen carrier schema.
 
@@ -117,7 +122,8 @@ Execute ArcForges delivery task SLATE.05 — Media library: bins, reference-in-p
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-05 (python tools/delivery.py claim SLATE.05 --worker <name>); task branch task/slate-05 in ArcSlate; ledger record ledger/tasks/slate-05.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Bins organise assets; import defaults to reference-in-place and completes without waiting for background analysis/caches; an indexing failure never fails the import (the asset still exists, degraded and retryable).
 
@@ -143,7 +149,8 @@ Execute ArcForges delivery task SLATE.06 — Timeline structural model: tracks, 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-06 (python tools/delivery.py claim SLATE.06 --worker <name>); task branch task/slate-06 in ArcSlate; ledger record ledger/tasks/slate-06.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Role-typed Track, TimelineItem, Clip (in/out points referencing a MediaAsset, never a file path), Transition and Marker/RangeMarker exist; one asset supports unlimited independent clip instances; track ordering/enable/lock/solo exist.
 
@@ -171,7 +178,8 @@ Execute ArcForges delivery task SLATE.07 — Edit command pipeline and placement
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-07 (python tools/delivery.py claim SLATE.07 --worker <name>); task branch task/slate-07 in ArcSlate; ledger record ledger/tasks/slate-07.md.
 Kind/size: feature/XL. Baseline: not-started.
 Outcome: TimelineCommand infrastructure exists (expand link/group scope, validate locks/handles/overlaps/bounds, commit one undoable transaction, failure changes nothing, caller-supplied IDs replay identically) together with the placement-operation family, each exact per its declared semantics (e.g. Overwrite trims/splits only the target track interval; RippleDelete processes disjoint intervals latest-first so shift occurs once).
 
@@ -198,7 +206,8 @@ Execute ArcForges delivery task SLATE.08 — Relationship and retiming edit oper
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-08 (python tools/delivery.py claim SLATE.08 --worker <name>); task branch task/slate-08 in ArcSlate; ledger record ledger/tasks/slate-08.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The remaining TL-06 operations exist on the same command pipeline: Roll adjusts a shared cut with both source handles; Slide trims outer neighbours to keep the combined boundary fixed; Link!=shared-identity is enforced; RetimeCurve composes rationals and projects once at the decode boundary with a reported inexact mapping; Snap converts pointer tolerance to ticks once and previews before commit.
 
@@ -224,7 +233,8 @@ Execute ArcForges delivery task SLATE.09 — Undo/redo stack and composite comma
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-09 (python tools/delivery.py claim SLATE.09 --worker <name>); task branch task/slate-09 in ArcSlate; ledger record ledger/tasks/slate-09.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Every edit command produces one undo transaction; a complex multi-command user gesture groups into one composite undo step; undo is demonstrably a different mechanism from checkpoint and crash recovery.
 
@@ -249,7 +259,8 @@ Execute ArcForges delivery task SLATE.10 — Project persistence and store infra
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-10 (python tools/delivery.py claim SLATE.10 --worker <name>); task branch task/slate-10 in ArcSlate; ledger record ledger/tasks/slate-10.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: ArcSlate.Infrastructure persists Project/Sequence/Timeline/MediaLibrary through the platform's single write path; fixtures/formats/arcslate/v1/ exists as the V1 project fixture; the storage schema version equals the highest applied migration.
 
@@ -278,7 +289,8 @@ Execute ArcForges delivery task SLATE.11 — Project checkpoints, crash recovery
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-11 (python tools/delivery.py claim SLATE.11 --worker <name>); task branch task/slate-11 in ArcSlate; ledger record ledger/tasks/slate-11.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: A checkpoint is an explicit user action distinct from both undo and autosave; a kill mid-edit recovers to the last committed boundary and reports what was lost; a prior-version project migrates forward with semantic (not merely structural) preservation.
 
@@ -307,7 +319,8 @@ Execute ArcForges delivery task SLATE.12 — Slate.project.v1/graph.v1 wire proj
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-12 (python tools/delivery.py claim SLATE.12 --worker <name>); task branch task/slate-12 in ArcSlate; ledger record ledger/tasks/slate-12.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The full slate.project.v1/graph.v1 wire projection round-trips metadata-only (no media bytes) with every edit and Offline Media preserved; nested-sequence and graph cycles are rejected; an unknown imported effect definition is retained and stays inert rather than silently activated.
 
@@ -335,7 +348,8 @@ Execute ArcForges delivery task SLATE.13 — ArcSlate reference-coverage drift c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-13 (python tools/delivery.py claim SLATE.13 --worker <name>); task branch task/slate-13 in Design; ledger record ledger/tasks/slate-13.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: ArcVideo (caf5651) and ArcVideoFoundation (139eeca) are re-diffed against their bound commits; changed rows are reassessed, newly introduced upstream material gets a disposition (mapped or excluded, never auto-adopted), and the licence position is re-confirmed.
 
@@ -361,7 +375,8 @@ Execute ArcForges delivery task SLATE.14 — Closure: owned-artifact and real-in
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-14 (python tools/delivery.py claim SLATE.14 --worker <name>); task branch task/slate-14 in ArcSlate; ledger record ledger/tasks/slate-14.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: One recorded receipt (source commit, candidate hashes, actual runtime/OS/provider, scenario, result, real-versus-fixture status per field) demonstrates that the exact timeline/edit/recovery fixtures from SLATE.01-12 remain valid and that no package or wire boundary rounds a frame/time value.
 
@@ -391,7 +406,8 @@ Execute ArcForges delivery task SLATE.15 — Native media boundary consumption (
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-15 (python tools/delivery.py claim SLATE.15 --worker <name>); task branch task/slate-15 in ArcSlate; ledger record ledger/tasks/slate-15.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: ArcSlate.Media consumes the exact published ArcForges.Native.Media/.Colour/.Image/.Otio/.Graphics packages with managed input validation, safe handles and a sacrificial-process integration suite; sanitiser builds run in CI; every native dependency's licence position is recorded; no native type escapes the media layer. Satisfies PG-03 for ArcSlate.
 
@@ -408,7 +424,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Media/**; ArcSlate:src/ArcForges.ArcSlate.Native/**
-Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Permitted substitutes (never real integration evidence): SUB-no-op-media-adapter: wiring/composition only, never decode/codec correctness Real producer ['NAT.07', 'NAT.08']; removed by SLATE.23
 Unblocks: SLATE.16, SLATE.19, SLATE.23
 
@@ -422,7 +438,8 @@ Execute ArcForges delivery task SLATE.16 — Decode and pooled buffers.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-16 (python tools/delivery.py claim SLATE.16 --worker <name>); task branch task/slate-16 in ArcSlate; ledger record ledger/tasks/slate-16.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Demux and decode run through the boundary into pooled buffers; buffers return on every path including failure; pool exhaustion is measured and surfaced; hardware acceleration is discovered at runtime with a proven software fallback whose output matches within declared tolerance.
 
@@ -436,7 +453,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] NAT.14: production ContentSandbox.Runtime.<rid> parser composition
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Media/Decode/**
-Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.17, SLATE.20, SLATE.21, SLATE.30
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Long-run buffer accounting, pool-exhaustion behaviour, forced-software-path equivalence, decode-capability disclosure -- local, once, on the existing environment.
@@ -449,7 +466,8 @@ Execute ArcForges delivery task SLATE.17 — Playback engine, clock and schedule
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-17 (python tools/delivery.py claim SLATE.17 --worker <name>); task branch task/slate-17 in ArcSlate; ledger record ledger/tasks/slate-17.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The playback engine is driven by the timeline clock, decoupled from editing so an edit invalidates and re-requests incrementally without stalling playback; frames may drop but the audio/timeline clock stays correct; playback quality state (realtime/reduced/proxy/dropping/requires-render) is computed and visible.
 
@@ -476,7 +494,8 @@ Execute ArcForges delivery task SLATE.18 — Processing graph and keyframe engin
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-18 (python tools/delivery.py claim SLATE.18 --worker <name>); task branch task/slate-18 in ArcSlate; ledger record ledger/tasks/slate-18.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: A typed acyclic ProcessingGraph evaluates per node kind with typed, non-arbitrarily-connectable ports; EffectDefinition and EffectInstance are distinct; keyframe time is pinned to its declared clip-local-or-sequence scope and never silently switches, including across a clip move; bezier evaluation uses the exact cubic-Hermite tangent contract.
 
@@ -502,7 +521,8 @@ Execute ArcForges delivery task SLATE.19 — Native-backed processing nodes (con
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-19 (python tools/delivery.py claim SLATE.19 --worker <name>); task branch task/slate-19 in ArcSlate; ledger record ledger/tasks/slate-19.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Transform/crop/composite/generated-source nodes actually produce pixel output through the native convert path when evaluated, matching the CPU reference formulas within the declared 1e-5 tolerance; the CPU graph definition remains the oracle for any optional GPU acceleration.
 
@@ -519,7 +539,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Processing/NativeNodes/**
-Shared resources (follow the owner protocol): RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.23, SLATE.25, SLATE.28
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Reference-vector comparison at 1e-5 per-channel tolerance before quantisation; identity-operation exactness check.
@@ -531,7 +551,8 @@ Execute ArcForges delivery task SLATE.20 — Audio processing chain and sample-a
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-20 (python tools/delivery.py claim SLATE.20 --worker <name>); task branch task/slate-20 in ArcSlate; ledger record ledger/tasks/slate-20.md.
 Kind/size: feature/XL. Baseline: not-started.
 Outcome: Per-non-overlapping-track-cut sample ownership is assigned (never rounded) per BO-02, all track/transition contributions are summed once at each output index (BO-02/BO-03), filter/resampler padding primes DSP without being emitted independently, and gain/pan/dissolve/crossfade use the exact formulas of 26§5 (10^(dB/20) gain, equal-power pan/crossfade). Satisfies the PG-20 per-track-cut-ownership evidence for ArcSlate.
 
@@ -548,7 +569,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Audio/**
-Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.23, SLATE.28
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Two-mixed-tracks/dissolve/track-gap/resampler-priming/NTSC-frame-one-boundary vectors, each asserting exactly one mixed output sample at index k; mixing-against-reference-output test; sync-under-load test with video.
@@ -561,7 +582,8 @@ Execute ArcForges delivery task SLATE.21 — Proxies and derived caches.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-21 (python tools/delivery.py claim SLATE.21 --worker <name>); task branch task/slate-21 in ArcSlate; ledger record ledger/tasks/slate-21.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Proxy generation/policy per project and per asset, plus render/thumbnail/waveform caches, all exist as derived stores; a clip never knows which representation is in use; deleting every cache leaves the project fully intact; render output is identical with proxies enabled and disabled.
 
@@ -591,7 +613,8 @@ Execute ArcForges delivery task SLATE.22 — Viewer: source and sequence, profes
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-22 (python tools/delivery.py claim SLATE.22 --worker <name>); task branch task/slate-22 in ArcSlate; ledger record ledger/tasks/slate-22.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Source and sequence viewers exist with play/pause/frame-step/shuttle/in-out-marking/go-to-timecode/loop/rate, fully keyboard-operable, with playback quality state visible.
 
@@ -619,7 +642,8 @@ Execute ArcForges delivery task SLATE.23 — Closure: owned-artifact and real-in
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-23 (python tools/delivery.py claim SLATE.23 --worker <name>); task branch task/slate-23 in ArcSlate; ledger record ledger/tasks/slate-23.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: A clean AOT package consumer plus representative decode, synchronisation, cancellation, damaged-input and native dependency loading pass on every supported RID; the receipt records exact artifacts and real-versus-fixture status per field.
 
@@ -650,7 +674,8 @@ Execute ArcForges delivery task SLATE.24 — Colour management: input interpreta
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-24 (python tools/delivery.py claim SLATE.24 --worker <name>); task branch task/slate-24 in ArcSlate; ledger record ledger/tasks/slate-24.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Per-asset input colour metadata with a non-destructive override, a project/sequence working colour configuration, and strictly separate viewer-display and export transforms all exist; the colour domain holds only semantic configuration, with the OCIO backend fully behind an infrastructure interface.
 
@@ -666,7 +691,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Color/**
-Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.27, SLATE.32
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Round-trip colour tests against reference values, override-non-destructiveness assertion, display-transform-never-alters-export test, domain-purity test on the colour model.
@@ -678,7 +703,8 @@ Execute ArcForges delivery task SLATE.25 — Video scopes (waveform, vectorscope
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-25 (python tools/delivery.py claim SLATE.25 --worker <name>); task branch task/slate-25 in ArcSlate; ledger record ledger/tasks/slate-25.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Waveform/vectorscope/histogram/parade all read correctly against reference signals as derived views over the current frame or range, each stating its measurement point in the pipeline explicitly.
 
@@ -705,7 +731,8 @@ Execute ArcForges delivery task SLATE.26 — Render planning and immutable snaps
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-26 (python tools/delivery.py claim SLATE.26 --worker <name>); task branch task/slate-26 in ArcSlate; ledger record ledger/tasks/slate-26.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A RenderRequest captures sequence/range/preset/destination/options and binds an immutable project+sequence revision snapshot including font/colour/source-hash identities; editing during a render never affects that running render; proxy render is opt-in and recorded in output metadata.
 
@@ -734,7 +761,8 @@ Execute ArcForges delivery task SLATE.27 — Export presets and encoding validat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-27).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-27 (python tools/delivery.py claim SLATE.27 --worker <name>); task branch task/slate-27 in ArcSlate; ledger record ledger/tasks/slate-27.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Reusable ExportPresets cover container/codec/rate/resolution/colour-output/audio configuration; an invalid combination is refused before a ProductJob starts, never failing mid-render; the three portable baseline profiles (matroska-ffv1-pcm, wav-pcm, mp4-mpeg4-aac) validate exactly per the declared bounds (even dimensions 16-8192, sequence-representable rate, etc.).
 
@@ -749,7 +777,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Domain/Render/ExportPreset.cs; ArcSlate:src/ArcForges.ArcSlate.Rendering/Encoding/**
-Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-arcslate-migrations (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-arcslate-migrations (append): Numbered migrations are allocated at merge by the integration owner (a rebase renumbers pending migrations); each migration is forward-only with its recovery and downgrade-refusal tests; no task edits a merged migration.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.28, SLATE.31
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Preset validation negative tests; encode conformance tests per preset against golden fixtures with declared tolerance; metadata-correctness check on output files.
@@ -761,7 +789,8 @@ Execute ArcForges delivery task SLATE.28 — Render execution engine and atomic 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-28).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-28 (python tools/delivery.py claim SLATE.28 --worker <name>); task branch task/slate-28 in ArcSlate; ledger record ledger/tasks/slate-28.md.
 Kind/size: feature/XL. Baseline: not-started.
 Outcome: Render runs as a native Product Job (progress, pause, resume, cancellation) owned and recovered by ArcSlate, never entering task.task or consuming AI capacity; output writes to a temporary target and commits atomically so a crash/cancel/missing marker never exposes a complete-looking file; a long render survives machine sleep and resumes where the platform permits.
 
@@ -782,7 +811,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.Rendering/Execution/**
-Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.31, SLATE.33
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Cancellation and failure tests asserting no complete-looking partial file; long-render soak; sleep-and-resume test; disk-full test -- local, once, on the existing environment.
@@ -795,7 +824,8 @@ Execute ArcForges delivery task SLATE.29 — Subtitles and captions: authored tr
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-29).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-29 (python tools/delivery.py claim SLATE.29 --worker <name>); task branch task/slate-29 in ArcSlate; ledger record ledger/tasks/slate-29.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: SubtitleTrack/SubtitleCue exist as an independent track role (never a text-overlay effect); imported millisecond timestamps convert exactly to ticks; export rounds each endpoint once to nearest millisecond (ties-to-even) and reports maximum endpoint error and any collapsed-cue extension/refusal; exported files carry the content-origin carrier/sidecar.
 
@@ -824,7 +854,8 @@ Execute ArcForges delivery task SLATE.30 — Local transcription extraction Prod
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-30).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-30 (python tools/delivery.py claim SLATE.30 --worker <name>); task branch task/slate-30 in ArcSlate; ledger record ledger/tasks/slate-30.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: A local isolated ProductJob freezes the selected sequence revision/range, extracts mono PCM16 WAV in <=30s/1MiB chunks, and records exact sample counts/hashes/conform mapping without auto-uploading; adoption previews derived segments as authored subtitle cues, binds NativeContentRev, requires explicit partial-output acceptance where applicable, and commits one undoable edit carrying AI content-origin.
 
@@ -855,7 +886,8 @@ Execute ArcForges delivery task SLATE.31 — Golden output stability corpus.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-31).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-31 (python tools/delivery.py claim SLATE.31 --worker <name>); task branch task/slate-31 in ArcSlate; ledger record ledger/tasks/slate-31.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A golden fixture corpus with declared tolerances covers every supported export preset; a codec or backend update that changes output beyond tolerance fails the build and requires a recorded decision.
 
@@ -870,7 +902,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:fixtures/media/golden/**
-Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.32
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Golden comparison across the corpus; a deliberate-change negative test asserting the gate fires -- local, once.
@@ -883,7 +915,8 @@ Execute ArcForges delivery task SLATE.32 — Closure: owned-artifact and real-in
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-32).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-32 (python tools/delivery.py claim SLATE.32 --worker <name>); task branch task/slate-32 in ArcSlate; ledger record ledger/tasks/slate-32.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: Independent render/range/colour/output checks and cancel/failure/atomic-publish recovery pass, with the receipt confirming no CF Harness or AI budget is required for native render execution.
 
@@ -913,7 +946,8 @@ Execute ArcForges delivery task SLATE.33 — Capability surface: query, edit, re
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-33).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-33 (python tools/delivery.py claim SLATE.33 --worker <name>); task branch task/slate-33 in ArcSlate; ledger record ledger/tasks/slate-33.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Query capabilities (projects/sequences/tracks/clips/markers/media/transcripts/render-state), edit capabilities (semantic timeline operations, marker/subtitle operations, effect application) and render/export capabilities (ProductJobHandle-returning) are all registered, each declaring risk/side-effect-class/reversibility/approval-posture with owner-side validation; the contract is provably frozen only after timeline/command/undo semantics stabilised.
 
@@ -942,7 +976,8 @@ Execute ArcForges delivery task SLATE.34 — Bounded context provision.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-34).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-34 (python tools/delivery.py claim SLATE.34 --worker <name>); task branch task/slate-34 in ArcSlate; ledger record ledger/tasks/slate-34.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Context providers expose sequence structure, markers, selected ranges, timecodes and metadata; raw media structurally cannot enter a context payload; oversized context is refused explicitly and visibly.
 
@@ -968,7 +1003,8 @@ Execute ArcForges delivery task SLATE.35 — Collect, consolidate and the portab
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-35).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-35 (python tools/delivery.py claim SLATE.35 --worker <name>); task branch task/slate-35 in ArcSlate; ledger record ledger/tasks/slate-35.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Collect/Consolidate gathers external media into a managed portable form on request, reports exactly what was gathered/skipped and why, never destroys originals; the portable package (project data plus managed media) re-imports with equivalence.
 
@@ -996,7 +1032,8 @@ Execute ArcForges delivery task SLATE.36 — Cross-device resolution and relink.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-36).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-36 (python tools/delivery.py claim SLATE.36 --worker <name>); task branch task/slate-36 in ArcSlate; ledger record ledger/tasks/slate-36.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: MediaResolutionStrategy resolves per-device asset locations; the relink workflow handles moved/renamed/partially-available media; a project opens with all media offline and relinks without altering any edit decision.
 
@@ -1025,7 +1062,8 @@ Execute ArcForges delivery task SLATE.37 — Cloud sync scope declaration.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-37).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-37 (python tools/delivery.py claim SLATE.37 --worker <name>); task branch task/slate-37 in ArcSlate; ledger record ledger/tasks/slate-37.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Project data/sequences/markers/presets/metadata sync by default; heavyweight media follows an explicit escalation policy, never swept in by enabling sync; derived data (proxies/caches/analysis) never syncs as authority; big media never traverses the application runtime.
 
@@ -1052,7 +1090,8 @@ Execute ArcForges delivery task SLATE.38 — OTIO interchange: import.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-38).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-38 (python tools/delivery.py claim SLATE.38 --worker <name>); task branch task/slate-38 in ArcSlate; ledger record ledger/tasks/slate-38.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Importing a real.otio file (through the pinned official library, behind the narrow C ABI, no adapters/plug-ins/executable content) decodes each finite double via its exact binary rational, normalises only within one ULP of a declared standard rate, stages the result with a fidelity report the user reviews or cancels, and never silently drops timeline structure.
 
@@ -1070,7 +1109,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.ImportExport/Otio/Import/**
-Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-contracts-schema-sources (append): Each closure task edits only its own domain proto or HTTP-schema files and adds its own sharded constraint and fixture files; shared inventories (package inventory, foundation inventory, constraint aggregate) are append-only per closure. A proto file with several contributing tasks (operator, policy/configuration) has one designated author task and the others request changes through it. The integration owner merges closure pull requests one at a time and the next author rebases and regenerates.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-contracts-schema-sources (append): Each closure task edits only its own domain proto or HTTP-schema files and adds its own sharded constraint and fixture files; shared inventories (package inventory, foundation inventory, constraint aggregate) are append-only per closure. A proto file with several contributing tasks (operator, policy/configuration) has one designated author task and the others request changes through it. The integration owner merges closure pull requests one at a time and the next author rebases and regenerates.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.39
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Finite/nonfinite/large/fractional-value vectors, standard-30000/1001-vs-decimal-29.97 vector, metadata-stripped-external-file vector -- against real fixtures and the pinned official library, local, once.
@@ -1083,7 +1122,8 @@ Execute ArcForges delivery task SLATE.39 — OTIO interchange: export.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-39).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-39 (python tools/delivery.py claim SLATE.39 --worker <name>); task branch task/slate-39 in ArcSlate; ledger record ledger/tasks/slate-39.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Export binds a committed sequence revision (reusing the same immutable-snapshot pattern as render), writes to a temporary destination, and publishes atomically after validation; failure/cancellation leaves the project and any existing destination untouched; reports exclude unselected absolute paths and secrets.
 
@@ -1100,7 +1140,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate.ImportExport/Otio/Export/**
-Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-contracts-schema-sources (append): Each closure task edits only its own domain proto or HTTP-schema files and adds its own sharded constraint and fixture files; shared inventories (package inventory, foundation inventory, constraint aggregate) are append-only per closure. A proto file with several contributing tasks (operator, policy/configuration) has one designated author task and the others request changes through it. The integration owner merges closure pull requests one at a time and the next author rebases and regenerates.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcslate-golden-media (append): Golden media and reference outputs are added per task with provenance; they are never regenerated to make a test pass; large media follows the repository storage policy.; RES-contracts-schema-sources (append): Each closure task edits only its own domain proto or HTTP-schema files and adds its own sharded constraint and fixture files; shared inventories (package inventory, foundation inventory, constraint aggregate) are append-only per closure. A proto file with several contributing tasks (operator, policy/configuration) has one designated author task and the others request changes through it. The integration owner merges closure pull requests one at a time and the next author rebases and regenerates.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: SLATE.40
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Mixed/fractional-rate round trip, gaps/stack ordering, repeated-media-retains-placement, missing-references-become-relinkable-Offline-Media, supported-dissolves/markers, unsupported-feature-reports, export-cancellation-leaves-project-untouched -- against real fixtures and the pinned official library, local, once.
@@ -1112,7 +1152,8 @@ Execute ArcForges delivery task SLATE.40 — Closure: owned-artifact and real-in
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-40).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/slate-40 (python tools/delivery.py claim SLATE.40 --worker <name>); task branch task/slate-40 in ArcSlate; ledger record ledger/tasks/slate-40.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: OTIO round-trip/projection and relocation fixtures, the package boundary, explicit R2 upload and missing-external-reference behaviour are all recorded with real artifacts and provider identity; the receipt confirms no DTO version-skew can truncate a native project before sync.
 
@@ -1141,7 +1182,8 @@ Execute ArcForges delivery task SLATE.42 — Real multi-device ArcSlate project 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcslate.md (anchor task-slate-42).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate). Also touches: Cloud.
+Claim and handoff record: claims/slate-42 (python tools/delivery.py claim SLATE.42 --worker <name>); task branch task/slate-42 in ArcSlate; ledger record ledger/tasks/slate-42.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Two devices editing/opening the same ArcSlate project through the real Cloud sync engine converge correctly, with heavyweight media never implicitly transferred and derived data never syncing as authority.
 

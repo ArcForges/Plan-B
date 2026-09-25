@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Family governance and policy tests
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Family governance and policy tests
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task GOV.01 — Specification, naming, licence-bounda
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-01 (python tools/delivery.py claim GOV.01 --worker <name>); task branch task/gov-01 in DesktopPlatform; ledger record ledger/tasks/gov-01.md.
 Kind/size: governance/XL. Baseline: accepted.
 Outcome: WP00's naming/licence/provenance freeze is accepted across all nine implementation repositories: product-names.json, exported glossary/invariant policy data, per-project SPDX licence boundaries, a working provenance process and five registered Reference Coverage Matrices are in place, scanned clean, and enforced in CI.
 
@@ -43,7 +45,8 @@ Execute ArcForges delivery task GOV.02 — Repository reconciliation and target 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-02 (python tools/delivery.py claim GOV.02 --worker <name>); task branch task/gov-02 in DesktopPlatform; ledger record ledger/tasks/gov-02.md.
 Kind/size: governance/XL. Baseline: accepted.
 Outcome: WP01 reconciliation is accepted: nine-repository disposition inventory executed against ede43db, the Contracts public/internal Apache-2.0 split assigned, the shared-foundation boundary reviewed, native surface dispositions executed (OTIO admitted, MDF excluded), all eighteen test families mapped, bounded reconciliation applied with a green Notes build, and Cloud's 21 domain owners recorded.
 
@@ -75,7 +78,8 @@ Execute ArcForges delivery task GOV.03 — Build governance, packaging policy an
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-03 (python tools/delivery.py claim GOV.03 --worker <name>); task branch task/gov-03 in DesktopPlatform; ledger record ledger/tasks/gov-03.md.
 Kind/size: governance/XL. Baseline: accepted.
 Outcome: WP02 build governance is accepted: pinned/locked toolchains in all nine owners, warnings-as-errors with an empty authored-code waiver list, a complete AOT/trim declaration sweep with zero unassigned diagnostics, verified runtime/directory boundaries, all nine version axes producible, and dependency-admission policy encoded as data.
 
@@ -107,7 +111,8 @@ Execute ArcForges delivery task GOV.04 — Shared architecture/repository policy
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-04 (python tools/delivery.py claim GOV.04 --worker <name>); task branch task/gov-04 in DesktopPlatform; ledger record ledger/tasks/gov-04.md.
 Kind/size: governance/L. Baseline: not-started.
 Outcome: A reusable AT-01..14/RP-01..10 rule engine, project-graph reader, fixture compiler and banned-symbol scanner extend DesktopPlatform's existing 5-method RepositoryPolicyTests.cs baseline (WP01.04) to the full rule set, are published for the other eight repositories to reuse, and DesktopPlatform's own project graph is fully enforced with one positive and one failing negative fixture per rule.
 
@@ -138,7 +143,8 @@ Execute ArcForges delivery task GOV.05 — Contracts policy tests and contract/s
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/gov-05 (python tools/delivery.py claim GOV.05 --worker <name>); task branch task/gov-05 in Contracts; ledger record ledger/tasks/gov-05.md.
 Kind/size: governance/L. Baseline: not-started.
 Outcome: Contracts enforces its own layering/licence/banned-API rules using GOV.04's shared engine, and implements the contract/serialization policy engine that makes VG-04's policy-test half enforceable and that GOV.06-GOV.12 reuse for their own generated-client checks.
 
@@ -170,7 +176,8 @@ Execute ArcForges delivery task GOV.06 — ArcNotes policy tests.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/gov-06 (python tools/delivery.py claim GOV.06 --worker <name>); task branch task/gov-06 in ArcNotes; ledger record ledger/tasks/gov-06.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: ArcNotes enforces its own layering/licence/naming/banned-API/contract-consumption rules independently, using GOV.04's shared engine and GOV.05's contract-policy helpers, with positive and failing-negative fixtures for each rule.
 
@@ -202,7 +209,8 @@ Execute ArcForges delivery task GOV.07 — ArcScope policy tests.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/gov-07 (python tools/delivery.py claim GOV.07 --worker <name>); task branch task/gov-07 in ArcScope; ledger record ledger/tasks/gov-07.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: ArcScope enforces its own layering/licence/naming/banned-API/contract-consumption rules independently.
 
@@ -234,7 +242,8 @@ Execute ArcForges delivery task GOV.08 — ArcSlate policy tests.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/gov-08 (python tools/delivery.py claim GOV.08 --worker <name>); task branch task/gov-08 in ArcSlate; ledger record ledger/tasks/gov-08.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: ArcSlate enforces its own layering/licence/naming/banned-API/contract-consumption rules independently.
 
@@ -266,7 +275,8 @@ Execute ArcForges delivery task GOV.09 — Cloud policy tests.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/gov-09 (python tools/delivery.py claim GOV.09 --worker <name>); task branch task/gov-09 in Cloud; ledger record ledger/tasks/gov-09.md.
 Kind/size: governance/M. Baseline: not-started.
 Outcome: Cloud enforces its own layering/licence/naming/banned-API/contract-consumption rules independently, with extra weight on AOT-path banned APIs given BR-07's zero-trim/AOT-diagnostic requirement.
 
@@ -298,7 +308,8 @@ Execute ArcForges delivery task GOV.10 — AI (Workflow Harness) policy tests.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/gov-10 (python tools/delivery.py claim GOV.10 --worker <name>); task branch task/gov-10 in AI; ledger record ledger/tasks/gov-10.md.
 Kind/size: governance/S. Baseline: not-started.
 Outcome: AI enforces its own layering/licence/naming/banned-API/contract-consumption rules independently as the sole owner of the Workflow Harness (per WP01's Cloud/AI module split).
 
@@ -330,7 +341,8 @@ Execute ArcForges delivery task GOV.11 — Web policy tests (Node/TS mechanism).
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/gov-11 (python tools/delivery.py claim GOV.11 --worker <name>); task branch task/gov-11 in Web; ledger record ledger/tasks/gov-11.md.
 Kind/size: governance/M. Baseline: not-started.
 Outcome: Node/TS import and dependency policy checks enforce one Web workspace/lock, exact Node/npm/generator pins, SDK-to-UI licence separation, generated wire types only, no private/server/local-RPC imports, desktop JS/DOM prohibition scoped to desktop graphs, no obsolete Blazor target in the active Web graph, no esproj in portable managed references, no implicit npm install or production dev/HMR server, and no TS fixtures/test helpers in the release route graph - each with a passing and a failing negative example.
 
@@ -361,7 +373,8 @@ Execute ArcForges delivery task GOV.12 — Mobile policy tests (Gradle/Kotlin me
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/gov-12 (python tools/delivery.py claim GOV.12 --worker <name>); task branch task/gov-12 in Mobile; ledger record ledger/tasks/gov-12.md.
 Kind/size: governance/M. Baseline: not-started.
 Outcome: Mobile enforces its own layering/licence/naming/banned-API rules independently via a Gradle-native mechanism (dependency verification plus lint/Detekt-style rules) that consumes the same rule DATA as the other repos, not GOV.04's.NET test library directly.
 
@@ -392,7 +405,8 @@ Execute ArcForges delivery task GOV.13 — Invariant enforcement accounting repo
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-13 (python tools/delivery.py claim GOV.13 --worker <name>); task branch task/gov-13 in DesktopPlatform; ledger record ledger/tasks/gov-13.md.
 Kind/size: governance/M. Baseline: not-started.
 Outcome: A build-produced report classifies all 429 catalogued invariants as enforced-and-passing / enforced-and-failing / not-yet-implemented, every classification derived from an actual test-run result, without re-deriving the design-stage mapping (PG-06, already closed) and without itself closing PG-11.
 
@@ -418,7 +432,8 @@ Execute ArcForges delivery task GOV.14 — Specification integrity checks over t
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-14 (python tools/delivery.py claim GOV.14 --worker <name>); task branch task/gov-14 in DesktopPlatform; ledger record ledger/tasks/gov-14.md.
 Kind/size: governance/M. Baseline: not-started.
 Outcome: Checks run against the current Design repository and produce zero findings: every internal link resolves; every cited requirement/architecture rule/decision/verification finding/gate identifier exists; no superseded name appears as current outside docs/deprecated-inputs/; every Phase 1 decision is cited by at least one Phase 2 document or its non-applicability is stated; the work-package dependency graph is acyclic with every referenced package existing; and the decision-coverage check passes.
 
@@ -446,7 +461,8 @@ Execute ArcForges delivery task GOV.15 — WP05 stage integration verification.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/gov-15 (python tools/delivery.py claim GOV.15 --worker <name>); task branch task/gov-15 in DesktopPlatform; ledger record ledger/tasks/gov-15.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Each of the nine repositories enforces its own boundary independently, and a cross-repository integration graph - reading each repository's published package/dependency metadata rather than cloning every reference or product repository - detects a forbidden transitive edge; both the architecture/repository-policy suite and the specification-integrity suite run in the pull-request pipeline and a violation fails the build.
 
@@ -482,7 +498,8 @@ Execute ArcForges delivery task GOV.16 — Operation-catalogue authorization rea
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\governance.md (anchor task-gov-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/gov-16 (python tools/delivery.py claim GOV.16 --worker <name>); task branch task/gov-16 in Contracts; ledger record ledger/tasks/gov-16.md.
 Kind/size: governance/M. Baseline: not-started.
 Outcome: A build-produced reachability matrix classifies every public/local/operator/CF/exception operation binding under catalogue 00 against all seven AZ-04 authorization fields, failing on unclassified/ambiguous fields, impossible idempotency claims, public imports of local schema, and tool reachability of human-only approval/credential/commerce/policy methods, including hostile actor-chain fixtures; separately, the owner/deployment identity chain is asserted so automation loses authorization when its owner loses permission/service eligibility even with an otherwise-valid process credential, and no customer service-principal or Organization authority is introduced.
 

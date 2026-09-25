@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Operations, support and trust and safety
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Operations, support and trust and safety
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task OPS.01 — Service levels and alerting.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-01 (python tools/delivery.py claim OPS.01 --worker <name>); task branch task/ops-01 in Cloud; ledger record ledger/tasks/ops-01.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Service-level indicators measure user-visible success per capability group with realtime/managed-AI computed independently, error budgets are visible, and every deployed alert routes correctly and names an existing runbook.
 
@@ -37,7 +39,8 @@ Execute ArcForges delivery task OPS.02 — Incident process.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-02 (python tools/delivery.py claim OPS.02 --worker <name>); task branch task/ops-02 in Cloud; ledger record ledger/tasks/ops-02.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: A shared four-severity ladder drives incident state tracked independently of production, a possible personal-data breach classifies automatically at the highest severity with the statutory notification clock as a hard deadline, and post-incident review produces runbook updates.
 
@@ -62,7 +65,8 @@ Execute ArcForges delivery task OPS.03 — Runbooks and rehearsal.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-03 (python tools/delivery.py claim OPS.03 --worker <name>); task branch task/ops-03 in Cloud; ledger record ledger/tasks/ops-03.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Every required runbook is written with preconditions, decision points, exact steps, verification and rollback, and every runbook for an implemented owner carries at least one dated rehearsal record.
 
@@ -90,7 +94,8 @@ Execute ArcForges delivery task OPS.04 — Status page.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/ops-04 (python tools/delivery.py claim OPS.04 --worker <name>); task branch task/ops-04 in Web; ledger record ledger/tasks/ops-04.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: An independently hosted status page publishes only user-facing capability components with an explicit reviewed health-to-component mapping, survives a full Cloud outage, and publishes its emergency alternate URL in at least three places.
 
@@ -118,7 +123,8 @@ Execute ArcForges delivery task OPS.05 — Operator console and support access.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/ops-05 (python tools/delivery.py claim OPS.05 --worker <name>); task branch task/ops-05 in Web; ledger record ledger/tasks/ops-05.md.
 Kind/size: service/XL. Baseline: not-started.
 Outcome: The operator console runs on a separate origin with a separate identity system, never in public navigation; support access is explicit, scoped, time-bounded, consented and audited; a destructive action needs a second authorised operator; and no parallel unversioned admin API exists.
 
@@ -149,7 +155,8 @@ Execute ArcForges delivery task OPS.06 — Break-glass.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-06 (python tools/delivery.py claim OPS.06 --worker <name>); task branch task/ops-06 in Cloud; ledger record ledger/tasks/ops-06.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: A distinct, alarmed emergency-access path requires justification, expires automatically, alerts immediately, requires mandatory post-hoc review, and is visible to the affected account owner.
 
@@ -175,7 +182,8 @@ Execute ArcForges delivery task OPS.07 — Support cases and in-product reportin
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-07 (python tools/delivery.py claim OPS.07 --worker <name>); task branch task/ops-07 in Cloud; ledger record ledger/tasks/ops-07.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: In-product problem reporting produces a support reference without attaching user data by default, support cases link to diagnostic references rather than content, and the case lifecycle carries defined response expectations.
 
@@ -201,7 +209,8 @@ Execute ArcForges delivery task OPS.08 — Trust and safety.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-08 (python tools/delivery.py claim OPS.08 --worker <name>); task branch task/ops-08 in Cloud; ledger record ledger/tasks/ops-08.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Community report intake drives a proportionate enforcement ladder with every action recorded and communicated, account enforcement states integrate with the account model, and appeals have a defined path and response expectation.
 
@@ -227,7 +236,8 @@ Execute ArcForges delivery task OPS.09 — Operational mail and provider drills.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-09 (python tools/delivery.py claim OPS.09 --worker <name>); task branch task/ops-09 in Cloud; ledger record ledger/tasks/ops-09.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Transactional/broadcast email use the real WP-22 Postmark/SES adapters with separated streams; outage and reconciliation drills are rehearsed under a prepared secondary path; and the private security-advisory intake-through-publication process is complete with in-product containment/revocation attention.
 
@@ -256,7 +266,8 @@ Execute ArcForges delivery task OPS.10 — Customer push delivery and registrati
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-10 (python tools/delivery.py claim OPS.10 --worker <name>); task branch task/ops-10 in Cloud; ledger record ledger/tasks/ops-10.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Notification.IPushSender sends through a typed FCM HTTP v1 credential adapter with a unique delivery-intent outbox, generation/revocation checks and the exact push.v1 profile, working against an actual isolated Firebase project with bounded, fenced recovery.
 
@@ -284,7 +295,8 @@ Execute ArcForges delivery task OPS.11 — Package review and revocation console
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/ops-11 (python tools/delivery.py claim OPS.11 --worker <name>); task branch task/ops-11 in Web; ledger record ledger/tasks/ops-11.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The operator console integrates WP-41 PackageCatalog operator methods (catalogReview/catalogRevoke) with independent operator authentication, step-up/evidence and audit, and review/revocation decisions visibly affect real signed catalog consumers.
 
@@ -312,7 +324,8 @@ Execute ArcForges delivery task OPS.12 — Owned-artifact receipt.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ops-12 (python tools/delivery.py claim OPS.12 --worker <name>); task branch task/ops-12 in Cloud; ledger record ledger/tasks/ops-12.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: The package-level owned-artifact/real-integration receipt is recorded confirming actual role/redaction/status/support-case behavior and actionable CF/R2 failure diagnostics, with no second Node/operations business host.
 
@@ -347,7 +360,8 @@ Execute ArcForges delivery task OPS.13 — Operator console exercises real finan
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\operations.md (anchor task-ops-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/ops-13 (python tools/delivery.py claim OPS.13 --worker <name>); task branch task/ops-13 in Web; ledger record ledger/tasks/ops-13.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: an authorised operator can actually grant/revoke/issueCredit/adjustCredit/refund and activate a kill switch through the console UI, not just via direct RPC test calls
 

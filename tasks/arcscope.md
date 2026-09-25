@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — ArcScope
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## ArcScope
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task SCOPE.01 — DataSource/SourceAdapter contract, 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-01 (python tools/delivery.py claim SCOPE.01 --worker <name>); task branch task/scope-01 in ArcScope; ledger record ledger/tasks/scope-01.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A single adapter contract (DataSource/SourceAdapter/Connection) exists with persisted, reusable connection profiles; editing a profile never rewrites a historical session's recorded configuration; a second claimant on the same source is refused with a busy state.
 
@@ -39,7 +41,8 @@ Execute ArcForges delivery task SCOPE.02 — Channel, signal, event and time mod
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-02 (python tools/delivery.py claim SCOPE.02 --worker <name>); task branch task/scope-02 in ArcScope; ledger record ledger/tasks/scope-02.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A precise time model spanning signal samples and discrete events with exact rate representation, explicit conversion between domains, and explicit recorded alignment between sources.
 
@@ -65,7 +68,8 @@ Execute ArcForges delivery task SCOPE.03 — Network and file-replay source adap
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-03 (python tools/delivery.py claim SCOPE.03 --worker <name>); task branch task/scope-03 in ArcScope; ledger record ledger/tasks/scope-03.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: TCP, UDP and file-stream-replay adapters work over real transports (pure managed sockets/file I/O), pass connect/disconnect/reconnect tests, and share SCOPE.01's profile and exclusivity model.
 
@@ -91,7 +95,8 @@ Execute ArcForges delivery task SCOPE.04 — Serial and USB instrument adapters.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-04 (python tools/delivery.py claim SCOPE.04 --worker <name>); task branch task/scope-04 in ArcScope; ledger record ledger/tasks/scope-04.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Serial and USB adapters work over real hardware transports via the native ArcInstruments ABI, enumerate/open/transfer/cancel correctly, refuse busy/permission conflicts per Tier-1 RID, and record a hot-unplug as an explicit capture gap.
 
@@ -121,7 +126,8 @@ Execute ArcForges delivery task SCOPE.05 — Acquisition pipeline: bounded loop,
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-05 (python tools/delivery.py claim SCOPE.05 --worker <name>); task branch task/scope-05 in ArcScope; ledger record ledger/tasks/scope-05.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: A bounded, timestamped acquisition loop with explicit backpressure sustains throughput above the product target with bounded memory; every overrun is counted, timestamped and recorded; hardware timestamps are preserved where available and the timing source/uncertainty is recorded otherwise.
 
@@ -149,7 +155,8 @@ Execute ArcForges delivery task SCOPE.06 — Session and capture lifecycle: segm
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-06 (python tools/delivery.py claim SCOPE.06 --worker <name>); task branch task/scope-06 in ArcScope; ledger record ledger/tasks/scope-06.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: The session/capture lifecycle (armed, running, paused, stopped, finalised, interrupted) is correct; captures are sequences of segments plus explicit gaps; pausing the view never stops recording; a disconnect produces an explicit gap rather than a truncated capture.
 
@@ -176,7 +183,8 @@ Execute ArcForges delivery task SCOPE.07 — Durable capture writer, chunked ver
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-07 (python tools/delivery.py claim SCOPE.07 --worker <name>); task branch task/scope-07 in ArcScope; ledger record ledger/tasks/scope-07.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Raw capture is written to the chunked verifiable store with per-chunk checksums and an explicit end marker; a finalised capture is structurally immutable; a crash mid-capture recovers to the last committed boundary with an honest end marker and recorded loss.
 
@@ -203,7 +211,8 @@ Execute ArcForges delivery task SCOPE.08 — Replay as a source (capture-level).
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-08 (python tools/delivery.py claim SCOPE.08 --worker <name>); task branch task/scope-08 in ArcScope; ledger record ledger/tasks/scope-08.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Replay of a recorded, finalised capture feeds the same pipeline as a labelled ReplaySource, always recording its origin, and never presents device-only fields as measured.
 
@@ -230,7 +239,8 @@ Execute ArcForges delivery task SCOPE.09 — Long-running capture in the shell.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-09 (python tools/delivery.py claim SCOPE.09 --worker <name>); task branch task/scope-09 in ArcScope; ledger record ledger/tasks/scope-09.md.
 Kind/size: feature/S. Baseline: not-started.
 Outcome: Recording state is permanently visible; closing a window during capture always asks with consequences stated, never silently stopping or continuing; background capture persists only while genuine work is active.
 
@@ -257,7 +267,8 @@ Execute ArcForges delivery task SCOPE.10 — Reference drift check against Seria
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-10 (python tools/delivery.py claim SCOPE.10 --worker <name>); task branch task/scope-10 in Design; ledger record ledger/tasks/scope-10.md.
 Kind/size: feature/S. Baseline: not-started.
 Outcome: A drift report exists comparing the reference against the bound commit, covering changed rows, newly introduced upstream material (mapped to an existing requirement or recorded as an accepted exclusion) and licence re-verification; every changed/new item carries a disposition.
 
@@ -284,7 +295,8 @@ Execute ArcForges delivery task SCOPE.11 — Owned-artifact verification and rea
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-11 (python tools/delivery.py claim SCOPE.11 --worker <name>); task branch task/scope-11 in ArcScope; ledger record ledger/tasks/scope-11.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: The WP-33 candidate closes: real packaged hardware-path and throughput/overrun/recovery acceptance recorded, no automatic upload of raw acquisition data, PG-08 and PG-03 evidence recorded for every producer this package owns.
 
@@ -320,7 +332,8 @@ Execute ArcForges delivery task SCOPE.12 — Visualisation: virtualised renderin
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-12 (python tools/delivery.py claim SCOPE.12 --worker <name>); task branch task/scope-12 in ArcScope; ledger record ledger/tasks/scope-12.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Time-series and event visualisation meets the responsiveness budget at corpus scale with virtualised rendering and downsampling; the display explicitly discloses when it is downsampled; cursor readings are exact regardless of display resolution.
 
@@ -347,7 +360,8 @@ Execute ArcForges delivery task SCOPE.13 — Triggers with pre/post windows.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-13 (python tools/delivery.py claim SCOPE.13 --worker <name>); task branch task/scope-13 in ArcScope; ledger record ledger/tasks/scope-13.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Triggers control capture and mark significant time events with exact pre- and post-trigger windows served by the rolling buffer; samples are provably unmodified; trigger storms are bounded.
 
@@ -373,7 +387,8 @@ Execute ArcForges delivery task SCOPE.14 — Measurements: scope.measurement.v1.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-14 (python tools/delivery.py claim SCOPE.14 --worker <name>); task branch task/scope-14 in ArcScope; ledger record ledger/tasks/scope-14.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Every measurement family in scope.measurement.v1 reproduces under its recorded profile/configuration within the declared numerical tolerance, with units and precision stated; independent reference values (including the Pearson r=1/r=-1 vectors and constant-input-unavailable case) pass.
 
@@ -402,7 +417,8 @@ Execute ArcForges delivery task SCOPE.15 — Decoder framework and first-party p
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-15 (python tools/delivery.py claim SCOPE.15 --worker <name>); task branch task/scope-15 in ArcScope; ledger record ledger/tasks/scope-15.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: A versioned decoder framework produces structured events (never raw channel data); malformed frames, checksum failures and unknown fields are surfaced with counts/locations; no decoder has a device-write path.
 
@@ -428,7 +444,8 @@ Execute ArcForges delivery task SCOPE.16 — Analysis definitions and recipes as
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-16 (python tools/delivery.py claim SCOPE.16 --worker <name>); task branch task/scope-16 in ArcScope; ledger record ledger/tasks/scope-16.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Versioned analysis definitions compose into recipes; results are derived data reconstructable from evidence plus configuration; long analyses run as long-running product jobs with progress and cancellation; deleting and rebuilding all results matches the profile oracle within tolerance; historical results record their definition version.
 
@@ -455,7 +472,8 @@ Execute ArcForges delivery task SCOPE.17 — Annotations, findings and session/c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-17 (python tools/delivery.py claim SCOPE.17 --worker <name>); task branch task/scope-17 in ArcScope; ledger record ledger/tasks/scope-17.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Annotations and findings exist as authored content with identity and history, never written into raw capture; session-to-session and capture-to-capture comparison states its alignment explicitly.
 
@@ -481,7 +499,8 @@ Execute ArcForges delivery task SCOPE.18 — Reports and reproducibility.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-18 (python tools/delivery.py claim SCOPE.18 --worker <name>); task branch task/scope-18 in ArcScope; ledger record ledger/tasks/scope-18.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Reports compose analyses, measurements, findings and visualisations into a portable exported form; every element traces to session, capture, time range, configuration snapshot, decoder version and analysis version; regenerating from recorded sources produces equivalent results.
 
@@ -511,7 +530,8 @@ Execute ArcForges delivery task SCOPE.19 — Owned-artifact verification and rea
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-19 (python tools/delivery.py claim SCOPE.19 --worker <name>); task branch task/scope-19 in ArcScope; ledger record ledger/tasks/scope-19.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: The WP-34 candidate closes: scope.measurement.v1 independent expected results, invalid/status cases and reporting references pass; native acceleration does not redefine the result; PG-08 hardware-based measurement/analysis evidence is recorded.
 
@@ -544,7 +564,8 @@ Execute ArcForges delivery task SCOPE.20 — ArcChat capability surface for ArcS
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-20 (python tools/delivery.py claim SCOPE.20 --worker <name>); task branch task/scope-20 in ArcScope; ledger record ledger/tasks/scope-20.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Query, analysis, authoring and operational capabilities are declared, each with risk level, permission requirement and approval posture; start/stop capture are treated as real-side-effect operations, not read-only conveniences.
 
@@ -571,7 +592,8 @@ Execute ArcForges delivery task SCOPE.21 — Bounded context provision for AI.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-21 (python tools/delivery.py claim SCOPE.21 --worker <name>); task branch task/scope-21 in ArcScope; ledger record ledger/tasks/scope-21.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: ArcScope contributes structured results (measurements, analysis outputs, decoded event summaries, selected ranges) as bounded context; raw capture structurally cannot enter a context payload; oversized context is refused explicitly.
 
@@ -599,7 +621,8 @@ Execute ArcForges delivery task SCOPE.22 — Cloud sync scope (metadata, not raw
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-22 (python tools/delivery.py claim SCOPE.22 --worker <name>); task branch task/scope-22 in ArcScope; ledger record ledger/tasks/scope-22.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: The ArcScope sync scope excludes raw capture by default and includes metadata, analysis, annotations, findings, reports and configurations; enabling project sync transfers no raw capture bytes; the policy is visible per project and per session; the included scope converges across devices.
 
@@ -627,7 +650,8 @@ Execute ArcForges delivery task SCOPE.23 — Explicit per-session raw capture up
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-23 (python tools/delivery.py claim SCOPE.23 --worker <name>); task branch task/scope-23 in ArcScope; ledger record ledger/tasks/scope-23.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: Raw upload is an explicit per-session act with size/destination/consequence stated, using the chunked upload path with resumption and verification; no automatic trigger path exists anywhere (not from AI, not from enabling sync).
 
@@ -653,7 +677,8 @@ Execute ArcForges delivery task SCOPE.24 — Import, export and format fixtures.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-24 (python tools/delivery.py claim SCOPE.24 --worker <name>); task branch task/scope-24 in ArcScope; ledger record ledger/tasks/scope-24.md.
 Kind/size: feature/L. Baseline: not-started.
 Outcome: Native full-fidelity bundle export/import round-trips with equivalence; tabular export carries explicit precision warnings; import enters the unified session model with a recorded origin (never disguised as a live device); every claimed import version has a fixture — satisfying PG-07 for ArcScope.
 
@@ -683,7 +708,8 @@ Execute ArcForges delivery task SCOPE.25 — Extension boundary: no third-party 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-25 (python tools/delivery.py claim SCOPE.25 --worker <name>); task branch task/scope-25 in ArcScope; ledger record ledger/tasks/scope-25.md.
 Kind/size: feature/S. Baseline: not-started.
 Outcome: No extension-reachable path can write raw capture; extension access to ArcScope is through capabilities with owner-side validation only.
 
@@ -710,7 +736,8 @@ Execute ArcForges delivery task SCOPE.26 — Owned-artifact verification and rea
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/scope-26 (python tools/delivery.py claim SCOPE.26 --worker <name>); task branch task/scope-26 in ArcScope; ledger record ledger/tasks/scope-26.md.
 Kind/size: feature/M. Baseline: not-started.
 Outcome: The WP-35 candidate closes: metadata sync and explicit-upload behavior remain distinct; context/report data retain measurement identity and ownership across real service calls; PG-03 licence/provenance evidence recorded.
 
@@ -740,7 +767,8 @@ Execute ArcForges delivery task SCOPE.27 — Real ArcScope metadata sync against
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\arcscope.md (anchor task-scope-27).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner). Also touches: Cloud.
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope). Also touches: Cloud.
+Claim and handoff record: claims/scope-27 (python tools/delivery.py claim SCOPE.27 --worker <name>); task branch task/scope-27 in ArcScope; ledger record ledger/tasks/scope-27.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: ArcScope session and capture metadata sync scopes converge across devices against the deployed Cloud sync engine, replacing the contract-bound sync substitute; raw captures stay local unless explicitly uploaded.
 

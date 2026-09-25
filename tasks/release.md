@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Release readiness and family release
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Release readiness and family release
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task REL.01 — ArcNotes desktop release readiness.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/rel-01 (python tools/delivery.py claim REL.01 --worker <name>); task branch task/rel-01 in ArcNotes; ledger record ledger/tasks/rel-01.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: ArcNotes' desktop release candidate passes the complete update matrix on all three platforms against a candidate/staging feed, and carries a complete licence/SBOM/provenance/NOTICE record for REL.07 to roll up.
 
@@ -43,7 +45,8 @@ Execute ArcForges delivery task REL.02 — ArcScope desktop release readiness.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/rel-02 (python tools/delivery.py claim REL.02 --worker <name>); task branch task/rel-02 in ArcScope; ledger record ledger/tasks/rel-02.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: ArcScope's desktop release candidate passes the complete update matrix on all three platforms against a candidate/staging feed, and carries a complete licence/SBOM/provenance/NOTICE record for REL.07 to roll up.
 
@@ -75,7 +78,8 @@ Execute ArcForges delivery task REL.03 — ArcSlate desktop release readiness.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/rel-03 (python tools/delivery.py claim REL.03 --worker <name>); task branch task/rel-03 in ArcSlate; ledger record ledger/tasks/rel-03.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: ArcSlate's desktop release candidate passes the complete update matrix on all three platforms against a candidate/staging feed, and carries a complete licence/SBOM/provenance/NOTICE record for REL.07 to roll up.
 
@@ -108,7 +112,8 @@ Execute ArcForges delivery task REL.04 — Android release readiness.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/rel-04 (python tools/delivery.py claim REL.04 --worker <name>); task branch task/rel-04 in Mobile; ledger record ledger/tasks/rel-04.md.
 Kind/size: release/M. Baseline: not-started.
 Outcome: The Android artifact is submitted and live with every mobile gate closed and the store listing consistent with the consumption-only posture; post-release install and update are verified from the store channel.
 
@@ -135,7 +140,8 @@ Execute ArcForges delivery task REL.05 — Web outputs release readiness.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/rel-05 (python tools/delivery.py claim REL.05 --worker <name>); task branch task/rel-05 in Web; ledger record ledger/tasks/rel-05.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: Site/Account/Chat build once through the pinned Node/npm pipeline after current released proto-descriptor/C#/TS compatibility checks, promote the same artifacts with manifest and safe runtime-config schema, deploy atomically with per-origin edge routing/opaque cookie/CSRF policy/CSP, preserve old hashed chunks for the compatibility window, and roll back headers/assets/config coherently, while keeping production Node servers and esproj/npm installs out of Cloud runtime; the full browser-support.v1 matrix passes for supported/degraded/blocked behavior.
 
@@ -165,7 +171,8 @@ Execute ArcForges delivery task REL.06 — Cloud/AI production readiness (deploy
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/rel-06 (python tools/delivery.py claim REL.06 --worker <name>); task branch task/rel-06 in Cloud; ledger record ledger/tasks/rel-06.md.
 Kind/size: release/XL. Baseline: not-started.
 Outcome: Cloud is deployed from a promoted, never-rebuilt artifact with rehearsed migration/rollback, proven backup/restore, a live status page with emergency alternate URL, and the approved/measured capacity envelope plus independently operated self-host deployment evidence required for L-16/PG-25/PG-26, on a genuine Native AOT publish.
 
@@ -207,7 +214,8 @@ Execute ArcForges delivery task REL.07 — Contracts/SDK release audit (licence,
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/rel-07 (python tools/delivery.py claim REL.07 --worker <name>); task branch task/rel-07 in Contracts; ledger record ledger/tasks/rel-07.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: Every shipped artifact across every surface has a licence inventory, SBOM, provenance attestation and verified NOTICE, and every reused item has a completed provenance record, rolled into one closure report.
 
@@ -239,7 +247,8 @@ Execute ArcForges delivery task REL.08 — Commercial activation.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/rel-08 (python tools/delivery.py claim REL.08 --worker <name>); task branch task/rel-08 in Cloud; ledger record ledger/tasks/rel-08.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: Account portal and checkout run in production; official pricing is published only after entitlement, refunds, webhook idempotency and a RECEIVED payout are all proven - until then the public statement is 'technical integration complete'; the regional route remains disabled unless its own gates are met.
 
@@ -266,7 +275,8 @@ Execute ArcForges delivery task REL.09 — Combined disaster drill and operation
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/rel-09 (python tools/delivery.py claim REL.09 --worker <name>); task branch task/rel-09 in Cloud; ledger record ledger/tasks/rel-09.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: A game-day exercise across the full severity ladder runs against the real deployed production topology with recorded evidence for every go-live gate; every alert maps to a rehearsed runbook, on-call is in place, and support/enforcement/appeal paths are operable.
 
@@ -294,7 +304,8 @@ Execute ArcForges delivery task REL.10 — Production update feed and signing sw
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/rel-10 (python tools/delivery.py claim REL.10 --worker <name>); task branch task/rel-10 in DesktopPlatform; ledger record ledger/tasks/rel-10.md.
 Kind/size: release/M. Baseline: not-started.
 Outcome: The production update feed is populated with hashes/compatibility ranges/minimum versions for all three desktop products across Windows/macOS/Linux, store and package-manager listings point at the corresponding signed installer, and a blocked bad version is refused by both the feed and compatibility policy.
 
@@ -325,7 +336,8 @@ Execute ArcForges delivery task REL.11 — Family release readiness audit and ho
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\release.md (anchor task-rel-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/rel-11 (python tools/delivery.py claim REL.11 --worker <name>); task branch task/rel-11 in DesktopPlatform; ledger record ledger/tasks/rel-11.md.
 Kind/size: release/L. Baseline: not-started.
 Outcome: Every gate in release-gates.md is evaluated for every surface with a named, resolvable evidence artifact; every still-open gate's blocking consequence is stated; no cross-system failure row in architecture/20-cross-system-lifecycles.md lacks a run test; every public claim is backed by gate evidence, iOS is explicitly stated as outside current scope, and nothing incomplete is presented as complete.
 

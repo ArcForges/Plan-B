@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Cloud core
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Cloud core
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task CLOUD.01 — Ingress and host pipeline.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-01 (python tools/delivery.py claim CLOUD.01 --worker <name>); task branch task/cloud-01 in Cloud; ledger record ledger/tasks/cloud-01.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Worker /api routing plus the C# AOT gRPC-Web/auth/current-owner pipeline runs behind the Worker in the real Container image; no buffered stream, no direct public Container port.
 
@@ -25,7 +27,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:worker/index.ts; Cloud:worker/router.ts; Cloud:wrangler.json; Cloud:src/ArcForges.Cloud.Host/**; Cloud:Dockerfile
-Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section; the deployed test environment is exclusive during live integration runs and is scheduled by the integration owner; production deployment belongs to release tasks.
+Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section, and the Cloud integration owner resolves ordering conflicts at merge. Any task that runs against the deployed test environment holds the lease `leases/res-cloud-deployment` for that live run only, whatever mode it declares for its binding edits; production deployment belongs to release tasks.
 Unblocks: CLOUD.02, CLOUD.05, CLOUD.08, CLOUD.09, CLOUD.10, CLOUD.19, CLOUD.37, CLOUD.42, HAR.00, PLT.48
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): offline unit tests for routing/validation logic; deployed-environment request/stream/cancel/CSRF/trailer path checks are opt-in local runtime evidence per docs/validation-policy.md, not hosted CI
@@ -38,7 +40,8 @@ Execute ArcForges delivery task CLOUD.02 — Twenty-one module boundaries and D1
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-02 (python tools/delivery.py claim CLOUD.02 --worker <name>); task branch task/cloud-02 in Cloud; ledger record ledger/tasks/cloud-02.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The 21 module projects exist as boundaries and the D1 named-plan bridge mechanism works: C# decides business logic and asks the Worker to execute one exact named/versioned plan; the Worker executes only approved SQL, never ad hoc queries.
 
@@ -65,7 +68,8 @@ Execute ArcForges delivery task CLOUD.03 — D1 migration runner and exact physi
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-03 (python tools/delivery.py claim CLOUD.03 --worker <name>); task branch task/cloud-03 in Cloud; ledger record ledger/tasks/cloud-03.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Model-04's full physical manifest is implemented: migrations, typed exact bind/result adapters for D1's signed64/uint64/Decimal/JSON/FTS5 quirks, and expand/backfill/fenced-cutover migration mode support.
 
@@ -93,7 +97,8 @@ Execute ArcForges delivery task CLOUD.04 — Receipts, outbox, inbox dedup and c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-04 (python tools/delivery.py claim CLOUD.04 --worker <name>); task branch task/cloud-04 in Cloud; ledger record ledger/tasks/cloud-04.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Every atomic guarded write also produces its owner receipt, outbox entry and change-archive row in the same D1 batch; inbox dedup makes replay a no-op; publication is contiguous (no gaps).
 
@@ -120,7 +125,8 @@ Execute ArcForges delivery task CLOUD.05 — Finite durable jobs (Cron/Queue/Wor
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-05 (python tools/delivery.py claim CLOUD.05 --worker <name>); task branch task/cloud-05 in Cloud; ledger record ledger/tasks/cloud-05.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Perpetual hosted loops are replaced by Cron/Queue/Workflow-woken C# endpoints bounded to <=100 items/20s per job with checkpoint/receipt/lease-then-yield semantics.
 
@@ -135,7 +141,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:src/ArcForges.Cloud.Jobs/**
-Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section; the deployed test environment is exclusive during live integration runs and is scheduled by the integration owner; production deployment belongs to release tasks.
+Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section, and the Cloud integration owner resolves ordering conflicts at merge. Any task that runs against the deployed test environment holds the lease `leases/res-cloud-deployment` for that live run only, whatever mode it declares for its binding edits; production deployment belongs to release tasks.
 Unblocks: CLOUD.10, CLOUD.33, CLOUD.45, HAR.00, SIM.03
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): opt-in local runtime tests: sleep/restart, duplicate wake, delayed delivery, stale lease, paused simulator continuation
@@ -148,7 +154,8 @@ Execute ArcForges delivery task CLOUD.06 — Shared atomic family guarded-batch 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-06 (python tools/delivery.py claim CLOUD.06 --worker <name>); task branch task/cloud-06 in Cloud; ledger record ledger/tasks/cloud-06.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: A reusable D1 guarded-batch executor exists that enforces the fixed SU-04 module lock order (Config->Identity->Workspace->Device->Entitlement->Commerce->Policy->Agent->Chat->Notes->Scope->Slate->Task->Search->PackageCatalog->Notification->Resource->Sync->Audit) and provides authorization/revision/policy/balance/lease guard primitives that any shared-transaction family can compose.
 
@@ -175,7 +182,8 @@ Execute ArcForges delivery task CLOUD.07 — Capacity, Container/D1 integration 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-07 (python tools/delivery.py claim CLOUD.07 --worker <name>); task branch task/cloud-07 in Cloud; ledger record ledger/tasks/cloud-07.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Model-04 named plans run through guarded-batch fixtures under measured load; the primary-authorization path, route/service-binding/outbound-handler matrix, job-slice and SimulationPacer infrastructure exist; the L-16 measurement harness and a proposed capacity report are produced.
 
@@ -191,7 +199,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:src/ArcForges.Cloud.Capacity/**; Cloud:wrangler.json
-Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section; the deployed test environment is exclusive during live integration runs and is scheduled by the integration owner; production deployment belongs to release tasks.
+Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section, and the Cloud integration owner resolves ordering conflicts at merge. Any task that runs against the deployed test environment holds the lease `leases/res-cloud-deployment` for that live run only, whatever mode it declares for its binding edits; production deployment belongs to release tasks.
 Permitted substitutes (never real integration evidence): SUB-guarded-batch-capacity-fixtures: capacity/latency/contention envelope under synthetic load only, never business correctness Real producer ['CLOUD.47', 'COM.15']; removed by REL.06
 Unblocks: CLOUD.10, COM.07, SIM.03, SIM.10
 
@@ -205,7 +213,8 @@ Execute ArcForges delivery task CLOUD.08 — Failure isolation and readiness sur
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-08 (python tools/delivery.py claim CLOUD.08 --worker <name>); task branch task/cloud-08 in Cloud; ledger record ledger/tasks/cloud-08.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Ingress/Container/D1/DO/R2/Queue health are exposed separately, and a missing binding or plan-hash mismatch fails readiness rather than allowing partial execution to appear successful; logs remain no-content.
 
@@ -232,7 +241,8 @@ Execute ArcForges delivery task CLOUD.09 — Selfhost.v1 deployment profile.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-09 (python tools/delivery.py claim CLOUD.09 --worker <name>); task branch task/cloud-09 in Cloud; ledger record ledger/tasks/cloud-09.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: An operator-owned Cloudflare deployment/config/realm descriptor exists for self-hosting, with default payment disabled, separate keys/identity/providers from the official realm, immutable artifacts and independent backup requirements preserved.
 
@@ -247,7 +257,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:docs/deployment.md; Cloud:eng/selfhost/**
-Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section; the deployed test environment is exclusive during live integration runs and is scheduled by the integration owner; production deployment belongs to release tasks.
+Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section, and the Cloud integration owner resolves ordering conflicts at merge. Any task that runs against the deployed test environment holds the lease `leases/res-cloud-deployment` for that live run only, whatever mode it declares for its binding edits; production deployment belongs to release tasks.
 Unblocks: CLOUD.10
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): opt-in local + real Cloudflare dev-account tests: fresh development account/realm provisioning, missing binding/secret/unsupported descriptor/redirect failures, no official token acceptance
@@ -260,7 +270,8 @@ Execute ArcForges delivery task CLOUD.10 — Owned-artifact closure and launch-c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-10 (python tools/delivery.py claim CLOUD.10 --worker <name>); task branch task/cloud-10 in Cloud; ledger record ledger/tasks/cloud-10.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Every WP-21 substep is complete, built/packed once, and consumed as exact candidate bytes from a clean environment; launch-capacity.v1 is produced and tested (four fixed standard-2 slots, no per-account instance creation, idle sleep/wake, pre-dispatch refusal vs unknown dispatched outcome, control-slot reserve, Vectorize/R2 reservation thresholds at 60/70/80/90%).
 
@@ -284,7 +295,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - [integration] CLOUD.09: final candidate build
 
 Permitted write scope: Cloud:artifacts/candidate/**
-Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section; the deployed test environment is exclusive during live integration runs and is scheduled by the integration owner; production deployment belongs to release tasks.
+Shared resources (follow the owner protocol): RES-cloud-deployment (append): Bindings are added by the owning module task in its own section, and the Cloud integration owner resolves ordering conflicts at merge. Any task that runs against the deployed test environment holds the lease `leases/res-cloud-deployment` for that live run only, whatever mode it declares for its binding edits; production deployment belongs to release tasks.
 Unblocks: REL.06
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): package/contract/owner/version compatibility, failure/recovery and the real boundaries above; publish/promote only the tested immutable bytes in the producer CI sequence (matches the existing candidate->verify->deploy CI job sequence)
@@ -297,7 +308,8 @@ Execute ArcForges delivery task CLOUD.11 — Core identity model (realm, user, a
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-11 (python tools/delivery.py claim CLOUD.11 --worker <name>); task branch task/cloud-11 in Cloud; ledger record ledger/tasks/cloud-11.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Realm, user, authentication identity and single-owner workspace exist with ownership as a direct workspace.owner_user_id check; no membership/role/seat table exists anywhere in schema, contracts or operations.
 
@@ -326,7 +338,8 @@ Execute ArcForges delivery task CLOUD.12 — Native and browser authentication w
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-12 (python tools/delivery.py claim CLOUD.12 --worker <name>); task branch task/cloud-12 in Cloud; ledger record ledger/tasks/cloud-12.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Native authorize/token PKCE ceremony and minimal browser login UI work with passkey/email and configured self-host OIDC/password; real Postmark-primary/SES-secondary delivery and outcome adapters exist and prove live delivery/recovery, not a stub.
 
@@ -353,7 +366,8 @@ Execute ArcForges delivery task CLOUD.13 — Device, installation, instance and 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-13 (python tools/delivery.py claim CLOUD.13 --worker <name>); task branch task/cloud-13 in Cloud; ledger record ledger/tasks/cloud-13.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Device, installation, instance and session are four distinct concepts with four lifecycles; device identity is stable but not a hardware fingerprint; device revocation cascades to sessions and push registrations.
 
@@ -380,7 +394,8 @@ Execute ArcForges delivery task CLOUD.14 — Device trust and remote gating.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-14 (python tools/delivery.py claim CLOUD.14 --worker <name>); task branch task/cloud-14 in Cloud; ledger record ledger/tasks/cloud-14.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Trust levels per device exist with remote access defaulting to off; raising trust requires an explicit act with step-up; remote capability is derived from trust, never from mere session possession.
 
@@ -405,7 +420,8 @@ Execute ArcForges delivery task CLOUD.15 — Step-up challenges for sensitive op
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-15 (python tools/delivery.py claim CLOUD.15 --worker <name>); task branch task/cloud-15 in Cloud; ledger record ledger/tasks/cloud-15.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Step-up challenges exist for the enumerated sensitive operations, bounded validity window, no app-unlock substitution; step-up state is per session and per operation class.
 
@@ -432,7 +448,8 @@ Execute ArcForges delivery task CLOUD.16 — PAT and actor authorization.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-16 (python tools/delivery.py claim CLOUD.16 --worker <name>); task branch task/cloud-16 in Cloud; ledger record ledger/tasks/cloud-16.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: patEligible/scopes metadata, hash-only token storage, expiry/revocation and one-time display after step-up are implemented; the actor chain is preserved and customer tokens are denied on operator/internal/local boundaries.
 
@@ -457,7 +474,8 @@ Execute ArcForges delivery task CLOUD.17 — Recovery, account states and deleti
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-17 (python tools/delivery.py claim CLOUD.17 --worker <name>); task branch task/cloud-17 in Cloud; ledger record ledger/tasks/cloud-17.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Recovery flows resist modelled abuse; account states (active/restricted/suspended/pending-deletion) have defined capability; deletion has a grace period, explicit scope of what is/isn't deleted, and never touches local data.
 
@@ -482,7 +500,8 @@ Execute ArcForges delivery task CLOUD.18 — Independent native session integrat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/cloud-18 (python tools/delivery.py claim CLOUD.18 --worker <name>); task branch task/cloud-18 in DesktopPlatform; ledger record ledger/tasks/cloud-18.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: System browser, per-product redirects, secure storage and installation-bound tokens are integrated into Platform client primitives; each client owns its own session, no token sharing/device SSO.
 
@@ -510,7 +529,8 @@ Execute ArcForges delivery task CLOUD.19 — Browser cookie-session adapter and 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-19 (python tools/delivery.py claim CLOUD.19 --worker <name>); task branch task/cloud-19 in Cloud; ledger record ledger/tasks/cloud-19.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: The same-origin browser adapter runs in the AOT host with random hashed session/preauth/CSRF records, exact Origin checks, idle/absolute expiry, lowest-trust browser installation and one-use auth flow, with explicit cookie parsing/writing (no ASP.NET Data Protection/cookie-auth middleware); the full typed account surface is wired through the same owner ports.
 
@@ -540,7 +560,8 @@ Execute ArcForges delivery task CLOUD.20 — Owned-artifact closure and real int
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-20 (python tools/delivery.py claim CLOUD.20 --worker <name>); task branch task/cloud-20 in Cloud; ledger record ledger/tasks/cloud-20.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Native/Android bearer sessions, same-origin Web opaque sessions, passkeys/recovery, workspace/device rules and authenticated CF authorization ports work end-to-end using selected AOT-compatible components; real publish-mode auth/session/CSRF/origin/rotation/revocation tests pass including stale CF requests and browser credential secrecy.
 
@@ -577,7 +598,8 @@ Execute ArcForges delivery task CLOUD.21 — Public endpoint mapping and validat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-21 (python tools/delivery.py claim CLOUD.21 --worker <name>); task branch task/cloud-21 in Cloud; ledger record ledger/tasks/cloud-21.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Generated proto service methods are registered with exact request/reply/semantic validation from the registry; binary gRPC-Web unary calls and declared server streams go through the same owner handlers; owner mutations and the Sync allowlist are mapped exactly; no ad-hoc REST business API exists.
 
@@ -604,7 +626,8 @@ Execute ArcForges delivery task CLOUD.22 — Typed protocol and error mapping.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-22 (python tools/delivery.py claim CLOUD.22 --worker <name>); task branch task/cloud-22 in Cloud; ledger record ledger/tasks/cloud-22.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Generated ArcResult domain errors and gRPC-Web transport statuses/trailers are mapped exactly under registry 04; ProblemDetails is limited to documented HTTP exceptions.
 
@@ -629,7 +652,8 @@ Execute ArcForges delivery task CLOUD.23 — Typed queries and revision precondi
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-23 (python tools/delivery.py claim CLOUD.23 --worker <name>); task branch task/cloud-23 in Cloud; ledger record ledger/tasks/cloud-23.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Opaque scope-bound PageRequest cursors, registered typed filters and RequestMeta expected-owner-revision preconditions work; no ETag/If-Match for business RPC.
 
@@ -655,7 +679,8 @@ Execute ArcForges delivery task CLOUD.24 — Idempotency and rate limiting.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-24 (python tools/delivery.py claim CLOUD.24 --worker <name>); task branch task/cloud-24 in Cloud; ledger record ledger/tasks/cloud-24.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: State-changing requests accept a command identity and produce exactly one effect under retry; rate limits apply per identity and per capability class with typed refusals carrying retry guidance.
 
@@ -680,7 +705,8 @@ Execute ArcForges delivery task CLOUD.25 — Resource transport schema and futur
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-25 (python tools/delivery.py claim CLOUD.25 --worker <name>); task branch task/cloud-25 in Cloud; ledger record ledger/tasks/cloud-25.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The complete generated upload/status/ticket/verification/owner-promotion schema and permission/error envelope is registered and exercised through declared protocol fixtures; every endpoint's real owner/fixture/replacement WP is recorded.
 
@@ -707,7 +733,8 @@ Execute ArcForges delivery task CLOUD.26 — Generated C#/TypeScript/Kotlin clie
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-26 (python tools/delivery.py claim CLOUD.26 --worker <name>); task branch task/cloud-26 in Cloud; ledger record ledger/tasks/cloud-26.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Released C# native, TypeScript gRPC-Web and Kotlin native clients work against actual Identity/Workspace/Device endpoints with native single-flight refresh, Web cookie/CSRF/Origin handling and generation-scoped callbacks outside generated code.
 
@@ -735,7 +762,8 @@ Execute ArcForges delivery task CLOUD.27 — Compatibility window and bidirectio
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-27).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-27 (python tools/delivery.py claim CLOUD.27 --worker <name>); task branch task/cloud-27 in Cloud; ledger record ledger/tasks/cloud-27.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The supported client window is declared with golden wire vectors per contract version; the compatibility matrix runs both directions (previous client vs current server, current client vs minimum supported server) and catches a deliberately breaking change.
 
@@ -760,7 +788,8 @@ Execute ArcForges delivery task CLOUD.28 — Owned-artifact closure and real int
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-28).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-28 (python tools/delivery.py claim CLOUD.28 --worker <name>); task branch task/cloud-28 in Cloud; ledger record ledger/tasks/cloud-28.md.
 Kind/size: integration/L. Baseline: not-started.
 Outcome: Real C#/browser/Kotlin calls succeed against the AOT image with previous/current compatibility and complete operation mapping including auth, files and webhooks outside gRPC.
 
@@ -797,7 +826,8 @@ Execute ArcForges delivery task CLOUD.29 — Stream connection and authenticatio
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-29).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-29 (python tools/delivery.py claim CLOUD.29 --worker <name>); task branch task/cloud-29 in Cloud; ledger record ledger/tasks/cloud-29.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Public server-streaming shells for EventService.Watch and ExecutionService.WatchOutput exist with generated StreamFrame, re-authorizing current session/scope every 15s; real C#/browser/Kotlin binary streams work with trailers/cancel/expiry; no WebSocket path.
 
@@ -824,7 +854,8 @@ Execute ArcForges delivery task CLOUD.30 — Scoped subscription (owner/product/
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-30).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-30 (python tools/delivery.py claim CLOUD.30 --worker <name>); task branch task/cloud-30 in Cloud; ledger record ledger/tasks/cloud-30.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The feed is bound to owner/product/filter/recovery generation, one events stream plus two output streams per foreground profile; mixed-product/unauthorized feeds are refused; account-security identifiers stay separate.
 
@@ -849,7 +880,8 @@ Execute ArcForges delivery task CLOUD.31 — Cursor and gap handling (DO project
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-31).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-31 (python tools/delivery.py claim CLOUD.31 --worker <name>); task branch task/cloud-31 in Cloud; ledger record ledger/tasks/cloud-31.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Sequence/hash/offset cursors and snapshot high-water recovery work per annex 10; the DO is a projection backed by the D1 outbox, never a second business authority.
 
@@ -875,7 +907,8 @@ Execute ArcForges delivery task CLOUD.32 — Durable unary fallback (Poll/readOu
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-32).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-32 (python tools/delivery.py claim CLOUD.32 --worker <name>); task branch task/cloud-32 in Cloud; ledger record ledger/tasks/cloud-32.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Poll/readOutput works with the same owner/cursor profile as the stream, replacing the old HTTP task-stream endpoint; a blocked stream recovers through a real unary read without inventing completion.
 
@@ -901,7 +934,8 @@ Execute ArcForges delivery task CLOUD.33 — Publication and wake (D1 outbox to 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-33).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-33 (python tools/delivery.py claim CLOUD.33 --worker <name>); task branch task/cloud-33 in Cloud; ledger record ledger/tasks/cloud-33.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: The committed D1 outbox publishes into the bounded DO feed with wake hints delivered via Queues; contiguous watermark, no skipped commit, duplicate queue event is safe; no business ownership lives in the DO.
 
@@ -928,7 +962,8 @@ Execute ArcForges delivery task CLOUD.34 — Bounded stream lifecycle.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-34).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-34 (python tools/delivery.py claim CLOUD.34 --worker <name>); task branch task/cloud-34 in Cloud; ledger record ledger/tasks/cloud-34.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: 5-minute stream, 15s heartbeat, 45s silence and bounded jitter/queue limits are enforced; Android background closes streams and later refetches; slow-reader overflow resets rather than growing unbounded.
 
@@ -953,7 +988,8 @@ Execute ArcForges delivery task CLOUD.35 — Reusable stream consumer adapters.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-35).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-35 (python tools/delivery.py claim CLOUD.35 --worker <name>); task branch task/cloud-35 in Cloud; ledger record ledger/tasks/cloud-35.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Platform Cloud.Client and Contracts TS/Kotlin stream fixtures are published with typed lifecycle states and no UI-specific transport logic.
 
@@ -980,7 +1016,8 @@ Execute ArcForges delivery task CLOUD.36 — Owned-artifact closure and real int
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-36).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-36 (python tools/delivery.py claim CLOUD.36 --worker <name>); task branch task/cloud-36 in Cloud; ledger record ledger/tasks/cloud-36.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Every WP-24 substep is complete and packaged; two distinct toolRequestIds in one attempt both persist and replay correctly for both Task and ChatTurn owners; a changed result under the same (toolRequestId, attemptId, commandId) refuses.
 
@@ -1012,7 +1049,8 @@ Execute ArcForges delivery task CLOUD.37 — Cloud Notes authority and sync scop
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-37).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-37 (python tools/delivery.py claim CLOUD.37 --worker <name>); task branch task/cloud-37 in Cloud; ledger record ledger/tasks/cloud-37.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: The canonical notes schema (notebook-owned folders, document-owned blocks/values, tags, property definitions, saved views, immutable revisions, checkpoints, derived backlinks) exists with typed folder/document/history operations and sorted-root revision checks; Cloud validates the same typed operations as the local domain.
 
@@ -1046,7 +1084,8 @@ Execute ArcForges delivery task CLOUD.38 — Client outbox and conflict lineage 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-38).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/cloud-38 (python tools/delivery.py claim CLOUD.38 --worker <name>); task branch task/cloud-38 in DesktopPlatform; ledger record ledger/tasks/cloud-38.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: The single sync_outbox schema exists client-side: acked shadow plus pending journal, frozen batch hash/revision/range, explicit supersession lineage; a user conflict resolution appends a new local event and never edits the frozen failed batch.
 
@@ -1073,7 +1112,8 @@ Execute ArcForges delivery task CLOUD.39 — Guarded publication and convergent 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-39).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-39 (python tools/delivery.py claim CLOUD.39 --worker <name>); task branch task/cloud-39 in Cloud; ledger record ledger/tasks/cloud-39.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Model-04's primary lower-bound W bootstrap, immutable-key pages, retention pin and replay-to-H work; the publisher guards watermark/fence/selected rows in one D1 batch; real D1 clients converge without PostgreSQL snapshot/locks or lost pending work.
 
@@ -1102,7 +1142,8 @@ Execute ArcForges delivery task CLOUD.40 — Conflict detection and five resolut
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-40).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-40 (python tools/delivery.py claim CLOUD.40 --worker <name>); task branch task/cloud-40 in Cloud; ledger record ledger/tasks/cloud-40.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Conflicts are detected by revision, never timestamp; five policies are implemented per the architecture, chosen per scope and object kind; discarded versions remain recoverable; user-facing conflicts present both versions intelligibly.
 
@@ -1128,7 +1169,8 @@ Execute ArcForges delivery task CLOUD.41 — Deletion and tombstones.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-41).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-41 (python tools/delivery.py claim CLOUD.41 --worker <name>); task branch task/cloud-41 in Cloud; ledger record ledger/tasks/cloud-41.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Deletion propagates through tombstones with defined retention; an offline-beyond-retention device resolves deterministically rather than silently resurrecting content; local deletion, cloud deletion and unsync are distinguished.
 
@@ -1153,7 +1195,8 @@ Execute ArcForges delivery task CLOUD.42 — Blob lifecycle (real R2 staged/veri
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-42).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-42 (python tools/delivery.py claim CLOUD.42 --worker <name>); task branch task/cloud-42 in Cloud; ledger record ledger/tasks/cloud-42.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Upload happens through a server-issued session, chunked and checksummed, moving Staged -> Verified -> Committed; a reference is only published after commit; orphan cleanup removes uncommitted staging without touching committed data; storage accounting is computed from committed objects.
 
@@ -1182,7 +1225,8 @@ Execute ArcForges delivery task CLOUD.43 — Availability, protection, data-heal
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-43).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-43 (python tools/delivery.py claim CLOUD.43 --worker <name>); task branch task/cloud-43 in Cloud; ledger record ledger/tasks/cloud-43.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Hydration/cache pause is distinguished from explicit Cloud deletion; source-consent/transient inputs and health states exist; the full realm-transfer export/preview/commit/status/cancel workflow works from client journeys; missing-object outcomes are rebuilt or verified with irrecoverable data retaining evidence and recovery/export actions.
 
@@ -1209,7 +1253,8 @@ Execute ArcForges delivery task CLOUD.44 — Multi-device convergence harness.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-44).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-44 (python tools/delivery.py claim CLOUD.44 --worker <name>); task branch task/cloud-44 in Cloud; ledger record ledger/tasks/cloud-44.md.
 Kind/size: integration/L. Baseline: not-started.
 Outcome: Three devices editing concurrently, one offline for an extended period, converge to verifiably identical state under concurrent edits, attachments, deletions and a mid-sync crash, verified by comparison not absence of errors.
 
@@ -1239,7 +1284,8 @@ Execute ArcForges delivery task CLOUD.45 — Real Cloud Notes and Chat export pr
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-45).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-45 (python tools/delivery.py claim CLOUD.45 --worker <name>); task branch task/cloud-45 in Cloud; ledger record ledger/tasks/cloud-45.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Bounded leased Cloud export jobs freeze an acknowledged revision manifest, pin content/history/attachment objects, generate Markdown/JSON/text outputs with metadata/link map and fidelity report, and publish a verified expiring download artifact; device-only pending edits are excluded.
 
@@ -1269,7 +1315,8 @@ Execute ArcForges delivery task CLOUD.46 — Application Cloud history and resta
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-46).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-46 (python tools/delivery.py claim CLOUD.46 --worker <name>); task branch task/cloud-46 in Cloud; ledger record ledger/tasks/cloud-46.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: HistoryService.BeginImport/FinalizeImport/GetImport/CancelImport work per annex 10 with fixed product scope, verified staged archive/typed rows and atomic visibility/receipt; local-only history bodies never enter Cloud Chat or search without explicit promotion.
 
@@ -1296,7 +1343,8 @@ Execute ArcForges delivery task CLOUD.47 — Owned-artifact closure and real int
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-47).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-47 (python tools/delivery.py claim CLOUD.47 --worker <name>); task branch task/cloud-47 in Cloud; ledger record ledger/tasks/cloud-47.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: R2 is used for the existing upload admission, multipart resume, Verified pin, owner promotion, quota and release lifecycle; outbox/inbox/tombstones/conflicts/bootstrap/unknown-field behavior and export protocol are retained; three-device convergence and interrupted-upload/failed-content-commit/orphan/delete cases run against actual provider adapters.
 
@@ -1335,7 +1383,8 @@ Execute ArcForges delivery task CLOUD.48 — D1 and independent object backup.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-48).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-48 (python tools/delivery.py claim CLOUD.48 --worker <name>); task branch task/cloud-48 in Cloud; ledger record ledger/tasks/cloud-48.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Model-04/backup-manifest-v1 works: matching D1 export/bookmark/base sequence, contiguous replay, verified R2 inventory and an independent S3-COMPLIANCE copy; no PostgreSQL WAL/LSN procedure; measured metadata/blob RPO and RTO pass; Time Travel alone cannot satisfy independent restore.
 
@@ -1362,7 +1411,8 @@ Execute ArcForges delivery task CLOUD.49 — Point-in-time and fresh restore.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-49).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-49 (python tools/delivery.py claim CLOUD.49 --worker <name>); task branch task/cloud-49 in Cloud; ledger record ledger/tasks/cloud-49.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Base bookmark/sequence and contiguous after-image archive are verified; in-place Time Travel and fresh import/replay both use generation fences.
 
@@ -1387,7 +1437,8 @@ Execute ArcForges delivery task CLOUD.50 — Fresh environment rebuild.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-50).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-50 (python tools/delivery.py claim CLOUD.50 --worker <name>); task branch task/cloud-50 in Cloud; ledger record ledger/tasks/cloud-50.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Old ingress/keys are fenced, D1/R2 are restored, the independent restrictive safety journal replays, credentials/leases/cursors are invalidated, external effects are reconciled; a deleted/revoked account cannot reappear and an absent attempt cannot execute twice.
 
@@ -1413,7 +1464,8 @@ Execute ArcForges delivery task CLOUD.51 — Disaster-recovery drill programme.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-51).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-51 (python tools/delivery.py claim CLOUD.51 --worker <name>); task branch task/cloud-51 in Cloud; ledger record ledger/tasks/cloud-51.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: An actual Container/Worker/DO/R2/D1 restore runs using separate credentials and an immutable archive with RTO<=4h real evidence, not a SQLite/simulator-only restore.
 
@@ -1438,7 +1490,8 @@ Execute ArcForges delivery task CLOUD.52 — Data health read projection.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-52).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-52 (python tools/delivery.py claim CLOUD.52 --worker <name>); task branch task/cloud-52 in Cloud; ledger record ledger/tasks/cloud-52.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Archive watermark, capacity, canonical refs/hash/pins, derived-rebuild state and backup lag/admission state are exposed as a queryable read projection, with 4min/12min warning guards and exceeded-objective incidents made visible.
 
@@ -1464,7 +1517,8 @@ Execute ArcForges delivery task CLOUD.53 — Export and realm migration.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-53).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-53 (python tools/delivery.py claim CLOUD.53 --worker <name>); task branch task/cloud-53 in Cloud; ledger record ledger/tasks/cloud-53.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Explicit realm export/import semantics work using compatible D1 physical/schema/plan manifests; no automatic cross-DB transaction; identity/resource/history scope is preserved and unsupported mapping is refused.
 
@@ -1491,7 +1545,8 @@ Execute ArcForges delivery task CLOUD.54 — Backup release gate.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-54).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-54 (python tools/delivery.py claim CLOUD.54 --worker <name>); task branch task/cloud-54 in Cloud; ledger record ledger/tasks/cloud-54.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Verified independent backup and safety journal are required before paid production admission; no unverified restore, private access or mutation reopens on incomplete inventory.
 
@@ -1516,7 +1571,8 @@ Execute ArcForges delivery task CLOUD.55 — Owned-artifact closure and real int
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-55).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-55 (python tools/delivery.py claim CLOUD.55 --worker <name>); task branch task/cloud-55 in Cloud; ledger record ledger/tasks/cloud-55.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Every WP-46 substep is complete, built/packed once, and consumed as exact candidate bytes from a clean environment with all applicable UX acceptance groups recorded.
 
@@ -1547,7 +1603,8 @@ Execute ArcForges delivery task CLOUD.58 — Structural removal of the Notes/Cha
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-58).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-58 (python tools/delivery.py claim CLOUD.58 --worker <name>); task branch task/cloud-58 in Cloud; ledger record ledger/tasks/cloud-58.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Both production clients run with no fixture export producer registered; real Cloud export jobs serve both paths
 
@@ -1574,7 +1631,8 @@ Execute ArcForges delivery task CLOUD.63 — Real Commerce/Entitlement participa
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-63).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-63 (python tools/delivery.py claim CLOUD.63 --worker <name>); task branch task/cloud-63 in Cloud; ledger record ledger/tasks/cloud-63.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: The 'exact credits' half of WP-21.05's own completion gate ('Two Containers contend, stale holder cannot finalize, exact credits and sync cursor safety') -- Commerce's family participation, owned by the commerce, policy and operations lanes
 
@@ -1601,7 +1659,8 @@ Execute ArcForges delivery task CLOUD.64 — Full operator contract closure acro
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-64).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-64 (python tools/delivery.py claim CLOUD.64 --worker <name>); task branch task/cloud-64 in Cloud; ledger record ledger/tasks/cloud-64.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Every operator operation's eight authorization fields, operator scope and OC-03 role binding work end-to-end with the real financial owners (WP-42), configuration/policy owners (WP-44) and console join (WP-45)
 
@@ -1629,7 +1688,8 @@ Execute ArcForges delivery task CLOUD.66 — Every enumerated sensitive operatio
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-66).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-66 (python tools/delivery.py claim CLOUD.66 --worker <name>); task branch task/cloud-66 in Cloud; ledger record ledger/tasks/cloud-66.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: Full coverage of WP-22.04's completion gate ('every enumerated operation demands step-up') across Commerce refund/purchase operations and any other module-owned sensitive operation, not just Identity's own
 
@@ -1657,7 +1717,8 @@ Execute ArcForges delivery task CLOUD.67 — Combined AI reopen after Cloud disa
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\cloud.md (anchor task-cloud-67).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/cloud-67 (python tools/delivery.py claim CLOUD.67 --worker <name>); task branch task/cloud-67 in Cloud; ledger record ledger/tasks/cloud-67.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: AI services genuinely reopen and function after a real Cloud DR restore, per WP-46.03's own 'then combined AI reopen at 50/52'
 

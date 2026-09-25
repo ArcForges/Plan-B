@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Extension platform and integrations
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Extension platform and integrations
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task EXT.00 — Extension host process and supervisio
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-00).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-00 (python tools/delivery.py claim EXT.00 --worker <name>); task branch task/ext-00 in DesktopPlatform; ledger record ledger/tasks/ext-00.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Per-installation extension processes start on demand and stop when idle inside the package-specific OS isolation profile; resource limits are enforced by termination, crashes trigger backoff restart then quarantine, in-flight invocations fail typed, and no ambient credential is inherited.
 
@@ -38,7 +40,8 @@ Execute ArcForges delivery task EXT.01 — Handshake and protocol versioning.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-01 (python tools/delivery.py claim EXT.01 --worker <name>); task branch task/ext-01 in DesktopPlatform; ledger record ledger/tasks/ext-01.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Identity is verified against the installed manifest before any contribution is invoked; more than one protocol version is negotiated during a migration window; impersonation and reserved-namespace claims are refused with a clean explanation.
 
@@ -63,7 +66,8 @@ Execute ArcForges delivery task EXT.02 — Dual capability boundary (typed layer
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/ext-02 (python tools/delivery.py claim EXT.02 --worker <name>); task branch task/ext-02 in Contracts; ledger record ledger/tasks/ext-02.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: The typed extension-point layer exists as ordinary versioned contracts and the dynamic layer as the closed, AOT-safe StructuredValue/ValueSchema model with bidirectional validation; a repository policy test proves StructuredValue never appears in a first-party domain or product contract, and the host still publishes AOT cleanly.
 
@@ -90,7 +94,8 @@ Execute ArcForges delivery task EXT.03 — Declarative UI and settings contribut
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-03 (python tools/delivery.py claim EXT.03 --worker <name>); task branch task/ext-03 in DesktopPlatform; ledger record ledger/tasks/ext-03.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Panel declarations from a closed, versioned element vocabulary render with first-party controls; settings schemas are declarative; secret fields yield references only; extension-contributed surfaces are visibly attributed.
 
@@ -115,7 +120,8 @@ Execute ArcForges delivery task EXT.04 — Package manifest/workflow/panel valid
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/ext-04 (python tools/delivery.py claim EXT.04 --worker <name>); task branch task/ext-04 in Contracts; ledger record ledger/tasks/ext-04.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: manifest.v1/workflow.v1/panel.v1 validators exist from published Contracts, and package installation moves only through the immutable staged states (acquired/verified/staged/awaitingConsent/active/disabled/quarantined/removed) with no state that resets an effect fence.
 
@@ -143,7 +149,8 @@ Execute ArcForges delivery task EXT.05 — Six contribution-kind runtime wiring.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-05 (python tools/delivery.py claim EXT.05 --worker <name>); task branch task/ext-05 in DesktopPlatform; ledger record ledger/tasks/ext-05.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Each of the six contribution kinds registers and executes through the lifecycle engine and the dual capability boundary; a running task freezes the package version it started with (BR-10); uninstall never cascade-deletes professional resources the extension created (BR-11).
 
@@ -168,7 +175,8 @@ Execute ArcForges delivery task EXT.06 — Cloud PackageCatalog producer.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/ext-06 (python tools/delivery.py claim EXT.06 --worker <name>); task branch task/ext-06 in Cloud; ledger record ledger/tasks/ext-06.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Cloud PackageCatalog accepts immutable submissions with DNS publisher verification, holds review-state/revocation authority and produces a signed static index; only OperatorService (not the console or the Extensions implementation) writes PackageCatalog tables.
 
@@ -197,7 +205,8 @@ Execute ArcForges delivery task EXT.07 — Desktop and CLI catalog consumers.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-07 (python tools/delivery.py claim EXT.07 --worker <name>); task branch task/ext-07 in DesktopPlatform; ledger record ledger/tasks/ext-07.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Desktop and CLI consume the signed static index and PackageCatalog methods to install/update packages, with correct offline behavior when the catalog is unreachable.
 
@@ -223,7 +232,8 @@ Execute ArcForges delivery task EXT.08 — Public SDK and CLI.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Contracts (integration owner: Contracts integration owner, the holder of roles/integration-contracts).
+Claim and handoff record: claims/ext-08 (python tools/delivery.py claim EXT.08 --worker <name>); task branch task/ext-08 in Contracts; ledger record ledger/tasks/ext-08.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: The SDK, validators and tool-payload projections generate from authored public proto; the CLI uses eligible publisher PAT and catalog/resource methods; validate matches host install checks; no generated schema is inferred from C# reflection.
 
@@ -251,7 +261,8 @@ Execute ArcForges delivery task EXT.09 — Local MCP stdio behind the owned conn
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-09 (python tools/delivery.py claim EXT.09 --worker <name>); task branch task/ext-09 in DesktopPlatform; ledger record ledger/tasks/ext-09.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Local MCP servers run stdio behind an owned connector child process; only that child speaks ArcForges gRPC; origin/scope changes invalidate consent; no browser/Android local subprocess exists; child crash/lease recovery works.
 
@@ -277,7 +288,8 @@ Execute ArcForges delivery task EXT.10 — Cloud MCP HTTP through the AI Worker 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\AI (integration owner: AI integration owner, the holder of roles/integration-ai).
+Claim and handoff record: claims/ext-10 (python tools/delivery.py claim EXT.10 --worker <name>); task branch task/ext-10 in AI; ledger record ledger/tasks/ext-10.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Cloud-placed MCP connections route HTTP through the AI Worker adapter only; standard MCP protocol is preserved; each connection has one placement/secret owner and exact failure/egress behavior; MCP content is treated as untrusted data.
 
@@ -303,7 +315,8 @@ Execute ArcForges delivery task EXT.90 — Verify owned artifact and real integr
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\extensions.md (anchor task-ext-90).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/ext-90 (python tools/delivery.py claim EXT.90 --worker <name>); task branch task/ext-90 in DesktopPlatform; ledger record ledger/tasks/ext-90.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: SDK/protocol, desktop host/runtime and Cloud registry ownership are verified split correctly; standard MCP transports and out-of-process extensions are preserved; no external-agent delegation or in-process third-party plugin exists anywhere; VG-02 and PG-09 close.
 

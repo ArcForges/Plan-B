@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Dynamic policy and configuration
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Dynamic policy and configuration
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task POL.01 — The four boundaries.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-01 (python tools/delivery.py claim POL.01 --worker <name>); task branch task/pol-01 in Cloud; ledger record ledger/tasks/pol-01.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: Policy, entitlement, user settings, health and the data plane are kept structurally distinct with an architecture test asserting no policy type reaches an entitlement decision, each boundary backed by a failing negative fixture.
 
@@ -37,7 +39,8 @@ Execute ArcForges delivery task POL.02 — Schema-constrained configuration.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-02 (python tools/delivery.py claim POL.02 --worker <name>); task branch task/pol-02 in Cloud; ledger record ledger/tasks/pol-02.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: policy.body.v1 and configuration.v1 bundles validate exactly against their schema (key/type/scope/limit/cross-reference), an invalid bundle is rejected wholesale, and activation is a dry-run proposal with dual approval and compare-and-swap.
 
@@ -65,7 +68,8 @@ Execute ArcForges delivery task POL.03 — Compiled hard limits.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-03 (python tools/delivery.py claim POL.03 --worker <name>); task branch task/pol-03 in Cloud; ledger record ledger/tasks/pol-03.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Safety-critical limits are compiled and authoritative; remote policy may only tighten them, and any attempt to loosen one is rejected and recorded.
 
@@ -92,7 +96,8 @@ Execute ArcForges delivery task POL.04 — Features, flags and deterministic rol
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-04 (python tools/delivery.py claim POL.04 --worker <name>); task branch task/pol-04 in Cloud; ledger record ledger/tasks/pol-04.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: Deterministic target/percent hashing, exclusion groups and sticky experiment allocation select the same result for the same stable subject/version across languages, and rollout cannot grant commercial or security authority.
 
@@ -120,7 +125,8 @@ Execute ArcForges delivery task POL.05 — Kill switches.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-05 (python tools/delivery.py claim POL.05 --worker <name>); task branch task/pol-05 in Cloud; ledger record ledger/tasks/pol-05.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: All four kill-switch modes propagate promptly with a defined blast radius, a mandatory reason, a user-visible explanation and a complete audit record, and are reversible.
 
@@ -149,7 +155,8 @@ Execute ArcForges delivery task POL.06 — Scoped resolution and explainability 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-06 (python tools/delivery.py claim POL.06 --worker <name>); task branch task/pol-06 in Cloud; ledger record ledger/tasks/pol-06.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Policy resolves across application, workspace, device and installation scopes in a fixed order, and the server can state which scope and bundle produced any effective value.
 
@@ -174,7 +181,8 @@ Execute ArcForges delivery task POL.07 — Compatibility policy.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-07 (python tools/delivery.py claim POL.07 --worker <name>); task branch task/pol-07 in Cloud; ledger record ledger/tasks/pol-07.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Compatibility rules express supported client windows and blocked version ranges; a bad version is blockable without affecting neighbours, and a minimum-version requirement is never enforced before its grace period elapses.
 
@@ -199,7 +207,8 @@ Execute ArcForges delivery task POL.08 — Publication, staleness and last-known
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-08 (python tools/delivery.py claim POL.08 --worker <name>); task branch task/pol-08 in Cloud; ledger record ledger/tasks/pol-08.md.
 Kind/size: service/M. Baseline: not-started.
 Outcome: Bundles publish with versioning and audit, and the server-side staleness/application-timing contract is defined so a change is never applied in a way that produces inconsistent behaviour mid-operation.
 
@@ -224,7 +233,8 @@ Execute ArcForges delivery task POL.09 — Client-side policy resolution library
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/pol-09 (python tools/delivery.py claim POL.09 --worker <name>); task branch task/pol-09 in DesktopPlatform; ledger record ledger/tasks/pol-09.md.
 Kind/size: service/L. Baseline: not-started.
 Outcome: A single ArcForges.Policy building block resolves, caches, and explains policy identically under Native AOT, falling back from staleness to last-known-good to compiled defaults with the staleness state always visible, and a change never takes effect mid-operation inconsistently.
 
@@ -257,7 +267,8 @@ Execute ArcForges delivery task POL.10 — Owned-artifact receipt.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-10 (python tools/delivery.py claim POL.10 --worker <name>); task branch task/pol-10 in Cloud; ledger record ledger/tasks/pol-10.md.
 Kind/size: service/S. Baseline: not-started.
 Outcome: The package-level owned-artifact/real-integration receipt is recorded confirming every CF run and effect uses the required policy version and stale/disallowed models or revoked permission fail deterministically without client-side policy becoming authority.
 
@@ -286,7 +297,8 @@ Execute ArcForges delivery task POL.11 — First real publish-then-resolve round
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\policy.md (anchor task-pol-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/pol-11 (python tools/delivery.py claim POL.11 --worker <name>); task branch task/pol-11 in Cloud; ledger record ledger/tasks/pol-11.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: a genuinely published bundle is fetched, cached, and correctly falls back to last-known-good on a later real staleness condition, not just against POL.09's local fixture
 

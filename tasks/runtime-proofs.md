@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Runtime proofs
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Runtime proofs
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task PRF.01 — ArcNotes desktop Native AOT package p
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcNotes (integration owner: ArcNotes integration owner, the holder of roles/integration-arcnotes).
+Claim and handoff record: claims/prf-01 (python tools/delivery.py claim PRF.01 --worker <name>); task branch task/prf-01 in ArcNotes; ledger record ledger/tasks/prf-01.md.
 Kind/size: proof/M. Baseline: not-started.
 Outcome: ArcForges.ArcNotes publishes self-contained Native AOT per Tier-1/Tier-2 RID, launches without a machine runtime, loads real native libraries and passes existing ABI smoke vectors with no reflection/sibling-source fallback; wired into continuous main-branch CI (BR-06).
 
@@ -27,7 +29,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcNotes:src/ArcForges.ArcNotes/**; ArcNotes:ArcNotes.slnx
-Shared resources (follow the owner protocol): RES-arcnotes-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-product-solutions (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-arcnotes-build-config (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-product-solutions (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.04, NAT.29, PLT.26, PLT.34, UPD.08
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Windows/Linux local Native AOT publish with zero trim/AOT/single-file diagnostics (BR-04); real per-RID launch and ABI smoke vectors; no macOS CI (P2-017), local-opt-in macOS only
@@ -40,7 +42,8 @@ Execute ArcForges delivery task PRF.02 — ArcScope desktop Native AOT package p
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcScope (integration owner: ArcScope integration owner, the holder of roles/integration-arcscope).
+Claim and handoff record: claims/prf-02 (python tools/delivery.py claim PRF.02 --worker <name>); task branch task/prf-02 in ArcScope; ledger record ledger/tasks/prf-02.md.
 Kind/size: proof/M. Baseline: not-started.
 Outcome: ArcForges.ArcScope publishes self-contained Native AOT per Tier-1/Tier-2 RID, launches without a machine runtime, loads real native libraries and passes existing ABI smoke vectors; wired into continuous main-branch CI.
 
@@ -56,7 +59,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcScope:src/ArcForges.ArcScope/**; ArcScope:ArcScope.slnx
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-product-solutions (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-product-solutions (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.29
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Windows/Linux local Native AOT publish with zero trim/AOT/single-file diagnostics; real per-RID launch and ABI smoke vectors; no macOS CI
@@ -69,7 +72,8 @@ Execute ArcForges delivery task PRF.03 — ArcSlate desktop Native AOT package p
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\ArcSlate (integration owner: ArcSlate integration owner, the holder of roles/integration-arcslate).
+Claim and handoff record: claims/prf-03 (python tools/delivery.py claim PRF.03 --worker <name>); task branch task/prf-03 in ArcSlate; ledger record ledger/tasks/prf-03.md.
 Kind/size: proof/M. Baseline: not-started.
 Outcome: ArcForges.ArcSlate publishes self-contained Native AOT per Tier-1/Tier-2 RID, launches without a machine runtime, loads real native libraries and passes existing ABI smoke vectors; wired into continuous main-branch CI.
 
@@ -85,7 +89,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: ArcSlate:src/ArcForges.ArcSlate/**; ArcSlate:ArcSlate.slnx
-Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-product-solutions (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-desktopplatform-native-build (append): The vcpkg baseline and overlay ports change only through a dependency-admission change with licence and provenance receipts; each native family adds its own CMake targets and workflow entries; triplet or port changes are rebased and rebuilt by their author; CPU-heavy native builds use the workstation build slot.; RES-product-solutions (append): Solution/project lists, central package versions and CI job lists are appended by the task that adds a project, dependency or job; dependency additions follow the dependency-admission policy with a reviewed receipt; lock files are regenerated after rebase and never hand-merged; the integration owner resolves ordering conflicts at merge.; RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: NAT.29
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Windows/Linux local Native AOT publish with zero trim/AOT/single-file diagnostics; real per-RID launch and ABI smoke vectors; no macOS CI
@@ -98,7 +102,8 @@ Execute ArcForges delivery task PRF.04 — Local RPC under AOT: bidirectional na
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/prf-04 (python tools/delivery.py claim PRF.04 --worker <name>); task branch task/prf-04 in DesktopPlatform; ledger record ledger/tasks/prf-04.md.
 Kind/size: proof/L. Baseline: not-started.
 Outcome: Two published AOT desktop probe processes complete LocalBootstrap over Kestrel HTTP/2 named-pipe (Windows) / UDS (Linux/macOS), authenticate same-user peers, register both endpoint directions, invoke generated services, cancel, disconnect and reattach; malformed-input/unauthorized-peer/bounded-resource negative tests pass.
 
@@ -113,7 +118,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: DesktopPlatform:tests/LocalRpcAotTests/**; DesktopPlatform:eng/verification/**
-Shared resources (follow the owner protocol): RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: APP.03, NAT.01, NAT.29, PLT.09
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Actual Windows/Linux/macOS(local opt-in) process-to-process runs; no in-memory or TCP substitute (explicit design prohibition); malformed input, unauthorized peer, bounded resource tests
@@ -126,7 +131,8 @@ Execute ArcForges delivery task PRF.05 — Generated gRPC-Web under AOT against 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/prf-05 (python tools/delivery.py claim PRF.05 --worker <name>); task branch task/prf-05 in DesktopPlatform; ledger record ledger/tasks/prf-05.md.
 Kind/size: proof/M. Baseline: not-started.
 Outcome: A published AOT desktop probe calls the real generated binary gRPC-Web client against actual deployed Worker/Container ingress, proving headers, trailers, cancellation, scoped errors and exact primitives; F-026 closes on this artifact.
 
@@ -154,7 +160,8 @@ Execute ArcForges delivery task PRF.06 — Realtime (EventService.Watch/Poll) un
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/prf-06 (python tools/delivery.py claim PRF.06 --worker <name>); task branch task/prf-06 in DesktopPlatform; ledger record ledger/tasks/prf-06.md.
 Kind/size: proof/M. Baseline: not-started.
 Outcome: A published AOT desktop probe proves EventService.Watch and output server streams plus Poll/readOutput recovery from annex 10 against actual Worker/Container/DO, including drop/expire/revoke and recovery through authoritative reads; no SignalR dependency, no claimed hint durability beyond what is proven.
 
@@ -181,7 +188,8 @@ Execute ArcForges delivery task PRF.07 — Cloudflare Native AOT host + D1 + DO/
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Cloud (integration owner: Cloud integration owner, the holder of roles/integration-cloud).
+Claim and handoff record: claims/prf-07 (python tools/delivery.py claim PRF.07 --worker <name>); task branch task/prf-07 in Cloud; ledger record ledger/tasks/prf-07.md.
 Kind/size: proof/XL. Baseline: not-started.
 Outcome: ArcForges.Cloud.Host publishes/deploys as a Linux x64 Native AOT container with the real private Worker D1 binding, DO/Queue/R2 foundation, rollback on guard failure, exact 64-bit/decimal handling, session/CSRF/revoke and bounded checkpoint/restart; zero trim/AOT diagnostics; VG-06 is supported (not yet closed platform-wide, since VG-06 is also maintained by WP-21.00/WP-50.04).
 
@@ -196,7 +204,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Cloud:src/Cloud/ArcForges.Cloud.Host/**; Cloud:eng/verification/**
-Shared resources (follow the owner protocol): RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Permitted substitutes (never real integration evidence): SUB-signed-format-fixture-keys: signature/hash verification mechanics, expired/revoked/unknown-key refusal, malformed/rollback/mixed-shard handling Real producer ['UPD.07']; removed by REL.11
 Unblocks: CLOUD.25, NAT.29, PRF.05, PRF.06, PRF.08, PRF.10
 
@@ -210,7 +218,8 @@ Execute ArcForges delivery task PRF.08 — React production build and generated 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Web (integration owner: Web integration owner, the holder of roles/integration-web).
+Claim and handoff record: claims/prf-08 (python tools/delivery.py claim PRF.08 --worker <name>); task branch task/prf-08 in Web; ledger record ledger/tasks/prf-08.md.
 Kind/size: proof/L. Baseline: not-started.
 Outcome: Minimal Account/Chat production React profiles build from Web root locks using the exact released generated gRPC-Web SDK, call the real AOT Cloud probe through same-origin routing/cookie/CSRF, exercise exact values/typed failures/cancellation and CF authenticated presentation; asset/interaction budgets measured; esproj and portable npm entry points proven. Contributes the foundation slice of PG-23 only.
 
@@ -239,7 +248,8 @@ Execute ArcForges delivery task PRF.09 — Third-party control AOT admission gat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/prf-09 (python tools/delivery.py claim PRF.09 --worker <name>); task branch task/prf-09 in DesktopPlatform; ledger record ledger/tasks/prf-09.md.
 Kind/size: proof/S. Baseline: not-started.
 Outcome: The process for admitting a third-party UI control into an AOT deliverable is documented and exercised once against a real candidate control published AOT with zero diagnostics; schedules VG-03 for WP10.
 
@@ -266,7 +276,8 @@ Execute ArcForges delivery task PRF.10 — Android Kotlin/Jetpack Compose gRPC-W
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\runtime-proofs.md (anchor task-prf-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\Mobile (integration owner: Mobile integration owner, the holder of roles/integration-mobile).
+Claim and handoff record: claims/prf-10 (python tools/delivery.py claim PRF.10 --worker <name>); task branch task/prf-10 in Mobile; ledger record ledger/tasks/prf-10.md.
 Kind/size: proof/L. Baseline: not-started.
 Outcome: A Kotlin Android release build consumes the actual Maven Connect Kotlin gRPC-Web client, exercises unary/server-stream/trailers/cancel/Keystore against real Worker/Container/D1/DO/R2 foundation; the compatible actual toolchain is pinned after proof. Closes VG-07 and the first-artifact leg of F-023 (already CLOSED for the inspected android-0.1.0-ci.14.1 replacement per the gates register, but reopens on dependency/resource change).
 
@@ -282,7 +293,7 @@ Completion prerequisites (may start earlier; cannot complete before these are co
 - none
 
 Permitted write scope: Mobile:app/**; Mobile:gradle/**
-Shared resources (follow the owner protocol): RES-workstation-build-slot (append): One CPU-heavy local build or test at a time per workstation, coordinated by a lock file in the user profile; coding and review continue meanwhile; CI capacity is not limited by this rule.
+Shared resources (follow the owner protocol): RES-workstation-build-slot (exclusive): Exclusive per workstation for the duration of each CPU-heavy local build or test, through the workstation lock rather than a Plan lease: run the command as `python tools/delivery.py build-slot run --worker <name> --task <task> -- <command>` with the Plan repository tool, which holds the lock directory `.arcforges/build-slot` in the user profile with an owner record and heartbeat and recovers a lock whose holder stopped. Coding and review continue while a build waits; CI capacity is not limited by this rule.
 Unblocks: AND.01, CLOUD.26, NAT.29
 
 Validation (P2-017; no macOS/hosted runtime, device, GUI, browser E2E, live-service, inference or installed-consumer CI): Actual device/service/native-adapter tests; scope/permission, wrong/stale target, loss/retry, expiry cases; CI builds the release artifact, device checks are local opt-in under P2-017

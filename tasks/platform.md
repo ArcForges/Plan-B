@@ -1,8 +1,9 @@
 # ArcForges delivery task prompts — Desktop platform mechanisms
 
 Generated from Design `docs/planning/delivery/delivery-graph.json` by `tools/delivery.py`; do not edit by hand.
-Each block is self-contained. Claim a task only when `python tools/delivery.py ready --claims` lists it,
-then follow `arcforges-implementation.md`. Tasks are ordered by lane for reading; the order is not a schedule.
+Each block is self-contained. Claim a task only when `python tools/delivery.py ready` lists it, with
+`python tools/delivery.py claim <TASK-ID> --worker <name>`, then follow `arcforges-implementation.md`.
+Tasks are ordered by lane for reading; the order is not a schedule.
 
 ## Desktop platform mechanisms
 
@@ -11,7 +12,8 @@ Execute ArcForges delivery task PLT.01 — Store abstraction and the single tran
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-01).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-01 (python tools/delivery.py claim PLT.01 --worker <name>); task branch task/plt-01 in DesktopPlatform; ledger record ledger/tasks/plt-01.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: IStore/CommitUnit/WriteCommand exist with the eight-step write path (validate, authorize, begin commit unit, apply, journal, advance revision, enqueue outbox, commit, notify) implemented exactly once; persistence types never cross the repository boundary; a policy test proves no alternative write path exists.
 
@@ -41,7 +43,8 @@ Execute ArcForges delivery task PLT.02 — Append-only journal with durability a
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-02).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-02 (python tools/delivery.py claim PLT.02 --worker <name>); task branch task/plt-02 in DesktopPlatform; ledger record ledger/tasks/plt-02.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: JournalEntry records every commit with enough information to replay; journal writes are durable before a commit is acknowledged; growth is bounded by snapshot policy and truncation is safe under concurrent read.
 
@@ -68,7 +71,8 @@ Execute ArcForges delivery task PLT.03 — Snapshot and crash/corruption recover
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-03).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-03 (python tools/delivery.py claim PLT.03 --worker <name>); task branch task/plt-03 in DesktopPlatform; ledger record ledger/tasks/plt-03.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Snapshots are policy-triggered, self-describing and verifiable; recovery selects the latest verifiable snapshot and replays the journal forward to typed outcomes (clean, recovered-with-loss, unrecoverable-with-preserved-evidence); native crash and safe-start paths are handled.
 
@@ -95,7 +99,8 @@ Execute ArcForges delivery task PLT.04 — Migration runner.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-04).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-04 (python tools/delivery.py claim PLT.04 --worker <name>); task branch task/plt-04 in DesktopPlatform; ledger record ledger/tasks/plt-04.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Numbered migrations run through a transactional-per-step, idempotent, resumable-after-interruption runner; StorageSchemaVersion equals the highest applied migration; downgrade is either an explicit reverse migration or a clean refusal.
 
@@ -121,7 +126,8 @@ Execute ArcForges delivery task PLT.05 — Managed resource store (content-addre
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-05).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-05 (python tools/delivery.py claim PLT.05 --worker <name>); task branch task/plt-05 in DesktopPlatform; ledger record ledger/tasks/plt-05.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Content-addressed storage with identity-to-location resolution, integrity verification on read, reference counting derived from a referrer table, and a GC path that never deletes a referenced object even after a crash mid-operation.
 
@@ -147,7 +153,8 @@ Execute ArcForges delivery task PLT.06 — Large append store for high-rate chun
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-06).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-06 (python tools/delivery.py claim PLT.06 --worker <name>); task branch task/plt-06 in DesktopPlatform; ledger record ledger/tasks/plt-06.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: A chunked, verifiable append store outside the relational working store, with per-chunk checksums, an explicit end marker, and honest truncation: a crash mid-append yields a verifiable prefix plus a recorded loss, never a silently short file.
 
@@ -173,7 +180,8 @@ Execute ArcForges delivery task PLT.07 — Derived-store abstraction and storage
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-07).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-07 (python tools/delivery.py claim PLT.07 --worker <name>); task branch task/plt-07 in DesktopPlatform; ledger record ledger/tasks/plt-07.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: A DerivedStore abstraction with declared rebuild semantics (every derived store deletable/rebuildable from canonical data) and a StoragePressureState model whose eviction policy only ever touches derived data.
 
@@ -199,7 +207,8 @@ Execute ArcForges delivery task PLT.08 — Publish Persistence packages and veri
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-08).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-08 (python tools/delivery.py claim PLT.08 --worker <name>); task branch task/plt-08 in DesktopPlatform; ledger record ledger/tasks/plt-08.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: ArcForges.Persistence.Sqlite,.Persistence.Resources and.Persistence.Derived are packed, admitted to the publication allowlist, published, and independently consumed; package consumption is shown not to centralise product data ownership.
 
@@ -230,7 +239,8 @@ Execute ArcForges delivery task PLT.09 — Local gRPC transport and framing over
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-09).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-09 (python tools/delivery.py claim PLT.09 --worker <name>); task branch task/plt-09 in DesktopPlatform; ledger record ledger/tasks/plt-09.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Generated gRPC over HTTP/2 runs on Windows Named Pipe/Unix domain socket between parent and owned helper/extension children via a custom Kestrel IConnectionListenerFactory and ConnectCallback client, with explicit registration, AOT-safe serialization, and zero local TCP listener.
 
@@ -259,7 +269,8 @@ Execute ArcForges delivery task PLT.10 — Parent-owned endpoint identity.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-10).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-10 (python tools/delivery.py claim PLT.10 --worker <name>); task branch task/plt-10 in DesktopPlatform; ledger record ledger/tasks/plt-10.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Parent launch descriptor fixes endpoint, process/build/protocol identity, nonce and epoch; owner-only endpoint files are created/removed atomically; a stale descriptor never authorizes a child.
 
@@ -284,7 +295,8 @@ Execute ArcForges delivery task PLT.11 — Child registration lifecycle.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-11).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-11 (python tools/delivery.py claim PLT.11 --worker <name>); task branch task/plt-11 in DesktopPlatform; ledger record ledger/tasks/plt-11.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: LocalBootstrap authentication with 30s lease/10s renewal, epoch fencing and restartable restricted launch; expired/stale children cannot call; parent restart requires fresh grants.
 
@@ -310,7 +322,8 @@ Execute ArcForges delivery task PLT.12 — Static routing and version refusal.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-12).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-12 (python tools/delivery.py claim PLT.12 --worker <name>); task branch task/plt-12 in DesktopPlatform; ledger record ledger/tasks/plt-12.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Resolves only explicitly launched children and their declared generated services; rejects unsupported version/capability; never selects an installed product as fallback.
 
@@ -335,7 +348,8 @@ Execute ArcForges delivery task PLT.13 — Bounds and concurrency.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-13).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-13 (python tools/delivery.py claim PLT.13 --worker <name>); task branch task/plt-13 in DesktopPlatform; ledger record ledger/tasks/plt-13.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: 16 active/64 queued bounded calls, deadlines and parent-owned callback channels; no recursive saturated callback lane.
 
@@ -360,7 +374,8 @@ Execute ArcForges delivery task PLT.14 — Disconnect, cancel and retry semantic
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-14).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-14 (python tools/delivery.py claim PLT.14 --worker <name>); task branch task/plt-14 in DesktopPlatform; ledger record ledger/tasks/plt-14.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Effect certainty, stable command/receipt identity and cancellation are preserved across helper crashes; replay only when explicitly allowed; kill before/after commit and lost-ack scenarios resolve to typed unknown-effect outcomes, in-memory only (durable receipts remain WP07/21/52 territory per WP-04.01's own gate).
 
@@ -386,7 +401,8 @@ Execute ArcForges delivery task PLT.15 — Brokered large data over the sandbox 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-15).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-15 (python tools/delivery.py claim PLT.15 --worker <name>); task branch task/plt-15 in DesktopPlatform; ledger record ledger/tasks/plt-15.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Bounded verified chunks over annex-09 sandbox resources/buffers, parent-authorized only; no direct product-to-product transfer ticket.
 
@@ -412,7 +428,8 @@ Execute ArcForges delivery task PLT.16 — Publish LocalRpc package and verify r
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-16).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-16 (python tools/delivery.py claim PLT.16 --worker <name>); task branch task/plt-16 in DesktopPlatform; ledger record ledger/tasks/plt-16.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: ArcForges.LocalRpc is packed, admitted, published, and independently consumed; all owned actions/schemas/public interfaces and tests are complete with applicable UX acceptance ledger rows recorded.
 
@@ -443,7 +460,8 @@ Execute ArcForges delivery task PLT.17 — Application identity and in-process c
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-17).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-17 (python tools/delivery.py claim PLT.17 --worker <name>); task branch task/plt-17 in DesktopPlatform; ledger record ledger/tasks/plt-17.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: AppIdentity/InstallationIdentity/InstanceIdentity bound to each application composition root; two products on one device keep separate sessions/history/capabilities; forged/missing target refuses; no running-product registry or shared Hub.
 
@@ -471,7 +489,8 @@ Execute ArcForges delivery task PLT.18 — Static contribution registration.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-18).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-18 (python tools/delivery.py claim PLT.18 --worker <name>); task branch task/plt-18 in DesktopPlatform; ledger record ledger/tasks/plt-18.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Capability/context/artifact/lifecycle/deep-link handlers register inside the owning process through generated descriptors and explicit composition; duplicate IDs, wrong owner, unavailable child, undeclared tool schema and cross-product registration all refuse; registration is idempotent and survives restart.
 
@@ -497,7 +516,8 @@ Execute ArcForges delivery task PLT.19 — Capability registry and selection.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-19).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-19 (python tools/delivery.py claim PLT.19 --worker <name>); task branch task/plt-19 in DesktopPlatform; ledger record ledger/tasks/plt-19.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: The wire CapabilityDescriptor/OperationBinding/effect/locus/context/cancellation schema is implemented with a complete initial first-party binding matrix; enumerated bindings are validated against declared Contracts methods; unsupported major, inconsistent pureRead/write classification, readiness mismatch and ambiguous target all reject.
 
@@ -523,7 +543,8 @@ Execute ArcForges delivery task PLT.20 — Actions and availability.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-20).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-20 (python tools/delivery.py claim PLT.20 --worker <name>); task branch task/plt-20 in DesktopPlatform; ledger record ledger/tasks/plt-20.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Actions are computed from capabilities plus current context, side-effect free, cheap enough for UI enumeration; unavailability always yields a typed reason across permission/entitlement/health/context/version causes.
 
@@ -548,7 +569,8 @@ Execute ArcForges delivery task PLT.21 — Context providers and freezing.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-21).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-21 (python tools/delivery.py claim PLT.21 --worker <name>); task branch task/plt-21 in DesktopPlatform; ledger record ledger/tasks/plt-21.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Context providers contribute typed context; at invocation the context is frozen into an immutable snapshot carried with the invocation; a later live-context change never affects an in-flight invocation; oversized context is refused explicitly.
 
@@ -573,7 +595,8 @@ Execute ArcForges delivery task PLT.22 — Resources and artifacts resolution.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-22).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-22 (python tools/delivery.py claim PLT.22 --worker <name>); task branch task/plt-22 in DesktopPlatform; ledger record ledger/tasks/plt-22.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Resource resolution from reference to access honours ownership and floating-versus-pinned distinction; artifact handlers register per kind; a reference never carries a path/pointer/handle; resolution re-checks permission at access time.
 
@@ -599,7 +622,8 @@ Execute ArcForges delivery task PLT.23 — Own navigation, hints and health.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-23).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-23 (python tools/delivery.py claim PLT.23 --worker <name>); task branch task/plt-23 in DesktopPlatform; ledger record ledger/tasks/plt-23.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Artifact opens and deep links route to the owning application handler; bounded in-process state hints cause authoritative rereads; invalid ownership, missing content, expired child cursor, restart and duplicate hint all recover without launching another product.
 
@@ -624,7 +648,8 @@ Execute ArcForges delivery task PLT.24 — Invocation pipeline.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-24).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-24 (python tools/delivery.py claim PLT.24 --worker <name>); task branch task/plt-24 in DesktopPlatform; ledger record ledger/tasks/plt-24.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: The end-to-end path resolve -> check availability -> freeze context -> authorize -> invoke -> validate result -> record is the ONLY route to a capability; every failure maps to the closed semantic error set; every invocation is traced.
 
@@ -652,7 +677,8 @@ Execute ArcForges delivery task PLT.25 — Publish Capabilities/Contributions pa
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-25).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-25 (python tools/delivery.py claim PLT.25 --worker <name>); task branch task/plt-25 in DesktopPlatform; ledger record ledger/tasks/plt-25.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: ArcForges.Capabilities (and the Contributions internals it packages) is packed, admitted, published, and independently consumed; owner refuses invalid/stale invocations and opaque references do not grant access.
 
@@ -685,7 +711,8 @@ Execute ArcForges delivery task PLT.26 — Token system and theming.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-26).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-26 (python tools/delivery.py claim PLT.26 --worker <name>); task branch task/plt-26 in DesktopPlatform; ledger record ledger/tasks/plt-26.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Semantic tokens for colour/typography/spacing/radius/elevation/motion with light/dark/high-contrast themes and first-class density modes; no component references a raw literal.
 
@@ -712,7 +739,8 @@ Execute ArcForges delivery task PLT.27 — Windows, panels and layout.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-27).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-27 (python tools/delivery.py claim PLT.27 --worker <name>); task branch task/plt-27 in DesktopPlatform; ledger record ledger/tasks/plt-27.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Multi-window-per-instance window model, dockable/collapsible panel host, device-local layout persistence resilient to a missing panel or changed screen configuration.
 
@@ -739,7 +767,8 @@ Execute ArcForges delivery task PLT.28 — Command system.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-28).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-28 (python tools/delivery.py claim PLT.28 --worker <name>); task branch task/plt-28 in DesktopPlatform; ledger record ledger/tasks/plt-28.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Command registry with availability, shortcut binding, command palette and conflict detection; command availability is computed from the same evaluation the capability model uses so command and capability never disagree.
 
@@ -766,7 +795,8 @@ Execute ArcForges delivery task PLT.29 — Scoped settings.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-29).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-29 (python tools/delivery.py claim PLT.29 --worker <name>); task branch task/plt-29 in DesktopPlatform; ledger record ledger/tasks/plt-29.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Fixed scope resolution (application/workspace/device/instance), typed schemas, migration on schema change, explainable effective value; device-scoped settings never sync.
 
@@ -792,7 +822,8 @@ Execute ArcForges delivery task PLT.30 — Attention and notification model.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-30).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-30 (python tools/delivery.py claim PLT.30 --worker <name>); task branch task/plt-30 in DesktopPlatform; ledger record ledger/tasks/plt-30.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Attention items classified by durability; a durable item (pending approval, failed task) persists until resolved regardless of a missed transient notification; lock-screen/system-notification content is non-sensitive by default.
 
@@ -817,7 +848,8 @@ Execute ArcForges delivery task PLT.31 — Error presentation.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-31).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-31 (python tools/delivery.py claim PLT.31 --worker <name>); task branch task/plt-31 in DesktopPlatform; ledger record ledger/tasks/plt-31.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Errors are presented from the reason-code registry with a human-readable statement, retry guidance and a support reference identifier; a raw exception message never reaches the user.
 
@@ -843,7 +875,8 @@ Execute ArcForges delivery task PLT.32 — Lifecycle, menus and shutdown.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-32).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-32 (python tools/delivery.py claim PLT.32 --worker <name>); task branch task/plt-32 in DesktopPlatform; ledger record ledger/tasks/plt-32.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Start-up sequence within budget; single-instance routing; shutdown prompts stating consequences when work is running/unsaved; menu contribution from the command registry.
 
@@ -868,7 +901,8 @@ Execute ArcForges delivery task PLT.33 — Accessibility and localisation baseli
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-33).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-33 (python tools/delivery.py claim PLT.33 --worker <name>); task branch task/plt-33 in DesktopPlatform; ledger record ledger/tasks/plt-33.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Every shell surface carries assistive-technology semantics, correct focus order and keyboard reachability; all strings externalised; RTL layout supported structurally.
 
@@ -894,7 +928,8 @@ Execute ArcForges delivery task PLT.34 — Third-party control admission.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-34).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-34 (python tools/delivery.py claim PLT.34 --worker <name>); task branch task/plt-34 in DesktopPlatform; ledger record ledger/tasks/plt-34.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Every third-party control the shell uses passes a real AOT publish proof with zero diagnostics before adoption, with a recorded licence position per control.
 
@@ -919,7 +954,8 @@ Execute ArcForges delivery task PLT.35 — Publish DesignSystem/Shell packages a
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-35).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-35 (python tools/delivery.py claim PLT.35 --worker <name>); task branch task/plt-35 in DesktopPlatform; ledger record ledger/tasks/plt-35.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: ArcForges.DesignSystem and ArcForges.Desktop.Shell are packed, admitted, published, and independently consumed; each app is shown to restore only the packages/mechanisms it needs.
 
@@ -953,7 +989,8 @@ Execute ArcForges delivery task PLT.36 — Principals and the actor chain.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-36).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-36 (python tools/delivery.py claim PLT.36 --worker <name>); task branch task/plt-36 in DesktopPlatform; ledger record ledger/tasks/plt-36.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Every operation carries a complete actor chain (human principal, device, installation, session, any acting agent/extension) constructed once at the entry point and flowing through every layer without reconstruction; no operation reaches an enforcement point without it.
 
@@ -978,7 +1015,8 @@ Execute ArcForges delivery task PLT.37 — Risk model and classification.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-37).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-37 (python tools/delivery.py claim PLT.37 --worker <name>); task branch task/plt-37 in DesktopPlatform; ledger record ledger/tasks/plt-37.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: R0 to R4 with runtime modifiers; every capability declares a base risk; modifiers raise it based on scope/target/reversibility/egress/actor kind; effective risk is computed, explainable and monotonic (never lowered).
 
@@ -1003,7 +1041,8 @@ Execute ArcForges delivery task PLT.38 — Decision pipeline and the four enforc
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-38).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-38 (python tools/delivery.py claim PLT.38 --worker <name>); task branch task/plt-38 in DesktopPlatform; ledger record ledger/tasks/plt-38.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: The fourteen-step decision pipeline implemented once and invoked at each of the four enforcement points (caller pre-check, transport boundary, service-side decision, owner-side final validation always last); every step produces a typed outcome; a refusal names the failing step and reason code; the pipeline is unbypassable.
 
@@ -1031,7 +1070,8 @@ Execute ArcForges delivery task PLT.39 — Approval, steering and step-up.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-39).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-39 (python tools/delivery.py claim PLT.39 --worker <name>); task branch task/plt-39 in DesktopPlatform; ledger record ledger/tasks/plt-39.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Approval requests with bounded lifetime, durable pending state and explicit outcome; steering adjusts a running operation without granting authority; step-up challenges for enumerated sensitive operations; local presence required for the highest risk class, biometric app-unlock never substituting.
 
@@ -1057,7 +1097,8 @@ Execute ArcForges delivery task PLT.40 — Per-application secrets and session i
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-40).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-40 (python tools/delivery.py claim PLT.40 --worker <name>); task branch task/plt-40 in DesktopPlatform; ledger record ledger/tasks/plt-40.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Platform secure storage/broker primitives scoped to realm/account/product/installation with no cross-product SSO endpoint; SecretRef Use != Reveal; connector child grants are foreground/definition-bound and cannot export raw secrets; own sign-out leaves other apps/local data intact.
 
@@ -1084,7 +1125,8 @@ Execute ArcForges delivery task PLT.41 — Egress control.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-41).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-41 (python tools/delivery.py claim PLT.41 --worker <name>); task branch task/plt-41 in DesktopPlatform; ledger record ledger/tasks/plt-41.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Every outbound data transfer is its own egress decision, distinct from read access, recording data class/destination/authority; a denied egress produces a typed refusal and every egress is audited.
 
@@ -1109,7 +1151,8 @@ Execute ArcForges delivery task PLT.42 — Instruction provenance.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-42).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-42 (python tools/delivery.py claim PLT.42 --worker <name>); task branch task/plt-42 in DesktopPlatform; ledger record ledger/tasks/plt-42.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Every input that can carry instructions (model output, extension output, retrieved content, imported documents, deep links, catalog metadata) is marked with its provenance; untrusted provenance can be processed but never gains authority to trigger an operation unapproved.
 
@@ -1134,7 +1177,8 @@ Execute ArcForges delivery task PLT.43 — Capability leases and trust.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-43).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-43 (python tools/delivery.py claim PLT.43 --worker <name>); task branch task/plt-43 in DesktopPlatform; ledger record ledger/tasks/plt-43.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: A delegation creates a lease with scope/expiry/revocation, enforced at use not only at issue; typed trust levels evaluated at defined points; trust never substitutes for permission.
 
@@ -1160,7 +1204,8 @@ Execute ArcForges delivery task PLT.44 — Append-only audit subsystem.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-44).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-44 (python tools/delivery.py claim PLT.44 --worker <name>); task branch task/plt-44 in DesktopPlatform; ledger record ledger/tasks/plt-44.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Append-only audit append/query with a dedicated policy-retention maintenance authority; ordinary roles cannot UPDATE/DELETE; audited retention purge removes only expired unheld partitions under declared policy; complete separation from telemetry.
 
@@ -1187,7 +1232,8 @@ Execute ArcForges delivery task PLT.45 — Content helper and OS-enforced isolat
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-45).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-45 (python tools/delivery.py claim PLT.45 --worker <name>); task branch task/plt-45 in DesktopPlatform; ledger record ledger/tasks/plt-45.md.
 Kind/size: producer/XL. Baseline: not-started.
 Outcome: The first-party C# Native AOT ContentSandbox, generated gRPC broker/control bindings and all restricted RID launch profiles (Windows AppContainer+Job Object, Linux Landlock+seccomp, macOS App-Sandbox+XPC handoff) are built and solely owned here; ContentSandbox.Contracts/.Broker and the foundation Runtime.<rid> are published before WP13 consumes them; OS containment is proven with a deliberately hostile first-party test parser. Production PDF/image/media/OTIO libraries are WP13's job, never an upstream input here.
 
@@ -1218,7 +1264,8 @@ Execute ArcForges delivery task PLT.46 — Publish Security packages and verify 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-46).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-46 (python tools/delivery.py claim PLT.46 --worker <name>); task branch task/plt-46 in DesktopPlatform; ledger record ledger/tasks/plt-46.md.
 Kind/size: acceptance/M. Baseline: not-started.
 Outcome: ArcForges.Security,.Security.Secrets and.Security.Audit are packed, admitted, published and independently consumed; the signed parent-bound helper and OS broker are packaged with only this stage's dependencies and the test-only parser fixture, no dependency back on WP13.
 
@@ -1254,7 +1301,8 @@ Execute ArcForges delivery task PLT.47 — Emission and required dimensions.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-47).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-47 (python tools/delivery.py claim PLT.47 --worker <name>); task branch task/plt-47 in DesktopPlatform; ledger record ledger/tasks/plt-47.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: A single emission surface for metrics/traces/structured logs with the required dimension set attached automatically from ambient context; a present dimension is always attached, an absent one omitted rather than defaulted; build identifier and instance identity are on every signal.
 
@@ -1279,7 +1327,8 @@ Execute ArcForges delivery task PLT.48 — Correlation and causation propagation
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-48).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-48 (python tools/delivery.py claim PLT.48 --worker <name>); task branch task/plt-48 in DesktopPlatform; ledger record ledger/tasks/plt-48.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Correlation created at the originating edge or accepted from a validated client value, propagated across HTTP/queue/worker/realtime/provider calls once, in shared infrastructure; causation records which operation caused which; a user-visible task/run identifier resolves to its trace.
 
@@ -1304,7 +1353,8 @@ Execute ArcForges delivery task PLT.49 — Redaction by construction.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-49).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-49 (python tools/delivery.py claim PLT.49 --worker <name>); task branch task/plt-49 in DesktopPlatform; ledger record ledger/tasks/plt-49.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Secret-bearing and content types have no logging representation; a scrubbing processor removes known-sensitive header/field names as a second line of defence; URLs recorded as route templates plus identifiers; exception messages mapped to reason codes before export.
 
@@ -1331,7 +1381,8 @@ Execute ArcForges delivery task PLT.50 — Cardinality and sampling.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-50).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-50 (python tools/delivery.py claim PLT.50 --worker <name>); task branch task/plt-50 in DesktopPlatform; ledger record ledger/tasks/plt-50.md.
 Kind/size: producer/M. Baseline: not-started.
 Outcome: Metric labels and bounded trace policy enforced from observability architecture SS13: head sample plus bounded diagnostic buffer, error/slow promotion only for spans still retained, explicit overflow/loss counters; unsampled mandatory error facts remain redacted under consent.
 
@@ -1357,7 +1408,8 @@ Execute ArcForges delivery task PLT.51 — Health probes.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-51).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-51 (python tools/delivery.py claim PLT.51 --worker <name>); task branch task/plt-51 in DesktopPlatform; ledger record ledger/tasks/plt-51.md.
 Kind/size: producer/S. Baseline: not-started.
 Outcome: Liveness, readiness and capability health as three distinct probe kinds; readiness fails closed on a missing required dependency; capability health uses the five health dimensions (reachable, ready, healthy, degraded, capacity) shared with the contract model.
 
@@ -1382,7 +1434,8 @@ Execute ArcForges delivery task PLT.52 — Desktop diagnostics and consent.
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-52).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-52 (python tools/delivery.py claim PLT.52 --worker <name>); task branch task/plt-52 in DesktopPlatform; ledger record ledger/tasks/plt-52.md.
 Kind/size: producer/L. Baseline: not-started.
 Outcome: Local diagnostics always available without upload; three tiers (minimal always-on local, user-approved report, time-bounded self-disabling verbose session visible while active); a report is generated, shown in full, sent only after approval; no memory dump by default; consent is revocable and stops collection immediately and locally.
 
@@ -1409,7 +1462,8 @@ Execute ArcForges delivery task PLT.53 — Publish Observability packages and ve
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-53).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-53 (python tools/delivery.py claim PLT.53 --worker <name>); task branch task/plt-53 in DesktopPlatform; ledger record ledger/tasks/plt-53.md.
 Kind/size: acceptance/S. Baseline: not-started.
 Outcome: ArcForges.Observability and.Observability.Desktop are packed, admitted, published and independently consumed; a trace can join one request across owners without logging prompts/credentials/unbounded payloads; health distinguishes backend/CF/model/R2 failures once those exist.
 
@@ -1439,7 +1493,8 @@ Execute ArcForges delivery task PLT.54 — Real hostile-input containment proof 
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-54).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-54 (python tools/delivery.py claim PLT.54 --worker <name>); task branch task/plt-54 in DesktopPlatform; ledger record ledger/tasks/plt-54.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: that PG-12/PG-22's OS isolation mechanics (proven against a first-party hostile test parser in PLT.45) hold once real PDFium/FFmpeg/OpenImageIO/OpenColorIO/OTIO composition is loaded into the same helper by WP-13.13 ; this is the point where the SUB-hostile-test-parser substitute is actually replaced.
 
@@ -1466,7 +1521,8 @@ Execute ArcForges delivery task PLT.56 — Three professional products compose t
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-56).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-56 (python tools/delivery.py claim PLT.56 --worker <name>); task branch task/plt-56 in DesktopPlatform; ledger record ledger/tasks/plt-56.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: that ArcNotes, ArcScope and ArcSlate each restore only the shell packages/mechanisms they need, feel like one family (shared tokens/commands/settings/attention/error presentation), and that no product had to depend on another to render its own UI (BR-02 of WP10).
 
@@ -1494,7 +1550,8 @@ Execute ArcForges delivery task PLT.57 — End-to-end capability invocation with
 
 Task record: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\lanes\platform.md (anchor task-plt-57).
 Delivery rules: C:\MyFile\Projects\ArcForges-Design-B\docs\planning\delivery\README.md; execution: C:\MyFile\Projects\Plan-B\arcforges-implementation.md.
-Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner).
+Owning repository: C:\MyFile\Projects\ArcForges\DesktopPlatform (integration owner: DesktopPlatform integration owner, the holder of roles/integration-desktopplatform).
+Claim and handoff record: claims/plt-57 (python tools/delivery.py claim PLT.57 --worker <name>); task branch task/plt-57 in DesktopPlatform; ledger record ledger/tasks/plt-57.md.
 Kind/size: integration/M. Baseline: not-started.
 Outcome: that the WP-09.07 invocation pipeline's 'authorize' step, wired to the real WP-11.02 decision pipeline, actually gates a real product capability end to end (resolve -> availability -> freeze -> authorize -> invoke -> validate -> record -> audit), closing the IAuthorizer interface seam both PLT.24 and PLT.38 are built against.
 
