@@ -306,6 +306,14 @@ class DeliveryTests(unittest.TestCase):
                            sys.executable, '-c', 'import sys; sys.exit(3)'])
             self.assertEqual(code, 3)
             self.assertFalse(d.slot_path().exists())
+            if os.name == 'nt':  # a batch file named without a path runs from the current directory
+                (self.fx.root / 'probe.bat').write_bytes(b'@exit /b 4\r\n')
+                here = os.getcwd()
+                os.chdir(self.fx.root)
+                try:
+                    self.assertEqual(d.main(['build-slot', 'run', '--worker', 'w1', '--task', 'ADOPT.01', '--', 'probe.bat']), 4)
+                finally:
+                    os.chdir(here)
             token = d.slot_acquire('w1', 'ADOPT.01', 60, 0, 'build')
             with self.assertRaises(d.Conflict):
                 d.slot_acquire('w2', 'ADOPT.02', 60, 0, 'build')
