@@ -26,7 +26,7 @@ Coordination is at the narrowest boundary: each repository's integration owner (
 
 ## Network and resources
 
-Use the normal network path. Do not configure proxy 7890 or another proxy. On a failed network operation, stop and report the exact operation rather than changing networking or repeatedly retrying. Do not invoke wsl.exe or WSL wrappers; use a directly available WSL terminal only if necessary. Parallelize independent tasks, not competing heavy local builds.
+Use the normal network path. On a failed network operation, stop and report the exact operation rather than changing networking or repeatedly retrying. Do not invoke wsl.exe or WSL wrappers; use a directly available WSL terminal only if necessary. Parallelize independent tasks, not competing heavy local builds.
 
 ## Review and merge
 

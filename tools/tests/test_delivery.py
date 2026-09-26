@@ -14,9 +14,11 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import unittest
 from datetime import timedelta
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import delivery as d  # noqa: E402
@@ -222,6 +224,45 @@ class DeliveryTests(unittest.TestCase):
         self.assertIn('Ready to start (68):', out)
         self.assertNotIn('ADOPT.01\t', out)
 
+    def test_complete_ledger_requires_completed_integration_prerequisites(self):
+        g = d.Graph(self.fx.design)
+        self.fx.record('AND.08', 'complete')  # AND.07 is its completion prerequisite
+        for status in (None, 'delivered', 'superseded'):
+            with self.subTest(prerequisite=status):
+                if status:
+                    self.fx.record('AND.07', status)
+                _, errors = d.read_ledger(self.fx.plan, g)
+                self.assertTrue(any('AND.08 cannot be complete' in e and 'AND.07' in e for e in errors), errors)
+        # Both the working-tree check and authoritative readiness use this validation.
+        code, out = self.fx.run('check')
+        self.assertEqual(code, 1, out)
+        self.assertIn('AND.08 cannot be complete', out)
+        self.fx.commit(self.fx.plan, 'invalid premature completion')
+        code, out = self.fx.run('ready')
+        self.assertEqual(code, 1, out)
+        self.assertIn('AND.08 cannot be complete', out)
+        for status in ('complete', 'inherited'):
+            self.fx.record('AND.07', status)
+            _, errors = d.read_ledger(self.fx.plan, g)
+            self.assertEqual(errors, [])
+        # Delivered work and adopted inherited work need not have completed these scenarios yet.
+        self.fx.record('AND.07', 'delivered')
+        for status in ('delivered', 'inherited'):
+            self.fx.record('AND.08', status)
+            self.assertEqual(d.read_ledger(self.fx.plan, g)[1], [])
+
+    def test_repository_adoption_completion_requires_every_generated_slice(self):
+        g = d.Graph(self.fx.design)
+        self.fx.record('ADOPT.02', 'complete')
+        slices = [e['task'] for e in g.tasks['ADOPT.02']['complete']]
+        self.assertTrue(slices)
+        for sid in slices[:-1]:
+            self.fx.record(sid, 'complete')
+        _, errors = d.read_ledger(self.fx.plan, g)
+        self.assertTrue(any('ADOPT.02 cannot be complete' in e and slices[-1] in e for e in errors), errors)
+        self.fx.record(slices[-1], 'complete')
+        self.assertEqual(d.read_ledger(self.fx.plan, g)[1], [])
+
     def test_a_delivered_task_returns_as_a_follow_up_when_its_completion_prerequisites_complete(self):
         self.fx.record('AND.08', 'delivered')
         self.fx.commit(self.fx.plan, 'delivered')
@@ -355,6 +396,98 @@ class DeliveryTests(unittest.TestCase):
             self.assertFalse(d.slot_path().exists())
         finally:
             os.environ.pop('ARCFORGES_BUILD_SLOT', None)
+
+    def test_stale_build_slot_recovery_serializes_competing_waiters(self):
+        with patch.dict(os.environ, {'ARCFORGES_BUILD_SLOT': str(self.fx.root / 'contended-slot')}):
+            old = d.slot_acquire('old', 'ADOPT.01', 60, 0, 'build')
+            owner = d.slot_owner(d.slot_path())
+            owner['expiresAt'] = d.iso(d.utcnow() - timedelta(minutes=5))
+            d.slot_write(d.slot_path(), owner)
+            recovering, resume, attempting = threading.Event(), threading.Event(), threading.Event()
+            second_observed = threading.Event()
+            results, failures = {}, []
+            discard, read_owner = d.slot_discard, d.slot_owner
+
+            def observed_owner(path):
+                if threading.current_thread().name == 'second':
+                    second_observed.set()
+                return read_owner(path)
+
+            def paused_discard(path, label, *args, **kwargs):
+                if label == 'stale' and threading.current_thread().name == 'first':
+                    recovering.set()
+                    if not resume.wait(10):
+                        raise AssertionError('test did not release stale recovery')
+                return discard(path, label, *args, **kwargs)
+
+            def acquire(name):
+                try:
+                    if name == 'second':
+                        attempting.set()
+                    results[name] = d.slot_acquire(name, 'ADOPT.01', 60, 0, 'build')
+                except d.Conflict:
+                    results[name] = None
+                except BaseException as exc:
+                    failures.append(exc)
+
+            first = threading.Thread(target=acquire, args=('first',), name='first')
+            second = threading.Thread(target=acquire, args=('second',), name='second')
+            with patch.object(d, 'slot_discard', side_effect=paused_discard), \
+                    patch.object(d, 'slot_owner', side_effect=observed_owner):
+                try:
+                    first.start()
+                    self.assertTrue(recovering.wait(10))  # old owner observed; removal deliberately paused
+                    second.start()
+                    self.assertTrue(attempting.wait(10))
+                    self.assertFalse(second_observed.wait(0.2))  # inspection waits for the whole recovery
+                finally:
+                    resume.set()
+                    first.join(10)
+                    if second.ident is not None:
+                        second.join(10)
+            self.assertFalse(first.is_alive())
+            self.assertFalse(second.is_alive())
+            self.assertEqual(failures, [])
+            self.assertIsNotNone(results['first'])
+            self.assertIsNone(results['second'])
+            fresh = d.slot_owner(d.slot_path())
+            d.slot_release(old)
+            d.slot_renew(old, 1)
+            self.assertEqual(d.slot_owner(d.slot_path()), fresh)
+            self.assertEqual(d.main(['build-slot', 'release', '--worker', 'old']), 2)
+            self.assertEqual(d.slot_owner(d.slot_path()), fresh)
+            d.slot_renew(results['first'], 120)
+            self.assertGreater(d.slot_owner(d.slot_path())['expiresAt'], fresh['expiresAt'])
+            self.assertEqual(d.main(['build-slot', 'release', '--worker', 'first']), 0)
+            self.assertFalse(d.slot_path().exists())
+            self.assertTrue(d.slot_path().with_name(d.slot_path().name + '.guard').is_file())
+
+    def test_build_slot_guard_excludes_another_process_and_survives_release(self):
+        path = self.fx.root / 'process-slot'
+        script = ('import sys; from pathlib import Path; '
+                  f'sys.path.insert(0, {str(Path(d.__file__).parent)!r}); import delivery as d; '
+                  'print("attempting", flush=True)\n'
+                  'with d.slot_guard(Path(sys.argv[1])): print("acquired", flush=True)\n')
+        with d.slot_guard(path):
+            child = subprocess.Popen([sys.executable, '-B', '-c', script, str(path)],
+                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            try:
+                self.assertEqual(child.stdout.readline().strip(), 'attempting')
+                with self.assertRaises(subprocess.TimeoutExpired):
+                    child.communicate(timeout=0.2)
+            except BaseException:
+                child.kill()
+                child.communicate()
+                raise
+        try:
+            out, err = child.communicate(timeout=10)
+        except BaseException:
+            child.kill()
+            child.communicate()
+            raise
+        self.assertEqual(child.returncode, 0, err)
+        self.assertEqual(out.strip(), 'acquired')
+        self.assertTrue(path.with_name(path.name + '.guard').is_file())
 
 
 if __name__ == '__main__':
