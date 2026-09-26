@@ -37,6 +37,7 @@ Standard library only.
 from __future__ import annotations
 
 import argparse
+import errno
 import heapq
 import io
 import json
@@ -53,6 +54,7 @@ import time
 import uuid
 from collections import Counter, defaultdict, deque
 from dataclasses import dataclass
+from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -1499,6 +1501,14 @@ def read_ledger(plan: Path, g: Graph) -> tuple[dict[str, dict], list[str]]:
         if tid in out:
             errors.append(f'{where}: second record for {tid}')
         out[tid] = {'status': fields.get('status'), 'file': p.name}
+    for tid, record in out.items():
+        if record['status'] != 'complete':
+            continue
+        pending = [edge['task'] for edge in g.tasks[tid].get('complete', [])
+                   if out.get(edge['task'], {}).get('status') not in {'complete', 'inherited'}]
+        if pending:
+            errors.append(f"ledger/tasks/{record['file']}: {tid} cannot be complete; completion prerequisites "
+                          f"are not complete or inherited: {', '.join(pending)}")
     return out, errors
 
 
@@ -2108,20 +2118,58 @@ def slot_discard(path: Path, label: str, attempts: int = 20) -> bool:
     return True
 
 
+@contextmanager
+def slot_guard(path: Path):
+    """Serialize slot mutations across processes and threads, including stale recovery.
+
+    The persistent sidecar must never be deleted: every caller must lock the same file.
+    Its OS lock is released even when a process dies; no heartbeat or stale takeover applies here.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.with_name(path.name + '.guard').open('a+b') as guard:
+        if os.fstat(guard.fileno()).st_size == 0:
+            guard.write(b'\0')
+            guard.flush()
+        guard.seek(0)
+        if os.name == 'nt':
+            import msvcrt
+            while True:
+                try:
+                    msvcrt.locking(guard.fileno(), msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError as exc:
+                    if exc.errno not in {errno.EACCES, errno.EAGAIN, errno.EDEADLK}:
+                        raise
+                    time.sleep(0.05)
+        else:
+            import fcntl
+            fcntl.flock(guard.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            if os.name == 'nt':
+                guard.seek(0)
+                msvcrt.locking(guard.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(guard.fileno(), fcntl.LOCK_UN)
+
+
 def slot_acquire(worker: str, task: str, minutes: float, wait_minutes: float, command: str, poll: float = 5.0) -> str:
     path = slot_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
     deadline = time.monotonic() + wait_minutes * 60
     token, announced = uuid.uuid4().hex, False
     while True:
-        try:
-            os.mkdir(path)
-        except FileExistsError:
+        with slot_guard(path):
             owner = slot_owner(path)
-            if slot_stale(path, owner, utcnow()):
-                if not slot_discard(path, 'stale'):
-                    time.sleep(poll)
-                continue
+            if path.exists() and slot_stale(path, owner, utcnow()):
+                slot_discard(path, 'stale')
+            if not path.exists():
+                os.mkdir(path)
+                now = utcnow()
+                slot_write(path, {'token': token, 'worker': worker, 'task': task, 'host': socket.gethostname(),
+                                  'pid': os.getpid(), 'acquiredAt': iso(now),
+                                  'expiresAt': iso(now + timedelta(minutes=minutes)), 'command': command})
+                return token
             if time.monotonic() >= deadline:
                 raise Conflict(f'workstation build slot busy: held by {owner and owner.get("worker")} for '
                                f'{owner and owner.get("task")} until {owner and owner.get("expiresAt")}')
@@ -2129,24 +2177,29 @@ def slot_acquire(worker: str, task: str, minutes: float, wait_minutes: float, co
                 print(f'waiting for the workstation build slot (held by {owner and owner.get("worker")} for '
                       f'{owner and owner.get("task")}); keep coding or reviewing meanwhile', flush=True)
                 announced = True
-            time.sleep(poll)
-            continue
-        now = utcnow()
-        slot_write(path, {'token': token, 'worker': worker, 'task': task, 'host': socket.gethostname(),
-                          'pid': os.getpid(), 'acquiredAt': iso(now),
-                          'expiresAt': iso(now + timedelta(minutes=minutes)), 'command': command})
-        return token
+        time.sleep(poll)
 
 
 def slot_release(token: str) -> None:
     path = slot_path()
-    owner = slot_owner(path)
-    if owner and owner.get('token') == token and not slot_discard(path, 'released'):
-        owner['expiresAt'] = iso(datetime(2000, 1, 1, tzinfo=timezone.utc))  # let the next waiter recover it now
-        try:
-            slot_write(path, owner)
-        except OSError:
-            pass
+    with slot_guard(path):
+        owner = slot_owner(path)
+        if owner and owner.get('token') == token and not slot_discard(path, 'released'):
+            owner['expiresAt'] = iso(datetime(2000, 1, 1, tzinfo=timezone.utc))  # next waiter recovers it
+            try:
+                slot_write(path, owner)
+            except OSError:
+                pass
+
+
+def slot_renew(token: str, minutes: float) -> None:
+    path = slot_path()
+    with slot_guard(path):
+        owner = slot_owner(path)
+        if not owner or owner.get('token') != token:
+            return
+        owner['expiresAt'] = iso(utcnow() + timedelta(minutes=minutes))
+        slot_write(path, owner)
 
 
 def windows_batch(cmd: list[str]) -> list[str]:
@@ -2170,13 +2223,17 @@ def cmd_build_slot(args) -> int:
         return 0
     worker = worker_name(args)
     if args.action == 'release':
-        owner = slot_owner(path)
-        if not owner:
-            print('the workstation build slot is free')
-            return 0
-        if owner.get('worker') != worker:
-            raise Conflict(f'the build slot is held by {owner.get("worker")}, not {worker}')
-        slot_discard(path, 'released')
+        with slot_guard(path):
+            owner = slot_owner(path)
+            if not owner:
+                if path.exists():
+                    raise Conflict('the build slot has no readable owner; wait for stale recovery')
+                print('the workstation build slot is free')
+                return 0
+            if owner.get('worker') != worker:
+                raise Conflict(f'the build slot is held by {owner.get("worker")}, not {worker}')
+            if not slot_discard(path, 'released'):
+                raise Conflict('could not release the workstation build slot')
         print('released the workstation build slot')
         return 0
     cmd = list(args.cmd)
@@ -2190,13 +2247,9 @@ def cmd_build_slot(args) -> int:
 
     def heartbeat():
         while not stop.wait(60):
-            owner = slot_owner(path)
-            if not owner or owner.get('token') != token:
-                return
-            owner['expiresAt'] = iso(utcnow() + timedelta(minutes=args.minutes))
             try:
-                slot_write(path, owner)
-            except OSError:  # a reader held the record open; the next beat retries well before expiry
+                slot_renew(token, args.minutes)
+            except OSError:  # a reader held the record open; the next beat retries before expiry
                 pass
 
     beat = threading.Thread(target=heartbeat, daemon=True)
